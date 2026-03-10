@@ -9,7 +9,15 @@
       "Bash(node templates/generate-docx.js)",
       "Bash(npm install docx)",
       "Bash(pip install python-docx)",
-      "Bash(python -c \":*)"
+      "Bash(python -c \":*)",
+      "WebSearch",
+      "WebFetch(domain:developers.docusign.com)",
+      "WebFetch(domain:www.docusign.com)",
+      "WebFetch(domain:community.docusign.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:zapier.com)",
+      "Bash(pip install composio-core python-dotenv)",
+      "Bash(export COMPOSIO_API_KEY=\"ak_HZZxYn8_ysJ7eC__oX0t\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\rjain\\.claude\\projects\\c--VSCode-tech-legal-tech-legal",
