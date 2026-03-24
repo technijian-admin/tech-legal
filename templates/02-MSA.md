@@ -37,7 +37,7 @@ NOW, THEREFORE, for good and valuable consideration, the receipt and sufficiency
 - **Schedule B** — Subscription and License Services
 - **Schedule C** — Rate Card
 
-Additional services may be provided through Statements of Work ("SOWs") executed under this Agreement.
+Additional services may be provided through Statements of Work ("SOWs") executed under this Agreement. Each SOW shall be signed by authorized representatives of both Parties and shall reference this Agreement by number. Upon execution, each SOW is incorporated into and governed by this Agreement.
 
 **1.02. Standard of Care.** Technijian shall perform all services in a professional and workmanlike manner, consistent with industry standards for managed IT service providers.
 
@@ -57,6 +57,16 @@ Additional services may be provided through Statements of Work ("SOWs") executed
 
 **1.05. Independent Contractor.** Technijian is an independent contractor. Nothing in this Agreement shall be construed to create a partnership, joint venture, agency, or employment relationship between the Parties.
 
+**1.06. Client Data.** "Client Data" means any data, information, content, records, or files that belong to Client or Client's customers, employees, or agents, that are stored, processed, or transmitted using the services, including personal information as defined under the California Consumer Privacy Act.
+
+**1.07. Currency.** All fees under this Agreement are stated and payable in United States Dollars (USD).
+
+**1.08. Order of Precedence.** In the event of a conflict between this Agreement and any Schedule, SOW, or Service Order, the following order of precedence shall apply (highest to lowest): (a) the applicable SOW or Service Order (but only for the specific services described therein); (b) the applicable Schedule; (c) this Master Service Agreement. A more specific provision in a lower-priority document shall not be deemed to conflict with a general provision in a higher-priority document unless it expressly states an intent to override.
+
+**1.09. Representations and Warranties.** Each Party represents and warrants that: (a) it has the legal power and authority to enter into this Agreement; (b) the execution of this Agreement has been duly authorized by all necessary corporate action; (c) this Agreement constitutes a valid and binding obligation enforceable against it in accordance with its terms; and (d) its performance under this Agreement will not violate any applicable law, regulation, or existing contractual obligation.
+
+**1.10. Subcontractors.** Technijian may engage subcontractors, including offshore personnel, to perform services under this Agreement, provided that: (a) Technijian shall remain fully responsible for all services performed by its subcontractors; (b) all subcontractors shall be bound by confidentiality and data protection obligations at least as protective as those in this Agreement; and (c) Technijian shall be liable for the acts and omissions of its subcontractors as if they were Technijian's own.
+
 ---
 
 ## SECTION 2 — TERM AND RENEWAL
@@ -75,13 +85,13 @@ Additional services may be provided through Statements of Work ("SOWs") executed
 
 **2.05. Effect of Termination.**
 
-(a) Upon termination, Client shall pay all fees and charges for services rendered through the date of termination, including any remaining obligations for annual licenses and subscriptions procured on Client's behalf.
+(a) Upon termination, Client shall pay all fees and charges for services rendered through the date of termination, including any remaining obligations for annual licenses and subscriptions procured on Client's behalf. For Virtual Staff services, any unpaid hour balance shall be invoiced at the applicable Hourly Rate from the Rate Card (Schedule C) as set forth in Schedule A, Section 3.3(e).
 
 (b) Technijian shall provide reasonable transition assistance for a period of up to **thirty (30) days** following termination, subject to payment of applicable fees.
 
 (c) Technijian shall return all Client Data in its possession within **thirty (30) days** of termination, in a commercially standard format, provided Client is not in breach of this Agreement.
 
-(d) The following sections shall survive termination: Section 4 (Confidentiality), Section 5 (Limitation of Liability), Section 6 (Indemnification), and Section 8 (Dispute Resolution).
+(d) The following sections shall survive termination: Section 3 (Payment), Section 4 (Confidentiality), Section 5 (Limitation of Liability), Section 6 (Indemnification), Section 7 (Intellectual Property), Section 8 (Dispute Resolution), Section 10 (Data Protection), and Section 11 (Insurance, which shall remain in effect through the end of any transition assistance period under Section 2.05(b)).
 
 ---
 
@@ -127,7 +137,7 @@ Additional services may be provided through Statements of Work ("SOWs") executed
 
 **5.01. Limitation.** EXCEPT FOR BREACHES OF SECTION 4 (CONFIDENTIALITY), WILLFUL MISCONDUCT, OR GROSS NEGLIGENCE, NEITHER PARTY'S TOTAL AGGREGATE LIABILITY UNDER THIS AGREEMENT SHALL EXCEED THE TOTAL FEES PAID OR PAYABLE BY CLIENT UNDER THIS AGREEMENT DURING THE **TWELVE (12) MONTH** PERIOD IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM.
 
-**5.02. Exclusion of Consequential Damages.** IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, BUSINESS OPPORTUNITY, OR GOODWILL, REGARDLESS OF WHETHER SUCH DAMAGES WERE FORESEEABLE OR WHETHER EITHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+**5.02. Exclusion of Consequential Damages.** EXCEPT FOR BREACHES OF SECTION 4 (CONFIDENTIALITY), SECTION 10 (DATA PROTECTION), INDEMNIFICATION OBLIGATIONS UNDER SECTION 6, WILLFUL MISCONDUCT, OR GROSS NEGLIGENCE, IN NO EVENT SHALL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING LOSS OF PROFITS, DATA, BUSINESS OPPORTUNITY, OR GOODWILL, REGARDLESS OF WHETHER SUCH DAMAGES WERE FORESEEABLE OR WHETHER EITHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
 **5.03. Data Liability.** While Technijian shall use commercially reasonable efforts to protect Client Data in its possession, Client acknowledges that:
 
@@ -203,6 +213,28 @@ Additional services may be provided through Statements of Work ("SOWs") executed
 
 ---
 
+## SECTION 10 — DATA PROTECTION
+
+**10.01. CCPA Compliance.** To the extent Technijian processes, stores, or has access to personal information (as defined under the California Consumer Privacy Act, Cal. Civ. Code \u00a7 1798.100 et seq., "CCPA") on behalf of Client, Technijian shall: (a) process such personal information only as necessary to perform the services and in accordance with Client's documented instructions; (b) not sell, share, or use personal information for any purpose other than performing the services; (c) implement reasonable security measures appropriate to the nature of the personal information; and (d) cooperate with Client in responding to consumer rights requests under the CCPA.
+
+**10.02. Security Incident Notification.** If Technijian becomes aware of a breach of security leading to the accidental or unlawful destruction, loss, alteration, unauthorized disclosure of, or access to Client Data ("Security Incident"), Technijian shall: (a) notify Client in writing without unreasonable delay and in no event later than **seventy-two (72) hours** after becoming aware of the Security Incident; (b) provide Client with sufficient information to enable Client to comply with its obligations under California Civil Code \u00a7 1798.82 (data breach notification) and any other applicable data breach notification laws; (c) cooperate with Client's investigation of the Security Incident; and (d) take reasonable steps to contain and remediate the Security Incident.
+
+**10.03. Data Security.** Technijian shall implement and maintain administrative, technical, and physical safeguards designed to protect Client Data from unauthorized access, use, or disclosure, consistent with industry standards for managed IT service providers. Such safeguards shall include, at a minimum: (a) encryption of Client Data in transit and at rest; (b) access controls limiting access to authorized personnel; (c) regular security assessments and vulnerability testing; and (d) employee security awareness training.
+
+**10.04. Regulatory Compliance.** If Client is subject to the Health Insurance Portability and Accountability Act ("HIPAA"), the Payment Card Industry Data Security Standard ("PCI DSS"), the General Data Protection Regulation ("GDPR"), or other industry-specific data protection requirements, the Parties shall execute a separate addendum addressing the additional obligations applicable to the regulated data. Technijian shall cooperate with Client in implementing controls necessary to meet such requirements.
+
+**10.05. Data Return and Deletion.** Upon termination of this Agreement or upon Client's written request, Technijian shall securely delete or return all Client Data in its possession within **thirty (30) days**, using methods consistent with NIST SP 800-88 (Guidelines for Media Sanitization) or equivalent standards, and shall certify such deletion in writing upon request. Technijian may retain copies of Client Data only to the extent required by applicable law, provided such retained data remains subject to the confidentiality and data protection obligations of this Agreement.
+
+---
+
+## SECTION 11 — INSURANCE
+
+**11.01. Required Coverage.** During the term of this Agreement, Technijian shall maintain the following insurance coverage with carriers rated A- VII or better by A.M. Best: (a) Commercial General Liability insurance with limits of not less than $1,000,000 per occurrence and $2,000,000 in the aggregate; (b) Professional Liability (Errors and Omissions) insurance with limits of not less than $1,000,000 per claim and $2,000,000 in the aggregate; (c) Cyber Liability insurance with limits of not less than $1,000,000 per claim, covering data breaches, network security failures, and privacy violations; and (d) Workers' Compensation insurance as required by the laws of the State of California.
+
+**11.02. Certificates of Insurance.** Upon Client's written request, Technijian shall provide certificates of insurance evidencing the coverage required under this Section. Technijian shall provide Client with at least **thirty (30) days'** prior written notice of any material change to or cancellation of such coverage.
+
+---
+
 ## SIGNATURES
 
 **TECHNIJIAN, INC.**
@@ -228,6 +260,7 @@ Date: _________________________________
 ---
 
 **Schedules:**
+
 - Schedule A — Monthly Managed Services
 - Schedule B — Subscription and License Services
 - Schedule C — Rate Card
