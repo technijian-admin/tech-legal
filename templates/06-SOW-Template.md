@@ -158,7 +158,23 @@ If Client elects to finance equipment through a third-party financing provider, 
 
 ### 5.3 Payment Terms
 
-All invoices are due and payable within **thirty (30) days** of the invoice date. Late payments are subject to the terms of the Master Service Agreement, or if no MSA is in effect, a late fee of **1.5% per month** on the unpaid balance.
+All invoices are due and payable within **thirty (30) days** of the invoice date.
+
+### 5.4 Late Payment and Collection Remedies
+
+**(a)** Late payments shall accrue a late fee of **1.5% per month** (or the maximum rate permitted by law, whichever is less) on the unpaid balance, compounding monthly from the date payment was due. If an MSA is in effect, the late payment, acceleration, collection costs, lien, and fee-shifting provisions of the MSA (Sections 3.04 through 3.10 and Section 8.04) shall apply in full to this SOW.
+
+**(b)** If no MSA is in effect between the Parties, the following shall apply:
+
+(i) **Acceleration.** If Client fails to pay any undisputed invoice within **forty-five (45) days** of the due date, all remaining fees under this SOW shall become immediately due and payable.
+
+(ii) **Suspension.** Technijian may suspend all work under this SOW upon **ten (10) days** written notice if any invoice remains unpaid beyond the due date. Suspension shall not relieve Client of its payment obligations, and project timelines shall be adjusted accordingly at no cost to Technijian.
+
+(iii) **Collection Costs and Attorney's Fees.** In any action or proceeding to collect fees, invoices, or other amounts owed under this SOW, Client shall be liable for all costs of collection, including reasonable attorney's fees (including in-house counsel at market rates), collection agency fees, court costs, arbitration fees, and all costs of appeal. This fee-shifting applies exclusively to collection of amounts owed and does not apply to disputes regarding service quality, professional performance, or other non-payment claims.
+
+(iv) **Lien on Work Product.** Technijian shall retain a lien on all deliverables, work product, documentation, and materials under this SOW until all amounts owed are paid in full. Title to equipment under Section 4.1 shall not transfer until full payment is received.
+
+(v) **Fees for Non-Collection Disputes.** Except as provided in subsection (iii) above, in any dispute arising under this SOW relating to service quality, professional performance, scope, or any other non-payment matter, each Party shall bear its own attorney's fees and costs.
 
 ---
 

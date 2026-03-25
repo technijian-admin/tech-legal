@@ -174,6 +174,10 @@ The specific Virtual Staff roles, initial estimated hours, Cycle length, and ass
 
 Either Party may request changes to the services described in this Schedule by providing **thirty (30) days** written notice. Changes to quantities, roles, or service levels shall be documented in an updated Service Order signed by both Parties.
 
+### Payment and Collection
+
+All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all services under this Schedule. In the event of non-payment, Technijian may suspend all services described in this Schedule (including Online Services, SIP Trunk Services, and Virtual Staff services) in accordance with Section 3.06 of the MSA, regardless of which specific service generated the unpaid invoice.
+
 ### Pricing Adjustments
 
 Pricing for services under this Schedule is subject to the Rate Card (Schedule C). Technijian may adjust rates upon **sixty (60) days** written notice, effective at the start of the next Renewal Term of the Agreement.

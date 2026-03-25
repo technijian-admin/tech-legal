@@ -91,7 +91,11 @@ Includes but is not limited to:
 
 **6.02. Credentials.** Client is responsible for maintaining the security of login credentials associated with Subscription Services.
 
-## 7. SUBSCRIPTION ORDER
+## 7. PAYMENT AND COLLECTION
+
+All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all Subscription Services under this Schedule. In the event of non-payment for any services under the MSA, Technijian may suspend Subscription Services and withhold license renewals, credential transfers, and administrative access in accordance with the MSA, regardless of which specific service generated the unpaid invoice. Client acknowledges that failure to pay may result in lapse or cancellation of third-party subscriptions and licenses, and Technijian shall not be liable for any loss or disruption resulting from such lapse or cancellation caused by Client's non-payment.
+
+## 8. SUBSCRIPTION ORDER
 
 The specific subscriptions, quantities, billing frequency, and pricing for Client are detailed in the **Subscription Order** attached to this Schedule. The Subscription Order may be updated upon mutual written agreement or in accordance with Section 5.
 
