@@ -13,8 +13,8 @@ Irvine, California 92618
 and
 
 **JDH Pacific** ("Client")
-[CLIENT ADDRESS]
-[CITY, STATE ZIP]
+1818 E. Orangethorpe Ave
+Fullerton, CA 92831
 
 ---
 
@@ -26,21 +26,19 @@ Endpoint Storage Upgrade — SSD Replacement for Critical and Low-Disk Systems
 
 ### 1.2 Project Description
 
-JDH Pacific currently has eight (8) endpoint workstations experiencing critically low or concerning disk space utilization, as identified in the Disk Space Health Report dated March 27, 2026. Four of these systems are in a critical state with less than 15 GB of free space remaining, and four additional systems are below the operational free-space threshold.
+JDH Pacific currently has four (4) endpoint workstations experiencing critically low or concerning disk space utilization, as identified in the Disk Space Health Report dated March 27, 2026. One system is in a critical state with virtually no free space remaining, and three additional systems are below the operational free-space threshold.
 
-This SOW covers the procurement, installation, and validation of replacement SSD drives for all eight affected workstations using a **loaner swap methodology** to minimize end-user downtime. Technijian will deploy three (3) preconfigured loaner workstations in rotating waves, swap each affected machine for a loaner, perform drive cloning and upgrade at the Technijian facility, and return upgraded machines in subsequent visits. End-user downtime is limited to approximately 15 minutes per swap.
+This SOW covers the procurement, installation, and validation of replacement SSD drives for all four affected workstations using a **loaner swap methodology** to minimize end-user downtime. Technijian will deploy up to three (3) preconfigured loaner workstations in rotating waves, swap each affected machine for a loaner, perform drive cloning and upgrade at the Technijian facility, and return upgraded machines in subsequent visits. End-user downtime is limited to approximately 15 minutes per swap.
 
 ### 1.3 Upgrade Methodology — Loaner Swap Process
 
-**Why Loaner Swap:** Rather than performing on-site drive cloning (which requires 1-3 hours per machine with the user waiting), Technijian will use a rotating pool of three (3) loaner workstations to minimize disruption:
+**Why Loaner Swap:** Rather than performing on-site drive cloning (which requires 1-3 hours per machine with the user waiting), Technijian will use a rotating pool of up to three (3) loaner workstations to minimize disruption:
 
-1. **Wave 1 (Visit 1):** Deploy 3 loaner workstations to the 3 most critical machines. Swap cables, verify user login on loaner, and transport affected machines to Technijian facility. (~15 min downtime per user)
+1. **Wave 1 (Visit 1):** Deploy 3 loaner workstations to the 3 highest-priority machines. Swap cables, verify user login on loaner, and transport affected machines to Technijian facility. (~15 min downtime per user)
 2. **Wave 1 Shop Work:** Clone drives to new SSDs, install upgraded drives, validate boot and applications at Technijian facility.
-3. **Wave 2 (Visit 2):** Return 3 upgraded machines, swap next 3 machines with the same 3 loaners, transport to facility. (~15 min downtime per user)
-4. **Wave 2 Shop Work:** Clone and upgrade batch 2 at facility.
-5. **Wave 3 (Visit 3):** Return 3 upgraded machines, swap last 2 machines with loaners, transport to facility. (~15 min downtime per user)
-6. **Wave 3 Shop Work:** Clone and upgrade batch 3 at facility.
-7. **Final Return (Visit 4):** Return last 2 upgraded machines, collect all 3 loaners. (~15 min downtime per user)
+3. **Wave 2 (Visit 2):** Return 3 upgraded machines, swap last machine with 1 loaner, transport to facility. (~15 min downtime per user)
+4. **Wave 2 Shop Work:** Clone and upgrade last machine at facility.
+5. **Final Return (Visit 3):** Return last upgraded machine, collect loaner. (~15 min downtime per user)
 
 **User Impact:** Each user experiences approximately 15 minutes of downtime per swap (two swaps total: once to loaner, once back to upgraded machine). Users can continue working on loaner machines during the upgrade period.
 
@@ -49,21 +47,16 @@ This SOW covers the procurement, installation, and validation of replacement SSD
 | Priority | Machine | Type | Current Drive | Cap. (GB) | Free (GB) | Used % | Severity |
 |----------|---------|------|---------------|-----------|-----------|--------|----------|
 | 1 | JDH-HQ-PC-09 | OptiPlex 5040 | TOSHIBA TL100 | 111 | 0.1 | 100% | Critical |
-| 2 | JDH-HQ-LPT-01 | Precision 7780 | Samsung PM9C1a 256GB | 235 | 6 | 97% | Critical |
-| 3 | JDH-WHOFFICE | OptiPlex 7080 | SK hynix PC611 256GB | 236 | 9 | 96% | Critical |
-| 4 | SupplySalesconf | ASUSTeK P8Z77-V | ST240HM000 SSD | 223 | 14 | 94% | Critical |
-| 5 | JDH-HQ-PC-06 | OptiPlex Micro Plus 7010 | KIOXIA 512GB NVMe | 474 | 33 | 93% | Low |
-| 6 | DESKTOP-8QP97UG | ASRock AB350 Pro4 | SanDisk SSD PLUS 240GB | 251 | 34 | 86% | Low |
-| 7 | Frontdesk-JDH | OptiPlex 3000 | SK hynix BC901 256GB | 236 | 40 | 83% | Low |
-| 8 | DESKTOP-ED8O2CQ | Vostro 3470 | SK hynix SC401 256GB | 224 | 46 | 79% | Low |
+| 2 | JDH-WHOFFICE | OptiPlex 7080 | SK hynix PC611 256GB | 236 | 9 | 96% | Critical |
+| 3 | JDH-HQ-PC-06 | OptiPlex Micro Plus 7010 | KIOXIA 512GB NVMe | 474 | 33 | 93% | Low |
+| 4 | Frontdesk-JDH | OptiPlex 3000 | SK hynix BC901 256GB | 236 | 40 | 83% | Low |
 
 ### 1.5 Wave Assignments
 
 | Wave | Visit | Machines | Priority |
 |------|-------|----------|----------|
-| Wave 1 | Visit 1 (deploy loaners) → Visit 2 (return upgraded) | JDH-HQ-PC-09, JDH-HQ-LPT-01, JDH-WHOFFICE | Critical |
-| Wave 2 | Visit 2 (deploy loaners) → Visit 3 (return upgraded) | SupplySalesconf, JDH-HQ-PC-06, DESKTOP-8QP97UG | Critical + Low |
-| Wave 3 | Visit 3 (deploy loaners) → Visit 4 (return upgraded) | Frontdesk-JDH, DESKTOP-ED8O2CQ | Low |
+| Wave 1 | Visit 1 (deploy loaners) → Visit 2 (return upgraded) | JDH-HQ-PC-09, JDH-WHOFFICE, JDH-HQ-PC-06 | Critical + Low |
+| Wave 2 | Visit 2 (deploy loaner) → Visit 3 (return upgraded) | Frontdesk-JDH | Low |
 
 ---
 
@@ -71,10 +64,10 @@ This SOW covers the procurement, installation, and validation of replacement SSD
 
 ### 2.1 In Scope
 
-- Procurement of eight (8) replacement SSD drives (500/512 GB capacity)
+- Procurement of four (4) replacement SSD drives (500/512 GB capacity)
 - Pre-upgrade remote assessment and backup verification for all affected systems
-- Provisioning of three (3) Technijian-owned loaner workstations for the swap rotation
-- Four (4) on-site visits for loaner deployment, machine pickup, upgraded machine return, and loaner collection
+- Provisioning of up to three (3) Technijian-owned loaner workstations for the swap rotation
+- Three (3) on-site visits for loaner deployment, machine pickup, upgraded machine return, and loaner collection
 - Full disk clone / data migration from existing drives to new SSDs at Technijian facility
 - Physical drive installation and boot validation at Technijian facility
 - Post-upgrade validation after 48 hours of production use
@@ -91,12 +84,12 @@ The following items are expressly excluded from this SOW:
 - Server-side upgrades or cloud migration
 - Software license transfers or activation beyond what is required for drive swap
 - Loaner workstation customization beyond basic Windows configuration and network access
+- Upgrade of additional workstations beyond the four (4) identified in this SOW (additional machines may be addressed via Change Order)
 
 ### 2.3 Assumptions
 
 - Client will provide physical access to all workstations during scheduled swap windows
 - Existing drives are functional and clonable (not failed or failing)
-- Machines currently listed as Offline / Undone will be powered on and accessible for the swap
 - Loaner workstations will be configured with basic Windows, domain join, and network access sufficient for users to perform essential work
 - Client will inform affected users of the swap schedule and ensure they save work prior to each swap window
 - Minimum 2-hour on-site engagement per visit
@@ -110,53 +103,51 @@ The following items are expressly excluded from this SOW:
 
 **3.1.1 Description**
 
-Remote assessment of all eight affected systems to verify current drive health, confirm backup status, and validate form factor compatibility. Simultaneously, prepare three (3) Technijian-owned loaner workstations with basic Windows configuration, domain join credentials, and network access for the swap rotation.
+Remote assessment of all four affected systems to verify current drive health, confirm backup status, and validate form factor compatibility. Simultaneously, prepare up to three (3) Technijian-owned loaner workstations with basic Windows configuration, domain join credentials, and network access for the swap rotation.
 
 **3.1.2 Deliverables**
 
-- Drive health report (S.M.A.R.T. status) for all 8 systems
+- Drive health report (S.M.A.R.T. status) for all 4 systems
 - Backup verification confirmation for each machine
 - Form factor confirmation (2.5" SATA vs. M.2 2230 vs. M.2 2280) for each machine
-- 3 loaner workstations prepared and tested
-- Swap schedule coordinated with Client (4 visits)
+- Up to 3 loaner workstations prepared and tested
+- Swap schedule coordinated with Client (3 visits)
 
 **3.1.3 Schedule**
 
 | Role | Description | Rate | Hours | Timeline |
 |------|-------------|------|-------|----------|
-| Tech Support (US) | Remote assessment, backup verification, scheduling | $150/hr | 3 | Week 1 |
-| Tech Support (Offshore) | Loaner workstation preparation and configuration | $45/hr | 3 | Week 1 |
-| | **Phase 1 Total** | | **6** | |
+| Tech Support (US) | Remote assessment, backup verification, scheduling | $150/hr | 2 | Week 1 |
+| Tech Support (Offshore) | Loaner workstation preparation and configuration | $45/hr | 2 | Week 1 |
+| | **Phase 1 Total** | | **4** | |
 
 ---
 
-### Phase 2: On-Site Swap Visits (4 Visits, 3 Waves)
+### Phase 2: On-Site Swap Visits (3 Visits, 2 Waves)
 
 **3.2.1 Description**
 
-Four on-site visits to JDH Pacific headquarters to execute the loaner swap rotation. Each visit involves disconnecting affected machines, deploying loaner workstations, verifying user login on loaners, and transporting machines to/from the Technijian facility.
+Three on-site visits to JDH Pacific headquarters to execute the loaner swap rotation. Each visit involves disconnecting affected machines, deploying loaner workstations, verifying user login on loaners, and transporting machines to/from the Technijian facility.
 
-**Visit 1:** Deploy 3 loaners → pick up machines #1-3 (JDH-HQ-PC-09, JDH-HQ-LPT-01, JDH-WHOFFICE)
-**Visit 2:** Return upgraded #1-3, deploy loaners → pick up machines #4-6 (SupplySalesconf, JDH-HQ-PC-06, DESKTOP-8QP97UG)
-**Visit 3:** Return upgraded #4-6, deploy loaners → pick up machines #7-8 (Frontdesk-JDH, DESKTOP-ED8O2CQ)
-**Visit 4:** Return upgraded #7-8, collect all 3 loaners
+**Visit 1:** Deploy 3 loaners → pick up machines #1-3 (JDH-HQ-PC-09, JDH-WHOFFICE, JDH-HQ-PC-06)
+**Visit 2:** Return upgraded #1-3, deploy 1 loaner → pick up machine #4 (Frontdesk-JDH)
+**Visit 3:** Return upgraded #4, collect loaner
 
 **3.2.2 Deliverables**
 
-- All 8 machines swapped and returned with upgraded drives
+- All 4 machines swapped and returned with upgraded drives
 - User login verified on loaner at each swap
 - User login verified on returned upgraded machine at each swap
-- All 3 loaner workstations collected and returned to Technijian
+- All loaner workstations collected and returned to Technijian
 
 **3.2.3 Schedule**
 
 | Role | Description | Rate | Hours | Timeline |
 |------|-------------|------|-------|----------|
-| Tech Support (US) | Visit 1 — Deploy 3 loaners, pick up 3 critical machines | $150/hr | 2 | Week 2 |
-| Tech Support (US) | Visit 2 — Return 3 upgraded, swap next 3, pick up | $150/hr | 2 | Week 2 |
-| Tech Support (US) | Visit 3 — Return 3 upgraded, swap last 3, pick up | $150/hr | 2 | Week 3 |
-| Tech Support (US) | Visit 4 — Return last 3 upgraded, collect loaners | $150/hr | 2 | Week 3 |
-| | **Phase 2 Total** | | **8** | |
+| Tech Support (US) | Visit 1 — Deploy 3 loaners, pick up 3 machines | $150/hr | 2 | Week 2 |
+| Tech Support (US) | Visit 2 — Return 3 upgraded, swap last machine, pick up | $150/hr | 2 | Week 2 |
+| Tech Support (US) | Visit 3 — Return last upgraded machine, collect loaner | $150/hr | 2 | Week 3 |
+| | **Phase 2 Total** | | **6** | |
 
 ---
 
@@ -164,11 +155,11 @@ Four on-site visits to JDH Pacific headquarters to execute the loaner swap rotat
 
 **3.3.1 Description**
 
-At the Technijian facility, perform full disk clone from each existing drive to the new SSD, install the new SSD into the machine, validate boot, OS functionality, and application integrity. Process runs in three batches of 3 machines aligned with the on-site swap waves.
+At the Technijian facility, perform full disk clone from each existing drive to the new SSD, install the new SSD into the machine, validate boot, OS functionality, and application integrity. Process runs in two batches aligned with the on-site swap waves.
 
 **3.3.2 Deliverables**
 
-- 8 machines with new SSDs installed and validated
+- 4 machines with new SSDs installed and validated
 - Boot verification and OS validation for each machine
 - Application and data integrity confirmed for each machine
 - Old drives labeled and securely stored for return to Client
@@ -177,9 +168,9 @@ At the Technijian facility, perform full disk clone from each existing drive to 
 
 | Role | Description | Rate | Hours | Timeline |
 |------|-------------|------|-------|----------|
-| Tech Support (US) | Drive cloning setup, troubleshooting, SSD installation — 3 batches | $150/hr | 4 | Weeks 2-3 |
-| Tech Support (Offshore) | Clone monitoring, validation scripts, integrity checks — 3 batches | $45/hr | 5 | Weeks 2-3 |
-| | **Phase 3 Total** | | **9** | |
+| Tech Support (US) | Drive cloning setup, troubleshooting, SSD installation — 2 batches | $150/hr | 2 | Weeks 2-3 |
+| Tech Support (Offshore) | Clone monitoring, validation scripts, integrity checks — 2 batches | $45/hr | 3 | Weeks 2-3 |
+| | **Phase 3 Total** | | **5** | |
 
 ---
 
@@ -191,7 +182,7 @@ Remote validation of all upgraded systems after 48 hours of production use. Veri
 
 **3.4.2 Deliverables**
 
-- Post-upgrade health check report for all 8 systems
+- Post-upgrade health check report for all 4 systems
 - Updated disk space inventory
 - Old drives returned to Client (labeled by machine name)
 - Project closeout confirmation
@@ -200,8 +191,8 @@ Remote validation of all upgraded systems after 48 hours of production use. Veri
 
 | Role | Description | Rate | Hours | Timeline |
 |------|-------------|------|-------|----------|
-| Tech Support (Offshore) | Remote validation and health checks — all 8 systems | $45/hr | 3 | Week 4 |
-| | **Phase 4 Total** | | **3** | |
+| Tech Support (Offshore) | Remote validation and health checks — all 4 systems | $45/hr | 2 | Week 4 |
+| | **Phase 4 Total** | | **2** | |
 
 ---
 
@@ -216,34 +207,30 @@ All drives are procured and supplied by Technijian. Pricing includes procurement
 | # | Machine | Type | Qty | Price | Sub-Total |
 |---|---------|------|-----|-------|-----------|
 | 1 | JDH-HQ-PC-09 | OptiPlex 5040 | 1 | $163.75 | $163.75 |
-| 4 | SupplySalesconf | ASUSTeK P8Z77-V | 1 | $163.75 | $163.75 |
-| 6 | DESKTOP-8QP97UG | ASRock AB350 Pro4 | 1 | $163.75 | $163.75 |
-| 8 | DESKTOP-ED8O2CQ | Vostro 3470 | 1 | $163.75 | $163.75 |
-| | | **SATA Subtotal** | **4** | | **$655.00** |
+| | | **SATA Subtotal** | **1** | | **$163.75** |
 
 **NVMe SSD — M.2 2230 Form Factor (Kingston NV3 500GB)**
 
 | # | Machine | Type | Qty | Price | Sub-Total |
 |---|---------|------|-----|-------|-----------|
-| 2 | JDH-HQ-LPT-01 | Precision 7780 | 1 | $173.75 | $173.75 |
-| 5 | JDH-HQ-PC-06 | OptiPlex Micro Plus 7010 | 1 | $173.75 | $173.75 |
-| 7 | Frontdesk-JDH | OptiPlex 3000 | 1 | $173.75 | $173.75 |
-| | | **NVMe 2230 Subtotal** | **3** | | **$521.25** |
+| 2 | JDH-HQ-PC-06 | OptiPlex Micro Plus 7010 | 1 | $173.75 | $173.75 |
+| 3 | Frontdesk-JDH | OptiPlex 3000 | 1 | $173.75 | $173.75 |
+| | | **NVMe 2230 Subtotal** | **2** | | **$347.50** |
 
 **NVMe SSD — M.2 2280 Form Factor (Dell 512GB PCIe Gen3)**
 
 | # | Machine | Type | Qty | Price | Sub-Total |
 |---|---------|------|-----|-------|-----------|
-| 3 | JDH-WHOFFICE | OptiPlex 7080 | 1 | $156.25 | $156.25 |
+| 4 | JDH-WHOFFICE | OptiPlex 7080 | 1 | $156.25 | $156.25 |
 | | | **NVMe 2280 Subtotal** | **1** | | **$156.25** |
 
-| | | | | **Equipment Sub-Total** | **$1,332.50** |
-| | | | | **Sales Tax (7.75%)** | **$103.27** |
-| | | | | **Equipment Total** | **$1,435.77** |
+| | | | | **Equipment Sub-Total** | **$667.50** |
+| | | | | **Sales Tax (7.75%)** | **$51.73** |
+| | | | | **Equipment Total** | **$719.23** |
 
 ### 4.2 Loaner Workstations
 
-Technijian will provide three (3) loaner workstations from its equipment pool at no additional charge to Client. Loaner workstations remain the property of Technijian and will be collected upon project completion. Client is responsible for any physical damage to loaner equipment beyond normal wear.
+Technijian will provide up to three (3) loaner workstations from its equipment pool at no additional charge to Client. Loaner workstations remain the property of Technijian and will be collected upon project completion. Client is responsible for any physical damage to loaner equipment beyond normal wear.
 
 ### 4.3 Title and Ownership
 
@@ -274,24 +261,24 @@ Equipment warranty is provided by the manufacturer per the manufacturer's warran
 
 | Phase | Description | US Tech ($150) | Offshore ($45) | Total Hrs | Cost |
 |-------|-------------|----------------|----------------|-----------|------|
-| Phase 1 | Remote Assessment & Loaner Preparation | 3 | 3 | 6 | $585.00 |
-| Phase 2 | On-Site Swap Visits (4 visits, 3 waves) | 8 | — | 8 | $1,200.00 |
-| Phase 3 | Off-Site Drive Cloning & Upgrade | 4 | 5 | 9 | $825.00 |
-| Phase 4 | Post-Upgrade Validation & Closeout | — | 3 | 3 | $135.00 |
-| **TOTAL** | | **15** | **10** | **25** | **$2,550.00** |
+| Phase 1 | Remote Assessment & Loaner Preparation | 2 | 2 | 4 | $390.00 |
+| Phase 2 | On-Site Swap Visits (3 visits, 2 waves) | 6 | — | 6 | $900.00 |
+| Phase 3 | Off-Site Drive Cloning & Upgrade | 2 | 3 | 5 | $435.00 |
+| Phase 4 | Post-Upgrade Validation & Closeout | — | 2 | 2 | $90.00 |
+| **TOTAL** | | **10** | **7** | **17** | **$1,815.00** |
 
 **Labor Cost Breakdown:**
-- Tech Support (US): 15 hrs x $150/hr = $2,250.00
-- Tech Support (Offshore): 10 hrs x $45/hr = $450.00
+- Tech Support (US): 10 hrs x $150/hr = $1,500.00
+- Tech Support (Offshore): 7 hrs x $45/hr = $315.00
 
 ### 5.3 Total Project Cost
 
 | Category | Amount |
 |----------|--------|
-| Equipment (8 SSDs) | $1,332.50 |
-| Sales Tax (7.75%) | $103.27 |
-| Labor (25 hours) | $2,550.00 |
-| **Total Project Cost** | **$3,985.77** |
+| Equipment (4 SSDs) | $667.50 |
+| Sales Tax (7.75%) | $51.73 |
+| Labor (17 hours) | $1,815.00 |
+| **Total Project Cost** | **$2,534.23** |
 
 **Pricing Type:** Fixed Cost — Technijian will complete all work described in this SOW at the stated price regardless of actual hours consumed. The fixed price includes all labor, travel, loaner equipment, and project management. Equipment pricing is fixed and inclusive of procurement and handling.
 
@@ -299,9 +286,9 @@ Equipment warranty is provided by the manufacturer per the manufacturer's warran
 
 | Milestone | Invoiced | Amount |
 |-----------|----------|--------|
-| Equipment procurement (before Phase 2 begins) | Upon SOW execution | $1,435.77 |
-| Labor — fixed project fee | Upon project closeout | $2,550.00 |
-| **Total** | | **$3,985.77** |
+| Equipment procurement (before Phase 2 begins) | Upon SOW execution | $719.23 |
+| Labor — fixed project fee | Upon project closeout | $1,815.00 |
+| **Total** | | **$2,534.23** |
 
 ### 5.5 Payment Terms
 
@@ -339,11 +326,9 @@ Client shall:
 
 (e) Inform affected users of the swap schedule and ensure users save all work prior to each swap window;
 
-(f) Power on and make accessible any machines currently listed as Offline / Undone prior to the scheduled swap;
+(f) Accept responsibility for any physical damage to Technijian-owned loaner workstations beyond normal wear during the loaner period; and
 
-(g) Accept responsibility for any physical damage to Technijian-owned loaner workstations beyond normal wear during the loaner period; and
-
-(h) Notify Technijian promptly of any issues with loaner workstations during the swap period.
+(g) Notify Technijian promptly of any issues with loaner workstations during the swap period.
 
 ---
 
