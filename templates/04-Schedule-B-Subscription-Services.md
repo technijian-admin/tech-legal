@@ -83,7 +83,11 @@ Includes but is not limited to:
 
 (c) Client is responsible for fees through the end of the applicable subscription term.
 
-**5.03. Annual Renewals.** Unless Client provides written notice of non-renewal at least **thirty (30) days** prior to the renewal date, annual subscriptions shall automatically renew for successive one-year terms.
+**5.03. Annual Renewals.**
+
+> **AUTOMATIC RENEWAL NOTICE:** Annual subscriptions will automatically renew for successive one-year terms unless you provide written notice of non-renewal at least thirty (30) days prior to the renewal date. You may cancel by sending written notice to Technijian at the address in the MSA or by email to contracts@technijian.com. Technijian will notify you at least thirty (30) days before each annual renewal per Section 3.02(c) of this Schedule.
+
+Unless Client provides written notice of non-renewal at least **thirty (30) days** prior to the renewal date, annual subscriptions shall automatically renew for successive one-year terms.
 
 ## 6. DATA AND ACCESS
 
@@ -91,9 +95,11 @@ Includes but is not limited to:
 
 **6.02. Credentials.** Client is responsible for maintaining the security of login credentials associated with Subscription Services.
 
+**6.03. Data Protection.** To the extent Subscription Services involve the processing of personal information on behalf of Client, the data protection obligations of the MSA (Section 10) apply in full to Technijian's management of such subscriptions, including CCPA/CPRA service provider obligations, security incident notification, and data return provisions.
+
 ## 7. PAYMENT AND COLLECTION
 
-All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all Subscription Services under this Schedule. In the event of non-payment for any services under the MSA, Technijian may suspend Subscription Services and withhold license renewals, credential transfers, and administrative access in accordance with the MSA, regardless of which specific service generated the unpaid invoice. Client acknowledges that failure to pay may result in lapse or cancellation of third-party subscriptions and licenses, and Technijian shall not be liable for any loss or disruption resulting from such lapse or cancellation caused by Client's non-payment.
+All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all Subscription Services under this Schedule. In the event of non-payment, Technijian may suspend Subscription Services in accordance with Section 3.06 of the MSA, which provides for suspension of the specific service associated with the unpaid invoice after thirty (30) days past due, and suspension of all services across Schedules and SOWs after sixty (60) days past due. Client acknowledges that failure to pay may result in lapse or cancellation of third-party subscriptions and licenses, and Technijian shall not be liable for any loss or disruption resulting from such lapse or cancellation caused by Client's non-payment. Notwithstanding the foregoing, Technijian shall not withhold credential transfers or administrative account access that Client needs to comply with applicable law or to prevent imminent data loss; such transfers shall be subject to the data return provisions of MSA Section 2.05(c).
 
 ## 8. SUBSCRIPTION ORDER
 

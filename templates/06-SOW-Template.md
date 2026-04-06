@@ -162,19 +162,21 @@ All invoices are due and payable within **thirty (30) days** of the invoice date
 
 ### 5.4 Late Payment and Collection Remedies
 
-**(a)** Late payments shall accrue a late fee of **1.5% per month** (or the maximum rate permitted by law, whichever is less) on the unpaid balance, compounding monthly from the date payment was due. If an MSA is in effect, the late payment, acceleration, collection costs, lien, and fee-shifting provisions of the MSA (Sections 3.04 through 3.10 and Section 8.04) shall apply in full to this SOW.
+**(a)** If an MSA is in effect between the Parties, the payment, late payment, acceleration, collection costs, lien, security interest, and fee-shifting provisions of the MSA (Sections 3.04 through 3.10 and Section 8.04) shall apply in full to this SOW and shall supersede any conflicting provisions in this Section 5.4. The standalone provisions in Section 5.4(b) below apply only when no MSA is in effect.
 
 **(b)** If no MSA is in effect between the Parties, the following shall apply:
 
-(i) **Acceleration.** If Client fails to pay any undisputed invoice within **forty-five (45) days** of the due date, all remaining fees under this SOW shall become immediately due and payable.
+(i) **Late Payment.** Late payments shall accrue a late fee of **1.5% per month** (or the maximum rate permitted by law, whichever is less) on the unpaid balance, calculated as simple interest from the date payment was due. The Parties acknowledge that the late fee represents a reasonable estimate of Technijian's administrative costs and damages resulting from late payment and is not a penalty.
 
-(ii) **Suspension.** Technijian may suspend all work under this SOW upon **ten (10) days** written notice if any invoice remains unpaid beyond the due date. Suspension shall not relieve Client of its payment obligations, and project timelines shall be adjusted accordingly at no cost to Technijian.
+(ii) **Acceleration.** If Client fails to pay any undisputed invoice within **forty-five (45) days** of the due date, all remaining fees under this SOW shall become immediately due and payable.
 
-(iii) **Collection Costs and Attorney's Fees.** In any action or proceeding to collect fees, invoices, or other amounts owed under this SOW, Client shall be liable for all costs of collection, including reasonable attorney's fees (including in-house counsel at market rates), collection agency fees, court costs, arbitration fees, and all costs of appeal. This fee-shifting applies exclusively to collection of amounts owed and does not apply to disputes regarding service quality, professional performance, or other non-payment claims.
+(iii) **Suspension.** Technijian may suspend all work under this SOW upon **ten (10) days** written notice if any invoice remains unpaid beyond the due date. Suspension shall not relieve Client of its payment obligations, and project timelines shall be adjusted accordingly at no cost to Technijian.
 
-(iv) **Lien on Work Product.** Technijian shall retain a lien on all deliverables, work product, documentation, and materials under this SOW until all amounts owed are paid in full. Title to equipment under Section 4.1 shall not transfer until full payment is received.
+(iv) **Collection Costs and Attorney's Fees.** In any action or proceeding to collect fees, invoices, or other amounts owed under this SOW, the **prevailing Party** shall be entitled to recover all reasonable costs of collection, including attorney's fees (including in-house counsel at market rates), collection agency fees, court costs, arbitration fees, and all costs of appeal. Pursuant to California Civil Code Section 1717, the Parties acknowledge that this attorney's fees provision is reciprocal. This fee-shifting applies exclusively to collection of amounts owed and does not apply to disputes regarding service quality, professional performance, or other non-payment claims.
 
-(v) **Fees for Non-Collection Disputes.** Except as provided in subsection (iii) above, in any dispute arising under this SOW relating to service quality, professional performance, scope, or any other non-payment matter, each Party shall bear its own attorney's fees and costs.
+(v) **Lien on Work Product.** Technijian shall retain a lien on all deliverables, work product, documentation, and materials (excluding Client Data) under this SOW until all amounts owed are paid in full. Title to equipment under Section 4.1 shall not transfer until full payment is received.
+
+(vi) **Fees for Non-Collection Disputes.** Except as provided in subsection (iv) above, in any dispute arising under this SOW relating to service quality, professional performance, scope, or any other non-payment matter, each Party shall bear its own attorney's fees and costs.
 
 ---
 
@@ -186,7 +188,7 @@ Client shall:
 
 (b) Designate a point of contact authorized to make decisions on behalf of Client;
 
-(c) Review and approve deliverables within **five (5) business days** of submission;
+(c) Review and approve deliverables within **ten (10) business days** of submission;
 
 (d) Ensure all relevant data is backed up prior to the start of work; and
 
@@ -200,7 +202,7 @@ Client shall:
 
 **7.02.** If Client requests work outside the defined scope, Technijian shall provide a Change Order detailing the additional work, estimated hours, and cost impact.
 
-**7.03.** Technijian shall not proceed with out-of-scope work without an approved Change Order, except in cases where delay would result in harm to Client's systems, in which case Technijian shall notify Client as soon as practicable.
+**7.03.** Technijian shall not proceed with out-of-scope work without an approved Change Order, except in cases where delay would result in imminent risk of data loss, security breach, or system outage to Client's systems, in which case Technijian may perform emergency out-of-scope work not to exceed **$2,500** (at applicable Rate Card rates) without prior approval. Technijian shall notify Client as soon as practicable and shall issue a retrospective Change Order within **three (3) business days** of the emergency work for Client's review and ratification.
 
 ---
 
@@ -208,7 +210,7 @@ Client shall:
 
 **8.01.** Upon completion of each phase, Technijian shall notify Client in writing that the deliverables are ready for review.
 
-**8.02.** Client shall review the deliverables and provide written acceptance or a detailed description of deficiencies within **five (5) business days**.
+**8.02.** Client shall review the deliverables and provide written acceptance or a detailed description of deficiencies within **ten (10) business days**. Technijian's delivery notification shall include a conspicuous statement: "If you do not respond within ten (10) business days, deliverables will be deemed accepted per SOW Section 8.03."
 
 **8.03.** If Client does not respond within the review period, the deliverables shall be deemed accepted.
 
@@ -220,7 +222,7 @@ Client shall:
 
 **9.01.** If a Master Service Agreement is in effect between the Parties, the terms of the MSA shall govern this SOW. In the event of a conflict between this SOW and the MSA, the MSA shall prevail unless this SOW expressly states otherwise.
 
-**9.02.** If no MSA is in effect, the Technijian Standard Terms and Conditions (attached as Appendix A) shall govern this SOW.
+**9.02.** If no MSA is in effect, the Technijian Standard Terms and Conditions (attached as Appendix A) shall govern this SOW. If Appendix A is not attached, the following shall apply as a minimum: (a) neither Party's total aggregate liability under this SOW shall exceed the total fees paid or payable under this SOW; (b) in no event shall either Party be liable for indirect, incidental, special, consequential, or punitive damages; and (c) this SOW shall be governed by the laws of the State of California, and disputes shall be resolved by binding arbitration in Orange County, California, under the AAA Commercial Arbitration Rules.
 
 ---
 

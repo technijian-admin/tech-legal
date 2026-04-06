@@ -4,15 +4,17 @@
 
 This Non-Disclosure Agreement ("Agreement") is entered into by and between:
 
-**Technijian, Inc.** ("Disclosing Party")
+**Technijian, Inc.**
 18 Technology Drive, Suite 141
 Irvine, California 92618
 
 and
 
-**[CLIENT NAME]** ("Receiving Party")
+**[CLIENT NAME]**
 [CLIENT ADDRESS]
 [CITY, STATE ZIP]
+
+(each a "Disclosing Party" when disclosing Confidential Information and a "Receiving Party" when receiving Confidential Information)
 
 (collectively, the "Parties")
 
@@ -58,9 +60,11 @@ The Receiving Party agrees to:
 
 (d) Limit access to Confidential Information to those employees, agents, and advisors who have a need to know and who are bound by confidentiality obligations at least as protective as those in this Agreement;
 
-(e) Take reasonable measures to protect the Confidential Information from unauthorized disclosure, using at least the same degree of care the Receiving Party uses for its own confidential information, but in no event less than reasonable care; and
+(e) Take reasonable measures to protect the Confidential Information from unauthorized disclosure, using at least the same degree of care the Receiving Party uses for its own confidential information, but in no event less than reasonable care;
 
-(f) Promptly notify the Disclosing Party in writing of any unauthorized disclosure or use of Confidential Information.
+(f) Promptly notify the Disclosing Party in writing of any unauthorized disclosure or use of Confidential Information; and
+
+(g) If the Receiving Party is required by law, regulation, subpoena, civil investigative demand, or court order to disclose Confidential Information, the Receiving Party shall (to the extent legally permitted) provide prompt written notice to the Disclosing Party prior to such disclosure and cooperate in seeking a protective order or other appropriate remedy to preserve confidentiality. If a protective order is not obtained, the Receiving Party may disclose only that portion of the Confidential Information that is legally required, and shall use commercially reasonable efforts to ensure that such disclosed information receives confidential treatment. Disclosure compelled by law shall not constitute a breach of this Agreement.
 
 ## 4. RETURN OF MATERIALS
 
@@ -76,7 +80,7 @@ This Agreement does not obligate either Party to enter into any further agreemen
 
 ## 7. TERM AND TERMINATION
 
-This Agreement shall remain in effect for a period of **two (2) years** from the Effective Date. The confidentiality obligations set forth in this Agreement shall survive termination for a period of **three (3) years** following the date of disclosure of the Confidential Information.
+This Agreement shall remain in effect for a period of **two (2) years** from the Effective Date. The confidentiality obligations set forth in this Agreement shall survive termination for a period of **three (3) years** following the date of disclosure of the Confidential Information. Notwithstanding the foregoing, the confidentiality obligations with respect to any Confidential Information that constitutes a trade secret under the California Uniform Trade Secrets Act (Cal. Civ. Code § 3426 et seq.) or other applicable law shall continue for so long as such information remains a trade secret.
 
 ## 8. REMEDIES
 

@@ -116,7 +116,7 @@ This Schedule sets forth the standard rates for services provided by Technijian,
 
 ## 5. TERMS
 
-**5.01. Rate Adjustments.** Technijian may adjust the rates in this Schedule upon **sixty (60) days** written notice to Client. Adjusted rates shall take effect at the start of the next Renewal Term of the Agreement.
+**5.01. Rate Adjustments.** Technijian may adjust the rates in this Schedule upon **sixty (60) days** written notice to Client. Adjusted rates shall take effect at the start of the next Renewal Term of the Agreement. Rate increases shall not exceed the greater of: (a) **ten percent (10%)** of the then-current rate; or (b) the percentage increase in the Consumer Price Index for All Urban Consumers (CPI-U), U.S. City Average, as published by the Bureau of Labor Statistics, for the twelve (12) month period ending sixty (60) days prior to the Renewal Term, plus three percent (3%). If a rate increase exceeds this cap, Client may terminate the affected Schedule without penalty by providing written notice within **thirty (30) days** of receiving the rate adjustment notice. The rate adjustment notice shall include a reminder of Client's non-renewal option under MSA Section 2.02.
 
 **5.02. Volume Discounts.** Volume-based pricing may be negotiated and documented in the applicable Service Order or Subscription Order.
 

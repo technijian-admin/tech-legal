@@ -33,12 +33,25 @@ The specific services, quantities, and monthly pricing for Client are detailed i
 | Service Level | Target |
 |---------------|--------|
 | Infrastructure Uptime | 99.9% monthly (excluding scheduled maintenance) |
-| Scheduled Maintenance | Tuesdays evenings and Saturdays (with advance notice) |
+| Scheduled Maintenance | Tuesdays evenings and Saturdays (with advance notice), not to exceed 8 hours per month |
 | Critical Incident Response | Within 1 hour of notification |
 | Standard Support Response | Within 4 business hours |
 | Emergency Maintenance | As needed with reasonable notice |
 
-### 1.5 Monitoring and Reporting
+### 1.5 Service Credits
+
+If Technijian fails to meet the Infrastructure Uptime target in any calendar month (excluding scheduled maintenance windows and Force Majeure Events under the MSA), Client shall be entitled to service credits as follows:
+
+| Monthly Uptime | Service Credit (% of Monthly Service Fee) |
+|----------------|-------------------------------------------|
+| 99.0% – 99.89% | 5% |
+| 98.0% – 98.99% | 10% |
+| 95.0% – 97.99% | 20% |
+| Below 95.0% | 30% |
+
+Service credits shall be applied to the next monthly invoice. Client must request service credits in writing within **fifteen (15) days** of the end of the affected month. Service credits are Client's sole and exclusive remedy for failure to meet the uptime target and shall not exceed 30% of the applicable Monthly Service Fee in any single month. Nothing in this Section limits Client's remedies under the MSA for Technijian's gross negligence, willful misconduct, or breach of data protection obligations under Section 10 of the MSA. Service credits do not apply during any period in which Client's services are suspended for non-payment.
+
+### 1.6 Monitoring and Reporting
 
 Technijian shall provide:
 
@@ -108,7 +121,7 @@ Client may select from the following standard support roles:
 
 **(b) Monthly Billed Amount Calculation.** The fixed monthly billing rate for each role is calculated as follows:
 
-1. At the start of each new Cycle, Technijian calculates the **average monthly hours** consumed per role during the previous Cycle, excluding the final month of that Cycle.
+1. At the start of each new Cycle, Technijian calculates the **average monthly hours** consumed per role during the previous Cycle, excluding the final month of that Cycle (to avoid billing spikes from ramp-down or ramp-up activity in the transition month).
 
 2. This average becomes the **monthly billed hours** for each role during the current Cycle.
 
@@ -136,9 +149,11 @@ Client may select from the following standard support roles:
 
 1. Any positive running balance (actual hours exceeding billed hours) shall become immediately due and payable.
 
-2. Any negative running balance (billed hours exceeding actual hours) will be credited to Client's final invoice, subject to a maximum credit of one month's billed amount per role.
+2. Any negative running balance (billed hours exceeding actual hours) will be credited to Client's final invoice. The credit shall equal the full net negative balance for each role, up to a maximum of the total billed amount for the current Cycle for that role. Any remaining credit beyond this maximum shall be forfeited, as Technijian has committed staffing resources and reserved capacity for the duration of the Cycle.
 
-### 3.4 Weekly Service Reports
+**(f) Cycle Reconciliation Dispute Window.** Technijian shall deliver a written reconciliation statement to Client within **ten (10) business days** of the end of each Cycle. Client shall have **fifteen (15) business days** from receipt of the reconciliation statement to dispute any portion of the running balance, specifying the nature of the dispute in writing. Failure to provide a timely written dispute shall constitute acceptance of the reconciliation.
+
+### 3.4 Weekly Service Invoices
 
 Technijian shall provide Client with **weekly service invoices** that detail:
 
@@ -176,7 +191,7 @@ Either Party may request changes to the services described in this Schedule by p
 
 ### Payment and Collection
 
-All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all services under this Schedule. In the event of non-payment, Technijian may suspend all services described in this Schedule (including Online Services, SIP Trunk Services, and Virtual Staff services) in accordance with Section 3.06 of the MSA, regardless of which specific service generated the unpaid invoice.
+All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all services under this Schedule. In the event of non-payment, Technijian may suspend services in accordance with Section 3.06 of the MSA, which provides for suspension of the specific service associated with the unpaid invoice after thirty (30) days past due, and suspension of all services across Schedules and SOWs after sixty (60) days past due.
 
 ### Pricing Adjustments
 
