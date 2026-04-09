@@ -153,6 +153,8 @@ Client may select from the following standard support roles:
 
 **(f) Cycle Reconciliation Dispute Window.** Technijian shall deliver a written reconciliation statement to Client within **ten (10) business days** of the end of each Cycle. Client shall have **fifteen (15) business days** from receipt of the reconciliation statement to dispute any portion of the running balance, specifying the nature of the dispute in writing. Failure to provide a timely written dispute shall constitute acceptance of the reconciliation.
 
+**(g) Minimum Contracted Hours.** The monthly billed hours for each role shall not fall below **fifty percent (50%)** of the initial contracted hours established in the Service Order for that role (the "Minimum Hours"). If actual usage drops below the Minimum Hours for three (3) or more consecutive months, Technijian may adjust the monthly billed hours down to the Minimum Hours at the start of the next Cycle, but shall not reduce below the Minimum Hours without mutual written agreement. The Minimum Hours provision ensures that Technijian can maintain dedicated staffing resources and reserved capacity for Client. If Client wishes to reduce hours below the Minimum, Client may request a Service Order amendment, subject to Technijian's approval and a **thirty (30) day** notice period.
+
 ### 3.4 Weekly Service Invoices
 
 Technijian shall provide Client with **weekly service invoices** that detail:
