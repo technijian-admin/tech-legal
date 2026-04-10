@@ -1,2 +1,5 @@
 # Secrets are stored in OneDrive, not in repo
 # keys/ folder contains only reference pointers
+
+__pycache__/
+*.pyc

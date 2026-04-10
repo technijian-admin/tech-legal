@@ -1,0 +1,14 @@
+{
+  "generatedAtUtc": "2026-04-10T18:32:45Z",
+  "portalFlagActiveContractCount": 1610,
+  "portalFlagActiveClientCount": 415,
+  "currentActiveContractCount": 1180,
+  "currentActiveClientCount": 367,
+  "portalFlagActiveButEndDatePastCount": 430,
+  "contractsWithDateSigned": 260,
+  "contractsWithInvoiceContacts": 1088,
+  "portalContractCsv": "/mnt/c/Users/rjain/OneDrive - Technijian, Inc/Documents/Client Portal - Active Contracts Enriched - 2026-04-10.csv",
+  "portalClientCsv": "/mnt/c/Users/rjain/OneDrive - Technijian, Inc/Documents/Client Portal - Active Clients From Active Contracts - 2026-04-10.csv",
+  "currentContractCsv": "/mnt/c/Users/rjain/OneDrive - Technijian, Inc/Documents/Client Portal - Current Active Contracts Enriched - 2026-04-10.csv",
+  "currentClientCsv": "/mnt/c/Users/rjain/OneDrive - Technijian, Inc/Documents/Client Portal - Current Active Clients - 2026-04-10.csv"
+}

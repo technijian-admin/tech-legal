@@ -1,0 +1,10 @@
+{
+  "generatedFrom": "/mnt/c/vscode/tech-legal/tech-legal/docs/client-portal/exports/2026-04-10/Client Portal - Current Active Contracts Enriched - 2026-04-10.csv",
+  "currentActiveClientCount": 367,
+  "currentActiveContractCount": 1180,
+  "clientsWithSignerContacts": 273,
+  "contractsWithSignerContacts": 862,
+  "clientSignerCsv": "/mnt/c/vscode/tech-legal/tech-legal/docs/client-portal/exports/2026-04-10/Client Portal - Current Active Client Contract Signers - 2026-04-10.csv",
+  "contractSignerCsv": "/mnt/c/vscode/tech-legal/tech-legal/docs/client-portal/exports/2026-04-10/Client Portal - Current Active Contract Signers Detail - 2026-04-10.csv",
+  "note": "Signer contacts are derived from contract XML_Email returned by dbo.stp_xml_Con_Org_Loc_Con_Info_Get for current-active contracts."
+}
