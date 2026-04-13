@@ -1,0 +1,52 @@
+config-file-header
+arandaswitch03
+v3.2.1.1 / RCBS3.2hotfix_950_377_136
+CLI v1.0
+file SSD indicator excluded
+@
+!
+unit-type-control-start 
+unit-type unit 1 network gi uplink te 
+unit-type unit 2 network gi uplink te 
+unit-type unit 3 network gi uplink te 
+unit-type unit 4 network gi uplink te 
+unit-type-control-end 
+!
+vlan database
+vlan 20,100 
+exit
+voice vlan oui-table add 0001e3 Siemens_AG_phone
+voice vlan oui-table add 00036b Cisco_phone
+voice vlan oui-table add 00096e Avaya
+voice vlan oui-table add 000fe2 H3C_Aolynk
+voice vlan oui-table add 0060b9 Philips_and_NEC_AG_phone
+voice vlan oui-table add 00d01e Pingtel_phone
+voice vlan oui-table add 00e075 Polycom/Veritel_phone
+voice vlan oui-table add 00e0bb 3Com_phone
+bonjour interface range vlan 1
+hostname arandaswitch03
+username arandaadmin password encrypted $15$z0rX2DQdBSAAZ3lM$iRddq+BGeK8fQOimTKAZqv8A/e3ZygyBDsdfywLZzGgCRcJuLDewhTlSEa49TMOS59wEVFUeSl5/NlL4dyjQ3Q== privilege 15 
+username arandaintern password encrypted $15$+O7ZNBpRHAlkQDte$1qejETnN/Q5fZGUnfab+I3vWmR9FtIeUN2EsuC5AMHfGCJ8+MFaGbvSt8qcwdQ3FVpYEVM+Jw0BKcMnS25txIg== privilege 15 
+!
+interface vlan 1
+ ip address 10.10.0.30 255.255.0.0 
+ no ip address dhcp 
+!
+interface vlan 20
+ name "Office Computer VLAN" 
+!
+interface vlan 100
+ name "OT Management VLAN" 
+ ip address 10.28.1.30 255.255.254.0 
+!
+interface GigabitEthernet1/0/1
+ switchport access vlan 20 
+!
+interface GigabitEthernet1/0/13
+ switchport access vlan 20 
+!
+interface TenGigabitEthernet1/0/1
+ switchport mode trunk 
+!
+exit
+ip default-gateway 10.10.0.1 
