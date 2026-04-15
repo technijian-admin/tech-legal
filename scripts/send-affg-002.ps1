@@ -15,8 +15,10 @@ $baseUrl = "https://na1.foxitesign.foxit.com/api"
 # --- Read credentials from OneDrive keys file ---
 Write-Host "Reading credentials from OneDrive..." -ForegroundColor Cyan
 $keysContent = Get-Content $keysFile -Raw
-$clientId = [regex]::Match($keysContent, 'Client ID:\*\*\s*(\S+)').Groups[1].Value
-$clientSecret = [regex]::Match($keysContent, 'Client Secret:\*\*\s*(\S+)').Groups[1].Value
+$clientId = [regex]::Match($keysContent, 'Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $clientId) { $clientId = [regex]::Match($keysContent, 'Client ID\s*=\s*(\S+)').Groups[1].Value }
+$clientSecret = [regex]::Match($keysContent, 'Client Secret[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $clientSecret) { $clientSecret = [regex]::Match($keysContent, 'Client Secret\s*=\s*(\S+)').Groups[1].Value }
 
 if (-not $clientId -or -not $clientSecret) {
     Write-Error "Failed to read Foxit eSign credentials from $keysFile"

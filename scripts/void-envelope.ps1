@@ -10,11 +10,19 @@ $ClientId = [regex]::Match($keysContent, 'Client ID[^:]*:\*\*\s*(\S+)').Groups[1
 $UserId = [regex]::Match($keysContent, 'User ID:\*\*\s*(\S+)').Groups[1].Value
 $AccountId = [regex]::Match($keysContent, 'Account ID:\*\*\s*(\S+)').Groups[1].Value
 $rsaKey = [regex]::Match($keysContent, '(?s)(-----BEGIN RSA PRIVATE KEY-----.*?-----END RSA PRIVATE KEY-----)').Groups[1].Value
+$nodeCommand = (Get-Command node,node.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source)
+if (-not $nodeCommand -and (Test-Path "C:\Program Files\nodejs\node.exe")) {
+    $nodeCommand = "C:\Program Files\nodejs\node.exe"
+}
 
 $tempKeyPath = [System.IO.Path]::GetTempFileName()
 $rsaKey | Set-Content -Path $tempKeyPath -NoNewline
 $jwtHelperPath = Join-Path (Split-Path -Parent $MyInvocation.MyCommand.Path) "docusign-jwt-helper.js"
-$jwt = & node $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
+if (-not $nodeCommand) {
+    Write-Error "Node.js was not found. Install Node.js or add node.exe to PATH."
+    exit 1
+}
+$jwt = & $nodeCommand $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
 Remove-Item $tempKeyPath -ErrorAction SilentlyContinue
 
 $tokenResponse = Invoke-RestMethod -Uri "https://account.docusign.com/oauth/token" -Method POST -Body @{

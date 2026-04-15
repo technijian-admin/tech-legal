@@ -12,9 +12,9 @@
 
 ## PURPOSE
 
-This memorandum documents the six alternative damages computations available under the signed Client Monthly Service Agreement between Technijian, Inc. and Vintage Design, executed via DocuSign on May 4, 2023 (Envelope ID B679C550-E41C-4E31-BE34-7F8FFF437C3D). It confirms the Demand's stated damages figure ($240,555.15), identifies the three lower-value readings Respondent's counsel is expected to push, and sets out the **controlling legal authorities that render each of those readings implausible**.
+This memorandum documents the six alternative damages computations available under the signed Client Monthly Service Agreement between Technijian, Inc. and Vintage Design, executed via DocuSign on May 4, 2023 (Envelope ID B679C550-E41C-4E31-BE34-7F8FFF437C3D). It reconciles the Demand's stated damages figure ($240,555.15) against the contract-correct calculation ($240,487.50, a $67.65 difference in the late-fee line), identifies the three lower-value readings Respondent's counsel is expected to push, and sets out the **controlling legal authorities that render each of those readings implausible**.
 
-**The Settlement Position Memorandum anchors at $240,555.15 (consistent with the Demand).** This memorandum preserves the range for internal strategy and identifies the walk-away floor at **$125,000**.
+**The Settlement Position Memorandum anchors at $240,487.50 (the contract-correct calculation; Demand to be conformed).** This memorandum preserves the range for internal strategy and identifies the walk-away floor at **$125,000**.
 
 ---
 
@@ -88,9 +88,11 @@ Key fact: P3 ran slightly *below* billed usage. This is the fulcrum of Responden
 | Hours (per Demand ¶ 40) | 1,457.50 |
 | × $150/hour | $218,625.00 |
 | + 10% late fee | $21,862.50 |
-| **TOTAL** | **$240,487.50** (≈ Demand's pleaded $240,555.15) |
+| **TOTAL (contract-correct)** | **$240,487.50** |
 
-**Legal support:** Already pleaded. Sits between Scenario B (gross positive, 1,413.94) and Scenario D (monthly positive, 1,878.67) — squarely within defensible bounds. **Primary anchor in the Settlement Position Memorandum.**
+**Note on the Demand's $240,555.15 figure:** The Demand pleaded $240,555.15, which cannot be reproduced from a 10% late fee on $218,625.00 (the correct 10% is $21,862.50, yielding $240,487.50). The $67.65 discrepancy is an arithmetic error in the Demand's late-fee line. Recommendation: amend the Demand under AAA Rule R-6 to the contract-correct $240,487.50, or flag the correction at settlement as part of the stipulated damages amendment.
+
+**Legal support:** Figure is already on the record (with the $67.65 correction noted above). Sits between Scenario B (gross positive, 1,413.94) and Scenario D (monthly positive, 1,878.67) — squarely within defensible bounds. **Primary anchor in the Settlement Position Memorandum.**
 
 ---
 
@@ -141,10 +143,10 @@ The following three scenarios are the readings Respondent's counsel is expected 
 3. **¶¶ 3–4 are prospective, not retroactive.** The averaging mechanism in ¶¶ 3–4 adjusts **future** monthly billing at the end of each completed period. It does not **forgive** unpaid excess from prior periods — it simply raises the baseline going forward. Technijian's P2 and P3 monthly billing did in fact step up (80/mo → ~170/mo → ~210/mo) reflecting this adjustment. But the P1 excess hours (1,010.97 hrs) were already delivered and never paid for; the prospective averaging does not compensate for them. The only contractual mechanism that does compensate Technijian for that delivered-but-unpaid excess is the cancellation fee in ¶ 5.
 
 4. **Two independent dispute waivers bar any "we didn't owe for those hours" argument.**
-   - **Weekly 30-day dispute waiver.** Throughout the ~27-month performance period, Technijian sent Vintage Design **weekly zero-dollar invoices** — approximately **140 of them** — each enumerating every ticket, time entry, technician assignment, and hours worked that week, and each expressly providing Vintage Design with a 30-day window to dispute any work performed. Vintage Design disputed **none**. Under contract course-of-performance principles, this is dispositive acceptance of the ticketed hours. Cal. Comm. Code § 1303; *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388.
+   - **Weekly 30-day dispute waiver.** Throughout the ~27-month performance period, Technijian sent Vintage Design **weekly zero-dollar invoices** — approximately **140 of them** — each enumerating every ticket, time entry, technician assignment, and hours worked that week, and each expressly providing Vintage Design with a 30-day window to dispute any work performed. Vintage Design disputed **none**. Under contract course-of-performance principles, this is dispositive acceptance of the ticketed hours. Cal. Com. Code § 1303; *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388.
    - **Monthly 60-day objection waiver.** T&C § 3.01 provides: "If Client does not notify Technijian within the sixty (60) day[] period, Client shall be deemed to have accepted without question such invoice or bill." Vintage Design never objected to any monthly invoice. Every invoice itemized "Hours not paid are due if support agreement is cancelled per monthly service agreement." *Cobb v. Pacific Mut. Life Ins. Co.* (1935) 4 Cal.2d 565, 573; *Gleason v. Klamer* (1980) 103 Cal.App.3d 782, 787 (failure to object within reasonable time is implied admission of correctness).
 
-   Either waiver alone bars any attack on ticket accuracy; both combined make the hours effectively undisputable under any theory.
+   Either waiver alone bars any attack on ticket accuracy; both combined make the hours effectively indisputable under any theory.
 
 5. **Ratification and course of performance cement the reading.** Erica Garcia, as Vintage Design's VP Finance, personally reviewed and paid each monthly invoice for over two years. *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67, 73 (ratification by acceptance of benefits with knowledge); *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388 (long course of performance persuasive as to parties' interpretation).
 
@@ -162,7 +164,7 @@ The following three scenarios are the readings Respondent's counsel is expected 
 
 2. **No provision in ¶¶ 3–4 states that completed-period excess is released.** Paragraph 3 states: "The first month of the new average will be charged at the previous average since that invoice will be due the first of the month." Paragraph 4 states: "If the average goes down a credit will be given on the next month's invoice. If the average goes up an extra charge will be given on the next month's invoice." **Neither paragraph uses the word "release," "forgive," "credit back," or any other term of absolution.** They describe billing adjustments going forward. Courts will not imply a release that the parties did not write. *Series AGI West Linn of Appian Group Investors DE v. Eves* (2013) 217 Cal.App.4th 156, 164–165.
 
-3. **The averaging mechanism does not compensate Technijian for the delivered excess.** A higher P2 billed baseline charges Vintage Design prospectively for the ongoing *ongoing* elevated demand pattern. It does not pay Technijian retroactively for the P1 hours that already walked out the door. Technijian billed 960 hours in P1 and delivered 1,970.97 — the 1,010.97 hour gap was never invoiced at the averaged rate; it was deferred to the cancellation-fee trigger in ¶ 5. To eliminate P1 from the cancellation calculation is to eliminate the whole economic purpose of the clause.
+3. **The averaging mechanism does not compensate Technijian for the delivered excess.** A higher P2 billed baseline charges Vintage Design prospectively for the ongoing elevated demand pattern. It does not pay Technijian retroactively for the P1 hours that already walked out the door. Technijian billed 960 hours in P1 and delivered 1,970.97 — the 1,010.97 hour gap was never invoiced at the averaged rate; it was deferred to the cancellation-fee trigger in ¶ 5. To eliminate P1 from the cancellation calculation is to eliminate the whole economic purpose of the clause.
 
 4. **California disfavors reading commercial clauses to be meaningless.** *MacKinnon v. Truck Ins. Exchange* (2003) 31 Cal.4th 635, 648 (reasonable expectations of the parties control); *Powerine Oil*, supra. No reasonable party in Technijian's position would have agreed to a cancellation clause that could be defeated by the simple expedient of terminating after each period closed — which is exactly what E2 proposes.
 
@@ -199,7 +201,7 @@ The following three scenarios are the readings Respondent's counsel is expected 
 | Scenario | Hours | × Rate | **TOTAL** | Posture | Plausibility |
 |---|---:|---|---:|---|---|
 | **D — Monthly positive × $150** | 1,878.67 | $150 | **$309,980.55** | Most aggressive opening | ✅ Supportable |
-| **Demand filed ★ ANCHOR** | 1,457.50 | $150 | **$240,487.50** (≈ $240,555.15) | Primary memo anchor | ✅ On record |
+| **Demand filed ★ ANCHOR** (contract-correct) | 1,457.50 | $150 | **$240,487.50** | Primary memo anchor; Demand's $240,555.15 has $67.65 late-fee error to conform | ✅ On record |
 | **B — Gross positive × $150** | 1,413.94 | $150 | **$233,300.10** | Aggressive, defensible | ✅ Supportable |
 | **A — Net excess × $150** | 1,330.76 | $150 | **$219,575.40** | Conservative fallback anchor | ✅ Directly provable |
 | ***★ $125,000 SETTLEMENT FLOOR*** | | | ***$125,000*** | Walk-away floor | |
@@ -215,7 +217,7 @@ The following three scenarios are the readings Respondent's counsel is expected 
 
 | Position | Amount | Rationale |
 |---|---:|---|
-| Opening / stated in memo | **$240,555.15** | Matches Demand — no story change |
+| Opening / stated in memo | **$240,487.50** | Contract-correct figure; Demand conformed by $67.65 on late-fee line |
 | First concession | $200,000 – $220,000 | Scenario A/B territory, still defensible |
 | Realistic landing zone | $150,000 – $180,000 | Midpoint between Scenario A and the floor |
 | **Walk-away floor** | **$125,000** | Below this, arbitrate to award |
@@ -247,8 +249,8 @@ The following constrain Respondent's ability to push toward sub-floor outcomes:
 | Integration clause (T&C § 6.08) bars oral side-deals | CCP § 1856; *Casa Herrera v. Beydoun* (2004) 32 Cal.4th 336 | Blocks "we were promised X" testimony |
 | 60-day invoice objection window waived | T&C § 3.01; *Cobb v. Pacific Mut.* (1935) 4 Cal.2d 565 | Forecloses ticketing-accuracy dispute |
 | Course of performance / ratification across ~27 months | *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67; *Pasadena Medi-Center* (1973) 9 Cal.3d 773 | Cures any late-breaking interpretation defenses |
-| VP Finance apparent authority; Corp. Code § 313 | *Snukal v. Flightways* (2000) 23 Cal.4th 754 | Conclusive presumption for third parties |
-| DocuSign signatures attributable as matter of law | Cal. Civ. Code § 1633.9; *Fabian v. Renovate America* (2019) 42 Cal.App.5th 1062 | Defeats authentication challenge |
+| VP Finance apparent authority + ratification by 27 months of paid performance | *Pasadena Medi-Center* (1973) 9 Cal.3d 773; *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67 | Cures any signatory-authority challenge |
+| DocuSign signatures authenticated via completion certificate + metadata + course of performance | Cal. Civ. Code § 1633.9; authentication standard set by *Ruiz v. Moss Bros.* (2014) 232 Cal.App.4th 836 and *Fabian v. Renovate America* (2019) 42 Cal.App.5th 1062 | Meets the foundation those cases required |
 | Attorneys' fees recoverable via § 5.02 indemnity + § 1717 reciprocity | *Santisas v. Goodin* (1998) 17 Cal.4th 599 | Shifts fee exposure to Respondent |
 | Business records admissibility | Evid. Code §§ 1271, 1552; *Jazayeri v. Mao* (2009) 174 Cal.App.4th 301 | Admits ticketing data and QuickBooks ledger |
 
@@ -258,7 +260,7 @@ Full citations and treatment are in the accompanying Case Law Research Memorandu
 
 ## PRE-MEETING CHECKLIST
 
-- [ ] Confirm the **$240,555.15 anchor** and **$125,000 floor** with Technijian
+- [ ] Confirm the **$240,487.50 anchor** (contract-correct; Demand to be conformed on the $67.65 late-fee line) and **$125,000 floor** with Technijian
 - [ ] Confirm the landing zone ($150K–$180K) and opening concession tiers
 - [ ] Prepare the Exhibit C month-by-month billed-vs-actual reconciliation as a standalone spreadsheet (clean version for production)
 - [ ] Prepare "Delaware LLC → California corporation" caption amendment (AAA Rule R-6)
@@ -273,7 +275,7 @@ Full citations and treatment are in the accompanying Case Law Research Memorandu
 
 2. **Entity cleanup.** Caption amendment from "Vintage Design, LLC, a Delaware limited liability company" to the actual signed-agreement designation "Vintage Design, a California corporation." Relation-back under *Hawkins v. Pacific Coast Bldg. Prods.*
 
-3. **Post-termination engagements** (3CX upgrade prepayment, SSL cert, continued monthly services through April 2026) — separately paid. Counsel to confirm these are treated as distinct contracts and do not muddy the termination-effective-date analysis.
+3. **Demand's $67.65 arithmetic error.** The Demand's $240,555.15 cannot be reproduced from a 10% late fee on the $218,625 cancellation subtotal (correct is $240,487.50). Counsel to decide whether to amend the Demand now under AAA Rule R-6 or flag the correction at settlement as part of the stipulated damages amendment. The Settlement Position Memorandum has been conformed to $240,487.50.
 
 4. **Arbitrator selection timeline** — any deadlines to lodge the amended Statement of Claims before arbitrator appointment (AAA Rule R-6).
 
