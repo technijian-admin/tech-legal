@@ -87,7 +87,7 @@ Scripts parse the OneDrive key files with regex like `'<Field>:\*\*\s*(\S+)'`, w
 **Base URL:** https://na1.foxitesign.foxit.com/api
 **Client ID:** <foxit-client-id>
 **Client Secret:** <foxit-client-secret>
-**Auth endpoint:** https://na1.foxitesign.foxit.com/api/oauth2/token
+**Auth endpoint:** https://na1.foxitesign.foxit.com/api/oauth2/access_token
 **Grant type:** client_credentials
 ```
 
@@ -231,7 +231,7 @@ $f = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\key
 $fid = [regex]::Match($f,'Client ID:\*\*\s*(\S+)').Groups[1].Value
 $fsec = [regex]::Match($f,'Client Secret:\*\*\s*(\S+)').Groups[1].Value
 $body = @{ grant_type='client_credentials'; client_id=$fid; client_secret=$fsec; scope='read-write' }
-Invoke-RestMethod -Method Post -Uri "https://na1.foxitesign.foxit.com/api/oauth2/token" -Body $body
+Invoke-RestMethod -Method Post -Uri "https://na1.foxitesign.foxit.com/api/oauth2/access_token" -Body $body
 ```
 
 All three must return without error before attempting a production send.
