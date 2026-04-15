@@ -72,7 +72,7 @@ The cancellation fee ($150/hr × hours exceeding the prior under-contract period
 - *Hitz v. First Interstate Bank* (1995) 38 Cal.App.4th 274, 286–289 — § 1671(b) presumption of validity; commercial parties' negotiated allocations of risk receive deference.
 - *El Centro Mall, LLC v. Payless ShoeSource, Inc.* (2009) 174 Cal.App.4th 58, 63 — clause assessed at time of contracting, not in hindsight; reasonableness considers difficulty of computing actual damages.
 - *Utility Consumers' Action Network, Inc. v. AT&T Broadband* (2006) 135 Cal.App.4th 1023 — courts respect bargained commercial liquidated damages.
-- *Greentree Financial Group, Inc. v. Execute Sports, Inc.* (2008) 163 Cal.App.4th 495 — distinction between valid liquidated damages and unenforceable penalty in B2B context.
+- *Greentree Financial Group, Inc. v. Execute Sports, Inc.* (2008) 163 Cal.App.4th 495, 499–500 — **framework case**; the stipulated-judgment clause there was invalidated because the stipulated amount bore no reasonable relationship to actual damages. Distinguishable here: the $150/hour cancellation rate is tied to contemporaneous measured usage and sits at or below the Agreement's own bargained out-of-contract rates ($150/$200).
 
 **Application:** The cancellation fee here is reasonable because:
 
@@ -137,9 +137,9 @@ See also:
 
 10% late fee enforceable under § 1671(b) commercial standard:
 
-- *Garrett v. Coast & Southern Fed. Sav. & Loan Assn.* (1973) 9 Cal.3d 731, 738–740 — late charges in commercial contracts assessed under liquidated damages framework.
-- *Beasley v. Wells Fargo Bank* (1991) 235 Cal.App.3d 1383 — late fees survive where reasonable under circumstances at contracting.
-- *Hitz v. First Interstate Bank, supra*, 38 Cal.App.4th at 289 — § 1671(b) presumption of validity applies to late charges in commercial settings.
+- *Garrett v. Coast & Southern Fed. Sav. & Loan Assn.* (1973) 9 Cal.3d 731, 738–740 — **framework case**; invalidated the 2%/month consumer-loan late charge as a penalty unrelated to actual harm. Distinguishable here: (a) B2B commercial MSP contract, not consumer lending; (b) the 10% charge applies only after a 10-day grace period; (c) charge is proportionate to documented cost of capital and collection effort.
+- *Beasley v. Wells Fargo Bank* (1991) 235 Cal.App.3d 1383 — **framework case**; struck down specific bank NSF/late-fee schedule as penalties under *Garrett*. Distinguishable on same grounds as *Garrett*; also a consumer-deposit-account context, not commercial.
+- *Hitz v. First Interstate Bank, supra*, 38 Cal.App.4th at 289 — affirmed enforcement of a liquidated-damages measure tied to actual harm; confirms § 1671(b) presumption of validity applies in commercial settings.
 
 **Application:** The 10% late fee was disclosed both in the Agreement (Other Terms ¶ 3) and on every invoice; it is keyed to actual unpaid amounts and reflects collection costs and lost time-value of money. Reasonable under § 1671(b).
 
@@ -147,14 +147,16 @@ See also:
 
 ## 7. AUTHORITY OF CORPORATE OFFICER TO BIND
 
-Vintage Design's VP Finance Erica Garcia signed the 5/4/2023 Agreement. Anticipated defense ("she lacked authority") fails:
+Vintage Design's VP Finance Erica Garcia signed the 5/4/2023 Agreement. Anticipated defense ("she lacked authority") fails on apparent authority + ratification grounds:
 
-- *Snukal v. Flightways Mfg., Inc.* (2000) 23 Cal.4th 754, 782 — Cal. Corp. Code § 313 establishes that an instrument signed by specified officers (including any vice president and any officer with title indicating authority) is presumed conclusively binding on the corporation as to third parties acting in good faith.
+- *Pasadena Medi-Center Associates v. Superior Court* (1973) 9 Cal.3d 773, 779–780 — officer holding a title that conveys general authority over the subject matter (here, financial obligations) has apparent authority to bind the corporation; ratification arises through acceptance of contract benefits.
 - *Memorial Hospitals Assn. v. Randol* (1995) 38 Cal.App.4th 1300, 1308 — apparent authority of officer holding title that suggests management responsibility.
 - *Lippert v. Bailey* (1966) 241 Cal.App.2d 376, 382 — apparent authority binding where principal cloaks agent with indicia of authority.
-- *Pasadena Medi-Center Associates v. Superior Court* (1973) 9 Cal.3d 773, 779–780 — ratification through acceptance of contract benefits.
+- *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67, 73 — ratification by acceptance of contract benefits with knowledge of the material terms.
 
-**Application:** Erica Garcia identified herself as VP Finance, signed via DocuSign on Vintage Design's behalf, and Vintage Design thereafter accepted services and paid monthly invoices for ~27 months. Both actual and apparent authority are established; ratification is established by 27 months of paid performance.
+**Note on Cal. Corp. Code § 313.** Section 313's "conclusive presumption" for third parties turns on a signature by a specified combination of officers (a chair/president/VP **plus** a secretary, assistant secretary, CFO, or assistant treasurer). *Snukal v. Flightways Mfg., Inc.* (2000) 23 Cal.4th 754, 782, found the presumption on that two-officer pairing. A single VP Finance signature, standing alone, does not trigger § 313's statutory presumption. Technijian's authority argument therefore rests on apparent authority and ratification, not § 313 — arguments which are amply supported on the 27-month course of performance.
+
+**Application:** Erica Garcia identified herself as VP Finance (a title conveying general authority over the corporation's financial obligations), signed via DocuSign on Vintage Design's behalf, and Vintage Design thereafter accepted services and paid monthly invoices for ~27 months without objection. Apparent authority is established; ratification is established by 27 months of paid performance.
 
 ---
 
@@ -162,7 +164,7 @@ Vintage Design's VP Finance Erica Garcia signed the 5/4/2023 Agreement. Anticipa
 
 The Agreement (T&C § 1.06) provides that if Client does not object in writing within 30 days of any modification, Client is bound. Course-of-dealing principles reinforce:
 
-- Cal. Comm. Code § 1303 (course of performance, course of dealing).
+- Cal. Com. Code § 1303 (course of performance, course of dealing).
 - *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388 — long course of performance establishes parties' interpretation of contract.
 - *Employers Reinsurance Co. v. Superior Court* (2008) 161 Cal.App.4th 906, 921 — practical construction of contract by parties' conduct is highly persuasive.
 - *Crestview Cemetery Assn. v. Dieden* (1960) 54 Cal.2d 744, 753 — silence with knowledge can constitute acceptance.
@@ -191,14 +193,14 @@ Approximately 27 monthly invoices across the relationship, each attaching the Ag
 - *Gleason v. Klamer* (1980) 103 Cal.App.3d 782, 787 — failure to object to invoice within reasonable time is implied admission of correctness.
 - *Trafton v. Youngblood* (1968) 69 Cal.2d 17, 25 — assent to amount due may be implied from retention of statement without objection within reasonable time.
 - *Pollard v. Saxe & Yolles Dev. Co.* (1974) 12 Cal.3d 374, 380 — purpose of notice provisions is to allow seller to investigate and cure while evidence is fresh.
-- **Cal. Comm. Code § 1303 (course of performance)** — repeated conduct by both parties without objection establishes the parties' interpretation and acceptance. *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388.
-- **Cal. Comm. Code § 2607(3)(a)** (by analogy from goods) — buyer must notify seller of breach within reasonable time after discovery or be barred.
+- **Cal. Com. Code § 1303 (course of performance)** — repeated conduct by both parties without objection establishes the parties' interpretation and acceptance. *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388.
+- **Cal. Com. Code § 2607(3)(a)** (by analogy from goods) — buyer must notify seller of breach within reasonable time after discovery or be barred.
 - *Tatum v. Schering Corp.* (S.D. Cal. 1991) — contractual time-bar on disputing invoices enforced in commercial context.
 - *Employers Reinsurance Co. v. Superior Court* (2008) 161 Cal.App.4th 906, 921 — practical construction of contract by parties' conduct is highly persuasive.
 
 ### Application
 
-Under the **weekly 30-day waiver alone**, Vintage Design is barred from disputing any ticketed hour it did not challenge during a 30-day window across ~140 weekly notices over 27 months. Under the **monthly 60-day waiver alone (T&C § 3.01)**, Vintage Design is barred from disputing any billed hour it did not challenge within 60 days of each monthly invoice. Applied together, **every ticketed hour underlying Technijian's cancellation-fee calculation is effectively undisputable as a matter of contract.** Respondent's "the records aren't accurate" or "we didn't actually use those hours" arguments are foreclosed at the threshold, before the merits of the cancellation clause are even reached.
+Under the **weekly 30-day waiver alone**, Vintage Design is barred from disputing any ticketed hour it did not challenge during a 30-day window across ~140 weekly notices over 27 months. Under the **monthly 60-day waiver alone (T&C § 3.01)**, Vintage Design is barred from disputing any billed hour it did not challenge within 60 days of each monthly invoice. Applied together, **every ticketed hour underlying Technijian's cancellation-fee calculation is effectively indisputable as a matter of contract.** Respondent's "the records aren't accurate" or "we didn't actually use those hours" arguments are foreclosed at the threshold, before the merits of the cancellation clause are even reached.
 
 This is also the single strongest evidentiary foundation for the business-records admissibility argument under **Cal. Evid. Code §§ 1271, 1552, 1553** (Issue 23 below): contemporaneous records that the client had a weekly and monthly opportunity to audit and dispute — and did not — are as trustworthy as commercial records get.
 
@@ -213,7 +215,7 @@ Anticipated defense: Technijian continued invoicing/serving Vintage Design after
 - *Wind Dancer Production Group v. Walt Disney Pictures* (2017) 10 Cal.App.5th 56, 78 — accepting partial performance does not waive right to insist on full performance.
 - *Old Republic Ins. Co. v. FSR Brokerage, Inc.* (2000) 80 Cal.App.4th 666, 678 — waiver is fact-intensive; defendant bears burden.
 
-**Application:** Post-termination services (e.g., the 9/25/2025 prepaid 3CX upgrade) were separately bargained for and **separately invoiced and paid**, demonstrating they were independent engagements — not a withdrawal of the cancellation fee assessment from the original under-contract period. Technijian's assessment of the cancellation fee on June 27, 2025 is the controlling notice of intent.
+**Application:** The defense has no factual footing. Technijian performed no services for Vintage Design after the July 31, 2025 effective termination date; there are no post-termination invoices, tickets, or engagements in the record. Technijian's assessment of the cancellation fee on June 27, 2025 is the controlling notice of intent, and the absence of any post-termination activity is itself affirmative evidence that Technijian treated the relationship as terminated.
 
 ---
 
@@ -249,7 +251,7 @@ Two statutory bases:
 - *North Oakland Med. Clinic v. Rogers* (1998) 65 Cal.App.4th 824, 829–830 — § 3289(b) imposes 10% legal rate on breach of contract damages.
 - *Continental Heller Corp. v. Amtech Mech. Services* (1997) 53 Cal.App.4th 500, 511 — applies in commercial settings.
 
-**Application:** The cancellation fee ($240,555.15 as pleaded, or $219,575.40 under the spreadsheet-net-excess reading) is fully ascertainable from Technijian's ticketing system and contracted rate; § 3287(a) interest applies. Absent a higher contractual rate, § 3289(b) supplies 10% per annum running from July 27, 2025.
+**Application:** The cancellation fee ($240,487.50 contract-correct, as the Demand will be conformed; or $219,575.40 under the spreadsheet-net-excess reading) is fully ascertainable from Technijian's ticketing system and contracted rate; § 3287(a) interest applies. Absent a higher contractual rate, § 3289(b) supplies 10% per annum running from July 27, 2025.
 
 ---
 
@@ -260,8 +262,8 @@ T&C § 6.10 mandates AAA Commercial Arbitration:
 - *AT&T Mobility LLC v. Concepcion* (2011) 563 U.S. 333 — FAA preempts state-law obstacles to arbitration enforcement.
 - *Pinnacle Museum Tower Assn. v. Pinnacle Market Development* (2012) 55 Cal.4th 223 — commercial arbitration agreements presumptively valid.
 - *Moncharsh v. Heily & Blase* (1992) 3 Cal.4th 1 — arbitration awards reviewed only on narrow grounds; merits errors not reviewable.
-- *Sandquist v. Lebo Automotive, Inc.* (2016) 1 Cal.5th 233 — arbitrator interprets contract scope.
 - *Aerojet-General Corp. v. Transport Indemnity Insurance* (1997) 17 Cal.4th 38 — broad arbitration clauses encompass all disputes "arising from or relating to" the agreement.
+- *Sandquist v. Lebo Automotive, Inc.* (2016) 1 Cal.5th 233 — on the language of this class of contracts, arbitrability questions (there, class arbitration) are for the arbitrator to decide; useful corollary that gateway issues of contract scope go to the arbitrator under the parties' chosen AAA rules.
 - *Cal. Code Civ. Proc. § 1286* — confirmation of arbitration award.
 - *Cal. Code Civ. Proc. § 1286.2* — limited grounds for vacatur.
 
@@ -318,11 +320,11 @@ The operative Agreement is DocuSigned (Envelope ID B679C550-E41C-4E31-BE34-7F8FF
 - **Cal. Civ. Code § 1633.7(d)** — "If a law requires a signature, an electronic signature satisfies the law."
 - **Cal. Civ. Code § 1633.9(a)** — an electronic signature is attributable to a person if it was the act of the person, shown by any relevant circumstances.
 - *J.B.B. Investment Partners, Ltd. v. Fair* (2014) 232 Cal.App.4th 974 — electronic signatures (including email-typed names) satisfy statute of frauds and form binding agreements when the signer intended to authenticate the writing.
-- *Ruiz v. Moss Bros. Auto Group, Inc.* (2014) 232 Cal.App.4th 836, 844 — electronic signatures enforceable upon adequate authentication; DocuSign audit trail is prima facie authentication.
-- *Fabian v. Renovate America, Inc.* (2019) 42 Cal.App.5th 1062, 1066–1069 — DocuSign envelope metadata (IP address, timestamps, completion certificate) satisfies authentication; burden shifts to challenger.
+- *Ruiz v. Moss Bros. Auto Group, Inc.* (2014) 232 Cal.App.4th 836, 844 — **sets the authentication standard**: the proponent of an electronic signature must offer evidence sufficient to attribute the signature to the signer; on the record in *Ruiz* (a one-sentence declaration asserting attribution), the showing was held insufficient. Technijian's record exceeds that standard: custodian declaration, full completion certificate with IP addresses and timestamps, email delivery to Erica Garcia's Vintage Design address, and 27 months of paid performance under the signed Agreement.
+- *Fabian v. Renovate America, Inc.* (2019) 42 Cal.App.5th 1062, 1066–1069 — applies the *Ruiz* authentication standard in the DocuSign context; affirmed denial of motion to compel where the proponent submitted only a bare certificate without custodian testimony or linking evidence. Technijian's record meets the *Fabian* foundation requirements (metadata + custodian + corroborating performance).
 - 15 U.S.C. § 7001(a) (federal E-SIGN Act) — additional federal backstop.
 
-**Application:** The DocuSign Certificates of Completion for Envelope B679C550-E41C-4E31-BE34-7F8FFF437C3D (5/4/2023) establish Erica Garcia's electronic signature as a matter of law. Any attack on signature validity fails at the authentication stage; even if Vintage Design challenges, the completion certificate (with IP address, timestamp, email delivery confirmation) establishes attribution under § 1633.9(a).
+**Application:** The DocuSign Certificate of Completion for Envelope B679C550-E41C-4E31-BE34-7F8FFF437C3D (5/4/2023), combined with custodian declaration and 27 months of paid performance, satisfies the authentication foundation required by *Ruiz* and *Fabian* and establishes attribution under Cal. Civ. Code § 1633.9(a). Any attack on signature validity should be defeated at the foundation stage — but declarant testimony from Technijian's custodian of records should be prepared in advance to avoid the thin-record problem that tripped up the proponents in *Ruiz* and *Fabian*.
 
 ---
 
@@ -334,7 +336,7 @@ T&C § 6.08 is a **full integration clause**: *"This Agreement . . . sets forth 
 - *Casa Herrera, Inc. v. Beydoun* (2004) 32 Cal.4th 336, 343–344 — parol evidence rule is a rule of substantive law barring consideration of extrinsic evidence to vary integrated agreements.
 - *Banco do Brasil, S.A. v. Latian, Inc.* (1991) 234 Cal.App.3d 973, 1001–1002 — strong presumption of integration where contract contains explicit integration clause.
 - *EPA Real Estate Partnership v. Kang* (1992) 12 Cal.App.4th 171, 175–176 — integration clause conclusive absent fraud or mutual mistake.
-- *Riverisland Cold Storage, Inc. v. Fresno-Madera Production Credit Assn.* (2013) 55 Cal.4th 1169, 1172 — fraud exception narrow and fact-specific.
+- *Riverisland Cold Storage, Inc. v. Fresno-Madera Production Credit Assn.* (2013) 55 Cal.4th 1169, 1172 — overruled *Bank of America etc. Assn. v. Pendergrass* (1935) 4 Cal.2d 258 and broadened the fraud exception to the parol evidence rule. Extrinsic evidence of fraud is now admissible even where it directly varies the integrated terms; but the fraud exception still requires a pleading and proof of each element of fraud, and does not reach promissory fraud inconsistent with a written term where the party was represented and sophisticated at contracting.
 
 **Application:** Any attempt by Vintage Design to introduce side representations (alleged oral assurances of lower termination fees, promises of rate discounts, etc.) is barred by the integration clause. Technijian should invoke the parol evidence rule at the earliest procedural opportunity.
 
@@ -443,7 +445,7 @@ Even if Vintage Design challenged the authority of any signer or the validity of
 **Application (offensive & defensive):**
 
 - *Offensive* — Vintage Design's refusal to pay a contractually triggered cancellation fee, after 27 months of accepting services, frustrates Technijian's reasonable expectation of compensation.
-- *Defensive* — If Vintage Design alleges Technijian breached good faith by invoicing post-termination, Technijian's response is that each post-termination engagement was (a) separately requested by Vintage Design, (b) separately priced, (c) separately invoiced, and (d) separately paid, expressly authorized by the Agreement's structure for "Out of Contract" services.
+- *Defensive* — The premise of any "post-termination invoicing" theory is absent from the record; Technijian performed no services for Vintage Design after the July 31, 2025 effective termination. There are no post-termination invoices, tickets, or engagements to characterize one way or another.
 
 ---
 
@@ -455,7 +457,7 @@ Even if Vintage Design challenged the authority of any signer or the validity of
 - AAA Commercial Rule R-47(d)(ii) — arbitrator may award attorneys' fees if all parties requested such an award or it is authorized by law or the arbitration agreement.
 - *Corona v. Amherst Partners* (2003) 107 Cal.App.4th 701, 706–707 — arbitrator's fee award reviewable only on narrow statutory grounds.
 
-**Application:** The Agreement (Other Terms ¶ 3; ratified fee-shifting in ¶ 12 of Demand) authorizes attorneys' fees to Technijian as prevailing party. The arbitrator has plenary authority to award the full contractual fee amount. Judicial review will be highly deferential.
+**Application:** The Agreement's T&C § 5.02 indemnity — made reciprocal in favor of the prevailing party by Cal. Civ. Code § 1717 and *Santisas v. Goodin* — authorizes attorneys' fees to Technijian as prevailing party. The arbitrator has plenary authority to award the full contractual fee amount. Judicial review will be highly deferential.
 
 ---
 
@@ -465,7 +467,7 @@ Even if Vintage Design challenged the authority of any signer or the validity of
 - AAA Commercial Rule R-22 — arbitrator manages information exchange; party document production is routine.
 - *Berglund v. Arthroscopic & Laser Surgery Center of San Diego, L.P.* (2008) 44 Cal.4th 528 — arbitration discovery disputes resolved by arbitrator.
 
-**Application:** Technijian can compel production of: (a) Vintage Design's internal communications regarding termination and intent; (b) any analyses or challenges Vintage Design internally prepared of Technijian's invoices/ticketing; (c) Vintage Design's accounting records of payments; (d) post-termination service requests evidencing separate engagements. Conversely, Vintage Design's discovery is unlikely to produce material that undermines the contract documents or Technijian's ticketing.
+**Application:** Technijian can compel production of: (a) Vintage Design's internal communications regarding termination and intent; (b) any analyses or challenges Vintage Design internally prepared of Technijian's invoices/ticketing; (c) Vintage Design's accounting records of payments. Conversely, Vintage Design's discovery is unlikely to produce material that undermines the contract documents or Technijian's ticketing.
 
 ---
 

@@ -1,8 +1,14 @@
 # Test DocuSign JWT Authentication
 $keysFile = "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\docusign.md"
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$jwtHelperPath = Join-Path $scriptDir "docusign-jwt-helper.js"
+$nodeCommand = (Get-Command node,node.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source)
+if (-not $nodeCommand -and (Test-Path "C:\Program Files\nodejs\node.exe")) {
+    $nodeCommand = "C:\Program Files\nodejs\node.exe"
+}
 $keysContent = Get-Content $keysFile -Raw
 
-$ClientId = [regex]::Match($keysContent, 'Client ID:\*\*\s*(\S+)').Groups[1].Value
+$ClientId = [regex]::Match($keysContent, 'Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
 $UserId = [regex]::Match($keysContent, 'User ID:\*\*\s*(\S+)').Groups[1].Value
 $AccountId = [regex]::Match($keysContent, 'Account ID:\*\*\s*(\S+)').Groups[1].Value
 $rsaKey = [regex]::Match($keysContent, '(?s)(-----BEGIN RSA PRIVATE KEY-----.*?-----END RSA PRIVATE KEY-----)').Groups[1].Value
@@ -13,57 +19,20 @@ Write-Host "Account ID: $AccountId" -ForegroundColor Cyan
 Write-Host "RSA Key loaded: $($rsaKey.Length) chars" -ForegroundColor Cyan
 
 $OAuthUrl = "https://account.docusign.com/oauth/token"
-
-# JWT Header
-$header = @{ alg = "RS256"; typ = "JWT" } | ConvertTo-Json -Compress
-$headerB64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($header)).TrimEnd('=').Replace('+','-').Replace('/','_')
-
-# JWT Payload
-$now = [int]([DateTimeOffset]::UtcNow.ToUnixTimeSeconds())
-$payload = @{
-    iss   = $ClientId
-    sub   = $UserId
-    aud   = "account.docusign.com"
-    iat   = $now
-    exp   = $now + 3600
-    scope = "signature impersonation"
-} | ConvertTo-Json -Compress
-$payloadB64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($payload)).TrimEnd('=').Replace('+','-').Replace('/','_')
-
-# Sign with RSA
-$dataToSign = "$headerB64.$payloadB64"
-$pemLines = $rsaKey -split "`n" | Where-Object { $_ -notmatch "-----" -and $_.Trim() -ne "" }
-$keyBase64 = ($pemLines -join "").Trim()
-$keyBytes = [Convert]::FromBase64String($keyBase64)
-
-# Try modern .NET method first, fall back to RSACryptoServiceProvider
-try {
-    $rsa = [System.Security.Cryptography.RSA]::Create()
-    $rsa.ImportRSAPrivateKey($keyBytes, [ref]$null)
-} catch {
-    # Fallback: use RSACng or manual import
-    Write-Host "Using fallback RSA import..." -ForegroundColor Yellow
-    $rsa = New-Object System.Security.Cryptography.RSACryptoServiceProvider
-    # Import via PKCS8
-    $rsa = [System.Security.Cryptography.RSA]::Create()
-    # Try ImportPkcs8PrivateKey
-    try {
-        $rsa.ImportPkcs8PrivateKey($keyBytes, [ref]$null)
-    } catch {
-        # Last resort: use BouncyCastle-style manual parse
-        Write-Host "Trying pwsh 7+ method..." -ForegroundColor Yellow
-        $rsa = [System.Security.Cryptography.RSA]::Create()
-        $pem = $rsaKey
-        $rsa.ImportFromPem($pem)
-    }
+if (-not $nodeCommand) {
+    Write-Host "`nNODE COMMAND NOT FOUND. Install Node.js or add node.exe to PATH." -ForegroundColor Red
+    exit 1
 }
-$sigBytes = $rsa.SignData(
-    [System.Text.Encoding]::UTF8.GetBytes($dataToSign),
-    [System.Security.Cryptography.HashAlgorithmName]::SHA256,
-    [System.Security.Cryptography.RSASignaturePadding]::Pkcs1
-)
-$sigB64 = [Convert]::ToBase64String($sigBytes).TrimEnd('=').Replace('+','-').Replace('/','_')
-$jwt = "$dataToSign.$sigB64"
+
+$tempKeyPath = [System.IO.Path]::GetTempFileName()
+$rsaKey | Set-Content -Path $tempKeyPath -NoNewline
+$jwt = & $nodeCommand $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
+Remove-Item $tempKeyPath -ErrorAction SilentlyContinue
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "`nJWT GENERATION FAILED: $jwt" -ForegroundColor Red
+    exit 1
+}
 
 try {
     $tokenResponse = Invoke-RestMethod -Uri $OAuthUrl -Method POST -Body @{

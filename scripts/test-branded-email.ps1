@@ -3,15 +3,18 @@ param(
     [string]$TestRecipient = "rjain@technijian.com"
 )
 
-$m365KeysFile = "c:\vscode\admin-job-postings\job-postings\Keys\keys.md"
+$m365KeysFile = "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md"
 $logoUrl = "https://technijian.com/wp-content/uploads/2023/08/Logo.jpg"
 $sampleSignUrl = "https://na1.foxitesign.foxit.com/viewDocumentDirect?sample=test"
 
 # --- Read M365 Graph credentials ---
 $m365Keys = Get-Content $m365KeysFile -Raw
-$m365ClientId = [regex]::Match($m365Keys, 'App Client ID = (\S+)').Groups[1].Value
-$m365TenantId = [regex]::Match($m365Keys, 'Tenant ID = (\S+)').Groups[1].Value
-$m365Secret = [regex]::Match($m365Keys, '(?<=Tenant ID[^\n]+\n)Client Secret = (.+)').Groups[1].Value.Trim()
+$m365ClientId = [regex]::Match($m365Keys, 'App Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $m365ClientId) { $m365ClientId = [regex]::Match($m365Keys, 'App Client ID = (\S+)').Groups[1].Value }
+$m365TenantId = [regex]::Match($m365Keys, 'Tenant ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $m365TenantId) { $m365TenantId = [regex]::Match($m365Keys, 'Tenant ID = (\S+)').Groups[1].Value }
+$m365Secret = [regex]::Match($m365Keys, 'Client Secret[^:]*:\*\*\s*(.+)').Groups[1].Value.Trim()
+if (-not $m365Secret) { $m365Secret = [regex]::Match($m365Keys, '(?<=Tenant ID[^\n]+\n)Client Secret = (.+)').Groups[1].Value.Trim() }
 
 # --- Get Graph token ---
 $graphTokenBody = @{

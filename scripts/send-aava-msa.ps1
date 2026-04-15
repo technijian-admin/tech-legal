@@ -135,6 +135,10 @@ Write-Host "M365 credentials loaded." -ForegroundColor Green
 Write-Host "`nGenerating JWT token..." -ForegroundColor Cyan
 
 $jwtHelperPath = Join-Path $scriptDir "docusign-jwt-helper.js"
+$nodeCommand = (Get-Command node,node.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source)
+if (-not $nodeCommand -and (Test-Path "C:\Program Files\nodejs\node.exe")) {
+    $nodeCommand = "C:\Program Files\nodejs\node.exe"
+}
 if (-not (Test-Path $jwtHelperPath)) {
     Write-Error "JWT helper not found: $jwtHelperPath"
     exit 1
@@ -143,7 +147,12 @@ if (-not (Test-Path $jwtHelperPath)) {
 $tempKeyPath = [System.IO.Path]::GetTempFileName()
 $rsaKey | Set-Content -Path $tempKeyPath -NoNewline
 
-$jwt = & node $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
+if (-not $nodeCommand) {
+    Write-Error "Node.js was not found. Install Node.js or add node.exe to PATH."
+    exit 1
+}
+
+$jwt = & $nodeCommand $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
 Remove-Item $tempKeyPath -ErrorAction SilentlyContinue
 
 if ($LASTEXITCODE -ne 0) {

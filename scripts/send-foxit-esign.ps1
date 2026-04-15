@@ -24,15 +24,17 @@ param(
 
 # --- Configuration ---
 $foxitKeysFile = "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\foxit-esign.md"
-$m365KeysFile = "c:\vscode\admin-job-postings\job-postings\Keys\keys.md"
+$m365KeysFile = "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md"
 $baseUrl = "https://na1.foxitesign.foxit.com/api"
 $logoUrl = "https://technijian.com/wp-content/uploads/2023/08/Logo.jpg"
 
 # --- Read Foxit eSign credentials ---
 Write-Host "Reading Foxit eSign credentials..." -ForegroundColor Cyan
 $foxitKeys = Get-Content $foxitKeysFile -Raw
-$clientId = [regex]::Match($foxitKeys, 'Client ID:\*\*\s*(\S+)').Groups[1].Value
-$clientSecret = [regex]::Match($foxitKeys, 'Client Secret:\*\*\s*(\S+)').Groups[1].Value
+$clientId = [regex]::Match($foxitKeys, 'Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $clientId) { $clientId = [regex]::Match($foxitKeys, 'Client ID\s*=\s*(\S+)').Groups[1].Value }
+$clientSecret = [regex]::Match($foxitKeys, 'Client Secret[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $clientSecret) { $clientSecret = [regex]::Match($foxitKeys, 'Client Secret\s*=\s*(\S+)').Groups[1].Value }
 
 if (-not $clientId -or -not $clientSecret) {
     Write-Error "Failed to read Foxit eSign credentials from $foxitKeysFile"
@@ -43,9 +45,12 @@ Write-Host "Foxit credentials loaded." -ForegroundColor Green
 # --- Read M365 Graph credentials ---
 Write-Host "Reading Microsoft Graph credentials..." -ForegroundColor Cyan
 $m365Keys = Get-Content $m365KeysFile -Raw
-$m365ClientId = [regex]::Match($m365Keys, 'App Client ID = (\S+)').Groups[1].Value
-$m365TenantId = [regex]::Match($m365Keys, 'Tenant ID = (\S+)').Groups[1].Value
-$m365Secret = [regex]::Match($m365Keys, '(?<=Tenant ID[^\n]+\n)Client Secret = (.+)').Groups[1].Value.Trim()
+$m365ClientId = [regex]::Match($m365Keys, 'App Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $m365ClientId) { $m365ClientId = [regex]::Match($m365Keys, 'App Client ID = (\S+)').Groups[1].Value }
+$m365TenantId = [regex]::Match($m365Keys, 'Tenant ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+if (-not $m365TenantId) { $m365TenantId = [regex]::Match($m365Keys, 'Tenant ID = (\S+)').Groups[1].Value }
+$m365Secret = [regex]::Match($m365Keys, 'Client Secret[^:]*:\*\*\s*(.+)').Groups[1].Value.Trim()
+if (-not $m365Secret) { $m365Secret = [regex]::Match($m365Keys, '(?<=Tenant ID[^\n]+\n)Client Secret = (.+)').Groups[1].Value.Trim() }
 
 if (-not $m365ClientId -or -not $m365TenantId -or -not $m365Secret) {
     Write-Error "Failed to read M365 Graph credentials from $m365KeysFile"

@@ -11,7 +11,7 @@
 
 ## I. PURPOSE
 
-Technijian, Inc. ("Technijian") submits this memorandum in advance of the parties' counsel conference to support a good-faith resolution of this matter before depositions and further arbitration costs are incurred. Based on the undisputed signed Agreement, Technijian's own contemporaneous business records, and controlling California authority, Technijian's cancellation-fee recovery — before prejudgment interest, contractual attorneys' fees, and arbitration costs — is **$240,555.15** (as pleaded in the Demand), rising to **approximately $325,000–$370,000** through award. This memorandum proposes resolution at the pleaded primary number and identifies the legal framework that will control the arbitration if the matter is not resolved.
+Technijian, Inc. ("Technijian") submits this memorandum in advance of the parties' counsel conference to support a good-faith resolution of this matter before depositions and further arbitration costs are incurred. Based on the undisputed signed Agreement, Technijian's own contemporaneous business records, and controlling California authority, Technijian's cancellation-fee recovery — before prejudgment interest, contractual attorneys' fees, and arbitration costs — is **$240,487.50** (the contract-correct calculation: 1,457.50 excess hours × $150/hr + the 10% late fee under "Other Terms" ¶ 3), rising to **approximately $325,000–$370,000** through award. The Demand's pleaded $240,555.15 reflects a $67.65 arithmetic discrepancy in the late-fee computation; Technijian will conform the Demand to the contract-correct figure as part of resolution or, failing resolution, by amendment. This memorandum proposes settlement at the corrected primary number and identifies the legal framework that will control the arbitration if the matter is not resolved.
 
 ---
 
@@ -105,11 +105,12 @@ Technijian has reconciled every month of billed hours against every month of act
 | Cancellation rate per signed Agreement | **× $150.00** |
 | **Cancellation Fee Subtotal** | **$218,625.00** |
 | + 10% late fee (Other Terms ¶ 3) | **$21,862.50** |
-| **Cancellation Fee + Late Fee (as pleaded in Demand)** | **$240,487.50** |
-| (Demand stated total: $240,555.15 — identical within rounding) | |
-| + Prejudgment interest at 10% per annum (Cal. Civ. Code § 3289(b)) from 7/27/2025 through anticipated award (~9 months) | ~$18,042 |
+| **Cancellation Fee + Late Fee (contract-correct)** | **$240,487.50** |
+| + Prejudgment interest at 10% per annum (Cal. Civ. Code § 3289(b)) from 7/27/2025 through anticipated award (~9 months) | ~$18,037 |
 | + Reasonable attorneys' fees and arbitration costs through award (§ 5.02 indemnity + § 1717 reciprocity) | ~$60,000–$110,000 |
 | **Total Recoverable at Award** | **~$325,000–$370,000** |
+
+**Note on the Demand's $240,555.15 figure.** The Demand for Arbitration pleads $240,555.15. That total cannot be reproduced from a 10% late fee on the $218,625.00 cancellation subtotal, which yields $240,487.50 (a $67.65 difference). The contract-correct figure is $240,487.50, and Technijian will conform the Demand to that figure at resolution or by pre-hearing amendment under AAA Rule R-6.
 
 The excess-hour figure is fully supported by Technijian's ticketing system extracts and QuickBooks ledger, both admissible business records under **Cal. Evid. Code §§ 1271, 1552, and 1553**. *Jazayeri v. Mao* (2009) 174 Cal.App.4th 301, 324; *Aguimatang v. California State Lottery* (1991) 234 Cal.App.3d 769, 797–798. Because the cancellation fee is a liquidated damages provision tied to contemporaneous measured data at a stipulated rate, the "certainty of damages" requirement is satisfied as a matter of law. *Sargon Enterprises, Inc. v. University of Southern California* (2012) 55 Cal.4th 747, 773–775; *Toscano v. Greene Music* (2004) 124 Cal.App.4th 685, 694.
 
@@ -135,11 +136,11 @@ Cal. Code Civ. Proc. § 337a; *Interstate Group Administrators, Inc. v. Cravens,
 
 ### E. Liquidated Damages Enforceability (Cancellation Fee)
 
-**Cal. Civ. Code § 1671(b)**; *Ridgley v. Topa Thrift & Loan Assn.* (1998) 17 Cal.4th 970; *Hitz v. First Interstate Bank* (1995) 38 Cal.App.4th 274; *El Centro Mall, LLC v. Payless ShoeSource, Inc.* (2009) 174 Cal.App.4th 58; *Greentree Financial Group, Inc. v. Execute Sports, Inc.* (2008) 163 Cal.App.4th 495. Commercial liquidated damages provisions are presumptively valid; Respondent bears the burden of proving unreasonableness at the time of contracting. The **$150 cancellation rate is below the Agreement's own out-of-contract alternative rates of $150–$200/hour**, foreclosing any penalty argument as a matter of law.
+**Cal. Civ. Code § 1671(b)**; *Ridgley v. Topa Thrift & Loan Assn.* (1998) 17 Cal.4th 970; *Hitz v. First Interstate Bank* (1995) 38 Cal.App.4th 274 (enforcement affirmed on measured-damages clause); *El Centro Mall, LLC v. Payless ShoeSource, Inc.* (2009) 174 Cal.App.4th 58 (enforcement affirmed where stipulated rate did not exceed alternative bargained rate). Commercial liquidated damages provisions are presumptively valid under § 1671(b); Respondent bears the burden of proving unreasonableness at the time of contracting. *Ridgley*, supra; see also *Greentree Financial Group, Inc. v. Execute Sports, Inc.* (2008) 163 Cal.App.4th 495, 499–500 (framework case; stipulated judgment there invalidated because unrelated to actual damages — distinguishable; here the $150 rate is tied to contemporaneous measured usage at or below the bargained out-of-contract rate). The **$150 cancellation rate is at or below the Agreement's own out-of-contract alternative rates of $150–$200/hour**, foreclosing any penalty argument as a matter of law under *El Centro Mall*.
 
 ### F. Late Fee
 
-Enforceable under the same § 1671(b) framework. *Garrett v. Coast & Southern Fed. Sav. & Loan Assn.* (1973) 9 Cal.3d 731, 738–740; *Beasley v. Wells Fargo Bank* (1991) 235 Cal.App.3d 1383.
+Enforceable under the same § 1671(b) framework. The framework cases include *Garrett v. Coast & Southern Fed. Sav. & Loan Assn.* (1973) 9 Cal.3d 731, 738–740 and *Beasley v. Wells Fargo Bank* (1991) 235 Cal.App.3d 1383, both of which invalidated specific late-charge schemes as penalties unrelated to actual harm; the 10% charge here is distinguishable because it (a) applies only after a 10-day grace period per Other Terms ¶ 3, (b) was negotiated by a sophisticated commercial party (VP Finance), and (c) is proportionate to the cost of capital and collection effort documented in the record.
 
 ### G. Attorneys' Fees — Recoverable via § 5.02 Indemnity + § 1717 Reciprocity
 
@@ -153,9 +154,9 @@ Cal. Civ. Code §§ 3287(a), 3289(b); *Wisper Corp. v. California Commerce Bank*
 
 Cal. Code Civ. Proc. § 685.010(a); *Britz, Inc. v. Alfa-Laval Food & Dairy Co.* (1995) 34 Cal.App.4th 1085, 1107; *Pierotti v. Torian* (2000) 81 Cal.App.4th 17, 28.
 
-### J. DocuSign Signatures — Fully Enforceable
+### J. DocuSign Signatures — Authentication Standard Satisfied
 
-Cal. Civ. Code §§ 1633.7, 1633.9; *Fabian v. Renovate America* (2019) 42 Cal.App.5th 1062; *J.B.B. Investment Partners v. Fair* (2014) 232 Cal.App.4th 974; *Ruiz v. Moss Bros. Auto Group, Inc.* (2014) 232 Cal.App.4th 836, 844. DocuSign Envelope ID B679C550 audit trail is prima facie authentication.
+Cal. Civ. Code §§ 1633.7, 1633.9; *J.B.B. Investment Partners v. Fair* (2014) 232 Cal.App.4th 974. *Ruiz v. Moss Bros. Auto Group, Inc.* (2014) 232 Cal.App.4th 836, 844 and *Fabian v. Renovate America* (2019) 42 Cal.App.5th 1062 set the foundation that a proponent of an electronic signature must meet: declaration from a custodian attesting to the signing process, the completion certificate with IP and timestamp metadata, and linkage of the signature to the signatory. Technijian's DocuSign record for Envelope ID B679C550 includes the completion certificate, IP and timestamp metadata, email delivery to Erica Garcia's Vintage Design address, and 27 months of paid performance under the signed Agreement — foundation that exceeds what *Ruiz* and *Fabian* found lacking.
 
 ### K. Arbitration Clause Enforceable and Final
 
@@ -167,14 +168,14 @@ Cal. Civ. Code §§ 1633.7, 1633.9; *Fabian v. Renovate America* (2019) 42 Cal.A
 
 | Anticipated Defense | Response and Authority |
 |---|---|
-| Signatory lacked authority | Erica Garcia signed as **VP Finance** — a textbook officer title under Cal. Corp. Code § 313, conferring a conclusive presumption of authority for third parties acting in good faith. *Snukal v. Flightways Mfg., Inc.* (2000) 23 Cal.4th 754, 782. DocuSign signature attributable as a matter of law. Cal. Civ. Code § 1633.9(a); *Fabian v. Renovate America*. Ratification by 27 months of paid performance. *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67, 73. |
-| Cancellation fee is a penalty / unconscionable | Presumptively valid under § 1671(b); Respondent bears burden. *Ridgley, Hitz, El Centro Mall*. B2B sophisticated parties (VP Finance signed). *Pinnacle Museum Tower*, supra, 55 Cal.4th at 246–247; *Sanchez v. Valencia Holding Co., LLC* (2015) 61 Cal.4th 899, 910–911. **$150 rate is at or below the Agreement's own "Out of Contract" rates — not a penalty as a matter of law.** |
-| Hours not used / records inaccurate | Contemporaneous ticketing records admissible as business records. Cal. Evid. Code §§ 1271, 1552, 1553; *Jazayeri v. Mao* (2009) 174 Cal.App.4th 301. **Two independent waivers apply:** (a) weekly zero-dollar invoices enumerating every ticket and time entry, with a 30-day dispute window — approximately 140 weekly notices over 27 months, zero disputes filed; and (b) monthly invoices with the 60-day objection window in T&C § 3.01. Failure to object within contractual time bars = deemed acceptance. *Cobb v. Pacific Mut. Life Ins. Co.* (1935) 4 Cal.2d 565, 573; *Gleason v. Klamer* (1980) 103 Cal.App.3d 782, 787; *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388 (course of performance). Cal. Comm. Code § 1303. |
+| Signatory lacked authority | Erica Garcia signed as **VP Finance** — an officer title creating apparent authority to bind the corporation on financial matters within the scope of her role. *Pasadena Medi-Center Assocs. v. Houston* (1973) 9 Cal.3d 773, 780–781. Ratification is independently conclusive: Vintage Design paid every monthly invoice without objection for 27 months, receiving the services to which the Agreement entitled it. *Rakestraw v. Rodrigues* (1972) 8 Cal.3d 67, 73. DocuSign signature attributable under Cal. Civ. Code § 1633.9(a) based on the full completion certificate. |
+| Cancellation fee is a penalty / unconscionable | Presumptively valid under § 1671(b); Respondent bears burden. *Ridgley, Hitz, El Centro Mall*. B2B sophisticated parties (VP Finance signed). *Pinnacle Museum Tower*, supra, 55 Cal.4th at 246–247; *Sanchez v. Valencia Holding Co., LLC* (2015) 61 Cal.4th 899, 910–911. **$150 rate is at or below the Agreement's own "Out of Contract" rates — not a penalty as a matter of law** under *El Centro Mall*. |
+| Hours not used / records inaccurate | Contemporaneous ticketing records admissible as business records. Cal. Evid. Code §§ 1271, 1552, 1553; *Jazayeri v. Mao* (2009) 174 Cal.App.4th 301. **Two independent waivers apply:** (a) weekly zero-dollar invoices enumerating every ticket and time entry, with a 30-day dispute window — approximately 140 weekly notices over 27 months, zero disputes filed; and (b) monthly invoices with the 60-day objection window in T&C § 3.01. Failure to object within contractual time bars = deemed acceptance. *Cobb v. Pacific Mut. Life Ins. Co.* (1935) 4 Cal.2d 565, 573; *Gleason v. Klamer* (1980) 103 Cal.App.3d 782, 787; *Wagner v. Glendale Adventist Med. Ctr.* (1989) 216 Cal.App.3d 1379, 1388 (course of performance). Cal. Com. Code § 1303. |
 | Cancellation clause reaches only the terminated period (P3) | Plain text reaches "**any hours that exceeded the previous under contract period average**" — cumulative and unqualified. Cal. Civ. Code §§ 1638, 1641; *Powerine Oil Co. v. Superior Court* (2005) 37 Cal.4th 377, 390–391. Reading the clause to cover only the terminated period would render it meaningless in virtually every real-world case and violates the whole-contract construction rule. |
 | P1's excess was "trued up" by the averaging mechanism | ¶¶ 3–4 describe **prospective** billing adjustments. Neither paragraph uses "release," "forgive," or "credit back." The averaging raises the going-forward billed baseline; it does not compensate Technijian retroactively for P1's 1,010.97 hours of delivered-but-unpaid excess. The cancellation fee in ¶ 5 is the sole mechanism for that compensation. *MacKinnon v. Truck Ins. Exchange* (2003) 31 Cal.4th 635, 648. |
 | Oral side-agreements modify written terms | Barred by integration clause (T&C § 6.08) and parol evidence rule. Cal. Code Civ. Proc. § 1856(a); *Casa Herrera, Inc. v. Beydoun* (2004) 32 Cal.4th 336, 343–344; *Banco do Brasil v. Latian* (1991) 234 Cal.App.3d 973, 1001–1002. |
 | Demand's "Delaware LLC" describes the wrong entity | Minor caption correction; amendment is routine under AAA Rule R-6 and relates back. *Hawkins v. Pacific Coast Bldg. Prods.*; *Mayberry v. Coca-Cola*. Respondent's principals are on actual notice; no prejudice. |
-| Continued post-termination services waive the cancellation fee | Waiver requires clear intent. *DRG/Beverly Hills v. Chopstix* (1994) 30 Cal.App.4th 54, 60; *Wind Dancer v. Disney* (2017) 10 Cal.App.5th 56, 78. Post-termination engagements were separately requested, separately priced, separately invoiced, and separately paid. |
+| Continued post-termination services waive the cancellation fee | No factual basis. Technijian performed no services for Vintage Design after the July 31, 2025 effective termination date; there are no post-termination invoices, tickets, or engagements. The premise of the defense is absent from the record. |
 
 ---
 
@@ -184,10 +185,10 @@ Technijian has every incentive to settle. Respondent has greater incentive.
 
 1. **Arbitration costs to award** (AAA fees, arbitrator fees, hearing days, transcripts): estimated **$30,000–$50,000** per side.
 2. **Technijian's attorneys' fees through award** (contractually recoverable via § 5.02 + § 1717): estimated **$60,000–$110,000** at this stage, growing monthly.
-3. **Prejudgment interest** at **10% per annum** accrues on the $240,555.15 principal from July 27, 2025, adding approximately **$2,005 per month** to Respondent's exposure.
+3. **Prejudgment interest** at **10% per annum** accrues on the $240,487.50 principal from July 27, 2025, adding approximately **$2,004 per month** to Respondent's exposure.
 4. **Post-judgment interest** at **10% per annum** attaches on the full confirmed award (principal, fees, costs) upon confirmation by the Orange County Superior Court. Cal. Code Civ. Proc. § 685.010.
 5. **Confirmation** of AAA awards is ministerial. *Moncharsh*. Upon confirmation, the award becomes a judgment of public record.
-6. **Respondent's total exposure through award** (principal + 10% late + interest + Technijian's attorneys' fees + its own attorneys' fees + AAA costs) conservatively approaches **$430,000–$520,000** by mid-2026, climbing thereafter.
+6. **Respondent's total out-of-pocket exposure through award** — including Technijian's recoverable award of $325,000–$370,000 *plus* Respondent's own attorneys' fees (~$60,000–$110,000) and its share of AAA costs (~$30,000–$50,000) — conservatively approaches **$430,000–$520,000** by mid-2026, climbing thereafter.
 
 ---
 
@@ -195,17 +196,17 @@ Technijian has every incentive to settle. Respondent has greater incentive.
 
 Technijian is prepared to resolve this matter **now**, prior to arbitrator appointment and commencement of depositions, on the following principal terms:
 
-1. **Payment to Technijian: $240,555.15**, representing the cancellation fee ($218,625.00) plus contractual 10% late fee ($21,930.15 as pleaded), payable within **fifteen (15) business days** of mutual execution of a settlement agreement and joint dismissal of the arbitration with prejudice.
+1. **Payment to Technijian: $240,487.50**, representing the cancellation fee ($218,625.00) plus the contractual 10% late fee ($21,862.50), payable within **fifteen (15) business days** of mutual execution of a settlement agreement and joint dismissal of the arbitration with prejudice.
 
-2. **Mutual General Release** of all claims arising from or relating to the Agreement, the Services, or the termination. Each side bears its own attorneys' fees and arbitration costs incurred to date — Technijian forgoes approximately **$60,000–$110,000** in recoverable fees plus approximately **$18,000** in accrued prejudgment interest, for an effective compromise of roughly **$78,000–$128,000** off the fully-recoverable award figure.
+2. **Mutual General Release** of all claims arising from or relating to the Agreement, the Services, or the termination. Each side bears its own attorneys' fees and arbitration costs incurred to date — Technijian forgoes approximately **$60,000–$110,000** in recoverable fees plus approximately **$18,037** in accrued prejudgment interest, for an effective compromise of roughly **$78,000–$128,000** off the fully-recoverable award figure.
 
 3. **Confidentiality** customary for commercial settlements, consistent with Cal. Evid. Code §§ 1119, 1152 and Fed. R. Evid. 408.
 
 4. **Mutual non-disparagement**.
 
-5. **Stipulated caption amendment** of the Demand to conform to the four corners of the signed Agreement ("Vintage Design, a California corporation"), simultaneously filed with the dismissal.
+5. **Stipulated caption amendment** of the Demand to conform to the four corners of the signed Agreement ("Vintage Design, a California corporation") and to conform the damages figure to the contract-correct $240,487.50, simultaneously filed with the dismissal.
 
-This proposal represents **100% of the pleaded cancellation fee and late fee** at the contractually correct $150/hour rate, with Technijian's compromise consisting of the fee-and-interest waiver described above. On a comprehensive-exposure basis, this is a discount of approximately **25–35%** off Respondent's total projected through-award exposure.
+This proposal represents **100% of the contract-correct cancellation fee and late fee** at the $150/hour rate, with Technijian's compromise consisting of the fee-and-interest waiver described above. On a comprehensive-exposure basis, this is a discount of approximately **25–35%** off Respondent's total projected through-award exposure.
 
 If this proposal is acceptable in principle, Technijian's counsel will circulate a draft Settlement Agreement and Mutual Release within three (3) business days of written acceptance.
 
@@ -230,7 +231,7 @@ Counsel for Claimant Technijian, Inc.
 ## EXHIBIT INDEX
 
 - **Exhibit A** — Client Monthly Service Agreement, DocuSigned 5/4/2023 (Envelope ID B679C550-E41C-4E31-BE34-7F8FFF437C3D)
-- **Exhibit B** — Technijian monthly invoice ledger, May 2023 – April 2026
+- **Exhibit B** — Technijian monthly invoice ledger, May 2023 – July 2025
 - **Exhibit C** — Billed-vs-Actual hours reconciliation by contracted support category and month (source: Technijian ticketing system and QuickBooks ledger)
 - **Exhibit D** — Vintage Design termination notice dated June 23, 2025 (in counsel's file)
 - **Exhibit E** — June 27, 2025 Final Invoice assessing cancellation fee (in counsel's file)

@@ -35,6 +35,10 @@ $m365KeysFile = "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $logoUrl = "https://technijian.com/wp-content/uploads/2026/03/technijian-logo-full-color-600x125-1.png"
 $returnUrl = "https://technijian.com"
+$nodeCommand = (Get-Command node,node.exe -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source)
+if (-not $nodeCommand -and (Test-Path "C:\Program Files\nodejs\node.exe")) {
+    $nodeCommand = "C:\Program Files\nodejs\node.exe"
+}
 
 # --- Read DocuSign credentials ---
 Write-Host "Reading DocuSign credentials..." -ForegroundColor Cyan
@@ -103,7 +107,12 @@ $jwtHelperPath = Join-Path $scriptDir "docusign-jwt-helper.js"
 $tempKeyPath = [System.IO.Path]::GetTempFileName()
 $rsaKey | Set-Content -Path $tempKeyPath -NoNewline
 
-$jwt = & node $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
+if (-not $nodeCommand) {
+    Write-Error "Node.js was not found. Install Node.js or add node.exe to PATH."
+    exit 1
+}
+
+$jwt = & $nodeCommand $jwtHelperPath $ClientId $UserId $tempKeyPath 2>&1
 Remove-Item $tempKeyPath -ErrorAction SilentlyContinue
 
 if ($LASTEXITCODE -ne 0) {
