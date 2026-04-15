@@ -2,9 +2,9 @@
 
 ## Purpose
 
-Claude Code's MCP server connections are configured per-workstation, not per-repo by default. This file documents what needs to be in place on every workstation so the Claude Code agent in this repo has the same toolset (Gmail, DocuSign, Foxit eSign, etc.) on every machine.
+Claude Code's MCP server connections are configured per-workstation, not per-repo by default. This file documents what needs to be in place on every workstation so the Claude Code agent in this repo has the same toolset (Microsoft 365 / Outlook mailbox for `rjain@technijian.com`, DocuSign, Foxit eSign, etc.) on every machine.
 
-Without these in place, Claude on a fresh workstation can only read/write files and run scripts — it cannot send emails, dispatch DocuSign envelopes, or drive Foxit eSign.
+Without these in place, Claude on a fresh workstation can only read/write files and run scripts — it cannot send emails from the M365 mailbox, dispatch DocuSign envelopes, or drive Foxit eSign.
 
 ## What needs to be replicated
 
@@ -34,14 +34,20 @@ On the workstation that already has working MCP servers, copy the relevant `mcpS
       },
       "type": "stdio"
     },
-    "gmail": {
+    "m365": {
       "command": "...",
       "args": ["..."],
+      "env": {
+        "M365_TENANT_ID": "${M365_TENANT_ID}",
+        "M365_CLIENT_ID": "${M365_CLIENT_ID}"
+      },
       "type": "stdio"
     }
   }
 }
 ```
+
+The M365 server connects to `rjain@technijian.com`'s Exchange Online mailbox via Microsoft Graph API (read inbox, send mail, handle attachments). Typical implementations: Composio's Outlook integration, or a dedicated MCP server for Microsoft Graph. Do **not** use a Gmail server — this workflow uses Microsoft 365 exclusively.
 
 Use `${ENV_VAR}` placeholders for secrets — the actual values come from `composio.env` (already in the repo) or the user's environment, never hard-coded into `.mcp.json`.
 
@@ -56,7 +62,7 @@ If the MCP servers must remain user-scoped on the working machine, the equivalen
 }
 ```
 
-The other workstation that has DocuSign / Foxit / Gmail working should export its `mcpServers` block from `~/.claude.json` and the new workstation should import it.
+The other workstation that has DocuSign / Foxit / M365 working should export its `mcpServers` block from `~/.claude.json` and the new workstation should import it.
 
 ### 3. Permissions allow-list (`.claude/settings.json`)
 
@@ -74,15 +80,15 @@ Two separate categories — handle differently:
 
 | Item | Where it lives | Commit to repo? |
 |---|---|---|
-| API keys (DocuSign, Composio, Foxit) | `composio.env` at repo root | **Already tracked in repo** — note: this means keys are visible to anyone with repo access. Rotate if the repo is shared beyond intended audience. |
-| Per-machine OAuth tokens (Gmail, Drive, Calendar) | `~/.claude/.credentials.json`, `~/.claude/mcp-needs-auth-cache.json` | **Never commit.** Each workstation re-runs the OAuth flow. |
+| API keys (DocuSign, Composio, Foxit, M365 client ID / tenant ID) | `composio.env` at repo root | **Already tracked in repo** — note: this means keys are visible to anyone with repo access. Rotate if the repo is shared beyond intended audience. |
+| Per-machine OAuth tokens (M365 delegated access, DocuSign JWT cache) | `~/.claude/.credentials.json`, `~/.claude/mcp-needs-auth-cache.json` | **Never commit.** Each workstation re-runs the OAuth / JWT flow. |
 | MCP needs-auth cache | `~/.claude/mcp-needs-auth-cache.json` | Never commit; regenerated automatically. |
 
 After the MCP server config arrives on a new workstation:
 
-- For Gmail: Claude will run `mcp__claude_ai_Gmail__authenticate`; user authorizes in the browser; Claude completes with `mcp__claude_ai_Gmail__complete_authentication`.
-- For DocuSign: depends on the chosen server. If using Composio, it inherits `DOCUSIGN_API_KEY` from `composio.env`. If using a JWT-based DocuSign integration, the integrator-key/RSA-private-key files need to be on the workstation.
-- For Foxit eSign: confirm whether it's an API-key model (use `composio.env`) or OAuth model (re-authorize per machine).
+- For **M365 / Outlook**: Claude runs the M365 MCP server's auth tool; user signs in at `login.microsoftonline.com` with `rjain@technijian.com`; delegated Mail.ReadWrite and Mail.Send scopes are granted; the OAuth refresh token is cached for future sessions. If Composio is the transport, the Outlook integration may already be tied to Ravi's identity — verify on the working workstation.
+- For **DocuSign**: depends on the chosen server. If using Composio, it inherits `DOCUSIGN_API_KEY` from `composio.env`. If using a JWT-based DocuSign integration, the integrator-key / RSA-private-key files need to be on the workstation.
+- For **Foxit eSign**: confirm whether it's an API-key model (use `composio.env`) or OAuth model (re-authorize per machine).
 
 ### 5. Required local installations
 
@@ -90,6 +96,7 @@ Some MCP servers are CLIs that need to be installed on the machine. Check the wo
 
 - `npm install -g @modelcontextprotocol/server-docusign` (or whatever DocuSign MCP package is in use)
 - `npm install -g @modelcontextprotocol/server-foxit` (or equivalent)
+- Microsoft 365 / Outlook MCP (Composio's Outlook integration or a Graph-API-based MCP server)
 - Any Python packages needed by Composio
 - Any Pencil / GitNexus binaries (already configured on this workstation)
 
@@ -101,9 +108,9 @@ Document these in this file once confirmed, so a fresh workstation can be brough
 2. `cd tech-legal/tech-legal`
 3. Open Claude Code in the repo directory.
 4. **Pull the project's `.mcp.json`** (after the working workstation has committed it). Restart Claude Code.
-5. **Authorize each OAuth-based MCP server** (Gmail, possibly Foxit) — Claude will guide through the auth flow.
-6. **Verify** by asking Claude to list available DocuSign / Gmail / Foxit tools. They should appear in the deferred-tool list.
-7. **Test** with a low-stakes action (e.g., list Gmail labels, read a DocuSign envelope status).
+5. **Authorize each OAuth-based MCP server** (M365, possibly Foxit) — Claude will guide through the auth flow. For M365, sign in with `rjain@technijian.com` at `login.microsoftonline.com` and grant delegated Mail scopes.
+6. **Verify** by asking Claude to list available DocuSign / M365 / Foxit tools. They should appear in the deferred-tool list.
+7. **Test** with a low-stakes action (e.g., read the latest email in `rjain@technijian.com`'s inbox, read a DocuSign envelope status).
 
 ## Action items for the workstation that currently has these tools working
 
@@ -111,7 +118,7 @@ Document these in this file once confirmed, so a fresh workstation can be brough
 - [ ] Create `c:/VSCode/tech-legal/tech-legal/.mcp.json` with the relevant server definitions, replacing hard-coded secrets with `${ENV_VAR}` placeholders
 - [ ] Update this file (`docs/WORKSTATION_SETUP.md`) with the actual server names, commands, args, and any required CLI installations
 - [ ] Commit `.mcp.json` and updated `WORKSTATION_SETUP.md` to `main`
-- [ ] Confirm `composio.env` contains all required keys (DocuSign, Foxit, Gmail if applicable). If keys are missing for a service, document where to obtain them.
+- [ ] Confirm `composio.env` contains all required keys (DocuSign, Foxit, M365 tenant ID + client ID). If keys are missing for a service, document where to obtain them.
 
 ## Security note — composio.env
 
