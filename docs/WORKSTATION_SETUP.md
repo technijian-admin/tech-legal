@@ -93,9 +93,9 @@ Scripts parse keys with regex: `'<Field>:\*\*\s*(\S+)'`. Each field must be `**F
 **Platform:** Foxit eSign
 **Region:** NA1
 **Base URL:** https://na1.foxitesign.foxit.com/api
-**Client ID:** <id>
-**Client Secret:** <secret>
-**Auth endpoint:** https://na1.foxitesign.foxit.com/api/oauth2/token
+**Client ID:** <foxit-client-id>
+**Client Secret:** <foxit-client-secret>
+**Auth endpoint:** https://na1.foxitesign.foxit.com/api/oauth2/access_token
 **Grant type:** client_credentials
 ```
 
@@ -279,7 +279,7 @@ $f = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\key
 $fid = [regex]::Match($f,'Client ID:\*\*\s*(\S+)').Groups[1].Value
 $fsec = [regex]::Match($f,'Client Secret:\*\*\s*(\S+)').Groups[1].Value
 $body = @{ grant_type='client_credentials'; client_id=$fid; client_secret=$fsec; scope='read-write' }
-Invoke-RestMethod -Method Post -Uri "https://na1.foxitesign.foxit.com/api/oauth2/token" -Body $body
+Invoke-RestMethod -Method Post -Uri "https://na1.foxitesign.foxit.com/api/oauth2/access_token" -Body $body
 
 # 3. MCP Servers - verify binaries exist
 Test-Path "C:\vscode\docx-mcp\target\release\docx-mcp.exe"   # docx-mcp
