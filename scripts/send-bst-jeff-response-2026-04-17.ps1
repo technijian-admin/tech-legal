@@ -23,7 +23,7 @@ $senderUpn = "RJain@technijian.com"
 $subject   = "RE: Boston Group - Time-Sensitive Closeout Items (Reply Requested)"
 
 $sigPath        = "C:\vscode\tech-legal\tech-legal\scripts\ravi-signature.html"
-$attachFolder   = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send_package_2026-04-17"
+$attachFolder   = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send-packages\2026-04-17"
 
 # --- Credentials ---
 Write-Host "Reading M365 Graph credentials..." -ForegroundColor Cyan

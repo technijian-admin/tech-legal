@@ -102,7 +102,7 @@ Write-Host ("New §1 block: {0} chars" -f $newSection1.Length) -ForegroundColor 
 $newHtml = $html.Substring(0, $leftAnchor) + $newSection1 + $html.Substring($rightAnchor)
 
 # --- Save a preview before we PATCH ---
-$previewPath = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\_patched_draft_preview.html"
+$previewPath = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\_working\_patched_draft_preview.html"
 Set-Content -Path $previewPath -Value $newHtml -Encoding UTF8
 Write-Host "Patched body preview written: $previewPath" -ForegroundColor Green
 

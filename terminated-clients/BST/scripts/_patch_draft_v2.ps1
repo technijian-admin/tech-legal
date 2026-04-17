@@ -4,7 +4,7 @@
 $ErrorActionPreference = "Stop"
 $senderUpn = "RJain@technijian.com"
 $messageId = "AAMkAGNlYjM0OTA4LThjMjYtNGQ3My1iNDg1LTQ2MTI5NTg0NzFlOQBGAAAAAAC88IffM67WS4tSyVwwqYmJBwBhk-ls8ubYRazD3tGgncxCAAAAAAEQAACgx7VhNWW1QYCgfGa-8kbOAAXP9qoXAAA="
-$pkgDir    = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send_package_2026-04-17"
+$pkgDir    = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send-packages\2026-04-17"
 
 # --- Graph auth ---
 $m365Keys = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md" -Raw

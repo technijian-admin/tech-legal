@@ -4,7 +4,7 @@
 $ErrorActionPreference = "Stop"
 $senderUpn = "RJain@technijian.com"
 $subjectNeedle = "Boston Group - Time-Sensitive Closeout Items"
-$outPath = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\_current_draft_snapshot.html"
+$outPath = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\_working\_current_draft_snapshot.html"
 
 $m365Keys = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md" -Raw
 $cid = [regex]::Match($m365Keys, 'App Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value

@@ -3,7 +3,7 @@
 
 $ErrorActionPreference = "Stop"
 $userId = "RJain@technijian.com"
-$outDir = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send_package_2026-04-17"
+$outDir = "C:\vscode\tech-legal\tech-legal\terminated-clients\BST\send-packages\2026-04-17"
 
 $m365Keys = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md" -Raw
 $cid = [regex]::Match($m365Keys, 'App Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
