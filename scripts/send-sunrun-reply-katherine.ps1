@@ -36,8 +36,12 @@ $sigPath = "C:\vscode\tech-legal\tech-legal\scripts\ravi-signature.html"
 # --- Attachments: re-attach the production photos ---
 $evidenceDir = "c:\VSCode\tech-legal\tech-legal\docs\personal\sunrun\evidence"
 $attachmentFiles = @(
-    "$evidenceDir\20260417-174746-25426.jpg",   # 2012 PPA system - WORKING (30 kWh/day)
-    "$evidenceDir\20260417-174746-25428.jpg"    # 2017 Costco system - DEAD (0 kWh, error loading)
+    "$evidenceDir\20260417-174746-25426.jpg",                          # 4/17 2012 PPA system - WORKING (30.5 kWh/day)
+    "$evidenceDir\20260417-174746-25428.jpg",                          # 4/17 2017 Costco system - DEAD (0 kWh, error loading)
+    "$evidenceDir\04-18-26\Screenshot_20260418_133016_Sunrun.jpg",     # 4/18 weekly chart - one system, 23.3 kWh Thu-Fri only
+    "$evidenceDir\04-18-26\Screenshot_20260418_133023_Sunrun.jpg",     # 4/18 weekly chart - other system, 69.2 kWh Thu-Fri only
+    "$evidenceDir\04-18-26\Screenshot_20260418_133034_Sunrun.jpg",     # 4/18 overview - 2017 system: "Outlier detected", 0.0 kWh
+    "$evidenceDir\04-18-26\Screenshot_20260418_133100_Sunrun.jpg"      # 4/18 overview - 2012 system: "System normal"
 )
 foreach ($f in $attachmentFiles) {
     if (-not (Test-Path $f)) { Write-Error "Missing attachment: $f"; exit 1 }
@@ -68,7 +72,7 @@ $htmlBody = @"
 
 <p>Katherine,</p>
 
-<p>I have spent the day reviewing every Sunrun communication on this matter from November 2025 through today. The factual record is now substantially worse for Sunrun than my April 16 letter assumed. This reply consolidates that record, corrects the multiple material errors in your April 17 response, and resets the basis for resolution.</p>
+<p>I have carefully reviewed every Sunrun communication on this matter from November 2025 through the date of this email. The factual record is now substantially worse for Sunrun than my April 16 letter assumed. This reply consolidates that record, corrects the multiple material errors in your April 17 response, and resets the basis for resolution.</p>
 
 <p>Before going further: <strong>given the scope of the factual record set out below, my recommendation is that you refer this email to your manager and to whichever Sunrun internal track handles concealment, CLRA, and executive-resolution matters (Office of the General Counsel, Executive Resolution Team, or equivalent).</strong> The matter has outgrown the standard Service Pipeline workflow. I am offering Sunrun the opportunity to resolve this through the proper internal channel before I escalate externally. If you would prefer that I direct future correspondence to a different individual at Sunrun, please tell me by reply and I will do so.</p>
 
@@ -100,7 +104,7 @@ $htmlBody = @"
 <p>Sunrun&#39;s first written communication to me about this matter was sent on <strong>January 16, 2026</strong> &mdash; <strong>67 days after Sunrun opened Case #18181148</strong>. Its opening line, verbatim:</p>
 
 <blockquote style="border-left:3px solid #999; padding-left:12px; color:#333;">
-&quot;Hi Ravi, <strong>Our monitoring system has detected an issue with your solar system that requires maintenance.</strong> We&#39;d like to schedule your service visit at your convenience.&quot; &mdash; <em>Schedule Your Sunrun Service Appointment</em>, from `noreply@ai.sunrun.com`, January 16, 2026.
+&quot;Hi Ravi, <strong>Our monitoring system has detected an issue with your solar system that requires maintenance.</strong> We&#39;d like to schedule your service visit at your convenience.&quot; &mdash; <em>Schedule Your Sunrun Service Appointment</em>, from noreply@ai.sunrun.com, January 16, 2026.
 </blockquote>
 
 <p>That email confirms two facts that materially change Sunrun&#39;s exposure here:</p>
@@ -133,8 +137,8 @@ $htmlBody = @"
 <p>While that was happening, Sunrun also sent me <strong>marketing communications during the outage</strong>:</p>
 
 <ul>
-<li><strong>March 15, 2026</strong> &mdash; from `theCEO@sunrun.com`, subject &quot;A Message From Mary: Get Ready to Celebrate.&quot;</li>
-<li><strong>March 21, 2026</strong> &mdash; from `theCXO@sunrun.com`, subject &quot;Ravi, It&#39;s Here! Your Sunrun Value Report is Ready to View&quot; &mdash; a &quot;Value Report&quot; sent in the middle of four months of zero production.</li>
+<li><strong>March 15, 2026</strong> &mdash; from theCEO@sunrun.com, subject &quot;A Message From Mary: Get Ready to Celebrate.&quot;</li>
+<li><strong>March 21, 2026</strong> &mdash; from theCXO@sunrun.com, subject &quot;Ravi, It&#39;s Here! Your Sunrun Value Report is Ready to View&quot; &mdash; a &quot;Value Report&quot; sent in the middle of four months of zero production.</li>
 </ul>
 
 <p>The duty to disclose the actual nature and severity of the defect was on Sunrun. Sunrun is the party that operates the monitoring system, holds the contractual maintenance obligation under PPA Section 2, and has materially superior knowledge under California concealment doctrine. The choice to use the word &quot;issue&quot; instead of &quot;your system has produced zero kWh since November 7&quot; was a choice. The choice to send a &quot;Value Report&quot; while the system produced zero was a choice. Together they support claims for fraudulent concealment under Cal. Civ. Code &sect;&sect; 1572 and 1710, deceit by suppression, and unfair business practices under Cal. Bus. &amp; Prof. Code &sect; 17200.</p>
@@ -144,10 +148,10 @@ $htmlBody = @"
 <p>Katherine wrote on April 17: &quot;We visited your property <strong>once</strong> on January 27th.&quot; That is also incorrect. Sunrun&#39;s own appointment-confirmation emails document at least three scheduled visits plus the unscheduled emergency visit:</p>
 
 <ol>
-<li><strong>January 27, 2026 (12pm-5pm)</strong> &mdash; confirmed by `noreply@ai.sunrun.com` on January 18, 2026. Visit occurred. <strong>My partner, Callie Wells, was present at the Property and spoke with the technicians.</strong> The technicians told her only that &quot;they need to come back.&quot; They did not disclose that the system had been producing zero kWh for 78 days at that point. They did not disclose any &quot;third-party interconnection&quot; finding to her. They left without restoring the system.</li>
-<li><strong>February 23, 2026 (11am-3pm)</strong> &mdash; confirmed by `noreply@ai.sunrun.com` on February 5 and reminded on February 9 and February 16. Please produce the visit record, work order, and technician notes for this scheduled appointment. If the appointment was canceled, please produce the cancellation record. If it occurred, please produce what was found and what was communicated to me. I have no record from Sunrun stating either that it occurred or that it was canceled.</li>
-<li><strong>April 22, 2026 (11am-3pm)</strong> &mdash; confirmed by `noreply@ai.sunrun.com` on April 12, 2026. Please confirm in writing whether this appointment is still scheduled in light of the unscheduled April 16 visit. Given that the 2017 Costco system remains non-operational tonight (see Section 6 below), I expect that this appointment WILL proceed and that the 2017 system will be fully restored as a result.</li>
-<li><strong>April 16, 2026 (unscheduled)</strong> &mdash; emergency visit triggered after I logged into my mySunrun app on April 15, 2026, discovered for the first time that production had been at zero, and emailed Katherine on April 15, 2026 at 6:56 PM PT stating, verbatim: <em>&quot;I was not aware the panels were completely zero for the past 4 months so I dont know if they are working or just communication error.&quot;</em></li>
+<li><strong>January 27, 2026 (12pm-5pm)</strong> &mdash; confirmed by noreply@ai.sunrun.com on January 18, 2026. Visit occurred. <strong>My partner, Callie Wells, was present at the Property and spoke with the technicians.</strong> The technicians told her only that &quot;they need to come back.&quot; They did not disclose that the system had been producing zero kWh for 78 days at that point. They did not disclose any &quot;third-party interconnection&quot; finding to her. They left without restoring the system.</li>
+<li><strong>February 23, 2026 (11am-3pm)</strong> &mdash; confirmed by noreply@ai.sunrun.com on February 5 and reminded on February 9 and February 16. Please produce the visit record, work order, and technician notes for this scheduled appointment. If the appointment was canceled, please produce the cancellation record. If it occurred, please produce what was found and what was communicated to me. I have no record from Sunrun stating either that it occurred or that it was canceled.</li>
+<li><strong>April 22, 2026 (11am-3pm)</strong> &mdash; confirmed by noreply@ai.sunrun.com on April 12, 2026. Please confirm in writing whether this appointment is still scheduled in light of the unscheduled April 16 visit. Given that the 2017 Costco system remains non-operational as of April 18 (see Section 6 below), I expect that this appointment WILL proceed and that the 2017 system will be fully restored as a result.</li>
+<li><strong>April 16, 2026 (unscheduled)</strong> &mdash; emergency visit triggered after I logged into my mySunrun app on April 15, 2026, discovered for the first time that production had been at zero, and emailed Katherine on April 15, 2026 at 6:56 PM PT stating, verbatim: <em>&quot;I was not aware the panels were completely zero for the past 4 months so I don&#39;t know if they are working or just a communication error.&quot;</em></li>
 </ol>
 
 <p><strong>Witnesses for any subsequent proceeding:</strong></p>
@@ -182,18 +186,24 @@ $htmlBody = @"
 
 <p>Please produce the January 27, 2026 work order, the technician&#39;s field notes, and any photographs taken at that visit. I expect they will show the same two-Sunrun-system configuration that has existed since 2018. If your tech recorded a &quot;third-party interconnection,&quot; the documentation will not survive comparison with the SDG&amp;E NEM record and the equipment actually present on the roof.</p>
 
-<h3 style="color:#b30000;">6. The 2017 Costco system is still non-operational tonight</h3>
+<h3 style="color:#b30000;">6. The 2017 Costco system remains non-operational &mdash; Sunrun&#39;s own app flags &ldquo;Outlier detected&rdquo; as of Saturday, April 18</h3>
 
 <p>You wrote: &quot;The technician visit yesterday, April 16, should have resolved the interconnection issue. We understand the panels are still not showing production on your monitoring app, but it can take some time for the production data to be accurately reflected in the monitoring application.&quot;</p>
 
-<p>That explanation does not survive the screenshots I sent you at 5:47 PM today (re-attached for the record):</p>
+<p>That explanation does not survive the screenshots I sent you at 5:47 PM on April 17 (re-attached for the record):</p>
 
 <ul>
 <li><strong>2012 PPA system:</strong> 30.5 kWh / Last 7 Days, 30 kWh yesterday, 30 kWh / Last 30 days &mdash; actively producing. All-time meter at 133,361 kWh, last updated 11:45 PM 4/16/26.</li>
 <li><strong>2017 Costco system:</strong> 0 kWh yesterday, 0 kWh / Last 30 days, &quot;Error loading production data.&quot; All-time meter frozen at 51,132 kWh, last updated 9:30 AM 4/16/26.</li>
 </ul>
 
-<p>If the issue were a monitoring lag, both systems would show it. Only one does. The 2017 Costco system was not actually restored on April 16. I expect another truck-roll from Sunrun within <strong>7 calendar days</strong> to complete the repair, at no charge to me, in accordance with Section 4 of the 2017 Limited Warranty.</p>
+<p>If the issue were a monitoring lag, both systems would show it. The 2012 PPA system &mdash; on the same property, on the same mySunrun account, updated at 11:45 PM on April 16 &mdash; shows normal production data. Only the 2017 Costco system does not. The 2017 Costco system was not actually restored on April 16.</p>
+
+<p><strong>Update &mdash; Saturday, April 18, 2026, 1:30 PM PT:</strong> Two days after the alleged repair, I checked the mySunrun app again. The 2012 PPA system correctly shows &ldquo;System normal&rdquo; and is generating as expected. The 2017 Costco system now shows: <strong>Status: &ldquo;Outlier detected&rdquo;</strong> (displayed in amber on the overview screen, with a &ldquo;Click here to learn more&rdquo; prompt beneath it); <strong>Total: 0.0 kWh</strong> as of <code>--</code>. The weekly production chart for the period April 12&ndash;18 shows bars only on Thursday, April 16 and Friday, April 17 &mdash; the day of and day after the tech visit &mdash; then returns to zero on Saturday, April 18. Four screenshots taken at 1:30 PM PT on April 18, 2026 are attached to this message.</p>
+
+<p>The &ldquo;Outlier detected&rdquo; designation is not a monitoring-lag artifact. It is Sunrun&#39;s own anomaly-detection flag appearing in the consumer-facing application, confirming that Sunrun&#39;s own monitoring infrastructure has identified the 2017 system as non-conforming two full days after the tech visit. The April 16 repair did not hold.</p>
+
+<p>I expect another truck-roll from Sunrun within <strong>7 calendar days</strong> from the date of this email to complete the repair, at no charge to me, in accordance with Section 4 of the 2017 Limited Warranty. The April 22 scheduled appointment should proceed.</p>
 
 <h3 style="color:#b30000;">7. Sunrun offered compensation 24 hours before refusing entirely &mdash; and Sunrun&#39;s own automation contradicts the &quot;no performance guarantee&quot; claim</h3>
 
@@ -205,7 +215,7 @@ $htmlBody = @"
 
 <p>That offer is an admission that (a) Sunrun acknowledged the delay was its responsibility, and (b) Sunrun acknowledged a duty to compensate for missed savings. The position adopted 24 hours later &mdash; that Sunrun &quot;cannot and will not compensate&quot; &mdash; was adopted only after the formal demand letter arrived, not because the contracts or facts changed. They did not.</p>
 
-<p>The same April 16, 2026 message asserted that I &quot;do not have a performance guarantee on your contract.&quot; That assertion is provably false. <strong>Approximately two minutes earlier on the same day</strong>, Sunrun&#39;s own automated system at `no-reply@email.sunrun.com` sent me an email titled &quot;Your Early Performance Guarantee Information&quot; that reads, verbatim:</p>
+<p>The same April 16, 2026 message asserted that I &quot;do not have a performance guarantee on your contract.&quot; That assertion is provably false. <strong>Approximately two minutes earlier on the same day</strong>, Sunrun&#39;s own automated system at no-reply@email.sunrun.com sent me an email titled &quot;Your Early Performance Guarantee Information&quot; that reads, verbatim:</p>
 
 <blockquote style="border-left:3px solid #999; padding-left:12px; color:#333;">
 &quot;Thank you for contacting Sunrun about your <strong>Early Performance Guarantee credit</strong>. While you aren&#39;t eligible for a credit at this time, we want to ensure you&#39;re getting the best performance and savings possible. <strong>We&#39;ll proceed with your regularly scheduled annual or bi-annual calculation to confirm your system is meeting its promised production.</strong>&quot;
@@ -227,7 +237,7 @@ $htmlBody = @"
 
 <h3 style="color:#b30000;">9. Position going forward</h3>
 
-<p>Given that (a) Sunrun&#39;s own portal records contradict the &quot;no November engagement&quot; claim, (b) there is no third-party system, (c) the 2017 Costco system remains non-operational tonight, and (d) Sunrun offered `$450 in compensation 24 hours before refusing entirely, my position has not improved with the new information.</p>
+<p>Given that (a) Sunrun&#39;s own portal records contradict the &quot;no November engagement&quot; claim, (b) there is no third-party system, (c) the 2017 Costco system remains non-operational as of Saturday, April 18 &mdash; with Sunrun&#39;s own app flagging &ldquo;Outlier detected&rdquo; and 0.0 kWh, two days after the alleged repair &mdash; and (d) Sunrun offered `$450 in compensation 24 hours before refusing entirely, my position has not improved with the new information.</p>
 
 <p>I remain willing to resolve this in correspondence on the following terms:</p>
 
@@ -255,7 +265,7 @@ $htmlBody = @"
 <li>Service Case #18181148 in Sunrun&#39;s CRM, including the case-creation entry, all internal status updates, all internal communications about how the case was classified (e.g., as &quot;Metering&quot; rather than &quot;System Down&quot; or equivalent), and any decision documentation about not notifying the customer of zero production;</li>
 <li>All <strong>monitoring telemetry from the SolarEdge inverters and the Sunrun monitoring system at the Property from October 1, 2025 through the date of full restoration</strong>, at the highest available resolution (interval data, not just daily aggregates);</li>
 <li>The work order, technician field notes, technician GPS records, photographs, and remote-monitoring readings for each of: the November 10, 2025 engagement (whether physical or remote), the January 27, 2026 visit, the February 23, 2026 scheduled appointment (whether it occurred or was canceled), the April 16, 2026 emergency visit, and the April 22, 2026 scheduled appointment;</li>
-<li>All scripts, templates, and decision rules used by Sunrun&#39;s automated email system (`noreply@ai.sunrun.com`) for choosing the language &quot;system issue&quot;, &quot;your issue&quot;, and &quot;system reboot&quot; in customer communications about Case #18181148; and</li>
+<li>All scripts, templates, and decision rules used by Sunrun&#39;s automated email system (noreply@ai.sunrun.com) for choosing the language &quot;system issue&quot;, &quot;your issue&quot;, and &quot;system reboot&quot; in customer communications about Case #18181148; and</li>
 <li>All internal communications among Sunrun personnel, including but not limited to Katherine Wilson and any field-operations and customer-engagement managers, regarding this case and my account.</li>
 </ul>
 
