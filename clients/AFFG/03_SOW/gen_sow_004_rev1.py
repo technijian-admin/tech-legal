@@ -243,12 +243,11 @@ heading(1, 'STATEMENT OF WORK')
 
 for label, value in [
     ('SOW Number: ', 'SOW-AFFG-004 Rev 1'),
-    ('Title: ', 'VDI-to-Managed-Device Migration'),
+    ('Title: ', 'Fleet Right-Sizing and Compliance Configuration'),
     ('Effective Date: ', 'May 1, 2026'),
-    ('Supersedes: ', 'SOW-AFFG-004 (original, April 2026)'),
+    ('Revision: ', 'Rev 1 \u2013 replaces SOW-AFFG-004 (April 2026)'),
     ('Parent Agreement: ', 'MSA-AFFG-2026'),
     ('Primary Contact: ', 'Iris Liu  |  iris.liu@americanfundstars.com  |  949-439-2392'),
-    ('Source: ', 'AFFG Managed Device Strategy (REF: AFFG-MDS-2026-04-Rev1, April 2026)'),
     ('Regulatory Scope: ', 'SEC Reg S-P (2024), FINRA 3110, FINRA 4370, SEC 17a-4, NIST SP 800-53 Rev 5'),
 ]:
     kv_para(label, value)
@@ -262,177 +261,181 @@ body_para(
     'Primary Contact: Iris Liu.'
 )
 body_para(
-    'Supersedes: SOW-AFFG-003 (IT Compliance & VDI Implementation). Upon completion of this SOW, the Horizon '
-    'VDI infrastructure deployed under SOW-AFFG-003 Phase 1 will be decommissioned. All compliance controls '
-    'previously enforced via VDI are migrated to managed endpoints with CloudBrink ZTNA. The monthly recurring '
-    'charges in Schedule A of MSA-AFFG-2026 will be amended per Section 8 of this SOW.'
-)
-body_para(
-    'Revision Notes (Rev 1): (1) BYOD MAM-only replaces company phone MDM enrollment; '
-    '(2) device fleet corrected to 4 Mac Mini (Apple ABM) + 6 Windows laptops; '
-    '(3) SSO/2FA Gateway product removed \u2014 Azure Entra ID SSO used instead; '
-    '(4) CloudBrink ZTNA replaces Cisco Umbrella; '
-    '(5) custodian portal access controlled via office WAN IP whitelist + CloudBrink egress IP for remote laptop access.'
+    'Revision Notes (Rev 1): (1) BYOD MAM-only adopted for personal mobile devices \u2014 no company phones; '
+    '(2) managed device fleet confirmed as 4 Mac Mini + 6 Windows laptops (10 endpoints); '
+    '(3) SSO/2FA Gateway product removed \u2014 Azure Entra ID SSO (M365 E3/E5 included) used for identity and MFA; '
+    '(4) CloudBrink ZTNA replaces Cisco Umbrella for DNS filtering and zero-trust remote egress; '
+    '(5) custodian portal access controlled via office WAN IP whitelist + CloudBrink egress IP for traveling laptops.'
 )
 
 # ── Section 1 ─────────────────────────────────────────────────────────────────
 heading(1, '1. PROJECT OVERVIEW')
 body_para(
-    'Technijian will deliver a 6-phase implementation that migrates AFFG from the Technijian Horizon VDI '
-    'environment (deployed under SOW-AFFG-003) to a managed-device model using 4 Mac Mini desktops and '
-    '6 Windows laptops enrolled in Microsoft Intune, with CloudBrink Zero Trust Network Access (ZTNA) '
-    'replacing both the VDI egress IP whitelist and Cisco Umbrella. Mobile access is handled via BYOD with '
-    'Intune MAM-only (Outlook App). This migration maintains the identical SEC/FINRA compliance posture '
-    'established under SOW-AFFG-003 while eliminating VDI hosting costs and improving user experience.'
+    'AFFG currently operates 16 physical desktops under the Technijian standard managed services program. '
+    'This SOW covers two concurrent workstreams: (1) right-sizing the managed device fleet from 16 desktops '
+    'to 10 company-owned endpoints (4 Mac Mini + 6 Windows laptops), and (2) deploying the compliance controls '
+    'required under SEC Regulation S-P (2024 amendments) and FINRA Rule 3110 that are not present in the '
+    'current environment. Compliance controls include Microsoft Intune enrollment with Conditional Access, '
+    'CloudBrink Zero Trust Network Access (ZTNA) replacing Cisco Umbrella, MyAudit UAM+DLP on all 10 '
+    'managed endpoints, and Intune MAM-only for employee personal mobile devices (BYOD).'
 )
 heading(2, '1.1 Objectives')
 for obj in [
     'Enroll 4 Mac Mini (Apple Business Manager) and 6 Windows laptops (Autopilot) in Microsoft Intune with full endpoint security stack',
-    'Deploy CloudBrink ZTNA to replace VDI egress IP and Cisco Umbrella; whitelist CloudBrink egress IP at Schwab Advisor Services and IBKR',
-    'Configure Entra ID Conditional Access: named location policy (office WAN IP) + Intune-compliant device requirement for M365',
-    'Configure BYOD Intune MAM (Outlook App) for employee personal mobile devices \u2014 no MDM enrollment required',
-    'Migrate MyAudit UAM+DLP and Credential Manager from VDI to all 10 managed endpoints',
-    'Execute controlled VDI-to-managed-device migration with 2-week parallel operation window',
-    'Decommission Horizon VDI infrastructure and amend Schedule A for monthly savings',
+    'Deploy CloudBrink ZTNA on all 10 endpoints to replace Cisco Umbrella; whitelist CloudBrink egress IP at Schwab Advisor Services and IBKR',
+    'Configure Entra ID Conditional Access: named location policy (office WAN IP) + Intune-compliant device requirement for M365; block legacy auth',
+    'Deploy MyAudit UAM+DLP (AMDLP1Y) on all 10 managed endpoints \u2014 block USB, clipboard, print, and local download of financial data',
+    'Configure BYOD Intune MAM (Outlook App) for employee personal mobile devices \u2014 no MDM enrollment of personal devices',
+    'Offboard 16 legacy desktops from Technijian managed services and amend Schedule A accordingly',
+    'Conduct user training and deliver post-implementation compliance documentation',
 ]:
     bullet_para(obj)
 
-heading(2, '1.2 Exclusions')
+heading(2, '1.2 Out of Scope')
 for exc in [
     'CloudBrink per-user subscription licensing (procured directly by AFFG)',
     'Hardware procurement (AFFG provides Mac Mini desktops and Windows laptops)',
     'Microsoft 365 license costs (AFFG procures directly \u2014 E3 or E5 required)',
     'Technijian My Archive (AFFG operates own email-archiving platform)',
     'Company-owned mobile phones and MDM enrollment thereof (BYOD model adopted)',
+    'Physical removal or disposal of retired desktop hardware (AFFG responsibility)',
 ]:
     bullet_para(exc)
 
 # ── Section 2 ─────────────────────────────────────────────────────────────────
 heading(1, '2. IMPLEMENTATION SCOPE')
 
-heading(2, 'Phase 1: Endpoint Foundation (Weeks 1\u20134)')
+heading(2, 'Phase 1: Endpoint Enrollment & Foundation (Weeks 1\u20134)')
 body_para('7 tickets  |  24 hours')
 body_para(
-    'Configure Intune Autopilot (Windows) and Apple Business Manager (Mac). Set compliance policies and '
-    'device configuration profiles. Enroll and image all 10 endpoints. Deploy full security stack '
-    '(CrowdStrike, Huntress, CloudBrink agent, DNS, Patch Mgmt, ScreenConnect), MyAudit UAM+DLP, and '
-    'Credential Manager on all managed endpoints.'
+    'Configure Microsoft Intune Autopilot (Windows) and Apple Business Manager (Mac Mini). Define device '
+    'compliance policies and configuration profiles for both platforms. Enroll and image all 10 endpoints. '
+    'Deploy full security stack on each endpoint: CrowdStrike Falcon EDR, Huntress MDR, Patch Management, '
+    'My Remote (ScreenConnect), and CloudBrink agent. Deploy MyAudit UAM+DLP on all 10 endpoints.'
 )
 heading(3, 'Phase 1 Tickets')
 add_table(TICKET_HDR, [
-    ('AFFG-004-001', 'Intune Autopilot Configuration & Enrollment Profiles (Windows)', 'CHD-TS1', '3'),
-    ('AFFG-004-002', 'Apple Business Manager (ABM) MDM Configuration (Mac Mini)', 'CHD-TS1', '3'),
-    ('AFFG-004-003', 'Intune Device Compliance & Configuration Policies', 'CHD-TS1', '2'),
+    ('AFFG-004-001', 'Intune Autopilot Configuration & Enrollment Profiles \u2013 Windows', 'CHD-TS1', '3'),
+    ('AFFG-004-002', 'Apple Business Manager (ABM) Setup & MDM Configuration \u2013 Mac Mini', 'CHD-TS1', '3'),
+    ('AFFG-004-003', 'Intune Device Compliance & Configuration Policies (Windows + macOS)', 'CHD-TS1', '2'),
     ('AFFG-004-004', 'Windows Laptop Autopilot Enrollment & Imaging \u2013 6 Devices', 'CHD-TS1', '4'),
     ('AFFG-004-005', 'Mac Mini ABM Enrollment & Imaging \u2013 4 Devices', 'CHD-TS1', '4'),
     ('AFFG-004-006', 'Endpoint Security Stack Deployment \u2013 All 10 Endpoints', 'CHD-TS1', '4'),
-    ('AFFG-004-007', 'MyAudit UAM+DLP & Credential Manager Deployment \u2013 All 10 Endpoints', 'CHD-TS1', '4'),
+    ('AFFG-004-007', 'MyAudit UAM+DLP Deployment & Policy Configuration \u2013 All 10 Endpoints', 'CHD-TS1', '4'),
     ('', 'Phase Total', '', '24'),
 ], TICKET_COLS)
 
-heading(2, 'Phase 2: Access Control (Weeks 3\u20136)')
+heading(2, 'Phase 2: Access Control & ZTNA (Weeks 3\u20136)')
 body_para('5 tickets  |  16 hours')
 body_para(
-    'Configure Entra ID Conditional Access (named location policy for office WAN IP, Intune-compliant device '
-    'requirement, legacy auth block, MFA enforcement). Deploy CloudBrink ZTNA (tenant, connector, agent on '
-    'all 10 endpoints, per-app micro-segmentation). Whitelist CloudBrink egress IP at Schwab Advisor Services '
-    'and IBKR, replacing the former VDI egress IP. Cisco Umbrella decommissioned.'
+    'Configure Entra ID Conditional Access policies: office WAN IP named location, Intune-compliant device '
+    'requirement for M365, legacy authentication block, and MFA enforcement. Deploy CloudBrink ZTNA '
+    '(tenant provisioning, connector, agent on all 10 endpoints, per-application micro-segmentation). '
+    'Whitelist CloudBrink egress IP at Schwab Advisor Services and IBKR as the sole permitted remote '
+    'access origin. Remove Cisco Umbrella from all 10 endpoints.'
 )
 heading(3, 'Phase 2 Tickets')
 add_table(TICKET_HDR, [
-    ('AFFG-004-008', 'Conditional Access Policy Suite (Named Location + Compliant Device + MFA)', 'IRV-TS1', '4'),
-    ('AFFG-004-009', 'CloudBrink ZTNA Tenant & Connector Setup', 'IRV-TS1', '3'),
-    ('AFFG-004-010', 'CloudBrink Agent Deployment \u2013 All 10 Managed Endpoints', 'CHD-TS1', '3'),
-    ('AFFG-004-011', 'CloudBrink Access Policies & Micro-Segmentation', 'CHD-TS1', '3'),
-    ('AFFG-004-012', 'Schwab & IBKR Access Migration (VDI Egress IP \u2192 CloudBrink Egress IP)', 'IRV-TS1', '3'),
+    ('AFFG-004-008', 'Conditional Access Policy Suite \u2013 Named Location + Compliant Device + MFA', 'IRV-TS1', '4'),
+    ('AFFG-004-009', 'CloudBrink ZTNA Tenant & Connector Provisioning', 'IRV-TS1', '3'),
+    ('AFFG-004-010', 'CloudBrink Agent Deployment \u2013 All 10 Endpoints (replaces Cisco Umbrella)', 'CHD-TS1', '3'),
+    ('AFFG-004-011', 'CloudBrink Access Policies & Per-App Micro-Segmentation', 'CHD-TS1', '3'),
+    ('AFFG-004-012', 'Schwab & IBKR IP Whitelist Update \u2013 Office WAN IP + CloudBrink Egress IP', 'IRV-TS1', '3'),
     ('', 'Phase Total', '', '16'),
 ], TICKET_COLS)
 
-heading(2, 'Phase 3: Mobile BYOD \u2013 MAM Configuration (Weeks 5\u20137)')
+heading(2, 'Phase 3: BYOD Mobile MAM (Weeks 5\u20137)')
 body_para('2 tickets  |  4 hours')
 body_para(
-    'Configure Intune App Protection (MAM) policies for BYOD personal devices. No MDM enrollment required. '
-    'Employees install the Outlook App from their personal app store; MAM policies containerize corporate '
-    'data, enforce app PIN, and enable selective corporate data wipe without touching personal content. '
-    'Full M365 browser access from mobile is restricted to Intune-compliant managed devices via Conditional Access.'
+    'Configure Intune App Protection (MAM) policies for employee personal mobile devices. No MDM enrollment '
+    'of personal devices. Employees install the Outlook App from their personal app store; MAM policies '
+    'containerize corporate data, enforce app PIN, and enable selective corporate data wipe on separation '
+    'without accessing personal content. Full M365 browser access from mobile is blocked via Conditional Access '
+    'unless on an Intune-managed company endpoint.'
 )
 heading(3, 'Phase 3 Tickets')
 add_table(TICKET_HDR, [
     ('AFFG-004-013', 'Intune MAM Policy Configuration \u2013 BYOD Outlook App (iOS & Android)', 'CHD-TS1', '2'),
-    ('AFFG-004-014', 'MAM Policy Testing & Employee BYOD Enrollment Guide', 'CHD-TS1', '2'),
+    ('AFFG-004-014', 'MAM Policy Testing & Employee BYOD Setup Guide', 'CHD-TS1', '2'),
     ('', 'Phase Total', '', '4'),
 ], TICKET_COLS)
 
-heading(2, 'Phase 4: Migration & Cutover (Weeks 7\u201312)')
-body_para('4 tickets  |  17 hours')
+heading(2, 'Phase 4: Legacy Desktop Offboarding (Weeks 5\u20138)')
+body_para('3 tickets  |  8 hours')
 body_para(
-    'Migrate user data from VDI to managed endpoints (Windows profile migration + Mac local profile setup). '
-    'User training on managed-device workflow and CloudBrink ZTNA for remote access. 2-week parallel '
-    'operation window. VDI decommission and cleanup.'
+    'Decommission the 16 legacy physical desktops from Technijian managed services. Remove all Technijian '
+    'agents (CrowdStrike, Huntress, Patch Management, My Remote, Cisco Umbrella) from retiring devices. '
+    'User data transfer assistance for any users moving from a retiring desktop to a new managed endpoint. '
+    'Draft and deliver Schedule A amendment to reflect the reduced fleet and updated service stack.'
 )
 heading(3, 'Phase 4 Tickets')
 add_table(TICKET_HDR, [
-    ('AFFG-004-015', 'VDI-to-Managed-Device Data Migration (Windows + Mac)', 'CHD-TS1', '6'),
-    ('AFFG-004-016', 'User Training \u2013 Managed Device & CloudBrink Remote Access Workflow', 'CHD-TS1', '4'),
-    ('AFFG-004-017', 'Parallel Operation Window (VDI + Managed Devices)', 'IRV-TS1', '4'),
-    ('AFFG-004-018', 'VDI Decommission & Cleanup', 'IRV-TS1', '3'),
-    ('', 'Phase Total', '', '17'),
+    ('AFFG-004-015', 'Agent Removal from 16 Legacy Desktops & Managed Services Offboarding', 'CHD-TS1', '4'),
+    ('AFFG-004-016', 'User Data Transfer Assistance \u2013 Legacy Desktop to New Endpoint', 'CHD-TS1', '2'),
+    ('AFFG-004-017', 'Schedule A Amendment \u2013 Fleet Right-Sizing & Compliance Stack Update', 'IRV-TS1', '2'),
+    ('', 'Phase Total', '', '8'),
 ], TICKET_COLS)
 
-heading(2, 'Phase 5: Monitoring & Validation (Weeks 11\u201314)')
-body_para('4 tickets  |  13 hours')
+heading(2, 'Phase 5: Validation & Training (Weeks 7\u201310)')
+body_para('4 tickets  |  12 hours')
 body_para(
-    'Expand monitoring to full device fleet and CloudBrink. Configure MAM compliance reporting. '
-    'End-to-end security validation. Post-migration compliance gap assessment confirming equivalent regulatory posture.'
+    'End-to-end security and compliance validation across all 10 managed endpoints. Verify MyAudit DLP '
+    'policy enforcement, CloudBrink ZTNA posture checks, Conditional Access enforcement, and MAM containment. '
+    'User training on managed-device workflows and CloudBrink remote access. Compliance gap assessment '
+    'documenting SEC Reg S-P and FINRA control coverage.'
 )
 heading(3, 'Phase 5 Tickets')
 add_table(TICKET_HDR, [
-    ('AFFG-004-019', 'Monitoring Expansion \u2013 Device Fleet & CloudBrink', 'CHD-TS1', '3'),
-    ('AFFG-004-020', 'MAM Compliance Reporting Configuration', 'CHD-TS1', '2'),
-    ('AFFG-004-021', 'End-to-End Security Validation', 'IRV-TS1', '4'),
-    ('AFFG-004-022', 'Post-Migration Compliance Gap Assessment', 'IRV-TS1', '4'),
-    ('', 'Phase Total', '', '13'),
+    ('AFFG-004-018', 'End-to-End Security & Compliance Validation \u2013 All 10 Endpoints', 'IRV-TS1', '4'),
+    ('AFFG-004-019', 'MyAudit DLP & CloudBrink Policy Verification', 'CHD-TS1', '3'),
+    ('AFFG-004-020', 'User Training \u2013 Managed Endpoints & CloudBrink Remote Access', 'CHD-TS1', '3'),
+    ('AFFG-004-021', 'Compliance Gap Assessment & Control Coverage Report (SEC/FINRA)', 'IRV-TS1', '2'),
+    ('', 'Phase Total', '', '12'),
 ], TICKET_COLS)
 
-heading(2, 'Phase 6: Documentation Update (Weeks 13\u201316)')
-body_para('2 tickets  |  9 hours')
-body_para('Update all SOW-003 compliance documents for managed-device architecture. Draft Schedule A amendment.')
+heading(2, 'Phase 6: Documentation (Weeks 9\u201312)')
+body_para('2 tickets  |  8 hours')
+body_para(
+    'Update compliance documentation suite to reflect the managed-device architecture: endpoint security '
+    'policy, ZTNA access control runbook, incident response procedure, and data handling policy. '
+    'All documents delivered in Technijian standard format.'
+)
 heading(3, 'Phase 6 Tickets')
 add_table(TICKET_HDR, [
-    ('AFFG-004-023', 'Update Compliance Documentation Suite', 'CHD-TS1', '6'),
-    ('AFFG-004-024', 'Schedule A Amendment \u2013 Remove VDI / Add Managed Device Services', 'IRV-TS1', '3'),
-    ('', 'Phase Total', '', '9'),
+    ('AFFG-004-022', 'Update Compliance Documentation Suite \u2013 Managed Device Architecture', 'CHD-TS1', '6'),
+    ('AFFG-004-023', 'Final Deliverable Package & Client Acceptance Sign-Off', 'IRV-TS1', '2'),
+    ('', 'Phase Total', '', '8'),
 ], TICKET_COLS)
 
 # ── Section 3 ─────────────────────────────────────────────────────────────────
 heading(1, '3. CONTROL-TO-CITATION MAP')
-body_para('The following table maps each design component to its control objective and regulatory citations:')
+body_para('The following table maps each design component to its regulatory control objective:')
 add_table(
     ['Design Component', 'Control Objective', 'Citation(s)'],
     [
-        ('Intune-managed endpoints (4 Mac Mini + 6 Windows laptops)',
-         'All 10 users on company-owned, encrypted, policy-enforced devices',
-         'Reg S-P 248.30(a)(1)-(3); FINRA 3110(a)'),
-        ('CloudBrink ZTNA (replaces Cisco Umbrella + VDI egress IP)',
-         'Zero-trust access; device posture verified per session; DNS filtering and ZTNA egress',
+        ('Intune-managed endpoints \u2013 4 Mac Mini + 6 Windows laptops',
+         'Company-owned, encrypted, policy-enforced devices with centralized MDM control',
+         'Reg S-P 248.30(a)(1)\u2013(3); FINRA 3110(a)'),
+        ('CloudBrink ZTNA on all 10 endpoints (replaces Cisco Umbrella)',
+         'Zero-trust egress; device posture verified per session; DNS filtering; blocks unmanaged device access to portals',
          'Reg S-P 248.30(a)(3); NIST AC-17, SC-7'),
-        ('Office WAN IP + CloudBrink egress whitelist at Schwab & IBKR',
-         'Only office or CloudBrink-tunneled devices reach custodian portals \u2014 MFA alone does not restrict device origin',
+        ('Office WAN IP + CloudBrink egress IP whitelist at Schwab & IBKR',
+         'Custodian portals accessible only from office or CloudBrink-tunneled managed device \u2014 MFA alone does not restrict device origin',
          'Reg S-P 248.30(a)(3); NIST AC-3, SC-7'),
-        ('Entra Conditional Access (Named Location + Compliant Device)',
-         'M365 restricted to office WAN IP or Intune-compliant device; legacy auth blocked',
+        ('Entra ID Conditional Access \u2013 Named Location + Compliant Device',
+         'M365 access restricted to office WAN IP or Intune-enrolled device; legacy authentication blocked',
          'Reg S-P 248.30(a)(3); NIST AC-3, IA-2(1)'),
-        ('Intune MAM \u2013 BYOD Outlook App',
-         'Corporate email containerized on personal device; selective corporate wipe on separation',
-         'Reg S-P 248.30(a)(1)-(3); NIST AC-19, MP-6'),
-        ('Technijian MyAudit UAM+DLP',
-         'Block USB, local download, print, clipboard, screen capture on all managed endpoints',
+        ('Intune MAM \u2013 BYOD Outlook App (personal mobile)',
+         'Corporate email containerized on personal device; selective corporate wipe on separation; no personal data access',
+         'Reg S-P 248.30(a)(1)\u2013(3); NIST AC-19, MP-6'),
+        ('MyAudit UAM+DLP (AMDLP1Y) \u2013 all 10 managed endpoints',
+         'Block USB exfiltration, local downloads, print, clipboard copy, and screen capture of financial data',
          'Reg S-P 248.30(a)(3); NIST AC-19, MP-7'),
         ('Technijian Veeam Backup for M365',
-         'Immutable, non-rewriteable backup of full M365 tenant',
+         'Immutable, non-rewriteable backup of full M365 tenant (Exchange, Teams, SharePoint, OneDrive)',
          'SEC Rule 17a-4(b),(f); FINRA 4511'),
-        ('Technijian monthly assessment',
-         'Detect drift; attested evidence of ongoing control operation',
+        ('Technijian monthly network assessment (SA)',
+         'Detect configuration drift; provide attested evidence of ongoing control operation',
          'FINRA 3110(c); FINRA 3120'),
     ],
     [2100, 2900, 2360]
@@ -441,15 +444,16 @@ add_table(
 # ── Section 4 ─────────────────────────────────────────────────────────────────
 heading(1, '4. DELIVERABLES')
 for d in [
-    '10 Intune-managed company endpoints (4 Mac Mini via ABM, 6 Windows laptops via Autopilot) with full security stack',
-    'CloudBrink ZTNA deployed with per-application micro-segmented access and device posture enforcement',
-    'Schwab and IBKR migrated from VDI egress IP to CloudBrink egress IP whitelist',
-    'Entra Conditional Access: M365 restricted to office WAN IP or Intune-compliant device; legacy auth blocked',
-    'MyAudit UAM+DLP and Credential Manager on all 10 managed endpoints (replaces VDI-based deployment)',
-    'Intune MAM policies for BYOD personal mobile devices (Outlook App, iOS and Android)',
-    'Updated compliance documentation suite reflecting managed-device architecture',
-    'Schedule A amendment reflecting monthly cost reduction',
-    'Post-migration compliance gap assessment confirming equivalent regulatory posture',
+    '10 Intune-managed company endpoints (4 Mac Mini via ABM, 6 Windows laptops via Autopilot) with full security stack deployed and verified',
+    'CloudBrink ZTNA deployed on all 10 endpoints with per-application micro-segmented access and device posture enforcement',
+    'Schwab Advisor Services and IBKR whitelisted for office WAN IP and CloudBrink egress IP; all other remote access blocked',
+    'Entra ID Conditional Access enforcing M365 access: office WAN IP or Intune-compliant device required; legacy auth blocked',
+    'MyAudit UAM+DLP active on all 10 managed endpoints with DLP policy covering USB, clipboard, print, and download',
+    'Intune MAM policies for BYOD personal mobile devices (iOS and Android, Outlook App)',
+    '16 legacy desktops offboarded from Technijian managed services with all agents removed',
+    'Schedule A amendment reflecting updated fleet (10 endpoints) and compliance service stack',
+    'Updated compliance documentation suite (endpoint security policy, ZTNA runbook, IRP, data handling policy)',
+    'Compliance gap assessment confirming SEC Reg S-P and FINRA control coverage on managed-device architecture',
 ]:
     bullet_para(d)
 
@@ -459,9 +463,9 @@ heading(2, '5.1 Labor Summary')
 add_table(
     ['Role', 'Rate', 'Hours', 'Labor'],
     [
-        ('US Tech Support (IRV-TS1)', '$150/hr', '24', '$3,600.00'),
-        ('India Tech Support (CHD-TS1)', '$45/hr', '59', '$2,655.00'),
-        ('TOTAL', '', '83 hrs', '$6,255.00'),
+        ('US Tech Support (IRV-TS1)', '$150/hr', '20', '$3,000.00'),
+        ('India Tech Support (CHD-TS1)', '$45/hr', '52', '$2,340.00'),
+        ('TOTAL', '', '72 hrs', '$5,340.00'),
     ],
     [4000, 1400, 1200, 1760]
 )
@@ -470,10 +474,10 @@ heading(2, '5.2 Payment Schedule')
 add_table(
     ['Milestone', 'Trigger', 'Amount'],
     [
-        ('50% upon SOW execution', 'SOW signed by both parties', '$3,127.50'),
-        ('25% upon Phase 4 completion', 'VDI decommissioned', '$1,563.75'),
-        ('25% upon Phase 6 delivery', 'Documentation + Schedule A amendment accepted', '$1,563.75'),
-        ('Total', '', '$6,255.00'),
+        ('50% upon SOW execution', 'SOW signed by both parties', '$2,670.00'),
+        ('25% upon Phase 4 completion', '16 legacy desktops offboarded; Schedule A amendment delivered', '$1,335.00'),
+        ('25% upon Phase 6 delivery', 'Compliance documentation + client acceptance sign-off', '$1,335.00'),
+        ('Total', '', '$5,340.00'),
     ],
     [3000, 4200, 1160]
 )
@@ -487,15 +491,15 @@ body_para(
 # ── Section 6 ─────────────────────────────────────────────────────────────────
 heading(1, '6. ASSUMPTIONS')
 for a in [
-    'AFFG has procured 4 Mac Mini desktops and 6 Windows 11 Pro/Enterprise laptops suitable for Intune enrollment',
-    'AFFG enrolls Mac Minis in Apple Business Manager (ABM) prior to Phase 1; Technijian will assist with ABM setup',
-    'AFFG has procured CloudBrink ZTNA per-user subscription licenses for all 10 users',
-    "AFFG\u2019s M365 tenant remains licensed at E3 or E5 (Intune, Conditional Access, and DLP included)",
-    'AFFG employees use personal mobile devices (BYOD) for Outlook App only; no company phones are procured',
-    'AFFG provides the office WAN static IP address to Technijian prior to Phase 2 commencement',
-    'Schwab Advisor Services and IBKR approve transition from VDI egress IP to CloudBrink egress IP within standard timelines',
-    'The 7 VDI agents are available for managed-device migration and training during Weeks 7\u201310',
-    'All MyAudit UAM+DLP and Credential Manager licenses are transferred from VDI to managed endpoints at no additional cost',
+    'AFFG has procured or will procure 4 Mac Mini desktops and 6 Windows 11 Pro/Enterprise laptops prior to Phase 1 commencement',
+    'AFFG will enroll Mac Minis in Apple Business Manager (ABM) prior to Phase 1; Technijian will provide setup assistance',
+    'AFFG has procured CloudBrink ZTNA per-user subscription licenses for all 10 managed users',
+    "AFFG\u2019s M365 tenant is licensed at E3 or E5 (Intune, Conditional Access, and Entra ID P1/P2 included)",
+    'AFFG employees will use personal mobile devices (BYOD) for corporate email via Outlook App; no company mobile phones',
+    'AFFG provides the office static WAN IP address to Technijian prior to Phase 2 commencement',
+    'Schwab Advisor Services and IBKR can update their IP whitelist within 5\u201310 business days of Technijian\u2019s request',
+    'The 16 legacy desktops will be available for agent removal during Phase 4; physical disposal is AFFG\u2019s responsibility',
+    'Users transitioning from legacy desktops to new managed endpoints are available during Weeks 5\u20138 for data transfer',
 ]:
     bullet_para(a)
 
@@ -505,47 +509,59 @@ for e in [
     'CloudBrink per-user subscription licensing (AFFG-procured)',
     'Hardware procurement (Mac Mini desktops and Windows laptops)',
     'Microsoft 365 license costs (AFFG procures directly)',
-    'Technijian My Archive (AFFG operates own archiving)',
+    'Technijian My Archive (AFFG operates own archiving platform)',
     'Company-owned mobile phones and MDM enrollment thereof',
-    'Remediation beyond defined scope; issues requiring additional work will be scoped as a separate Change Order',
+    'Physical removal, disposal, or resale of the 16 legacy desktop devices',
+    'Remediation beyond defined scope; additional work will be scoped as a separate Change Order',
 ]:
     bullet_para(e)
 
 # ── Section 8 ─────────────────────────────────────────────────────────────────
 heading(1, '8. MONTHLY COST IMPACT')
+body_para(
+    'The figures below reflect AFFG\u2019s actual signed invoice baseline (\u201cCurrent\u201d) and the '
+    'projected recurring charges after full SOW-004 implementation (\u201cProposed\u201d). '
+    'The net increase is a compliance investment \u2014 not a cost-reduction initiative. '
+    'AFFG currently operates 16 endpoints with no endpoint DLP, no ZTNA, and no device-posture '
+    'enforcement at custodian portals. The MyAudit UAM+DLP stack and CloudBrink ZTNA close gaps '
+    'required under SEC Reg S-P (2024 amendments) and FINRA Rule 3110. The regulatory exposure '
+    'associated with non-compliance materially exceeds the incremental monthly investment shown here.'
+)
 heading(2, '8.1 Current vs. Proposed Monthly Recurring')
-body_para('Current Monthly (SOW-003 implemented, VDI model) = $5,770.45/mo')
+body_para('Current Monthly (actual signed invoice \u2013 no VDI, no device compliance) = $2,794.50/mo')
 add_table(
     ['Category', 'Current Monthly', 'Proposed Monthly', 'Change'],
     [
-        ('Horizon VDI Workstations (7 agents)', '$2,433.20', '$0.00', '\u2212$2,433.20'),
-        ('Physical Desktop Security \u2013 10 endpoints (excl. Umbrella @ $22.50/device)', '$238.50', '$225.00', '\u2212$13.50'),
-        ('CloudBrink ZTNA \u2013 10 endpoints @ $8.00 (replaces Cisco Umbrella @ $4.00)', '$0.00', '$80.00', '+$80.00'),
-        ('Managed Endpoint Add-Ons \u2013 10 endpoints (see 8.2)', '$0.00', '$1,131.00', '+$1,131.00'),
-        ('All-User Services (31 M365 users)', '$441.75', '$441.75', '$0.00'),
-        ('Domain / Site / IP Services', '$162.00', '$162.00', '$0.00'),
-        ('Production Storage (VDI profiles)', '$400.00', '$0.00', '\u2212$400.00'),
-        ('Backup Storage (V365 / SEC 17a-4)', '$100.00', '$100.00', '$0.00'),
-        ('Virtual Staff Support (unchanged)', '$1,995.00', '$1,995.00', '$0.00'),
-        ('TOTAL MONTHLY', '$5,770.45', '$4,134.75', '\u2212$1,635.70'),
+        ('Endpoint security \u2013 16 desktops (AVD/AVMH/MR/PMW/SI)', '$424.00', '$0.00', '\u2212$424.00'),
+        ('Endpoint security \u2013 6 Windows laptops (AVD/AVMH/MR/PMW, no Umbrella)', '$0.00', '$123.00', '+$123.00'),
+        ('Endpoint security \u2013 4 Mac Mini (AVD/AVMH/MR/PMMAC, no Umbrella)', '$0.00', '$110.00', '+$110.00'),
+        ('CloudBrink ZTNA \u2013 10 endpoints @ $8.00 (replaces Cisco Umbrella)', '$0.00', '$80.00', '+$80.00'),
+        ('Compliance stack add-ons \u2013 10 endpoints (see 8.2)', '$0.00', '$1,131.00', '+$1,131.00'),
+        ('All-user services \u2013 31 users (V365 + PHT, unchanged)', '$310.00', '$310.00', '$0.00'),
+        ('Domain / DKIM / RTPT (unchanged)', '$62.00', '$62.00', '$0.00'),
+        ('Site Assessment \u2013 1 site (unchanged)', '$50.00', '$50.00', '$0.00'),
+        ('Virtual Staff Support (unchanged)', '$1,948.50', '$1,948.50', '$0.00'),
+        ('TOTAL MONTHLY', '$2,794.50', '$3,764.50', '+$970.00'),
     ],
     [3800, 1440, 1440, 1680]
 )
 
-heading(2, '8.2 Managed Endpoint Add-Ons Detail (NEW \u2013 10 endpoints)')
+heading(2, '8.2 Compliance Stack Add-Ons Detail (NEW \u2013 10 endpoints)')
 add_table(
     ['Service', 'Code', 'Qty', 'Unit Price', 'Monthly'],
     [
         ('MyAudit UAM+DLP / 1-Year', 'AMDLP1Y', '10', '$108.10', '$1,081.00'),
-        ('Credential Manager', 'CRM', '10', '$5.00', '$50.00'),
+        ('Site Assessment (Network Detective)', 'SA', '1 site', '$50.00', '$50.00'),
         ('Subtotal', '', '', '', '$1,131.00'),
     ],
     [3200, 1200, 640, 1440, 1880]
 )
 body_para(
-    'Note: SSO/2FA Gateway product removed \u2014 Azure Entra ID SSO (included in M365 E3) provides identity '
-    'federation and MFA natively. CloudBrink subscription is AFFG-procured. Cisco Umbrella removed from '
-    'security stack; CloudBrink ZTNA provides DNS filtering, zero-trust egress, and replaces the VDI egress IP.'
+    'Notes: (1) SSO/2FA Gateway product removed \u2014 Azure Entra ID SSO (included in M365 E3) provides '
+    'identity federation and MFA natively. (2) CloudBrink ZTNA subscription is AFFG-procured; $80/mo shown '
+    'above is the Technijian-billed component only. (3) Cisco Umbrella (SI) removed from security stack; '
+    'CloudBrink ZTNA provides DNS filtering, zero-trust egress, and replaces the former VDI egress IP. '
+    '(4) Mac Mini devices use PMMAC ($11.00/device) in place of PMW ($4.00/device).'
 )
 
 # ── Sections 9\u201311 ─────────────────────────────────────────────────────────────
