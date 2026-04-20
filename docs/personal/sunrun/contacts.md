@@ -7,6 +7,16 @@
 - 2017 **Customer-Owned** (Costco channel, 5.61 kWp, 10-yr labor warranty)
 - Combined NEM system size on file with SDG&E: **11.16 kW**
 
+## Active matter status (2026-04-20)
+
+- **Sunrun Case #18181148** — opened 2025-11-10; 2017 Costco system still 0 kWh as of Apr 18
+- **Round 1 demand** ($7,500) — sent 2026-04-17 to Katherine Wilson + membercare@
+- **Round 2 reply** — sent 2026-04-20 with April 18 evidence + concealment narrative
+- **CPUC Complaint #226711** — filed 2026-04-20; see [CPUC-COMPLAINT.md](CPUC-COMPLAINT.md)
+- **Ed Susolik (Callahan & Blaine)** — forwarded 2026-04-20 for class-action evaluation; same counsel as Technijian v. Vintage Design AAA matter
+- **Round 2 response deadline** — Friday 2026-04-24
+- **Sunrun's standing position** — "$450 or get a lawyer" (do NOT accept; likely conditioned on release of claims)
+
 ---
 
 ## Tier 0 — Your existing contact (start here, but escalate fast)
