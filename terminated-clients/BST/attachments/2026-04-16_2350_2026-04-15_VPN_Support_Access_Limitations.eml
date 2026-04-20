@@ -1,0 +1,395 @@
+From: Ravi Jain <RJain@technijian.com>
+To: Jeff Klein <jklein@bostongroupwaste.com>, Gagan Singh
+	<gagan@bostongroupwaste.com>
+CC: Edward Susolik <es@callahan-law.com>, Technijian Helpdesk
+	<support@technijian.com>, Rishad Mohamed <RMohamed@Technijian.com>
+Subject: VPN Support Request - Continued Access Limitations Following Tech
+ Heights Transition
+Thread-Topic: VPN Support Request - Continued Access Limitations Following
+ Tech Heights Transition
+Thread-Index: AQHczQGS2njNCMJcu0iGCjOnuMCSqA==
+Date: Wed, 15 Apr 2026 17:59:18 +0000
+Message-ID:
+	<IA3PR13MB700153BF26A313E21E003A2DDA222@IA3PR13MB7001.namprd13.prod.outlook.com>
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-SCL: -1
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+Content-Type: multipart/alternative;
+	boundary="_000_IA3PR13MB700153BF26A313E21E003A2DDA222IA3PR13MB7001namp_"
+MIME-Version: 1.0
+
+--_000_IA3PR13MB700153BF26A313E21E003A2DDA222IA3PR13MB7001namp_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+Hello Jeff and Gagan,
+
+Gagan called in today requesting VPN assistance. I want to confirm in writi=
+ng =97 consistent with my April 3, 2026 email on access, transition coordin=
+ation, and outstanding invoices =97 why Technijian is unable to act on this=
+ request, what has continued to change in the environment since that email,=
+ and what we need from Boston Group to resume support through the April 30,=
+ 2026 termination date.
+
+Documented access obstructions =97 sequence of events:
+
+  1.  Night of March 31, 2026 =97 Tech Heights personnel worked in the envi=
+ronment after hours. The ESXi host password was changed without notice to T=
+echnijian, locking us out of the virtualization layer. Reported to you in w=
+riting on April 1, 2026 at 9:28 AM (Helpdesk email, Rishad Samad).
+  2.  April 1, 2026 =97 BST-HQ-AD-01 Active Directory server went offline. =
+Technijian offered to dispatch an engineer (Rishad) onsite the same day to =
+restore service. That offer was declined at 11:29 AM ("No thank you. Let's =
+just resolve this and move on.").
+  3.  April 2, 2026 (evening) =96 April 3, 2026 =97 BST-HQ-AD-02 also went =
+offline. CrowdStrike detected and blocked an unauthorized attempt to elevat=
+e a new account to the Domain Admins group. Reported to you in writing on A=
+pril 3, 2026 at 2:32 AM (Rishad Mohamed, "RE: Urgent: Suspicious Activity D=
+etected on BST-HQ-AD-02").
+  4.  April 3, 2026 =97 Technijian's remote management tools were removed, =
+our administrative access account was disabled, and RDP access to the AD se=
+rvers was revoked. Documented in my April 3, 2026 email (Ed Susolik cc'd) a=
+sking Boston Group to confirm Tech Heights as the primary administrator goi=
+ng forward and to identify authorized Tech Heights recipients for credentia=
+ls.
+  5.  Since April 3, 2026 =97 Additional environmental changes have been ob=
+served by our engineers, including:
+     *   Default gateway changed from 10.1.1.254 to 10.1.1.1 and the previo=
+us firewall replaced. Technijian has no credentials on the current gateway =
+or firewall.
+     *   Technijian monitoring and management agents have been removed from=
+ BST endpoints and servers.
+     *   Domain controllers continue to be inaccessible to Technijian.
+
+Result for today's VPN request: Without credentials to the current firewall=
+/gateway, the current domain controllers, or the current hypervisor, Techni=
+jian cannot diagnose or remediate the reported VPN issue. Our engineer dire=
+cted Gagan to contact Tech Heights, since Tech Heights currently holds the =
+operational credentials. This email confirms that direction in writing.
+
+Our position through April 30, 2026:
+
+  *   Technijian remains contractually willing to provide support through t=
+he termination date per Section 4.05 of the signed agreement. Our offer of =
+April 1 (onsite dispatch) and April 3 (coordinated access restoration) both=
+ remain available.
+  *   We cannot provide support without administrative access. If Boston Gr=
+oup directs Tech Heights to (a) restore the ESXi host credentials, (b) rest=
+ore a Technijian administrative account on the current domain controllers, =
+(c) provide read/admin credentials on the current firewall/gateway, and (d)=
+ reinstate our monitoring and management agents, we will resume normal supp=
+ort response immediately.
+  *   Otherwise, please direct all active support requests to Tech Heights,=
+ which currently holds the operational credentials for the BST environment.
+
+Reservation of rights:
+
+Nothing in this email waives, releases, or limits any claim Technijian may =
+have arising from the unauthorized credential changes, agent removals, acce=
+ss-account disabling, or related conduct by Tech Heights or any other third=
+ party, including without limitation claims under the Computer Fraud and Ab=
+use Act, California Penal Code =A7 502, or for tortious interference. All r=
+ights are expressly reserved.
+
+The termination items outlined in my March 23 and April 3, 2026 emails =97 =
+including the $15,045.00 settlement offer (open through April 30, 2026), in=
+voice #28064 ($126,442.50 contract-basis cancellation fee, due April 30, 20=
+26), invoice #27949 ($5,645.35, past due), invoice #27890 ($552.00, past du=
+e), and invoices #28112 and #28143 (due May 1, 2026) =97 remain as stated.
+
+Please confirm by reply whether Boston Group intends to restore Technijian'=
+s access for the remaining notice period, or whether ongoing support should=
+ be routed to Tech Heights.
+
+Thank you,
+
+Thank you,
+
+[Ravi Jain]
+Ravi Jain
+CEO
+Technijian
+T: 949.379.8499 x201
+C: 714.402.3164
+S: 949.379.8501 (support)
+E: rjain@technijian.com<mailto:rjain@technijian.com>
+W: technijian.com<https://technijian.com>
+Book a Meeting<https://outlook.office.com/bookwithme/user/ceb349088c264d73b=
+4854612958471e9@technijian.com/meetingtype/SVRwCe7HMUGxuT6WGxi68g2?anonymou=
+s&ismsaljsauthenabled&ep=3DmLinkFromTile>   Book time with Support<https://=
+outlook.office365.com/owa/calendar/Meetingwithsupport@Technijian365.onmicro=
+soft.com/bookings/>
+USA: 18 Technology Dr., Ste 141, Irvine, CA 92618
+India: Plot No. 07, 1st Floor, Panchkula IT Park, Panchkula, Haryana 134109
+[Technijian]
+LinkedIn<https://www.linkedin.com/company/technijian> | Facebook<https://ww=
+w.facebook.com/Technijian01/> | YouTube<https://www.youtube.com/@Technijian=
+IT> | Instagram<https://www.instagram.com/technijianinc/> | X<https://twitt=
+er.com/technijian_> | TikTok<https://www.tiktok.com/@technijian> | Pinteres=
+t<https://in.pinterest.com/technijian01/>
+
+This email and any attachments are confidential and intended solely for the=
+ addressee. If you have received this message in error, please notify the s=
+ender immediately and delete it from your system. Unauthorized review, use,=
+ disclosure, or distribution is prohibited.
+
+--_000_IA3PR13MB700153BF26A313E21E003A2DDA222IA3PR13MB7001namp_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+</head>
+<body dir=3D"ltr">
+<div style=3D"font-family:Aptos,Aptos_EmbeddedFont,Aptos_MSFontService,Cali=
+bri,Helvetica,sans-serif;font-size:12pt;color:rgb(0,0,0)">
+<p>Hello Jeff and Gagan,</p>
+<p>Gagan called in today requesting VPN assistance. I want to confirm in wr=
+iting =97 consistent with my April 3, 2026 email on access, transition coor=
+dination, and outstanding invoices =97 why Technijian is unable to act on t=
+his request, what has continued to change
+ in the environment since that email, and what we need from Boston Group to=
+ resume support through the April 30, 2026 termination date.</p>
+<p><strong>Documented access obstructions =97 sequence of events:</strong><=
+/p>
+<ol>
+<li><strong>Night of March 31, 2026</strong> =97 Tech Heights personnel wor=
+ked in the environment after hours. The
+<strong>ESXi host password was changed without notice to Technijian</strong=
+>, locking us out of the virtualization layer. Reported to you in writing o=
+n April 1, 2026 at 9:28 AM (Helpdesk email, Rishad Samad).</li><li><strong>=
+April 1, 2026</strong> =97 BST-HQ-AD-01 Active Directory server went offlin=
+e. Technijian
+<strong>offered to dispatch an engineer (Rishad) onsite</strong> the same d=
+ay to restore service. That offer was declined at 11:29 AM (&quot;No thank =
+you. Let's just resolve this and move on.&quot;).</li><li><strong>April 2, =
+2026 (evening) =96 April 3, 2026</strong> =97 BST-HQ-AD-02 also went offlin=
+e.
+<strong>CrowdStrike detected and blocked an unauthorized attempt to elevate=
+ a new account to the Domain Admins group.</strong> Reported to you in writ=
+ing on April 3, 2026 at 2:32 AM (Rishad Mohamed, &quot;RE: Urgent: Suspicio=
+us Activity Detected on BST-HQ-AD-02&quot;).</li><li><strong>April 3, 2026<=
+/strong> =97 Technijian's <strong>remote management tools were removed</str=
+ong>, our
+<strong>administrative access account was disabled</strong>, and <strong>RD=
+P access to the AD servers was revoked</strong>. Documented in my April 3, =
+2026 email (Ed Susolik cc'd) asking Boston Group to confirm Tech Heights as=
+ the primary administrator going
+ forward and to identify authorized Tech Heights recipients for credentials=
+.</li><li><strong>Since April 3, 2026</strong> =97 Additional environmental=
+ changes have been observed by our engineers, including:
+<ul>
+<li><strong>Default gateway changed</strong> from 10.1.1.254 to 10.1.1.1 an=
+d the previous firewall replaced. Technijian has no credentials on the curr=
+ent gateway or firewall.</li><li><strong>Technijian monitoring and manageme=
+nt agents</strong> have been removed from BST endpoints and servers.</li><l=
+i>Domain controllers continue to be inaccessible to Technijian.</li></ul>
+</li></ol>
+<p><strong>Result for today's VPN request:</strong> Without credentials to =
+the current firewall/gateway, the current domain controllers, or the curren=
+t hypervisor, Technijian cannot diagnose or remediate the reported VPN issu=
+e. Our engineer directed Gagan to
+ contact Tech Heights, since Tech Heights currently holds the operational c=
+redentials. This email confirms that direction in writing.</p>
+<p><strong>Our position through April 30, 2026:</strong></p>
+<ul>
+<li>Technijian <strong>remains contractually willing to provide support</st=
+rong> through the termination date per Section 4.05 of the signed agreement=
+. Our offer of April 1 (onsite dispatch) and April 3 (coordinated access re=
+storation) both remain available.</li><li><strong>We cannot provide support=
+ without administrative access.</strong> If Boston Group directs Tech Heigh=
+ts to (a) restore the ESXi host credentials, (b) restore a Technijian admin=
+istrative account on the current domain controllers, (c) provide read/admin
+ credentials on the current firewall/gateway, and (d) reinstate our monitor=
+ing and management agents, we will resume normal support response immediate=
+ly.</li><li><strong>Otherwise, please direct all active support requests to=
+ Tech Heights,</strong> which currently holds the operational credentials f=
+or the BST environment.</li></ul>
+<p><strong>Reservation of rights:</strong></p>
+<p>Nothing in this email waives, releases, or limits any claim Technijian m=
+ay have arising from the unauthorized credential changes, agent removals, a=
+ccess-account disabling, or related conduct by Tech Heights or any other th=
+ird party, including without limitation
+ claims under the Computer Fraud and Abuse Act, California Penal Code =A7 5=
+02, or for tortious interference. All rights are expressly reserved.</p>
+<p>The termination items outlined in my March 23 and April 3, 2026 emails =
+=97 including the $15,045.00 settlement offer (open through April 30, 2026)=
+, invoice #28064 ($126,442.50 contract-basis cancellation fee, due April 30=
+, 2026), invoice #27949 ($5,645.35,
+ past due), invoice #27890 ($552.00, past due), and invoices #28112 and #28=
+143 (due May 1, 2026) =97 remain as stated.</p>
+<p>Please confirm by reply whether Boston Group intends to restore Techniji=
+an's access for the remaining notice period, or whether ongoing support sho=
+uld be routed to Tech Heights.</p>
+<p>Thank you,</p>
+</div>
+<div style=3D"font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<div style=3D"font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+Thank you,</div>
+<div style=3D"font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:12p=
+t; color:rgb(0,0,0)">
+<br>
+</div>
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" style=3D"max-width:=
+600px">
+<tbody>
+<tr>
+<td colspan=3D"2" style=3D"border-top:3px solid rgb(246,125,75); padding-bo=
+ttom:16px">
+</td>
+</tr>
+<tr>
+<td style=3D"padding-right:16px; vertical-align:top; width:120px"><img alt=
+=3D"Ravi Jain" width=3D"120" height=3D"120" style=3D"width:120px; height:12=
+0px; border:2px solid rgb(233,236,239); border-radius:6px; display:block" s=
+rc=3D"https://technijian.com/wp-content/uploads/2026/03/ravi-jain.jpg"></td=
+>
+<td style=3D"vertical-align:top">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">
+<tbody>
+<tr>
+<td style=3D"line-height:1.3; padding-bottom:1px; color:rgb(26,26,46)">
+<div style=3D"line-height:1.3; font-family:'Open Sans','Segoe UI',Helvetica=
+,Arial,sans-serif; font-size:18px">
+<span style=3D"font-weight:700">Ravi Jain</span></div>
+</td>
+</tr>
+<tr>
+<td style=3D"padding-bottom:2px; color:rgb(0,109,182)">
+<div style=3D"font-family:'Open Sans','Segoe UI',Helvetica,Arial,sans-serif=
+; font-size:13px">
+<span style=3D"font-weight:600">CEO</span></div>
+</td>
+</tr>
+<tr>
+<td style=3D"padding-bottom:8px; color:rgb(89,89,91)">
+<div style=3D"font-family:'Open Sans','Segoe UI',Helvetica,Arial,sans-serif=
+; font-size:12px">
+Technijian</div>
+</td>
+</tr>
+<tr>
+<td style=3D"line-height:1.7; color:rgb(89,89,91)">
+<div style=3D"line-height:1.7; font-family:'Open Sans','Segoe UI',Helvetica=
+,Arial,sans-serif">
+<span style=3D"font-size:12px; color:rgb(0,109,182); font-weight:600">T:</s=
+pan>&nbsp;<span style=3D"font-size:12px">949.379.8499 x201</span><br>
+<span style=3D"font-size:12px; color:rgb(0,109,182); font-weight:600">C:</s=
+pan>&nbsp;<span style=3D"font-size:12px">714.402.3164</span><br>
+<span style=3D"font-size:12px; color:rgb(0,109,182); font-weight:600">S:</s=
+pan>&nbsp;<span style=3D"font-size:12px">949.379.8501</span>&nbsp;<span sty=
+le=3D"font-size:11px; color:rgb(173,181,189)">(support)</span><br>
+<span style=3D"font-size:12px; color:rgb(0,109,182); font-weight:600">E:</s=
+pan>&nbsp;<a href=3D"mailto:rjain@technijian.com" style=3D"font-size:12px; =
+color:rgb(0,109,182); text-decoration:none">rjain@technijian.com</a><br>
+<span style=3D"font-size:12px; color:rgb(0,109,182); font-weight:600">W:</s=
+pan>&nbsp;<a href=3D"https://technijian.com" style=3D"font-size:12px; color=
+:rgb(0,109,182); text-decoration:none">technijian.com</a></div>
+</td>
+</tr>
+<tr>
+<td style=3D"padding-top:8px; padding-bottom:4px">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0">
+<tbody>
+<tr>
+<td style=3D"padding-right:8px"><a href=3D"https://outlook.office.com/bookw=
+ithme/user/ceb349088c264d73b4854612958471e9@technijian.com/meetingtype/SVRw=
+Ce7HMUGxuT6WGxi68g2?anonymous&amp;ismsaljsauthenabled&amp;ep=3DmLinkFromTil=
+e" style=3D"color:rgb(255,255,255); text-decoration:none; display:inline-bl=
+ock; padding:6px 16px; background-color:rgb(0,109,182); border-radius:4px; =
+font-family:'Open Sans','Segoe UI',Helvetica,Arial,sans-serif; font-size:12=
+px; font-weight:600">Book
+ a Meeting</a></td>
+<td><a href=3D"https://outlook.office365.com/owa/calendar/Meetingwithsuppor=
+t@Technijian365.onmicrosoft.com/bookings/" style=3D"color:rgb(255,255,255);=
+ text-decoration:none; display:inline-block; padding:6px 16px; background-c=
+olor:rgb(246,125,75); border-radius:4px; font-family:'Open Sans','Segoe UI'=
+,Helvetica,Arial,sans-serif; font-size:12px; font-weight:600">Book
+ time with Support</a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td style=3D"line-height:1.6; padding-top:6px; color:rgb(173,181,189)">
+<div style=3D"line-height:1.6; font-family:'Open Sans','Segoe UI',Helvetica=
+,Arial,sans-serif; font-size:11px">
+<span style=3D"color:rgb(0,109,182); font-weight:600">USA:</span>&nbsp;18 T=
+echnology Dr., Ste 141, Irvine, CA 92618<br>
+<span style=3D"color:rgb(0,109,182); font-weight:600">India:</span>&nbsp;Pl=
+ot No. 07, 1st Floor, Panchkula IT Park, Panchkula, Haryana 134109</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan=3D"2" style=3D"padding-top:14px; padding-bottom:10px">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" style=3D"width:100%=
+">
+<tbody>
+<tr>
+<td style=3D"border-top:2px solid rgb(0,109,182)"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan=3D"2" style=3D"padding-bottom:10px"><img alt=3D"Technijian" wid=
+th=3D"160" style=3D"width:160px; display:block" src=3D"https://technijian.c=
+om/wp-content/uploads/2026/03/technijian-logo-full-color-600x125-1.png"></t=
+d>
+</tr>
+<tr>
+<td colspan=3D"2" style=3D"padding-bottom:12px">
+<div style=3D"line-height:1; font-family:'Open Sans','Segoe UI',Helvetica,A=
+rial,sans-serif; font-size:11px">
+<a href=3D"https://www.linkedin.com/company/technijian" style=3D"color:rgb(=
+0,109,182); text-decoration:none; font-weight:600">LinkedIn</a>&nbsp;<span =
+style=3D"color:rgb(233,236,239)">|</span>&nbsp;<a href=3D"https://www.faceb=
+ook.com/Technijian01/" style=3D"color:rgb(0,109,182); text-decoration:none;=
+ font-weight:600">Facebook</a>&nbsp;<span style=3D"color:rgb(233,236,239)">=
+|</span>&nbsp;<a href=3D"https://www.youtube.com/@TechnijianIT" style=3D"co=
+lor:rgb(0,109,182); text-decoration:none; font-weight:600">YouTube</a>&nbsp=
+;<span style=3D"color:rgb(233,236,239)">|</span>&nbsp;<a href=3D"https://ww=
+w.instagram.com/technijianinc/" style=3D"color:rgb(0,109,182); text-decorat=
+ion:none; font-weight:600">Instagram</a>&nbsp;<span style=3D"color:rgb(233,=
+236,239)">|</span>&nbsp;<a href=3D"https://twitter.com/technijian_" style=
+=3D"color:rgb(0,109,182); text-decoration:none; font-weight:600">X</a>&nbsp=
+;<span style=3D"color:rgb(233,236,239)">|</span>&nbsp;<a href=3D"https://ww=
+w.tiktok.com/@technijian" style=3D"color:rgb(0,109,182); text-decoration:no=
+ne; font-weight:600">TikTok</a>&nbsp;<span style=3D"color:rgb(233,236,239)"=
+>|</span>&nbsp;<a href=3D"https://in.pinterest.com/technijian01/" style=3D"=
+color:rgb(0,109,182); text-decoration:none; font-weight:600">Pinterest</a><=
+/div>
+</td>
+</tr>
+<tr>
+<td colspan=3D"2" style=3D"border-top:1px solid rgb(233,236,239); padding-t=
+op:8px">
+<p style=3D"line-height:1.4; margin:0px; font-family:'Open Sans','Segoe UI'=
+,Helvetica,Arial,sans-serif; font-size:10px; color:rgb(173,181,189)">
+This email and any attachments are confidential and intended solely for the=
+ addressee. If you have received this message in error, please notify the s=
+ender immediately and delete it from your system. Unauthorized review, use,=
+ disclosure, or distribution is
+ prohibited.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+
+--_000_IA3PR13MB700153BF26A313E21E003A2DDA222IA3PR13MB7001namp_--
