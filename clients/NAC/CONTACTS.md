@@ -3,6 +3,8 @@
 **Client Code:** NAC
 **Portal DirID:** 5697
 
+> ⚠️ **CLIENT CLOSED 2026-04-21** — Marked inactive by user after email bounce (domain `natautocoverage.com` is dead). Pending manual portal UI closure of 1 contract: **4676**. Removed from all broadcast BCC lists. See [bounce-register.md](../../docs/client-portal/bounce-register.md).
+
 ## Contract Signer
 *Not designated in portal*
 

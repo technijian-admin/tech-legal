@@ -10,10 +10,18 @@
 ## Invoice Recipient
 *Not designated in portal*
 
-## Primary Contact
+## Broadcast Contact (used by send-*.ps1)
+- **Name:** Keith Brewer
+- **Email:** keith@b2insurance.com
+- **Phone:** (310) 809-0411
+- **Role:** C1 (portal)
+- **Reason:** Fallback from Brenna Klein after her address bounced 5.1.1 on 2026-04-16 and again on 2026-04-20 (see [bounce-register.md](../../docs/client-portal/bounce-register.md))
+
+## Primary Contact (BOUNCED — do not use for broadcasts)
 - **Name:** Brenna Klein
-- **Email:** brenna@b2insurance.com
+- **Email:** ~~brenna@b2insurance.com~~ (BOUNCED 2026-04-16, re-bounced 2026-04-20: NDR 5.1.1 recipient not found in Office 365)
 - **Phone:** 424-286-9400
+- **Status:** Needs replacement address from B2 Insurance if Brenna is still the preferred contact
 
 ## All Active Users (22)
 
