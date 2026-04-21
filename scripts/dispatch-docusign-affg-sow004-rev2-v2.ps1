@@ -1,0 +1,50 @@
+$ErrorActionPreference = "Stop"
+$scriptDir  = Split-Path -Parent $MyInvocation.MyCommand.Path
+$statePath  = Join-Path $scriptDir "affg-sow004-rev2-state.json"
+$state      = Get-Content $statePath -Raw | ConvertFrom-Json
+$clientHtml = Get-Content $state.clientHtmlFile -Raw
+$techHtml   = Get-Content $state.techHtmlFile   -Raw
+
+$m365Keys = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md" -Raw
+$cid = [regex]::Match($m365Keys, 'App Client ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+$tid = [regex]::Match($m365Keys, 'Tenant ID[^:]*:\*\*\s*(\S+)').Groups[1].Value
+$sec = [regex]::Match($m365Keys, 'Client Secret[^:]*:\*\*\s*(.+)').Groups[1].Value.Trim()
+
+Write-Host "Getting Graph token..."
+$tok = Invoke-RestMethod -Uri "https://login.microsoftonline.com/$tid/oauth2/v2.0/token" -Method POST `
+    -Body @{ grant_type="client_credentials"; client_id=$cid; client_secret=$sec; scope="https://graph.microsoft.com/.default" } `
+    -ContentType "application/x-www-form-urlencoded"
+$gH = @{ "Authorization" = "Bearer $($tok.access_token)"; "Content-Type" = "application/json" }
+Write-Host "Token OK."
+
+$clientBody = @{
+    Message = @{
+        Subject = $state.emailSubject
+        Body = @{ ContentType = "HTML"; Content = $clientHtml }
+        ToRecipients = @( @{ EmailAddress = @{ Address = $state.clientEmail; Name = $state.clientName } } )
+    }
+    SaveToSentItems = $true
+} | ConvertTo-Json -Depth 10
+
+Write-Host "Sending client email to $($state.clientEmail)..."
+Invoke-RestMethod -Uri "https://graph.microsoft.com/v1.0/users/RJain@technijian.com/sendMail" -Method POST -Headers $gH -Body $clientBody
+Write-Host "Client email SENT."
+
+$techBody = @{
+    Message = @{
+        Subject = $state.emailSubject
+        Body = @{ ContentType = "HTML"; Content = $techHtml }
+        ToRecipients = @( @{ EmailAddress = @{ Address = $state.signerEmail; Name = $state.signerName } } )
+    }
+    SaveToSentItems = $true
+} | ConvertTo-Json -Depth 10
+
+Write-Host "Sending Technijian email to $($state.signerEmail)..."
+Invoke-RestMethod -Uri "https://graph.microsoft.com/v1.0/users/RJain@technijian.com/sendMail" -Method POST -Headers $gH -Body $techBody
+Write-Host "Technijian email SENT."
+
+Write-Host ""
+Write-Host "=== DISPATCH COMPLETE ===" -ForegroundColor Green
+Write-Host "Envelope: $($state.envelopeId)"
+Write-Host "Client:   $($state.clientEmail)"
+Write-Host "Ravi:     $($state.signerEmail)"

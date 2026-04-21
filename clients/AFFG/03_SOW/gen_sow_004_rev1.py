@@ -131,6 +131,22 @@ def body_para(text, before=0, after=6, bold=False, size_pt=11, color=GREY):
     add_run(p, text, size_pt=size_pt, bold=bold, color=color)
     return p
 
+def body_para_with_anchor(visible_text, anchor, before=0, after=6):
+    """Paragraph with a hidden (1pt white) DocuSign anchor at the start, then visible text.
+    DocuSign finds the anchor string in the document and places signature tabs offset from it.
+    The anchor is invisible to readers (white-on-white, 1pt) but present in the XML text stream."""
+    p = insert_para()
+    pPr = OxmlElement('w:pPr')
+    sp = OxmlElement('w:spacing')
+    sp.set(qn('w:before'), str(int(before * 20)))
+    sp.set(qn('w:after'), str(int(after * 20)))
+    pPr.append(sp)
+    p.append(pPr)
+    # Hidden anchor (1pt, white) BEFORE visible text so tab offset lands on the fill line
+    add_run(p, anchor, size_pt=1, color=WHITE)
+    add_run(p, visible_text, size_pt=11, color=GREY)
+    return p
+
 def kv_para(label, value):
     """Matches original exactly: no pPr, two runs (bold dark + grey)."""
     p = insert_para()
@@ -587,21 +603,22 @@ clause_para('11.01.', 'This SOW is governed by the Master Service Agreement MSA-
     'In the event of a conflict between this SOW and the MSA, the MSA shall prevail unless this SOW expressly states otherwise.')
 
 # ── Signatures ────────────────────────────────────────────────────────────────
+# Hidden DocuSign anchors embedded on each signature line — invisible (1pt white) but
+# present in the text stream so send-docusign.ps1 can place tabs accurately regardless
+# of which page the signature block falls on.
 heading(1, 'SIGNATURES')
 body_para('TECHNIJIAN, INC.', bold=True, color=DARK, before=6, after=0)
-for line in ['By: ___________________________________',
-             'Name: _________________________________',
-             'Title: _________________________________',
-             'Date: _________________________________']:
-    body_para(line, before=12, after=0)
+body_para_with_anchor('By: ___________________________________',   '/tSign/',  before=12, after=0)
+body_para_with_anchor('Name: _________________________________', '/tName/',  before=12, after=0)
+body_para_with_anchor('Title: _________________________________', '/tTitle/', before=12, after=0)
+body_para_with_anchor('Date: _________________________________',  '/tDate/',  before=12, after=0)
 
 insert_para()
 body_para('AMERICAN FUNDSTARS FINANCIAL GROUP LLC', bold=True, color=DARK, before=6, after=0)
-for line in ['By: ___________________________________',
-             'Name: _________________________________',
-             'Title: _________________________________',
-             'Date: _________________________________']:
-    body_para(line, before=12, after=0)
+body_para_with_anchor('By: ___________________________________',   '/cSign/',  before=12, after=0)
+body_para_with_anchor('Name: _________________________________', '/cName/',  before=12, after=0)
+body_para_with_anchor('Title: _________________________________', '/cTitle/', before=12, after=0)
+body_para_with_anchor('Date: _________________________________',  '/cDate/',  before=12, after=0)
 
 # ── Save ──────────────────────────────────────────────────────────────────────
 doc.save(DEST)
