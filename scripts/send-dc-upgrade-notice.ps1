@@ -29,7 +29,7 @@ $bccAddresses = @(
     "cordero@aaoc.com",                       # AOC - Apartment Assoc OC
     "melissa@aventine-apartments.com",        # AAVA - Aventine Aliso Viejo
     "mike@ayresgroup.net",                    # AYH - Ayers Hotels
-    "brenna@b2insurance.com",                 # B2I - B2 Insurance
+    "keith@b2insurance.com",                  # B2I - B2 Insurance (swapped 2026-04-21 from brenna@b2insurance.com which bounced 5.1.1 on 2026-04-16 and 2026-04-20; see bounce-register.md)
     "info@tellustile.com",                    # BBTS - BB Tile and Stone
     "matt@bobergeng.com",                     # BBE - Boberg Engineering
     "rakeshr@bromic.com",                     # BRM - Bromic
@@ -42,7 +42,7 @@ $bccAddresses = @(
     "khartshorn@culpco.com",                  # CCC - Culp Construction
     "jcheng@customsiliconsolutions.com",      # CSS - Custom Silicon
     "josh@disruptixtalent.com",               # DTS - Disruptix Talent
-    "nellis@cfiemail.com",                    # EAG - Ellis Advisory
+    # REMOVED 2026-04-20: nellis@cfiemail.com (EAG) - NDR 550 5.x mailbox unavailable
     "basalcell@hotmail.com",                  # EBRMD - Ernest Robinson MD
     "salamonjeffrey@tartanofredlands.com",    # FOR - Falconer of Redlands
     "jaydai17@gmail.com",                     # R_GD - George Dai
@@ -59,13 +59,13 @@ $bccAddresses = @(
     "knelsen@kabukisprings.com",              # KSS - Kabuki Springs
     "patsythom@aol.com",                      # KRLMD - Kenneth Lynn MD
     "nengland@kivacc.com",                    # KCC - Kiva Container
-    "anthony@krugerandeckels.com",            # KEI - Kruger and Eckels
+    # REMOVED 2026-04-20: anthony@krugerandeckels.com (KEI) - NDR 550 5.x mailbox unavailable
     "dchesley@chesleylawyers.com",            # LODC - Law Offices David Chesley
     "stephen@ABRAHAM-LAWOFFICES.COM",         # FAL - Law Offices Stephen Abraham
     "aport@loganadgroup.com",                 # LAG - Logan Advertising
     "Estrada@magnespec.com",                  # MGN - Magnespec
     "natalie@miraculousminds.com",            # MRM - MiraculousMinds
-    "sammy@natautocoverage.com",              # NAC - National Auto Coverage
+    # REMOVED 2026-04-20: sammy@natautocoverage.com (NAC) - NDR 550 5.4.310 DNS domain natautocoverage.com does not exist (domain dead)
     "cbraun@oneoc.org",                       # ONE - OneOC
     "BVarner@orthoxpress.com",                # ORX - Ortho Xpress
     "chris@petcp.com",                        # PCAP - Pet Care Plus
@@ -82,7 +82,7 @@ $bccAddresses = @(
     "kevin@strategicairservices.com",         # SAS - Strategic Air Services
     "rob@talleyassoc.com",                    # TALY - Talley and Associates
     "salamonjeffrey@tartanofredlands.com",    # TOR - Tartan of Redlands
-    "DANIEL@TORCHENTERPRISE.COM",             # TCH - Torch Enterprises
+    # REMOVED 2026-04-20: DANIEL@TORCHENTERPRISE.COM (TCH) - NDR 5.1.1 recipient not found in Office 365
     "james@usfifoods.com",                    # USFI - USFI Inc
     "aaron.kyllander@viaautofinance.com",     # VAF - Via Auto Finance
     "colleen@vintagegroupre.com",             # VG - Vintage Group

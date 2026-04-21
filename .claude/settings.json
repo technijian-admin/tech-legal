@@ -25,7 +25,34 @@
     ],
     "additionalDirectories": [
       "C:\\Users\\rjain\\.claude\\projects\\c--VSCode-tech-legal-tech-legal",
-      "\\tmp\\tech-branding\\assets"
+      "\\tmp\\tech-branding\\assets",
+      "C:\\Users\\rjain\\OneDrive - Technijian, Inc\\Documents\\obsidian\\tech-legal"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/vault-inject.cjs\"",
+            "timeout": 8,
+            "statusMessage": "Loading vault memory..."
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/vault-capture.cjs\"",
+            "timeout": 8,
+            "statusMessage": "Saving turn to vault..."
+          }
+        ]
+      }
     ]
   }
 }
