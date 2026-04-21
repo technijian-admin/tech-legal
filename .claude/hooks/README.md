@@ -1,93 +1,93 @@
-# Claude Code Hooks — tech-legal
+# Hooks — tech-legal
 
-Two project-scoped hooks wire Claude Code to the Obsidian vault at
-`C:\Users\rjain\OneDrive - Technijian, Inc\Documents\obsidian\tech-legal`.
+Hooks installed in this repo and the role each plays in the Memory + Code Intelligence Stack.
 
-## Hooks
+## Active hooks
 
-### `vault-inject.cjs` — `UserPromptSubmit`
+| File | CC Event | Role |
+|---|---|---|
+| `vault-inject.cjs` | `UserPromptSubmit` | **Retrieval** — score vault topics + conversation log against the prompt and inject top matches. Loads `preferences.md` unconditionally. Appends to `.retrieval-log.jsonl`. |
+| `vault-capture.cjs` | `Stop` | **Consolidate** — capture durable knowledge from the exchange and write to a matching topic page or create a new one. Implements contradiction detection (compatible / clarifying / contradicting / replacing). Commits to vault git with `[consolidate]` prefix. |
+| `preference-extract.cjs` | `Stop` | **Preferences** — scan user turns for preference-shaped statements ("always X", "don't Y"). Appends candidates to `preferences.md` and flags for review in next `/review`. |
+| `health-check.cjs` | `SessionEnd` | **Monitoring** — recompute metrics from actual vault state, write `HEALTH.md`. Nag to stderr if `/review` is overdue (7/14/21 day escalation). |
+| `impact-check.cjs` | `PreToolUse` (Edit/Write/MultiEdit) | **Code safety** — query GitNexus for impact before risky edits. Currently passive (logs to stderr); will block HIGH/CRITICAL risk once GitNexus MCP is wired and `.claude/mcp.json` is loaded by CC. |
+| `reindex.cjs` | `PostToolUse` (Bash) | **Code index freshness** — after `git commit`/`merge`/`pull`/`rebase`, spawns `npx gitnexus analyze --incremental` in the background. |
+| `vault-bulk-import.cjs` | Manual / CLI | **Utility** — one-shot import of prior notes into topic format. Not a CC hook. |
 
-Runs before every user prompt reaches the model. Reads:
+## Hook chain order
 
-- `vault/claude-memory/*.md` — structured memory (pinned = `type: user` or `type: reference`)
-- `vault/conversation-log/YYYY-MM-DD.md` — last 14 days of captured turns
+On session end (Stop → SessionEnd):
+1. `vault-capture.cjs` — consolidate topics
+2. `preference-extract.cjs` — extract preferences
+3. `health-check.cjs` — recompute metrics
 
-Scores each entry by keyword overlap with the prompt, ranks by score + recency,
-emits a JSON `hookSpecificOutput.additionalContext` block (capped at 4000 chars)
-containing pinned memory + topic memory + top 4 prior relevant turns.
+On every prompt:
+1. `vault-inject.cjs` — retrieval (includes preferences.md unconditionally)
 
-### `vault-capture.cjs` — `Stop`
+On every tool call:
+1. `impact-check.cjs` — before Edit/Write (GitNexus)
+2. `reindex.cjs` — after Bash containing git commit/merge/pull/rebase
 
-Runs when the agent finishes responding. Reads the Claude Code transcript JSONL,
-extracts the most recent `user` + `assistant` message pair (skipping tool_use /
-tool_result / thinking blocks), appends them to today's conversation-log file
-using the canonical format:
+## Layer boundaries
 
-```
-### USER — <ISO timestamp> [<session-id prefix 8 chars>]
-<prompt text>
+- Vault writes are the ONLY place durable human knowledge goes. Auto-memory (`~/.claude/projects/.../memory`) is Claude's private working notes.
+- Every vault mutation produces a git commit prefixed with one of: `[consolidate]`, `[reorg]`, `[health]`, `[manual]`, `[contradiction]`, `[replaced]`, `[volatility]`, `[archive]`.
+- Hooks are non-blocking by default; only `impact-check.cjs` on CRITICAL risk is designed to block tool calls.
 
-### ASSISTANT — <ISO timestamp> [<session-id prefix 8 chars>]
-<response text>
-
----
-```
-
-Dedupes by `(session-prefix, timestamp)` so cross-device OneDrive sync doesn't
-produce double entries.
-
-## Registration
-
-Both hooks are registered in `.claude/settings.json` at project root. Because
-they live inside the repo, they sync to other machines via git automatically —
-unlike global `~/.claude/settings.json` which does not sync.
-
-## Activation
-
-**Hooks load at session start.** After any change to these files or to
-`settings.json`, close and reopen Claude Code for the new configuration to take
-effect. Running `/hooks` inside Claude Code shows the active hook list.
-
-## Storage format
-
-The vault layout this system expects / maintains:
+## Vault layout (after migration 2026-04-21)
 
 ```
 C:\Users\rjain\OneDrive - Technijian, Inc\Documents\obsidian\tech-legal\
+├── .git\                         # vault under git for rollback
+├── .gitignore                    # Obsidian workspace cruft excluded
 ├── claude-memory\
-│   ├── MEMORY.md                          # index (human-readable)
-│   ├── <topic>.md                         # one file per memory (frontmatter: name, description, type)
-│   └── ...
+│   ├── index.md                  # list-style index (was MEMORY.md)
+│   ├── CHANGELOG.md              # prefixed mutation log
+│   ├── HEALTH.md                 # live dashboard (regenerated by health-check hook)
+│   ├── preferences.md            # universal rules (created lazily by preference-extract)
+│   ├── .retrieval-log.jsonl      # append-only retrieval log
+│   ├── _archive\                 # retired pages (never deleted)
+│   └── topics\
+│       ├── <topic-slug>.md       # 19 topic files w/ full schema
+│       └── ...
 └── conversation-log\
-    ├── YYYY-MM-DD.md                      # one file per day
+    ├── YYYY-MM-DD.md             # raw per-day capture
     └── ...
 ```
 
-Memory files use simple frontmatter:
+## Topic frontmatter schema (v2 — post 2026-04-21)
 
-```markdown
+```yaml
 ---
-name: <title>
-description: <one-line hook for relevance>
-type: user | feedback | project | reference
+topic: <short name>
+aliases: [<alternate names>]
+volatility: stable|evolving|ephemeral
+last_updated: <ISO date>
+confidence: high|medium|low
+sources: ["session:<uuid>", "commit:<sha>", ...]
+access_count: 0
+last_accessed: <ISO date>
+name: <legacy>          # preserved for backwards compat
+description: <legacy>   # preserved for backwards compat
+type: <legacy>          # preserved for backwards compat
+originSessionId: <legacy>
 ---
-
-<body>
 ```
 
-`type: user` and `type: reference` are always injected (pinned). Other types
-only inject when the prompt's tokens overlap the body.
+The v1 fields (`name`, `description`, `type`, `originSessionId`) are preserved alongside the new schema so the existing cjs hooks continue to work without modification.
+
+## Registration
+
+Registered in `.claude/settings.json` at repo root. Sync to other machines via git.
+
+## Activation
+
+**Hooks load at session start.** After editing any `.cjs` or `settings.json`, close and reopen Claude Code. Run `/hooks` to list active hooks.
 
 ## Troubleshooting
 
-- **Nothing is injected**: confirm `conversation-log/` exists and has
-  `YYYY-MM-DD.md` files in the documented format. Run the hook manually:
-  `echo '{"prompt":"OKL Dell server"}' | node .claude/hooks/vault-inject.cjs`
-  should print a JSON block.
-- **Capture didn't fire**: Stop hook needs `transcript_path` and `session_id`
-  in the hook payload. These are provided by Claude Code — if missing, the
-  hook silently exits.
-- **Duplicate entries appear**: harmless, caused by multiple machines writing
-  after OneDrive sync. Dedup triggers on exact (session-prefix, timestamp) so
-  clock drift between machines can let duplicates slip through. Reconcile by
-  hand if needed.
+- **No retrieval injection**: verify `conversation-log/` has `YYYY-MM-DD.md` files. Manual test: `echo '{"prompt":"OKL Dell server"}' | node .claude/hooks/vault-inject.cjs`.
+- **Capture didn't fire**: `Stop` needs `transcript_path` and `session_id` in hook payload (provided by CC).
+- **HEALTH.md not updating**: check that `SessionEnd` hook is registered and running. Manually trigger: `node .claude/hooks/health-check.cjs`.
+- **GitNexus impact not running**: check `.gitnexus/` exists and `.claude/mcp.json` registers the `gitnexus` server. Run `npx gitnexus status` to verify index health.
+- **Duplicate conversation-log entries**: harmless, caused by OneDrive sync across machines. Dedup matches on `(session-prefix, timestamp)`.
