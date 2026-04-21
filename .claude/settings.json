@@ -88,6 +88,12 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node \".claude/hooks/session-archive.cjs\"",
+            "timeout": 15,
+            "statusMessage": "Archiving session transcript to vault..."
+          },
+          {
+            "type": "command",
             "command": "node \".claude/hooks/health-check.cjs\"",
             "timeout": 10,
             "statusMessage": "Refreshing vault HEALTH.md..."

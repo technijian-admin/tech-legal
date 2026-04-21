@@ -14,6 +14,8 @@ const path = require('path');
 const VAULT_ROOT = 'C:\\Users\\rjain\\OneDrive - Technijian, Inc\\Documents\\obsidian\\tech-legal';
 const LOG_DIR = path.join(VAULT_ROOT, 'conversation-log');
 const MEM_DIR = path.join(VAULT_ROOT, 'claude-memory');
+const TOPICS_DIR = path.join(MEM_DIR, 'topics');
+const PREFERENCES = path.join(MEM_DIR, 'preferences.md');
 
 const MAX_INJECT_CHARS = 4000;
 const TOP_N_TURNS = 4;
@@ -80,17 +82,20 @@ function loadAllPairs() {
 }
 
 function loadMemoryEntries() {
-  if (!fs.existsSync(MEM_DIR)) return { pinned: [], regular: [] };
-  const files = fs.readdirSync(MEM_DIR).filter(f => f.endsWith('.md') && f !== 'MEMORY.md');
+  // Prefer post-migration topics/ subfolder; fall back to MEM_DIR root for legacy.
+  const dir = fs.existsSync(TOPICS_DIR) ? TOPICS_DIR : MEM_DIR;
+  if (!fs.existsSync(dir)) return { pinned: [], regular: [] };
+  const exclude = new Set(['MEMORY.md', 'index.md', 'CHANGELOG.md', 'HEALTH.md', 'preferences.md']);
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md') && !exclude.has(f));
   const pinned = [], regular = [];
   for (const f of files) {
     try {
-      const text = fs.readFileSync(path.join(MEM_DIR, f), 'utf8');
-      const fm = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+      const text = fs.readFileSync(path.join(dir, f), 'utf8');
+      const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
       const meta = {};
       let body = text;
       if (fm) {
-        for (const line of fm[1].split('\n')) {
+        for (const line of fm[1].split(/\r?\n/)) {
           const kv = line.match(/^([^:]+):\s*(.*)$/);
           if (kv) meta[kv[1].trim()] = kv[2].trim();
         }
@@ -98,7 +103,7 @@ function loadMemoryEntries() {
       }
       const entry = {
         file: f,
-        title: meta.name || f.replace(/\.md$/, ''),
+        title: meta.topic || meta.name || f.replace(/\.md$/, ''),
         type: (meta.type || 'memory').toLowerCase(),
         body: body.trim()
       };
@@ -107,6 +112,26 @@ function loadMemoryEntries() {
     } catch (_) {}
   }
   return { pinned, regular };
+}
+
+// Load preferences.md unconditionally — per memory-stack spec, preferences
+// are universal rules that apply to every interaction regardless of topic
+// match. This is loaded as an extra pinned entry on every prompt.
+function loadPreferences() {
+  if (!fs.existsSync(PREFERENCES)) return null;
+  try {
+    const text = fs.readFileSync(PREFERENCES, 'utf8');
+    // Strip frontmatter
+    const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+    const body = (fm ? fm[2] : text).trim();
+    if (!body) return null;
+    return {
+      file: 'preferences.md',
+      title: 'User Preferences (universal)',
+      type: 'user',
+      body
+    };
+  } catch (_) { return null; }
 }
 
 function scorePair(promptTokens, pair) {
@@ -140,6 +165,9 @@ function truncate(s, n) {
   if (!ptoks.length) { process.exit(0); }
 
   const { pinned, regular } = loadMemoryEntries();
+  // Always include preferences.md if present — universal rules, not topic-matched.
+  const prefs = loadPreferences();
+  if (prefs) pinned.unshift(prefs);
   const pairs = loadAllPairs();
 
   const ranked = pairs
