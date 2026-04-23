@@ -473,17 +473,16 @@ async function generateSOW() {
   // ---- 1. PROJECT OVERVIEW ----
   content.push(heading1("1. PROJECT OVERVIEW"));
 
-  content.push(p("Technijian will deliver a 6-phase implementation that deploys a managed-device control architecture for AFFG, consisting of 9 company-owned Apple endpoints (3 Mac Minis and 6 Apple Neo notebooks) enrolled in Microsoft Intune via Apple Business Manager Automated Device Enrollment, 9 Intune MDM-managed company phones, CloudBrink Zero Trust Network Access (ZTNA), Entra Conditional Access, endpoint DLP, and SSO/2FA. The starting state is the existing production network defined in MSA-AFFG-2026 Schedule A, in which users access M365, Schwab Advisor Services, and Interactive Brokers from a mixed fleet (1 existing Mac Mini, 1 MacBook Pro, and 3 Windows devices) gated by office-IP whitelist and MFA. Under this SOW, the MacBook Pro and the 3 Windows devices are offboarded; the 9 new Apple endpoints are onboarded as the managed fleet. This SOW establishes a fully SEC/FINRA-compliant endpoint control posture for all 9 users and their company phones, enables secure access from any network, and produces the attested evidence required under FINRA 3110(c)."));
+  content.push(p("Technijian will deliver a 6-phase implementation that deploys a managed-device control architecture for AFFG, consisting of company-owned Intune-managed laptops and phones, CloudBrink Zero Trust Network Access (ZTNA), Entra Conditional Access, endpoint DLP, and SSO/2FA. The starting state is the existing production network defined in MSA-AFFG-2026 Schedule A, in which users access M365, Schwab Advisor Services, and Interactive Brokers from mixed/personal devices gated by office-IP whitelist and MFA. This SOW establishes a fully SEC/FINRA-compliant endpoint control posture for all 9 users and their company phones, enables secure access from any network, and produces the attested evidence required under FINRA 3110(c)."));
   content.push(spacer());
 
   content.push(heading2("1.1 Objectives"));
-  content.push(bullet("Enroll 9 company Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks) in Microsoft Intune via Apple Business Manager Automated Device Enrollment with the full macOS endpoint security stack", "bullets"));
+  content.push(bullet("Enroll 9 company laptops in Microsoft Intune via Windows Autopilot with full endpoint security stack", "bullets"));
   content.push(bullet("Deploy CloudBrink ZTNA to replace the existing office-IP whitelist with device-posture-based access from any network", "bullets"));
-  content.push(bullet("Deploy MyAudit UAM+DLP, SSO/2FA gateway, and Credential Manager on all 9 managed Apple endpoints", "bullets"));
+  content.push(bullet("Deploy MyAudit UAM+DLP, SSO/2FA gateway, and Credential Manager on all 9 managed laptops", "bullets"));
   content.push(bullet("Enroll 9 company phones in Intune MDM with App Protection (MAM) policies", "bullets"));
-  content.push(bullet("Configure Entra Conditional Access (compliant-device requirement, legacy-auth block, MFA) and cut over users from their existing devices to the new managed Apple fleet via a phased pilot", "bullets"));
-  content.push(bullet("Offboard the 4 legacy devices in scope (1 MacBook Pro and 3 Windows systems: KIKI, LEON, MAGGIE); securely wipe and retire them from the managed inventory", "bullets"));
-  content.push(bullet("Amend Schedule A of MSA-AFFG-2026 to replace Windows endpoint pricing with macOS endpoint pricing and add the managed-device control services; produce the updated monthly recurring", "bullets"));
+  content.push(bullet("Configure Entra Conditional Access (compliant-device requirement, legacy-auth block, MFA) and cut over users from their existing devices to the managed laptops via a phased pilot", "bullets"));
+  content.push(bullet("Amend Schedule A of MSA-AFFG-2026 to add the managed-device control services and produce the updated monthly recurring", "bullets"));
   content.push(spacer());
 
   content.push(heading2("1.2 Exclusions"));
@@ -498,9 +497,9 @@ async function generateSOW() {
   // Phase 1
   const phase1Tickets = ticketsForPhase(allTickets, "Phase 1");
   content.push(heading2("Phase 1: Endpoint Foundation (Weeks 1\u20134)"));
-  content.push(p("8 tickets  |  25 hours", { bold: true, color: TEAL }));
+  content.push(p("8 tickets  |  26 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Configure Apple Business Manager + Intune Automated Device Enrollment for macOS, compliance policies (FileVault, Gatekeeper/XProtect, firewall, screen lock, OS minimum), device configuration profiles (silent FileVault enable, System Integrity Protection, Software Update for macOS, PIN/password complexity), enroll all 9 Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks), deploy full macOS security stack (CrowdStrike Falcon for Mac, Huntress macOS, Cisco Umbrella macOS, ManageEngine Patch Management for macOS, ConnectWise ScreenConnect), MyAudit UAM+DLP for macOS, SSO/2FA gateway, and Credential Manager on all managed endpoints."));
+  content.push(p("Configure Intune Autopilot, compliance policies, device configuration profiles, enroll and image all 9 laptops, deploy full security stack (CrowdStrike, Huntress, DNS, Patch Mgmt, ScreenConnect), MyAudit UAM+DLP, SSO/2FA gateway, and Credential Manager on all managed laptops."));
   content.push(spacer());
   content.push(heading3("Phase 1 Tickets"));
   content.push(makeTicketTable(phase1Tickets));
@@ -530,10 +529,10 @@ async function generateSOW() {
 
   // Phase 4
   const phase4Tickets = ticketsForPhase(allTickets, "Phase 4");
-  content.push(heading2("Phase 4: User Cutover & Legacy Offboarding (Weeks 7\u201312)"));
-  content.push(p("4 tickets  |  19 hours", { bold: true, color: TEAL }));
+  content.push(heading2("Phase 4: User Cutover (Weeks 7\u201312)"));
+  content.push(p("4 tickets  |  17 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Migrate user data, application settings, and profiles from each user\u2019s existing work device to the new managed Apple endpoint; securely offboard and retire the 4 legacy devices (1 MacBook Pro and 3 Windows systems KIKI/LEON/MAGGIE) including full disk wipe per NIST SP 800-88; deliver end-user training on the macOS managed-device workflow; run a 2-week pilot operation window with 2\u20133 users on the new Macs before full fleet cutover; and decommission the legacy office-IP whitelist from Schwab and IBKR after ZTNA is validated."));
+  content.push(p("Migrate user data, application settings, and profiles from each user\u2019s existing work device to the new managed laptop; deliver end-user training on the managed-device workflow; run a 2-week pilot operation window with 2\u20133 users on the managed laptops before fleet cutover; and decommission the legacy office-IP whitelist from Schwab and IBKR after ZTNA is validated."));
   content.push(spacer());
   content.push(heading3("Phase 4 Tickets"));
   content.push(makeTicketTable(phase4Tickets));
@@ -634,9 +633,9 @@ async function generateSOW() {
   content.push(makeTable(
     ["Role", "Rate", "Hours", "Labor"],
     [
-      ["US Tech Support (IRV-TS1)", "$150/hr", "28", "$4,200.00"],
-      ["India Tech Support (CHD-TS1)", "$45/hr", "62", "$2,790.00"],
-      [{ text: "TOTAL", bold: true }, { text: "", bold: true }, { text: "90 hrs", bold: true }, { text: "$6,990.00", bold: true }]
+      ["US Tech Support (IRV-TS1)", "$150/hr", "24", "$3,600.00"],
+      ["India Tech Support (CHD-TS1)", "$45/hr", "65", "$2,925.00"],
+      [{ text: "TOTAL", bold: true }, { text: "", bold: true }, { text: "89 hrs", bold: true }, { text: "$6,525.00", bold: true }]
     ],
     [2800, 1800, 1800, 2960]
   ));
@@ -646,10 +645,10 @@ async function generateSOW() {
   content.push(makeTable(
     ["Milestone", "Trigger", "Amount"],
     [
-      ["50% upon SOW execution", "SOW signed by both parties", "$3,495.00"],
-      ["25% upon Phase 4 completion", "Fleet cutover complete (all 9 users operating on managed Macs, 4 legacy devices offboarded)", "$1,747.50"],
-      ["25% upon Phase 6 delivery", "Documentation + Schedule A amendment accepted", "$1,747.50"],
-      [{ text: "Total", bold: true }, { text: "", bold: true }, { text: "$6,990.00", bold: true }]
+      ["50% upon SOW execution", "SOW signed by both parties", "$3,262.50"],
+      ["25% upon Phase 4 completion", "Fleet cutover complete (all 9 users operating on managed laptops)", "$1,631.25"],
+      ["25% upon Phase 6 delivery", "Documentation + Schedule A amendment accepted", "$1,631.25"],
+      [{ text: "Total", bold: true }, { text: "", bold: true }, { text: "$6,525.00", bold: true }]
     ],
     [2800, 3560, 2960]
   ));
@@ -661,14 +660,12 @@ async function generateSOW() {
 
   // ---- 6. ASSUMPTIONS ----
   content.push(heading1("6. ASSUMPTIONS"));
-  content.push(bullet("AFFG has procured 9 company Apple endpoints (3 Mac Minis and 6 Apple Neo notebooks) running a currently supported macOS release, each with its hardware serial registered in Apple Business Manager for Automated Device Enrollment into Technijian\u2019s Intune tenant", "bullets4"));
+  content.push(bullet("AFFG has procured 9 company laptops (Windows 11 Pro or Enterprise) suitable for Intune Autopilot enrollment", "bullets4"));
   content.push(bullet("AFFG has procured 9 company phones (iOS or Android) for Intune MDM enrollment", "bullets4"));
   content.push(bullet("AFFG has procured CloudBrink ZTNA per-user subscription licenses for 9 users", "bullets4"));
   content.push(bullet("AFFG\u2019s M365 tenant remains licensed at E3 or E5 (Intune, Conditional Access, DLP included)", "bullets4"));
   content.push(bullet("All 9 AFFG users are available for cutover coordination and training during Weeks 7\u201312", "bullets4"));
   content.push(bullet("Schwab Advisor Services and Interactive Brokers approve the transition from the existing office-IP whitelist to CloudBrink ZTNA within their standard processing timelines", "bullets4"));
-  content.push(bullet("The 4 legacy devices in offboarding scope (1 MacBook Pro and 3 Windows systems: KIKI, LEON, MAGGIE) are accessible for secure wipe and retirement during the cutover window; no recovery of data from these devices is required post-cutover", "bullets4"));
-  content.push(bullet("MyAudit UAM+DLP, SSO/2FA, and Credential Manager agents are deployed in their current macOS-supported editions; any macOS-specific DLP-coverage gaps are documented in the Phase 5 gap assessment (Ticket AFFG-004-024) rather than treated as a SOW defect", "bullets4"));
   content.push(bullet("Starting-state network is the production network defined in the signed MSA-AFFG-2026 Schedule A; no Horizon VDI environment is in place and none is deployed as part of this SOW", "bullets4"));
   content.push(brandRule());
 
@@ -685,33 +682,33 @@ async function generateSOW() {
   content.push(heading1("8. MONTHLY COST IMPACT"));
 
   content.push(heading2("8.1 Current vs. Proposed Monthly Recurring"));
-  content.push(p("Baseline is the signed MSA-AFFG-2026 Schedule A as reflected on the executed Monthly Service Quote dated March 2026. Under this SOW the endpoint fleet is consolidated from the 16 Windows-priced desktops in the signed Schedule A down to 9 macOS-priced Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks). The 4 legacy devices in offboarding scope (1 MacBook Pro and 3 Windows systems KIKI/LEON/MAGGIE) are removed from managed inventory. The 31 M365 user services, 6 IP services, 1 domain service, and Virtual Staff Support are not altered by this SOW.", { italics: true }));
+  content.push(p("Baseline is the signed MSA-AFFG-2026 Schedule A as reflected on the executed Monthly Service Quote dated March 2026. Under this SOW the endpoint fleet is consolidated from the 16 existing desktops to 9 company-owned, Intune-managed laptops. The 31 M365 user services, 6 IP services, 1 domain service, and Virtual Staff Support are not altered by this SOW.", { italics: true }));
   content.push(spacer());
   content.push(p("Current Monthly (signed MSA Schedule A, no VDI) = $2,794.50/mo", { bold: true, color: CHARCOAL }));
   content.push(spacer());
   content.push(makeTable(
     ["Category", "Current Monthly", "Proposed Monthly", "Change"],
     [
-      ["Endpoint Security Stack (Current: 16 Windows-priced desktops \u2192 Proposed: 9 macOS-priced endpoints)", "$424.00", "$301.50", "-$122.50"],
-      ["Managed Endpoint Control Stack (NEW \u2014 9 Macs: AMDLP1Y, SSO-2FA, CRM)", "$0.00", "$1,125.90", "+$1,125.90"],
+      ["Desktop Security Stack (Current: 16 desktops \u2192 Proposed: 9 managed laptops)", "$424.00", "$238.50", "-$185.50"],
+      ["Managed Laptop Control Stack (NEW \u2014 9 endpoints: AMDLP1Y, SSO-2FA, CRM)", "$0.00", "$1,125.90", "+$1,125.90"],
       ["M365 User Services (31 users: V365, PHT)", "$263.50", "$263.50", "$0.00"],
       ["IP Services (6 IPs: RTPT)", "$42.00", "$42.00", "$0.00"],
       ["Domain Services (1 domain: SA, DKIM)", "$70.00", "$70.00", "$0.00"],
       ["Virtual Staff Support (IRV + CHD + CTO)", "$1,995.00", "$1,995.00", "$0.00"],
-      [{ text: "TOTAL MONTHLY", bold: true }, { text: "$2,794.50", bold: true }, { text: "$3,797.90", bold: true }, { text: "+$1,003.40", bold: true }]
+      [{ text: "TOTAL MONTHLY", bold: true }, { text: "$2,794.50", bold: true }, { text: "$3,734.90", bold: true }, { text: "+$940.40", bold: true }]
     ],
     [3360, 1800, 1800, 1560]
   ));
   content.push(spacer());
 
-  content.push(heading2("8.2 Current Endpoint Security Stack Detail (16 Windows desktops, per signed MSA)"));
+  content.push(heading2("8.2 Current Desktop Security Stack Detail (16 desktops, per signed MSA)"));
   content.push(makeTable(
     ["Service", "Code", "Qty", "Unit Price", "Monthly"],
     [
       ["AV Protection \u2014 Desktop (CrowdStrike)", "AVD", "16", "$8.50", "$136.00"],
       ["AVH Protection \u2014 Desktop (Huntress)", "AVMH", "16", "$6.00", "$96.00"],
       ["My Secure Internet (DNS Filtering)", "SI", "16", "$6.00", "$96.00"],
-      ["Patch Management \u2014 Windows", "PMW", "16", "$4.00", "$64.00"],
+      ["Patch Management", "PMW", "16", "$4.00", "$64.00"],
       ["My Remote", "MR", "16", "$2.00", "$32.00"],
       [{ text: "Subtotal (signed)", bold: true }, { text: "", bold: true }, { text: "16", bold: true }, { text: "$26.50", bold: true }, { text: "$424.00", bold: true }]
     ],
@@ -719,28 +716,28 @@ async function generateSOW() {
   ));
   content.push(spacer());
 
-  content.push(heading2("8.3 Proposed Endpoint Stack Detail (9 macOS endpoints)"));
-  content.push(p("The Technijian endpoint security stack (AVD, AVMH, SI, MR) is deployed to the 9 Apple endpoints under Phase 1 Ticket AFFG-004-005. Patch Management switches from PMW ($4/Windows) to PMMAC ($11/Mac) \u2014 a $7/unit uplift driven by the higher operational cost of macOS patch orchestration. The reduction in unit count (16 Windows \u2192 9 macOS) produces a net -$122.50/mo change. The Managed Endpoint Control Stack (AMDLP1Y + SSO-2FA + CRM) is the NEW capability added by this SOW to satisfy Reg S-P 2024 endpoint DLP, MFA gateway, and credential vault requirements.", { italics: true }));
+  content.push(heading2("8.3 Proposed Endpoint Stack Detail (9 managed laptops)"));
+  content.push(p("The same Technijian desktop security stack (AVD, AVMH, SI, PMW, MR) is deployed to the 9 managed laptops under Phase 1 Ticket AFFG-004-005. The reduction from 16 units to 9 units yields a -$185.50/mo savings on that stack. The Managed Laptop Control Stack (AMDLP1Y + SSO-2FA + CRM) is the NEW capability added by this SOW to satisfy Reg S-P 2024 endpoint DLP, MFA gateway, and credential vault requirements.", { italics: true }));
   content.push(spacer());
   content.push(makeTable(
     ["Service", "Code", "Qty", "Unit Price", "Monthly"],
     [
-      [{ text: "Endpoint Security Stack (9 macOS units)", bold: true, color: CHARCOAL }, "", "", "", ""],
-      ["AV Protection \u2014 CrowdStrike Falcon for Mac", "AVD", "9", "$8.50", "$76.50"],
-      ["AVH Protection \u2014 Huntress macOS", "AVMH", "9", "$6.00", "$54.00"],
-      ["My Secure Internet (Umbrella macOS)", "SI", "9", "$6.00", "$54.00"],
-      ["Patch Management \u2014 macOS", "PMMAC", "9", "$11.00", "$99.00"],
-      ["My Remote (macOS)", "MR", "9", "$2.00", "$18.00"],
-      [{ text: "Managed Endpoint Control Stack (NEW)", bold: true, color: CHARCOAL }, "", "", "", ""],
+      [{ text: "Desktop Security Stack (retained, reduced to 9 units)", bold: true, color: CHARCOAL }, "", "", "", ""],
+      ["AV Protection \u2014 Desktop (CrowdStrike)", "AVD", "9", "$8.50", "$76.50"],
+      ["AVH Protection \u2014 Desktop (Huntress)", "AVMH", "9", "$6.00", "$54.00"],
+      ["My Secure Internet (DNS Filtering)", "SI", "9", "$6.00", "$54.00"],
+      ["Patch Management", "PMW", "9", "$4.00", "$36.00"],
+      ["My Remote", "MR", "9", "$2.00", "$18.00"],
+      [{ text: "Managed Laptop Control Stack (NEW)", bold: true, color: CHARCOAL }, "", "", "", ""],
       ["MyAudit UAM+DLP / 1-Year", "AMDLP1Y", "9", "$108.10", "$972.90"],
       ["SSO / Multi-Factor", "SSO-2FA", "9", "$12.00", "$108.00"],
       ["Credential Manager", "CRM", "9", "$5.00", "$45.00"],
-      [{ text: "Subtotal per Mac endpoint", bold: true }, { text: "", bold: true }, { text: "9", bold: true }, { text: "$158.60", bold: true }, { text: "$1,427.40", bold: true }]
+      [{ text: "Subtotal per laptop", bold: true }, { text: "", bold: true }, { text: "9", bold: true }, { text: "$151.60", bold: true }, { text: "$1,364.40", bold: true }]
     ],
     [2600, 1200, 800, 1400, 1360]
   ));
   content.push(spacer());
-  content.push(p("Notes: Intune management for the 9 Apple endpoints and 9 company phones is included in the M365 E3 license AFFG already holds \u2014 no additional Technijian charge. Apple Business Manager is procured by AFFG at no cost. CloudBrink ZTNA subscription is AFFG-procured and therefore excluded from the Schedule A amendment. Per-managed-Mac monthly = $158.60 ($33.50 endpoint security + $125.10 managed control).", { italics: true }));
+  content.push(p("Notes: Intune management for the 9 laptops and 9 company phones is included in the M365 E3 license AFFG already holds \u2014 no additional Technijian charge. CloudBrink ZTNA subscription is AFFG-procured and therefore excluded from the Schedule A amendment. Per-managed-laptop monthly = $151.60 ($26.50 desktop security + $125.10 managed control).", { italics: true }));
   content.push(brandRule());
 
   // ---- 9. CHANGE MANAGEMENT ----
