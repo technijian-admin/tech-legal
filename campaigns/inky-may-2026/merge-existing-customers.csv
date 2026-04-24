@@ -1,0 +1,12 @@
+ClientCode,ClientName,FirstName,FullName,ToEmail,CcEmail,UserCount,Tier
+ACU,Acuity Advisors,Chris,Chris Kramer,ckramer@acuityadvisors.com,,1,ASB
+B2I,B2 Insurance,Keith,Keith Brewer,keith@b2insurance.com,derek@b2insurance.com,41,ASA
+BWH,Brandywine Homes,Dave,Dave Barisic,dave@brandywine-homes.com,,83,ASA
+CBI,Christian Brothers Interiors,Jason,Jason Weiner,jason.w@cbinteriors.net,tiffany.g@cbinteriors.net,13,ASB
+DTS,Disruptix Talent Solutions,Josh,Josh Miller,josh@disruptixtalent.com,jen@disruptixtalent.com,4,ASB
+EBRMD,"Ernest B Robinson, MD, PC",Dr. Robinson,Ernest B Robinson,basalcell@hotmail.com,,5,ASB
+HHOC,Housing for Health OC,Maritza,Maritza Alvarez,maritza.a@housingforhealthoc.org,heather.s@housingforhealthoc.org,12,ASA
+ICML,ICM Lending,Jack,Jack Wlodkowshi,jack@icmlending.com,,2,ASB
+KES,KES Homes,Heather,Heather Whitehead,heather@kes-homes.com,,2,ASB
+ORX,Ortho Xpress,Brett,Brett Varner,bvarner@orthoxpress.com,,136,ASB
+VG,Vintage Group,Colleen,Colleen Rozen,colleen@vintagegroupre.com,,126,ASB

@@ -1,0 +1,45 @@
+ClientCode,ClientName,FirstName,FullName,ToEmail,CcEmail,ServiceTier,Template,ComplianceFramework
+PCM,"180 Medical, Inc.",Terry,Terry Killian,terrykillian@180medical.com,bills@180medical.com,Monthly,healthcare,"HIPAA, HITECH"
+ALG,Algro International,Deepak,Deepak Bansal,Deepak@algrointernational.com,ap@algrointernational.com,Monthly,base,
+AFFG,American Fundstars Financial Group,Iris,Iris Liu,iris.liu@americanfundstars.com,,Monthly,financial,"SEC Reg S-P, FINRA 3110/4370"
+ANI,"Andersen Industries, Inc.",Dave,Dave Andersen,dave@andersenmp.com,ap@andersenmp.com,Monthly,base,
+AOC,Apartment Association of Orange County,David,David J. Cordero,cordero@aaoc.com,,Monthly,base,
+AAVA,Aventine at Aliso Viejo Apartments,Melissa,Melissa Winter,melissa@aventine-apartments.com,,Monthly,base,
+CBL,Chris Bank Law,Chris,Chris Bank,chris@chrisblanklaw.com,,Monthly,legal,"Cal RPC 1.6(c), ABA 477R"
+CCC,Culp Construction Company,Kim,Kim Hartshorn,khartshorn@culpco.com,dplatis@culpco.com,Monthly,base,
+R_GD,George Dai,George,George Dai,jaydai17@gmail.com,,Monthly,base,
+ISI,Intl Sportsmedicine Institute,Sharon,Sharon Kieffer,sdkamm@yahoo.com,,Monthly,healthcare,HIPAA
+JDH,JDH Pacific,Donald,Donald Hu,donald@jdhpacific.com,,Monthly,base,
+JSD,Jerry Seiner Dealerships,Scott,Scott Haney,scott.haney@jerryseiner.com,scott.olson@jerryseiner.com,Monthly,financial,"GLBA, FTC Safeguards Rule"
+RALF,Richard C. Alter Law Firm,Kathy,Kathy Draney,kathy@richardcalterlawfirm.com,,Monthly,legal,"Cal RPC 1.6(c), ABA 477R"
+RMG,Roddel Marketing Group,Tom,Tom Roddel,tomr@roddelnhs.com,,Monthly,base,
+RSPMD,Rosalina See-Prats M.D.,Dr. See-Prats,Rosalina See-Prats,alagrosa@yahoo.com,,Monthly,healthcare,"HIPAA, CMIA"
+SGC,Siege Consulting,Carol,Carol Maggio,carol@siegeconsulting.com,,Monthly,base,
+SAS,Strategic Air Services,Kevin,Kevin Maahs,kevin@strategicairservices.com,,Monthly,base,
+TALY,Talley & Associates,Robert,Robert L. Evens,rob@talleyassoc.com,,Monthly,base,
+USFI,USFI Inc.,James,James Cho,james@usfifoods.com,,Monthly,base,
+VAF,Via Auto Finance,Aaron,Aaron Kyllander,aaron.kyllander@viaautofinance.com,,Monthly,financial,"GLBA, FTC Safeguards Rule"
+ASC,"Adsys Controls, Inc",Brian,Brian Goldberg,bgoldcole@gmail.com,,Hourly,defense,"CMMC 2.0, DFARS 7012"
+ALE,Alera Group,Rami,Rami Hammouri,rami.hammouri@aleragroup.com,Aaron.Leppin@aleragroup.com,Hourly,insurance,"HIPAA, GLBA, FTC Safeguards"
+AYH,Ayers Hotels,Mike,Mike Purcell,mike@ayresgroup.net,,Hourly,base,
+BBE,Boberg Engineering,Matt,Matt Sage,matt@bobergeng.com,invoice@bobergeng.com,Hourly,base,
+BBC,Burkhart Brothers Construction,Bryan,Bryan Burkhart,bryan@burkhartbros.com,,Hourly,base,
+CAM,Coast Aero Mfg,David,David Rodriguez,david@coastaero.com,,Hourly,defense,"CMMC 2.0, DFARS 7012"
+EAG,Ellis Advisory Group,Nick,Nick Ellis,nellis@cfiemail.com,,Hourly,financial,"SEC Reg S-P, FTC Safeguards"
+FOR,Falconer of Redlands,Jeffrey,Jeffrey Salamon,salamonjeffrey@tartanofredlands.com,,Hourly,base,
+GSD,GSD Solutions,Danny,Danny Cota,danny@gsdsolutions.io,,Hourly,base,
+GRF,Golden Rain Foundation - LWSB,Marcelo,Marcelo Mario,marcelom@lwsb.com,ryann@lwsb.com,Hourly,base,
+HIT,Hula IT Services,Hung,Hung Lam,hung.lam@HuLa-IT.com,,Hourly,base,
+KCC,Kiva Container Corp,Nathan,Nathan England,nengland@kivacc.com,,Hourly,base,
+LODC,Law Offices of David Chesley,David,David Chesley,dchesley@chesleylawyers.com,,Hourly,legal,"Cal RPC 1.6(c), ABA 477R"
+LAG,Logan Advertising Group,Amy,Amy Port,aport@loganadgroup.com,,Hourly,base,
+MGN,Magnespec,Jesus,Jesus (Magnespec),jesus@magnespec.com,,Hourly,base,
+ONE,OneOC,Cindy,Cindy Braun,cbraun@oneoc.org,,Hourly,base,
+RKEG,RK Engineering Group,Rogier,Rogier Goedecke,rg@rkengineer.com,,Hourly,base,
+RBS,Roar Building Services,Raul,Raul Nunez,raul@roarservices.com,,Hourly,base,
+SSCI,"SSCI, Inc.",LaTonja,LaTonja Fant,fant.la@ssci2global.com,,Hourly,base,
+STW,STW Autosports,Fabricio,Fabricio Elizondo,bobby@stwautosports.com,,Hourly,base,
+SVE,Saddleback Valley Endodontic,Lars,Lars Bjorn Jonsson,lbjendo@mac.com,,Hourly,healthcare,"HIPAA, CMIA"
+TOR,Tartan of Redlands,Jeffrey,Jeffrey Salamon,salamonjeffrey@tartanofredlands.com,,Hourly,base,
+TCH,Torch Enterprises,Raghav,Raghav Mehra,raghav@torchenterprise.com,,Hourly,base,
+WCS,West Coast Shipping,Dmitriy,Dmitriy Shibarshin,dmitriy@wcshipping.com,andrew@wcshipping.com,Hourly,base,

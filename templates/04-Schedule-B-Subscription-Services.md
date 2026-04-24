@@ -56,7 +56,7 @@ Includes but is not limited to:
 
 (d) Process additions, removals, and changes to subscriptions upon Client's written request.
 
-**3.03. Vendor Terms.** Subscription Services are subject to the applicable vendor's terms and conditions (e.g., Microsoft Product Terms). Client acknowledges that Technijian is a reseller and that certain terms are passed through from the vendor. Technijian shall make applicable vendor terms available to Client upon request.
+**3.03. Vendor Terms.** Subscription Services are subject to the applicable vendor's terms and conditions (e.g., Microsoft Product Terms, Microsoft Customer Agreement, Adobe Subscription Terms). Client acknowledges that Technijian is a reseller and that certain terms are passed through from the vendor. For each Subscription Service, Technijian shall identify the applicable vendor and provide a current link or attachment to the vendor's terms in the **Subscription Order** at the time of ordering. Material changes to vendor terms shall be communicated to Client within thirty (30) days of Technijian's receipt of notice from the vendor. Where vendor terms impose data processing obligations, Client acknowledges that those obligations flow through to Client's use of the Subscription Service, and Technijian shall not be liable for vendor acts or omissions outside Technijian's control.
 
 ## 4. PRICING
 
@@ -91,7 +91,13 @@ Unless Client provides written notice of non-renewal at least **thirty (30) days
 
 ## 6. DATA AND ACCESS
 
-**6.01. Account Ownership.** Client retains ownership of all accounts and data associated with Subscription Services. Upon termination, Technijian shall transfer administrative access to Client or Client's designated representative within **thirty (30) days**.
+**6.01. Account Ownership.** Client retains ownership of all accounts and data associated with Subscription Services. Upon termination of this Schedule or any specific Subscription Service:
+
+(a) Technijian shall transfer **administrative (Global Admin / Owner / root-tenant) credentials and console access** to Client or Client's designated representative within **five (5) business days** of termination. This obligation is part of the Operational Continuity Materials under MSA Section 2.05(b) and is not subject to withholding for non-payment.
+
+(b) Technijian shall complete the full reassignment of subscription billing ownership, partner-of-record relationships, and removal of Technijian-controlled service principals within **thirty (30) days** of termination.
+
+(c) Client acknowledges that some vendors (e.g., Microsoft, Adobe) impose their own transfer or partner-of-record change windows, and Technijian's obligations under (b) are subject to those vendor-imposed timelines, provided Technijian initiates the transfer promptly.
 
 **6.02. Credentials.** Client is responsible for maintaining the security of login credentials associated with Subscription Services.
 

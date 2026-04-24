@@ -40,16 +40,22 @@ The specific services, quantities, and monthly pricing for Client are detailed i
 
 ### 1.5 Service Credits
 
-If Technijian fails to meet the Infrastructure Uptime target in any calendar month (excluding scheduled maintenance windows and Force Majeure Events under the MSA), Client shall be entitled to service credits as follows:
+**(a) Measurement.** Infrastructure Uptime is measured monthly as the percentage of total minutes in the calendar month during which the affected Online Service is operational and accessible by Client, as recorded by Technijian's monitoring system (PRTG, OpsManager, or equivalent). Raw measurement data and the monthly uptime calculation shall be available to Client upon written request. The unit of measurement is per Online Service (per VM, per managed device, per network appliance, etc.) as specified in the Service Order; uptime is not aggregated across Online Services.
 
-| Monthly Uptime | Service Credit (% of Monthly Service Fee) |
+**(b) Credit Schedule.** If Technijian fails to meet the 99.9% Infrastructure Uptime target in any calendar month for a particular Online Service (subject to the exclusions in subsection (c) below), Client shall be entitled to a service credit calculated against the **monthly recurring fee for the affected Online Service only** (not the total invoice or the entire Monthly Service Fee), as follows:
+
+| Monthly Uptime (Affected Service) | Service Credit (% of Affected Service's Monthly Fee) |
 |----------------|-------------------------------------------|
 | 99.0% – 99.89% | 5% |
 | 98.0% – 98.99% | 10% |
 | 95.0% – 97.99% | 20% |
 | Below 95.0% | 30% |
 
-Service credits shall be applied to the next monthly invoice. Client must request service credits in writing within **fifteen (15) days** of the end of the affected month. Service credits are Client's sole and exclusive remedy for failure to meet the uptime target and shall not exceed 30% of the applicable Monthly Service Fee in any single month. Nothing in this Section limits Client's remedies under the MSA for Technijian's gross negligence, willful misconduct, or breach of data protection obligations under Section 10 of the MSA. Service credits do not apply during any period in which Client's services are suspended for non-payment.
+**(c) Exclusions.** The following downtime is excluded from the uptime calculation: (i) scheduled maintenance windows under Section 1.4; (ii) emergency maintenance with reasonable advance notice; (iii) downtime caused by Client's acts or omissions, including misconfiguration by Client personnel, unauthorized changes by Client, or Client's failure to comply with Technijian's documented requirements; (iv) downtime caused by Client-provided or Client-procured hardware, software, or services not under Technijian's management; (v) downtime caused by failures of third-party services outside Technijian's reasonable control (including upstream ISP outages, public cloud platform outages, DNS provider outages, public certificate authority outages, and SaaS vendor outages); (vi) Force Majeure Events under MSA Section 9.06; (vii) any period during which Client's services are suspended for non-payment under MSA Section 3.06; and (viii) downtime resulting from Client's refusal to permit a remediation action recommended by Technijian.
+
+**(d) Claim Procedure.** Client must request service credits in writing to contracts@technijian.com within **fifteen (15) days** of the end of the affected month, identifying the affected Online Service, the dates and times of the alleged downtime, and any supporting evidence. Technijian will validate the claim against monitoring data and apply approved credits to the next monthly invoice within thirty (30) days.
+
+**(e) Cap and Sole Remedy.** The aggregate service credits payable under this Section in any single calendar month shall not exceed thirty percent (30%) of the affected Online Service's monthly recurring fee. Service credits are Client's sole and exclusive remedy for failure to meet the uptime target. Nothing in this Section limits Client's remedies under the MSA for Technijian's gross negligence, willful misconduct, or breach of data protection obligations under MSA Section 10.
 
 ### 1.6 Monitoring and Reporting
 

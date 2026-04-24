@@ -58,7 +58,7 @@ The Receiving Party agrees to:
 
 (c) Use the Confidential Information solely for the Purpose described in Section 1;
 
-(d) Limit access to Confidential Information to those employees, agents, and advisors who have a need to know and who are bound by confidentiality obligations at least as protective as those in this Agreement;
+(d) Limit access to Confidential Information to those employees, agents, contractors, and advisors (collectively, "Representatives") who have a need to know and who are bound by confidentiality obligations at least as protective as those in this Agreement. The Receiving Party shall be liable for any breach of this Agreement by its Representatives as if such breach were committed by the Receiving Party itself;
 
 (e) Take reasonable measures to protect the Confidential Information from unauthorized disclosure, using at least the same degree of care the Receiving Party uses for its own confidential information, but in no event less than reasonable care;
 
@@ -68,7 +68,7 @@ The Receiving Party agrees to:
 
 ## 4. RETURN OF MATERIALS
 
-Upon termination of this Agreement or upon written request by the Disclosing Party, the Receiving Party shall promptly return or destroy all Confidential Information in its possession, including all copies, notes, summaries, and extracts thereof, and shall certify such return or destruction in writing upon request.
+Upon termination of this Agreement or upon written request by the Disclosing Party, the Receiving Party shall promptly return or destroy all Confidential Information in its possession, including all copies, notes, summaries, and extracts thereof, and shall certify such return or destruction in writing upon request. Notwithstanding the foregoing, the Receiving Party may retain (i) one (1) archival copy in its outside legal counsel's files solely for legal-record purposes, and (ii) copies of Confidential Information contained in routine system backups or archives that cannot be deleted without unreasonable effort, provided that any such retained Confidential Information shall remain subject to the confidentiality obligations of this Agreement for so long as it is retained, and shall not be accessed, used, or restored except as required by law or for the legal-record purpose described above.
 
 ## 5. NO LICENSE OR WARRANTY
 
@@ -84,7 +84,7 @@ This Agreement shall remain in effect for a period of **two (2) years** from the
 
 ## 8. REMEDIES
 
-The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party for which monetary damages may be inadequate. Accordingly, the Disclosing Party shall be entitled to seek injunctive relief in addition to any other remedies available at law or in equity.
+The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party for which monetary damages may be inadequate. Accordingly, the Disclosing Party shall be entitled to seek injunctive relief, specific performance, and other equitable remedies, in addition to any other remedies available at law or in equity, **without the necessity of posting a bond or other security and without proof of actual damages**. The remedies in this Section are cumulative and not exclusive.
 
 ## 9. GOVERNING LAW AND DISPUTE RESOLUTION
 

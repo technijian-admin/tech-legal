@@ -116,7 +116,22 @@ This Schedule sets forth the standard rates for services provided by Technijian,
 
 ## 5. TERMS
 
-**5.01. Rate Adjustments.** Technijian may adjust the rates in this Schedule upon **sixty (60) days** written notice to Client. Adjusted rates shall take effect at the start of the next Renewal Term of the Agreement. Rate increases shall not exceed the greater of: (a) **ten percent (10%)** of the then-current rate; or (b) the percentage increase in the Consumer Price Index for All Urban Consumers (CPI-U), U.S. City Average, as published by the Bureau of Labor Statistics, for the twelve (12) month period ending sixty (60) days prior to the Renewal Term, plus three percent (3%). If a rate increase exceeds this cap, Client may terminate the affected Schedule without penalty by providing written notice within **thirty (30) days** of receiving the rate adjustment notice. The rate adjustment notice shall include a reminder of Client's non-renewal option under MSA Section 2.02.
+**5.01. Rate Adjustments at Renewal.**
+
+(a) **Adjustment Mechanism.** Technijian may adjust the rates in this Schedule effective at the start of any Renewal Term of the Agreement, by providing Client with written notice at least **sixty (60) days** prior to the Renewal Term. The adjustment shall be calculated as the **greater of**:
+
+- (i) **ten percent (10%)** of the then-current rate; or
+- (ii) the percentage increase in the Consumer Price Index for All Urban Consumers (CPI-U), U.S. City Average, as published by the Bureau of Labor Statistics, for the twelve (12) month period ending sixty (60) days prior to the Renewal Term, plus **three percent (3%)**.
+
+(b) **Rationale.** This formula is designed to (i) preserve Technijian's ability to keep pace with inflation in personnel, vendor, infrastructure, and compliance costs, and (ii) provide Technijian with a predictable minimum adjustment opportunity in low-inflation environments. The Parties have negotiated this formula at arm's length and acknowledge that it reflects a fair allocation of inflation and cost-escalation risk between them.
+
+(c) **Client's Right to Decline.** If Client does not accept the adjusted rates, Client may terminate the affected Schedule (or the entire Agreement) without payment of the early termination fee under MSA Section 2.03(b) (the wind-down fee), by providing written notice of non-renewal to Technijian within **thirty (30) days** of receiving the rate adjustment notice. Unrecoverable third-party costs under MSA Section 2.03(a) shall remain payable. Client's failure to provide such notice within thirty (30) days shall constitute acceptance of the adjusted rates for the upcoming Renewal Term.
+
+(d) **Notice Contents.** The rate adjustment notice shall: (i) state the prior rates and the adjusted rates, line-by-line for each affected service; (ii) state the percentage adjustment and which prong of subsection (a) was used; (iii) state the effective date; (iv) include a reminder of Client's right to decline under subsection (c); and (v) include a reminder of Client's general non-renewal option under MSA Section 2.02.
+
+(e) **No Mid-Term Adjustments.** Except as provided in Schedule B Section 4.03 for vendor pass-through cost increases, Technijian shall not adjust rates mid-term during any Initial Term or Renewal Term. Frequency of rate adjustments shall not exceed once per Renewal Term.
+
+(f) **Disclosure.** Technijian shall not represent to Client or to any third party that this provision constitutes a "cap" or "ceiling" on rate increases. The Parties acknowledge that under the formula in subsection (a), the actual rate increase may exceed ten percent (10%) in a high-inflation environment, and Client's protection against unwanted increases is the right to decline and terminate without wind-down fees under subsection (c).
 
 **5.02. Volume Discounts.** Volume-based pricing may be negotiated and documented in the applicable Service Order or Subscription Order.
 
