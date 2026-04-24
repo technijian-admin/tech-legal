@@ -473,25 +473,23 @@ async function generateSOW() {
   // ---- 1. PROJECT OVERVIEW ----
   content.push(heading1("1. PROJECT OVERVIEW"));
 
-  content.push(p("Technijian will deliver a 6-phase implementation that deploys a managed-device control architecture for AFFG, consisting of 10 company-owned Apple endpoints (4 Mac Minis and 6 MacBook Neos) enrolled in Microsoft Intune via Apple Business Manager Automated Device Enrollment, 10 personally-owned cell phones enrolled in Intune under a BYOD work-profile model (iOS via Apple Business Manager User Enrollment; Android via Intune personally-owned work profile), CloudBrink Zero Trust Network Access (ZTNA), Entra Conditional Access, and Teramind / MyAudit UAM+DLP. Of the 10 Apple endpoints, 2 Mac Minis have been pre-onboarded by AFFG prior to this SOW and require a configuration-cleanup pass (removal of Cisco Umbrella, deployment of the remaining stack agents, and compliance revalidation); the other 8 (2 new Mac Minis + 6 MacBook Neos) are fresh ABM-based enrollments. Under this SOW, 4 legacy devices (MACBOOK-PRO-4, KIKI, LEON, MAGGIE) are offboarded and securely wiped per NIST SP 800-88. This SOW establishes a fully SEC/FINRA-compliant endpoint control posture for all 10 users and their personal phones, enables secure access from any network via ZTNA, and produces the attested evidence required under FINRA 3110(c)."));
+  content.push(p("Technijian will deliver a 6-phase implementation that deploys a managed-device control architecture for AFFG, consisting of 9 company-owned Apple endpoints (3 Mac Minis and 6 Apple Neo notebooks) enrolled in Microsoft Intune via Apple Business Manager Automated Device Enrollment, 9 Intune MDM-managed company phones, CloudBrink Zero Trust Network Access (ZTNA), Entra Conditional Access, endpoint DLP, and SSO/2FA. The starting state is the existing production network defined in MSA-AFFG-2026 Schedule A, in which users access M365, Schwab Advisor Services, and Interactive Brokers from a mixed fleet (1 existing Mac Mini, 1 MacBook Pro, and 3 Windows devices) gated by office-IP whitelist and MFA. Under this SOW, the MacBook Pro and the 3 Windows devices are offboarded; the 9 new Apple endpoints are onboarded as the managed fleet. This SOW establishes a fully SEC/FINRA-compliant endpoint control posture for all 9 users and their company phones, enables secure access from any network, and produces the attested evidence required under FINRA 3110(c)."));
   content.push(spacer());
 
   content.push(heading2("1.1 Objectives"));
-  content.push(bullet("Enroll 10 company Apple endpoints (4 Mac Minis + 6 MacBook Neos) in Microsoft Intune via Apple Business Manager Automated Device Enrollment — 8 via fresh ABM enrollment and 2 pre-onboarded Mac Minis via configuration-cleanup — with the final macOS endpoint stack (CrowdStrike Falcon for Mac [AVD], Huntress macOS [AVMH], ManageEngine Patch Management for macOS [PMMAC], CloudBrink ZTNA, Teramind / MyAudit UAM+DLP [AMDLP1Y], My Remote / ScreenConnect [MR])", "bullets"));
-  content.push(bullet("Remove Cisco Umbrella from the 2 pre-onboarded Mac Minis and confirm it is not deployed anywhere in the managed fleet (Umbrella is excluded from the Rev 3 stack)", "bullets"));
-  content.push(bullet("Deploy CloudBrink ZTNA on all 10 Macs to replace the existing office-IP whitelist with device-posture-based access from any network", "bullets"));
-  content.push(bullet("Deploy Teramind / MyAudit UAM+DLP on all 10 managed Apple endpoints for endpoint-level data-loss-prevention and supervisory activity monitoring", "bullets"));
-  content.push(bullet("Enroll 10 personally-owned cell phones in Intune under the BYOD work-profile model: iOS devices via Apple Business Manager User Enrollment; Android devices via Intune personally-owned work profile. Apply App Protection (MAM) policies and selective-wipe-only termination procedures", "bullets"));
+  content.push(bullet("Enroll 9 company Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks) in Microsoft Intune via Apple Business Manager Automated Device Enrollment with the full macOS endpoint security stack", "bullets"));
+  content.push(bullet("Deploy CloudBrink ZTNA to replace the existing office-IP whitelist with device-posture-based access from any network", "bullets"));
+  content.push(bullet("Deploy MyAudit UAM+DLP, SSO/2FA gateway, and Credential Manager on all 9 managed Apple endpoints", "bullets"));
+  content.push(bullet("Enroll 9 company phones in Intune MDM with App Protection (MAM) policies", "bullets"));
   content.push(bullet("Configure Entra Conditional Access (compliant-device requirement, legacy-auth block, MFA) and cut over users from their existing devices to the new managed Apple fleet via a phased pilot", "bullets"));
-  content.push(bullet("Offboard the 4 legacy devices in scope (MACBOOK-PRO-4, and 3 Windows systems: KIKI, LEON, MAGGIE); securely wipe per NIST SP 800-88 and retire them from the managed inventory", "bullets"));
-  content.push(bullet("Amend Schedule A of MSA-AFFG-2026 to replace Windows endpoint pricing with the macOS stack pricing and add the Teramind managed-control service; produce the updated monthly recurring (+$932.00/mo net)", "bullets"));
+  content.push(bullet("Offboard the 4 legacy devices in scope (1 MacBook Pro and 3 Windows systems: KIKI, LEON, MAGGIE); securely wipe and retire them from the managed inventory", "bullets"));
+  content.push(bullet("Amend Schedule A of MSA-AFFG-2026 to replace Windows endpoint pricing with macOS endpoint pricing and add the managed-device control services; produce the updated monthly recurring", "bullets"));
   content.push(spacer());
 
   content.push(heading2("1.2 Exclusions"));
   content.push(bullet("CloudBrink per-user subscription licensing (procured directly by AFFG)", "bullets2"));
-  content.push(bullet("Hardware procurement (AFFG provides Mac Minis, MacBook Neos, and personal phones)", "bullets2"));
+  content.push(bullet("Hardware procurement (AFFG provides company laptops and phones)", "bullets2"));
   content.push(bullet("Technijian My Archive (AFFG operates own email-archiving platform)", "bullets2"));
-  content.push(bullet("Personal-content management on BYOD phones (Technijian manages only the Intune work profile; user personal data remains user-owned and un-touched)", "bullets2"));
   content.push(brandRule());
 
   // ---- 2. IMPLEMENTATION SCOPE (6 Phases) ----
@@ -500,9 +498,9 @@ async function generateSOW() {
   // Phase 1
   const phase1Tickets = ticketsForPhase(allTickets, "Phase 1");
   content.push(heading2("Phase 1: Endpoint Foundation (Weeks 1\u20134)"));
-  content.push(p("7 tickets  |  22 hours", { bold: true, color: TEAL }));
+  content.push(p("8 tickets  |  25 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Configure Apple Business Manager + Intune Automated Device Enrollment for macOS, compliance policies (FileVault, Gatekeeper/XProtect, firewall, screen lock, OS minimum), and device configuration profiles. Enroll the 8 new Apple endpoints (2 new Mac Minis + 6 MacBook Neos) via ABM ADE, and run a configuration-cleanup pass on the 2 pre-onboarded Mac Minis (uninstall Cisco Umbrella, install any missing stack agents, revalidate compliance). Deploy the final macOS endpoint stack to all 10 Macs: ManageEngine Patch Management for macOS (PMMAC), CrowdStrike Falcon for Mac (AVD), Huntress macOS (AVMH), My Remote / ScreenConnect (MR), and Teramind / MyAudit UAM+DLP (AMDLP1Y). Cisco Umbrella (SI) is NOT deployed in this revision."));
+  content.push(p("Configure Apple Business Manager + Intune Automated Device Enrollment for macOS, compliance policies (FileVault, Gatekeeper/XProtect, firewall, screen lock, OS minimum), device configuration profiles (silent FileVault enable, System Integrity Protection, Software Update for macOS, PIN/password complexity), enroll all 9 Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks), deploy full macOS security stack (CrowdStrike Falcon for Mac, Huntress macOS, Cisco Umbrella macOS, ManageEngine Patch Management for macOS, ConnectWise ScreenConnect), MyAudit UAM+DLP for macOS, SSO/2FA gateway, and Credential Manager on all managed endpoints."));
   content.push(spacer());
   content.push(heading3("Phase 1 Tickets"));
   content.push(makeTicketTable(phase1Tickets));
@@ -513,7 +511,7 @@ async function generateSOW() {
   content.push(heading2("Phase 2: Access Control (Weeks 3\u20136)"));
   content.push(p("5 tickets  |  16 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Configure Entra Conditional Access (require compliant device, block legacy auth, require MFA), deploy CloudBrink ZTNA (tenant, connector, agent on all 10 Macs, per-app policies), and transition Schwab Advisor Services and Interactive Brokers custodian access from the existing office-IP whitelist to CloudBrink ZTNA."));
+  content.push(p("Configure Entra Conditional Access (require compliant device, block legacy auth, require MFA), deploy CloudBrink ZTNA (tenant, connector, agent on 9 laptops, per-app policies), and transition Schwab Advisor Services and Interactive Brokers custodian access from the existing office-IP whitelist to CloudBrink ZTNA."));
   content.push(spacer());
   content.push(heading3("Phase 2 Tickets"));
   content.push(makeTicketTable(phase2Tickets));
@@ -524,7 +522,7 @@ async function generateSOW() {
   content.push(heading2("Phase 3: Mobile Device Control (Weeks 5\u20138)"));
   content.push(p("3 tickets  |  8 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Enroll 10 personally-owned cell phones in Intune under a BYOD work-profile model — iOS devices via Apple Business Manager User Enrollment linked to Intune (Managed Apple IDs where applicable), Android devices via Intune personally-owned work profile (Android Enterprise BYOD). Deploy App Protection (MAM) policies for Outlook, OneDrive, Teams, and Edge. Configure selective-wipe-only termination procedures — the work profile and managed apps can be wiped without touching the user's personal data."));
+  content.push(p("Enroll 9 company phones in Intune MDM, deploy App Protection (MAM) policies, configure remote wipe and termination procedures."));
   content.push(spacer());
   content.push(heading3("Phase 3 Tickets"));
   content.push(makeTicketTable(phase3Tickets));
@@ -535,7 +533,7 @@ async function generateSOW() {
   content.push(heading2("Phase 4: User Cutover & Legacy Offboarding (Weeks 7\u201312)"));
   content.push(p("4 tickets  |  19 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Migrate user data, application settings, and profiles from each user\u2019s existing work device to the new managed Apple endpoint; securely offboard and retire the 4 legacy devices (MACBOOK-PRO-4 and 3 Windows systems KIKI/LEON/MAGGIE) including full disk wipe per NIST SP 800-88; deliver end-user training on the macOS managed-device workflow and the BYOD personal-phone enrollment flow (iOS ABM User Enrollment vs. Android Work Profile); run a 2-week pilot operation window with 2\u20133 users on the new Macs before full fleet cutover; and decommission the legacy office-IP whitelist from Schwab and IBKR after ZTNA is validated."));
+  content.push(p("Migrate user data, application settings, and profiles from each user\u2019s existing work device to the new managed Apple endpoint; securely offboard and retire the 4 legacy devices (1 MacBook Pro and 3 Windows systems KIKI/LEON/MAGGIE) including full disk wipe per NIST SP 800-88; deliver end-user training on the macOS managed-device workflow; run a 2-week pilot operation window with 2\u20133 users on the new Macs before full fleet cutover; and decommission the legacy office-IP whitelist from Schwab and IBKR after ZTNA is validated."));
   content.push(spacer());
   content.push(heading3("Phase 4 Tickets"));
   content.push(makeTicketTable(phase4Tickets));
@@ -546,7 +544,7 @@ async function generateSOW() {
   content.push(heading2("Phase 5: Monitoring & Validation (Weeks 11\u201314)"));
   content.push(p("4 tickets  |  13 hours", { bold: true, color: TEAL }));
   content.push(spacer());
-  content.push(p("Expand the existing monthly assessment to include the managed Mac fleet + CloudBrink posture + Teramind DLP events + Intune BYOD phone work-profile health, configure the monthly mobile device audit, perform end-to-end security validation, and produce a post-deployment compliance gap assessment confirming every control-to-citation commitment is met."));
+  content.push(p("Expand the existing monthly assessment to include device fleet + CloudBrink + mobile, configure monthly mobile device audit, perform end-to-end security validation, and produce a post-deployment compliance gap assessment confirming every control-to-citation commitment is met."));
   content.push(spacer());
   content.push(heading3("Phase 5 Tickets"));
   content.push(makeTicketTable(phase5Tickets));
@@ -571,8 +569,8 @@ async function generateSOW() {
     ["Design Component", "Control Objective", "Citation(s)"],
     [
       [
-        "Intune-managed company Macs",
-        "All 10 users on company-owned, encrypted, policy-enforced macOS endpoints (4 Mac Mini + 6 MacBook Neo)",
+        "Intune-managed company laptops",
+        "All 9 users on company-owned, encrypted, policy-enforced devices",
         "Reg S-P 248.30(a)(1)-(3); FINRA 3110(a)"
       ],
       [
@@ -586,13 +584,18 @@ async function generateSOW() {
         "Reg S-P 248.30(a)(3); NIST AC-17, SC-7"
       ],
       [
-        "Teramind / MyAudit (endpoint DLP + UAM)",
-        "Block USB, local download, print, clipboard, screen capture; supervisory user-activity monitoring",
-        "Reg S-P 248.30(a)(3); FINRA 3110(b)(4); NIST AC-19, MP-7, AU-12"
+        "Technijian MyAudit (endpoint DLP)",
+        "Block USB, local download, print, clipboard, screen capture",
+        "Reg S-P 248.30(a)(3); NIST AC-19, MP-7"
       ],
       [
-        "Intune BYOD (personal phones, work profile)",
-        "Work-profile isolation on personal iOS/Android phones; selective wipe only; MAM policies on Outlook, OneDrive, Teams, Edge",
+        "Technijian SSO/2FA gateway",
+        "Enforced, logged MFA on custodian portals and third-party SaaS",
+        "Reg S-P 248.30 (2024); NIST IA-2(1)"
+      ],
+      [
+        "Intune MDM/MAM (company phones)",
+        "Phone enrollment, app containerization, remote wipe",
         "Reg S-P 248.30(a)(1)-(3); NIST AC-19, MP-6"
       ],
       [
@@ -612,16 +615,15 @@ async function generateSOW() {
 
   // ---- 4. DELIVERABLES ----
   content.push(heading1("4. DELIVERABLES"));
-  content.push(bullet("10 Intune-managed company Apple endpoints (4 Mac Mini + 6 MacBook Neo) running the final macOS stack (PMMAC, CrowdStrike, Huntress, CloudBrink, Teramind, My Remote) per the Technijian Services Price List (rev 2026-03-23)", "bullets3"));
-  content.push(bullet("Cisco Umbrella removed from the 2 pre-onboarded Mac Minis and confirmed absent from the managed fleet", "bullets3"));
-  content.push(bullet("CloudBrink ZTNA deployed on all 10 Macs with per-application micro-segmented access", "bullets3"));
+  content.push(bullet("9 Intune-managed company laptops with full Technijian security stack", "bullets3"));
+  content.push(bullet("CloudBrink ZTNA deployed with per-application micro-segmented access", "bullets3"));
   content.push(bullet("Schwab and IBKR transitioned from office-IP whitelist to CloudBrink ZTNA", "bullets3"));
-  content.push(bullet("Conditional Access: M365 restricted to compliant managed devices, legacy auth blocked, MFA required", "bullets3"));
-  content.push(bullet("Teramind / MyAudit UAM+DLP deployed on all 10 managed Macs (endpoint DLP + supervisory user-activity monitoring)", "bullets3"));
-  content.push(bullet("10 personal phones enrolled in Intune under a BYOD work-profile model (iOS via ABM User Enrollment; Android via Android Enterprise Work Profile) with App Protection (MAM) policies and selective-wipe-only termination", "bullets3"));
-  content.push(bullet("4 legacy devices (MACBOOK-PRO-4, KIKI, LEON, MAGGIE) securely wiped per NIST SP 800-88 and retired from managed inventory with chain-of-custody documentation", "bullets3"));
-  content.push(bullet("Compliance documentation suite aligned with the managed-device architecture (IRP, BCP disclosure, Service Provider Oversight, supervisory audit-trail architecture)", "bullets3"));
-  content.push(bullet("Schedule A amendment to MSA-AFFG-2026 consolidating to 10 macOS-priced endpoints and adding the Teramind managed-control service (+$932.00/mo net)", "bullets3"));
+  content.push(bullet("Conditional Access: M365 restricted to compliant managed devices, legacy auth blocked", "bullets3"));
+  content.push(bullet("MyAudit UAM+DLP deployed on all 9 managed laptops", "bullets3"));
+  content.push(bullet("SSO/2FA gateway deployed on all managed endpoints for custodian portals", "bullets3"));
+  content.push(bullet("9 company phones enrolled in Intune MDM with App Protection policies", "bullets3"));
+  content.push(bullet("Compliance documentation suite aligned with managed-device architecture", "bullets3"));
+  content.push(bullet("Schedule A amendment to MSA-AFFG-2026 adding managed-device control services", "bullets3"));
   content.push(bullet("Post-deployment compliance gap assessment confirming all control-to-citation commitments are met", "bullets3"));
   content.push(brandRule());
 
@@ -633,8 +635,8 @@ async function generateSOW() {
     ["Role", "Rate", "Hours", "Labor"],
     [
       ["US Tech Support (IRV-TS1)", "$150/hr", "28", "$4,200.00"],
-      ["India Tech Support (CHD-TS1)", "$45/hr", "59", "$2,655.00"],
-      [{ text: "TOTAL", bold: true }, { text: "", bold: true }, { text: "87 hrs", bold: true }, { text: "$6,855.00", bold: true }]
+      ["India Tech Support (CHD-TS1)", "$45/hr", "62", "$2,790.00"],
+      [{ text: "TOTAL", bold: true }, { text: "", bold: true }, { text: "90 hrs", bold: true }, { text: "$6,990.00", bold: true }]
     ],
     [2800, 1800, 1800, 2960]
   ));
@@ -644,10 +646,10 @@ async function generateSOW() {
   content.push(makeTable(
     ["Milestone", "Trigger", "Amount"],
     [
-      ["50% upon SOW execution", "SOW signed by both parties", "$3,427.50"],
-      ["25% upon Phase 4 completion", "Fleet cutover complete (all 10 users operating on managed Macs, 4 legacy devices offboarded)", "$1,713.75"],
-      ["25% upon Phase 6 delivery", "Documentation + Schedule A amendment accepted", "$1,713.75"],
-      [{ text: "Total", bold: true }, { text: "", bold: true }, { text: "$6,855.00", bold: true }]
+      ["50% upon SOW execution", "SOW signed by both parties", "$3,495.00"],
+      ["25% upon Phase 4 completion", "Fleet cutover complete (all 9 users operating on managed Macs, 4 legacy devices offboarded)", "$1,747.50"],
+      ["25% upon Phase 6 delivery", "Documentation + Schedule A amendment accepted", "$1,747.50"],
+      [{ text: "Total", bold: true }, { text: "", bold: true }, { text: "$6,990.00", bold: true }]
     ],
     [2800, 3560, 2960]
   ));
@@ -659,28 +661,23 @@ async function generateSOW() {
 
   // ---- 6. ASSUMPTIONS ----
   content.push(heading1("6. ASSUMPTIONS"));
-  content.push(bullet("AFFG has procured 10 company Apple endpoints in total \u2014 4 Mac Minis (2 of which are pre-onboarded and subject to the Phase 1 configuration-cleanup pass, and 2 new) and 6 MacBook Neos (all new) \u2014 each running a currently supported macOS release, with each new device's hardware serial registered in Apple Business Manager for Automated Device Enrollment into Technijian\u2019s Intune tenant", "bullets4"));
-  content.push(bullet("The 2 pre-onboarded Mac Minis currently have Cisco Umbrella installed and are accessible to Technijian for the Phase 1 cleanup pass (Ticket AFFG-004-027); AFFG-internal admin credentials for those devices are available to Technijian at the start of Phase 1", "bullets4"));
-  content.push(bullet("AFFG users provide 10 personally-owned cell phones for Intune BYOD enrollment. iOS devices enroll via Apple Business Manager User Enrollment mode (Managed Apple IDs provisioned as needed); Android devices enroll via Intune personally-owned work profile (Android Enterprise BYOD). Users consent to the work-profile enrollment; the user's personal content remains user-owned and is not managed by Technijian", "bullets4"));
-  content.push(bullet("AFFG has procured CloudBrink ZTNA per-user subscription licenses for 10 users (CloudBrink licensing is AFFG-direct and excluded from the Schedule A amendment)", "bullets4"));
-  content.push(bullet("AFFG\u2019s M365 tenant remains licensed at E3 or E5 (Intune, Conditional Access, DLP, and BYOD enrollment features included)", "bullets4"));
-  content.push(bullet("All 10 AFFG users are available for cutover coordination and training during Weeks 7\u201312", "bullets4"));
+  content.push(bullet("AFFG has procured 9 company Apple endpoints (3 Mac Minis and 6 Apple Neo notebooks) running a currently supported macOS release, each with its hardware serial registered in Apple Business Manager for Automated Device Enrollment into Technijian\u2019s Intune tenant", "bullets4"));
+  content.push(bullet("AFFG has procured 9 company phones (iOS or Android) for Intune MDM enrollment", "bullets4"));
+  content.push(bullet("AFFG has procured CloudBrink ZTNA per-user subscription licenses for 9 users", "bullets4"));
+  content.push(bullet("AFFG\u2019s M365 tenant remains licensed at E3 or E5 (Intune, Conditional Access, DLP included)", "bullets4"));
+  content.push(bullet("All 9 AFFG users are available for cutover coordination and training during Weeks 7\u201312", "bullets4"));
   content.push(bullet("Schwab Advisor Services and Interactive Brokers approve the transition from the existing office-IP whitelist to CloudBrink ZTNA within their standard processing timelines", "bullets4"));
-  content.push(bullet("The 4 legacy devices in offboarding scope (MACBOOK-PRO-4 and 3 Windows systems: KIKI, LEON, MAGGIE) are accessible for secure wipe and retirement during the cutover window; no recovery of data from these devices is required post-cutover", "bullets4"));
-  content.push(bullet("Teramind / MyAudit UAM+DLP is deployed in its current macOS-supported edition; any macOS-specific DLP-coverage gaps versus the Windows baseline are documented in the Phase 5 gap assessment (Ticket AFFG-004-024) rather than treated as a SOW defect", "bullets4"));
-  content.push(bullet("Patch management for macOS is billed under the PMMAC SKU ($11.00/Mac) per the Technijian Services Price List (Appendix A, rev 2026-03-23); all other monthly line items in Section 8 are likewise mapped to Price List SKUs (AVD, AVMH, MR, AMDLP1Y)", "bullets4"));
-  content.push(bullet("The endpoint stack in this revision does NOT include Cisco Umbrella, SSO/2FA gateway, or Credential Manager \u2014 any future addition of those services would be handled under a separate Change Order or SOW", "bullets4"));
+  content.push(bullet("The 4 legacy devices in offboarding scope (1 MacBook Pro and 3 Windows systems: KIKI, LEON, MAGGIE) are accessible for secure wipe and retirement during the cutover window; no recovery of data from these devices is required post-cutover", "bullets4"));
+  content.push(bullet("MyAudit UAM+DLP, SSO/2FA, and Credential Manager agents are deployed in their current macOS-supported editions; any macOS-specific DLP-coverage gaps are documented in the Phase 5 gap assessment (Ticket AFFG-004-024) rather than treated as a SOW defect", "bullets4"));
   content.push(bullet("Starting-state network is the production network defined in the signed MSA-AFFG-2026 Schedule A; no Horizon VDI environment is in place and none is deployed as part of this SOW", "bullets4"));
   content.push(brandRule());
 
   // ---- 7. EXCLUSIONS ----
   content.push(heading1("7. EXCLUSIONS"));
-  content.push(bullet("CloudBrink per-user subscription licensing (AFFG-procured directly; Technijian handles deployment/configuration under this SOW)", "bullets5"));
-  content.push(bullet("Hardware procurement (Mac Minis, MacBook Neos, and personal phones are all AFFG-supplied or user-supplied)", "bullets5"));
+  content.push(bullet("CloudBrink per-user subscription licensing (AFFG-procured)", "bullets5"));
+  content.push(bullet("Hardware procurement (company laptops and phones)", "bullets5"));
   content.push(bullet("Microsoft 365 license costs (AFFG procures directly)", "bullets5"));
   content.push(bullet("Technijian My Archive (AFFG operates own archiving)", "bullets5"));
-  content.push(bullet("SSO/2FA gateway and Credential Manager services (not included in this revision)", "bullets5"));
-  content.push(bullet("Management of personal content, personal apps, or personal identity on BYOD phones \u2014 Technijian manages only the Intune work profile", "bullets5"));
   content.push(bullet("Any remediation beyond the scope described; significant issues discovered during migration scoped as separate change order", "bullets5"));
   content.push(brandRule());
 
@@ -688,20 +685,20 @@ async function generateSOW() {
   content.push(heading1("8. MONTHLY COST IMPACT"));
 
   content.push(heading2("8.1 Current vs. Proposed Monthly Recurring"));
-  content.push(p("Baseline is the signed MSA-AFFG-2026 Schedule A as reflected on the executed Monthly Service Quote dated March 2026. Under this SOW the endpoint fleet is consolidated from the 16 Windows-priced desktops in the signed Schedule A down to 10 macOS-priced Apple endpoints (4 Mac Minis + 6 MacBook Neos). The 4 legacy devices in offboarding scope (MACBOOK-PRO-4 and 3 Windows systems KIKI/LEON/MAGGIE) are removed from managed inventory. The 31 M365 user services, 6 IP services, 1 domain service, and Virtual Staff Support are not altered by this SOW. Intune BYOD enrollment for the 10 personal phones carries no additional Technijian charge (included in AFFG's existing M365 E3 license).", { italics: true }));
+  content.push(p("Baseline is the signed MSA-AFFG-2026 Schedule A as reflected on the executed Monthly Service Quote dated March 2026. Under this SOW the endpoint fleet is consolidated from the 16 Windows-priced desktops in the signed Schedule A down to 9 macOS-priced Apple endpoints (3 Mac Minis + 6 Apple Neo notebooks). The 4 legacy devices in offboarding scope (1 MacBook Pro and 3 Windows systems KIKI/LEON/MAGGIE) are removed from managed inventory. The 31 M365 user services, 6 IP services, 1 domain service, and Virtual Staff Support are not altered by this SOW.", { italics: true }));
   content.push(spacer());
-  content.push(p("Current Monthly (signed MSA Schedule A) = $2,794.50/mo", { bold: true, color: CHARCOAL }));
+  content.push(p("Current Monthly (signed MSA Schedule A, no VDI) = $2,794.50/mo", { bold: true, color: CHARCOAL }));
   content.push(spacer());
   content.push(makeTable(
     ["Category", "Current Monthly", "Proposed Monthly", "Change"],
     [
-      ["Endpoint Security Stack (Current: 16 Windows-priced desktops \u2192 Proposed: 10 macOS-priced endpoints)", "$424.00", "$275.00", "-$149.00"],
-      ["Managed Endpoint Control Service (Teramind / MyAudit UAM+DLP \u2014 NEW; 10 Macs)", "$0.00", "$1,081.00", "+$1,081.00"],
+      ["Endpoint Security Stack (Current: 16 Windows-priced desktops \u2192 Proposed: 9 macOS-priced endpoints)", "$424.00", "$301.50", "-$122.50"],
+      ["Managed Endpoint Control Stack (NEW \u2014 9 Macs: AMDLP1Y, SSO-2FA, CRM)", "$0.00", "$1,125.90", "+$1,125.90"],
       ["M365 User Services (31 users: V365, PHT)", "$263.50", "$263.50", "$0.00"],
       ["IP Services (6 IPs: RTPT)", "$42.00", "$42.00", "$0.00"],
       ["Domain Services (1 domain: SA, DKIM)", "$70.00", "$70.00", "$0.00"],
       ["Virtual Staff Support (IRV + CHD + CTO)", "$1,995.00", "$1,995.00", "$0.00"],
-      [{ text: "TOTAL MONTHLY", bold: true }, { text: "$2,794.50", bold: true }, { text: "$3,726.50", bold: true }, { text: "+$932.00", bold: true }]
+      [{ text: "TOTAL MONTHLY", bold: true }, { text: "$2,794.50", bold: true }, { text: "$3,797.90", bold: true }, { text: "+$1,003.40", bold: true }]
     ],
     [3360, 1800, 1800, 1560]
   ));
@@ -713,7 +710,7 @@ async function generateSOW() {
     [
       ["AV Protection \u2014 Desktop (CrowdStrike)", "AVD", "16", "$8.50", "$136.00"],
       ["AVH Protection \u2014 Desktop (Huntress)", "AVMH", "16", "$6.00", "$96.00"],
-      ["My Secure Internet (DNS Filtering \u2014 Cisco Umbrella)", "SI", "16", "$6.00", "$96.00"],
+      ["My Secure Internet (DNS Filtering)", "SI", "16", "$6.00", "$96.00"],
       ["Patch Management \u2014 Windows", "PMW", "16", "$4.00", "$64.00"],
       ["My Remote", "MR", "16", "$2.00", "$32.00"],
       [{ text: "Subtotal (signed)", bold: true }, { text: "", bold: true }, { text: "16", bold: true }, { text: "$26.50", bold: true }, { text: "$424.00", bold: true }]
@@ -722,26 +719,28 @@ async function generateSOW() {
   ));
   content.push(spacer());
 
-  content.push(heading2("8.3 Proposed Endpoint Stack Detail (10 macOS endpoints)"));
-  content.push(p("All pricing in this Section 8 is drawn from the Technijian Services Price List (Appendix A, rev 2026-03-23). The final Rev 3 macOS endpoint stack consists of CrowdStrike Falcon for Mac (AVD, $8.50), Huntress macOS (AVMH, $6.00), ManageEngine Patch Management for macOS (PMMAC, $11.00), and My Remote / ScreenConnect (MR, $2.00) \u2014 all per-device monthly. Cisco Umbrella (SI, $6.00) is REMOVED from the stack in this revision: it is uninstalled from the 2 pre-onboarded Mac Minis under Ticket AFFG-004-027 and is not deployed on any of the 8 new Macs. Patch management switches from Windows PMW ($4.00) to macOS PMMAC ($11.00) \u2014 a $7 per-unit uplift driven by the higher operational cost of macOS patch orchestration. The reduction in unit count (16 Windows \u2192 10 macOS) combined with removal of the SI line and the PMMAC uplift produces a net -$149.00/mo change on the security stack. The Managed Endpoint Control Service (Teramind / MyAudit UAM+DLP, AMDLP1Y at $108.10/device) is the single NEW recurring line added by this SOW and satisfies the Reg S-P 2024 endpoint DLP and FINRA 3110 supervisory user-activity monitoring requirements.", { italics: true }));
+  content.push(heading2("8.3 Proposed Endpoint Stack Detail (9 macOS endpoints)"));
+  content.push(p("The Technijian endpoint security stack (AVD, AVMH, SI, MR) is deployed to the 9 Apple endpoints under Phase 1 Ticket AFFG-004-005. Patch Management switches from PMW ($4/Windows) to PMMAC ($11/Mac) \u2014 a $7/unit uplift driven by the higher operational cost of macOS patch orchestration. The reduction in unit count (16 Windows \u2192 9 macOS) produces a net -$122.50/mo change. The Managed Endpoint Control Stack (AMDLP1Y + SSO-2FA + CRM) is the NEW capability added by this SOW to satisfy Reg S-P 2024 endpoint DLP, MFA gateway, and credential vault requirements.", { italics: true }));
   content.push(spacer());
   content.push(makeTable(
     ["Service", "Code", "Qty", "Unit Price", "Monthly"],
     [
-      [{ text: "Endpoint Security Stack (10 macOS units)", bold: true, color: CHARCOAL }, "", "", "", ""],
-      ["AV Protection \u2014 CrowdStrike Falcon for Mac", "AVD", "10", "$8.50", "$85.00"],
-      ["AVH Protection \u2014 Huntress macOS", "AVMH", "10", "$6.00", "$60.00"],
-      ["Patch Management \u2014 macOS (ManageEngine)", "PMMAC", "10", "$11.00", "$110.00"],
-      ["My Remote / ScreenConnect (macOS)", "MR", "10", "$2.00", "$20.00"],
-      [{ text: "Subtotal \u2014 Endpoint Security Stack", bold: true }, { text: "", bold: true }, { text: "10", bold: true }, { text: "$27.50", bold: true }, { text: "$275.00", bold: true }],
-      [{ text: "Managed Endpoint Control Service (NEW)", bold: true, color: CHARCOAL }, "", "", "", ""],
-      ["Teramind / MyAudit UAM+DLP / 1-Year", "AMDLP1Y", "10", "$108.10", "$1,081.00"],
-      [{ text: "Subtotal per Mac endpoint", bold: true }, { text: "", bold: true }, { text: "10", bold: true }, { text: "$135.60", bold: true }, { text: "$1,356.00", bold: true }]
+      [{ text: "Endpoint Security Stack (9 macOS units)", bold: true, color: CHARCOAL }, "", "", "", ""],
+      ["AV Protection \u2014 CrowdStrike Falcon for Mac", "AVD", "9", "$8.50", "$76.50"],
+      ["AVH Protection \u2014 Huntress macOS", "AVMH", "9", "$6.00", "$54.00"],
+      ["My Secure Internet (Umbrella macOS)", "SI", "9", "$6.00", "$54.00"],
+      ["Patch Management \u2014 macOS", "PMMAC", "9", "$11.00", "$99.00"],
+      ["My Remote (macOS)", "MR", "9", "$2.00", "$18.00"],
+      [{ text: "Managed Endpoint Control Stack (NEW)", bold: true, color: CHARCOAL }, "", "", "", ""],
+      ["MyAudit UAM+DLP / 1-Year", "AMDLP1Y", "9", "$108.10", "$972.90"],
+      ["SSO / Multi-Factor", "SSO-2FA", "9", "$12.00", "$108.00"],
+      ["Credential Manager", "CRM", "9", "$5.00", "$45.00"],
+      [{ text: "Subtotal per Mac endpoint", bold: true }, { text: "", bold: true }, { text: "9", bold: true }, { text: "$158.60", bold: true }, { text: "$1,427.40", bold: true }]
     ],
     [2600, 1200, 800, 1400, 1360]
   ));
   content.push(spacer());
-  content.push(p("Notes: Intune management for the 10 Apple endpoints and the 10 personally-owned phones (iOS via ABM User Enrollment; Android via Android Enterprise Work Profile) is included in the M365 E3 license AFFG already holds \u2014 no additional Technijian charge. Apple Business Manager is procured by AFFG at no cost. CloudBrink ZTNA subscription is AFFG-procured and is therefore excluded from the Schedule A amendment (Technijian handles deployment and configuration under Phase 2). Per-managed-Mac monthly = $135.60 ($27.50 endpoint security + $108.10 Teramind). SSO-2FA and Credential Manager are NOT included in this revision.", { italics: true }));
+  content.push(p("Notes: Intune management for the 9 Apple endpoints and 9 company phones is included in the M365 E3 license AFFG already holds \u2014 no additional Technijian charge. Apple Business Manager is procured by AFFG at no cost. CloudBrink ZTNA subscription is AFFG-procured and therefore excluded from the Schedule A amendment. Per-managed-Mac monthly = $158.60 ($33.50 endpoint security + $125.10 managed control).", { italics: true }));
   content.push(brandRule());
 
   // ---- 9. CHANGE MANAGEMENT ----
@@ -788,8 +787,6 @@ async function generateSOW() {
   content.push(p("12.06. Severability. If any provision of this Section 12 or of Exhibit A is held invalid or unenforceable by a court of competent jurisdiction, the remaining provisions of the Original Agreement (as amended) and this SOW shall continue in full force and effect."));
   content.push(spacer());
   content.push(p("12.07. Effective Date of Amendment. This amendment is effective upon execution of this SOW by authorized representatives of both Parties, and the MSA Framework Provisions shall govern services from and after the Effective Date stated in the SOW header."));
-  content.push(spacer());
-  content.push(p("12.08. Template Currency Acknowledgment. The MSA Framework Provisions set forth in Exhibit A reflect Technijian’s 2026 MSA framework as most recently revised on April 24, 2026, including the revised Section 2.05 (Operational Continuity Materials) and Section 9.09 (Recruiting Cost Reimbursement). Technijian has commenced a legal-counsel review pass on this framework that has not yet been finalized as of the Effective Date. During the sixty (60) day period following execution of this SOW, either Party may propose conforming edits to Exhibit A to reflect any final clarifications or corrections issued by Technijian’s legal counsel; proposed edits that are mutually agreed in a writing signed by both Parties shall amend Exhibit A as of the date of such mutual written agreement. For the avoidance of doubt, this Section 12.08 does not cause Exhibit A or any portion of this Section 12 to be less than immediately effective and binding on the Parties upon execution of this SOW."));
   content.push(brandRule());
 
   // ---- SIGNATURES ----
@@ -830,10 +827,9 @@ async function generateSOW() {
   content.push(spacer());
   content.push(p("2.05. Effect of Termination."));
   content.push(p("(a) Upon termination, Client shall pay all fees and charges for services rendered through the date of termination, including any remaining obligations for annual licenses and subscriptions procured on Client\u2019s behalf, and any unpaid balance of contracted Virtual Staff Support hours actually worked in excess of contracted levels."));
-  content.push(p("(b) Technijian shall provide reasonable transition assistance for a period of up to thirty (30) days following termination, subject to payment of applicable fees. Such transition assistance may be conditioned upon payment of outstanding undisputed balances, except for the Operational Continuity Materials defined in subsection (c) below, which shall be transferred regardless of payment status."));
-  content.push(p("(c) Operational Continuity Materials. Notwithstanding any other provision of this Agreement (including any lien, setoff, or retention right), upon termination \u2014 or upon earlier written request by Client \u2014 Technijian shall transfer to Client or to a successor provider designated by Client, within five (5) business days, the following (the \u201cOperational Continuity Materials\u201d): (i) administrative, Global Administrator, root, or equivalent credentials to any Client-owned tenant, account, or system (including Microsoft 365, Azure, Entra ID, Apple Business Manager, Intune, CloudBrink, and any Client custodian- or regulator-facing system); (ii) DNS and domain-registrar control of Client-owned domains; (iii) break-glass credentials and recovery codes; (iv) information necessary to maintain the operation of any life-safety, regulatory-reporting, or other system whose interruption could cause physical harm, legal liability, or regulatory violation; and (v) all Client Data and records whose retention by Client is required by applicable law, regulation, or SRO rule (including SEC Rule 17a-4, FINRA Rule 4511, and the FTC Safeguards Rule). The Operational Continuity Materials shall not be withheld, conditioned, or delayed on account of any unpaid balance or dispute; Technijian\u2019s rights as to unpaid balances are preserved through the other remedies set forth in this Agreement, and not through retention of Operational Continuity Materials."));
-  content.push(p("(d) Technijian shall return all Client Data in its possession within thirty (30) days of termination, in a commercially standard format, provided Client is not in breach of this Agreement."));
-  content.push(p("(e) The following sections shall survive termination: Section 2.05(c) (Operational Continuity Materials), Section 3 (Payment), Section 4 (Confidentiality), Section 5 (Limitation of Liability), Section 6 (Indemnification), Section 7 (Intellectual Property), Section 8 (Dispute Resolution), Section 9.09 (Recruiting Cost Reimbursement), and Section 10 (Data Protection)."));
+  content.push(p("(b) Technijian shall provide reasonable transition assistance for a period of up to thirty (30) days following termination, subject to payment of applicable fees."));
+  content.push(p("(c) Technijian shall return all Client Data in its possession within thirty (30) days of termination, in a commercially standard format, provided Client is not in breach of this Agreement."));
+  content.push(p("(d) The following sections shall survive termination: Section 3 (Payment), Section 4 (Confidentiality), Section 5 (Limitation of Liability), Section 6 (Indemnification), Section 7 (Intellectual Property), Section 8 (Dispute Resolution), Section 9.09 (Personnel Transition Fee), and Section 10 (Data Protection)."));
   content.push(spacer());
 
   // --- SECTION 3: PAYMENT ---
@@ -939,11 +935,7 @@ async function generateSOW() {
   content.push(spacer());
   content.push(p("9.08. Governing Law. This Agreement shall be governed by the laws of the State of California."));
   content.push(spacer());
-  content.push(p("9.09. Recruiting Cost Reimbursement."));
-  content.push(p("(a) Reimbursement Obligation. The Parties acknowledge that each invests significant resources in recruiting, training, onboarding, and certifying skilled personnel. If either Party (the \u201cHiring Party\u201d) directly and specifically solicits, and subsequently hires (whether as an employee or independent contractor), any individual who was an employee or contractor of the other Party (the \u201cAffected Party\u201d) and who was directly involved in performing or receiving services under this Agreement \u2014 and such solicitation and hiring occurs during the term of this Agreement or within twelve (12) months following termination \u2014 the Hiring Party shall reimburse the Affected Party for documented, out-of-pocket recruiting, training, onboarding, and certification costs actually incurred with respect to that individual, capped at twenty-five thousand dollars ($25,000) per individual. This reimbursement is a liquidated estimate of the Affected Party\u2019s quantifiable recruitment and training investment and is not intended as a restraint on trade or employment."));
-  content.push(p("(b) \u00a716600 Acknowledgment. This Section 9.09 is expressly subject to California Business and Professions Code \u00a716600 and \u00a716600.1 (as amended by SB 699, effective January 1, 2024) and does not restrict, prohibit, or penalize any individual\u2019s right to seek, accept, or retain employment with any person or entity. No individual is a third-party beneficiary of this Section and no individual owes any duty or obligation hereunder."));
-  content.push(p("(c) Carve-outs. This Section 9.09 shall not apply to individuals who: (i) respond to a general public job posting or advertisement not specifically targeted at the Affected Party\u2019s employees or contractors; (ii) are referred by a third-party recruiting firm without the Hiring Party\u2019s direction to target the Affected Party\u2019s personnel; or (iii) initiate contact with the Hiring Party on their own initiative, without any prior targeted solicitation by the Hiring Party directed at them specifically as personnel of the Affected Party."));
-  content.push(p("(d) Severability. If any portion of this Section 9.09 is held invalid or unenforceable \u2014 including by reason of Cal. Bus. & Prof. Code \u00a716600 \u2014 the remaining portions shall continue in full force and effect to the maximum extent permitted by law."));
+  content.push(p("9.09. Personnel Transition Fee. The Parties acknowledge that each invests significant resources in recruiting, training, and retaining skilled personnel. If either Party hires (whether as an employee or independent contractor) any individual who was an employee of the other Party and who was directly involved in performing or receiving services under this Agreement, and such hiring occurs during the term of this Agreement or within twelve (12) months following termination, the hiring Party shall pay the other Party a personnel transition fee equal to 25% of the hired individual\u2019s first-year annual compensation (base salary or annualized contractor fees). This fee represents a reasonable estimate of the non-hiring Party\u2019s recruiting and training costs and is not intended as a restraint on trade or employment. This Section does not restrict any individual\u2019s right to seek or obtain employment, and shall not apply to individuals who: (a) respond to general public job postings or advertisements not specifically targeted at the other Party\u2019s employees; or (b) are referred by a third-party recruiting firm without the hiring Party\u2019s direction to target the other Party\u2019s employees."));
   content.push(spacer());
   content.push(p("9.10. Counterparts. This Agreement may be executed in counterparts, each of which shall be deemed an original."));
   content.push(spacer());
