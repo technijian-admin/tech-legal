@@ -1,0 +1,437 @@
+﻿Date:    2026-04-24T19:28:02Z
+From:    Franklin T. Dunn <fdunn@callahan-law.com>
+To:      RJain@technijian.com; ES@callahan-law.com
+Cc:      ES@callahan-law.com
+Subject: RE: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days
+MessageId: <BN0PR08MB6855383C2D661B65A4E5A166912B2@BN0PR08MB6855.namprd08.prod.outlook.com>
+
+---- BODY (html) ----
+
+Ravi, Good morning. I am working my way through the various emails on the open matters you forwarded to me. Thank you. The first one I reviewed this morning was the Sunrun/Costco Solar issue. I want t  External (fdunn@callahan-law.com)    Graymail  Spam  Phish  More...  myQuarantine  Send Encrypted Mail 
+Ravi, Good morning.  
+
+ 
+
+I am working my way through the various emails on the open matters you forwarded to me.  Thank you. 
+
+ 
+
+The first one I reviewed this morning was the Sunrun/Costco Solar issue.  I want to make sure we are on the same page on the facts.
+
+ 
+
+You acquired a solar system from Sunrun, Inc. in 2012 to provide approximately 10 kWhs of the 17.5 kWhs typically utilized for your home located at 5 Caladium in Rancho Santa Margarita.  Section 8 of this Agreement provides for a Guaranteed Output performance guarantee, a warranty.  Other than this warranty, Sunrun Inc. disclaims all other implied warranties (e.g., merchantability or fitness for a particular purpose)While Sunrun, Inc. will be required to meet its Guaranteed Output obligation, it disclaims all claims for consequential, incidental, punitive, exemplary or indirect damages or losses. In 2017 you purchased an additional solar system from Costco to supplement the existing Sunrun system which was to provide approximately an additional 5.6 kWhs.  The Costco System was purchased from Cosco who hired Sunrun Installation Services Inc. (“Sunrun Installer”) as the installer of the system. The Costco contract provides that the Sunrun Installer will, in addition to designing, permitting, and installing the System, it will also be responsible for the “supply of the equipment and material typically necessary for a complete and operable System.“As a result, while some Sunrun entity was involved in both transactions, a Court or Arbitrator would likely find that you have two distinct systems on your roof.  Each system will be viewed independently. 
+
+As a matter of contract law, Costco is the primary party to your 2017 system.  It hired a subcontractor to perform some of the work (actually all of the work), but you have no direct contractual rights against Sunrun Installer, except, Sunrun Installer did provide a Limited Warranty that you could seek to enforce.                                                               i.      The Limited Warranty provides in pertinent part that for 10 years from the day the permit is signed, the rated electrical output of the System will not be less than 85% of the DC nameplate rating measured upon completion of the installation as a result of defects in the parts Sunrun supplied or labor Sunrun performed to install the System.  The Sunrun Installer Limited Warranty does not cover parts covered by a separate manufacturers warranty. 
+
+                                                            ii.      If there is a warranty issue, Sunrun Installer agrees to repair or replace the part at its expense. 
+
+Please note that Costco provided no express warranties or performance guarantees with its system.  It did not disclaim any implied warranties either. Like most commercial agreements, the Costco contract does exclude liability for any incidental, indirect, consequential, or special damages.  It also has a limitation of liability clause of the contract price. Based on the facts I have reviewed, The 2017 Costco system was failing to produce any power from November 10, 2025 through at least April 16, 2026.  The 2012 Sunrun Inc. system has been producing electricityAnalysisIf the Costco system is the one at fault, it will be the terms and conditions of the Costco agreement that are at issue and any tort claims would be addressed to Costo or the Sunrun Installer.  Per the Limited Warranty provided by Sunrun Installer, if the system was supplying less than 85% of the output, they have a contractual obligation to provide the services necessary to fix the system and to the provide the parts needed to fix the system at their cost.  With the Limitation of Liability Clause in the Costco Agreement, they will try to limit any damage claim for extra electricity costs you incurred due to the failure of the system.  However, there are equitable arguments that you have identified (e.g., concealment, unfair competition, etc.), that could be pursued given Sunrun’s clearly excessive time to identify and fix the issue here.                                                               i.      Question: It was unclear to me if there is some sort of app or other resource that you have access to that shows you real time the performance of each solar system.  We can discuss.  
+
+ 
+
+Let me know when is a good time to call you to discuss.  Then I can draft the demand letter and get the legal ball rolling with Sunrun. 
+
+ 
+
+ 
+
+Frank Dunn, Esq.
+
+CALLAHAN & BLAINE, PC 
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Phone  714.241.4444
+
+FAX    714.241.4445
+
+ 
+
+We are pleased to announce that our firm has relocated to a new office!
+
+All correspondence and in-person business will take place at our new address:
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Please update your records accordingly. 
+
+ 
+
+NOTICE: This message, including any accompanying attachments, is intended solely for the use of the individual to which it is addressed and others authorized to receive it. This message may contain information that is privileged, confidential or exempt from disclosure under applicable Federal or State law. If the reader of this message is not the intended recipient, or the employee or agent responsible for the delivery of the message to the intended recipient, you are hereby notified that any dissemination, distribution or copying of this communication, or taking action in relation to its contents, is strictly prohibited and may be unlawful. If you have received this email in error, please notify us immediately by telephone or return email and delete the original email and any copies thereof. Thank you.  
+
+ 
+
+From: Ravi Jain <RJain@technijian.com> 
+Sent: Thursday, April 23, 2026 8:56 AM
+To: EDWARD SUSOLIK <ES@callahan-law.com>
+Cc: Franklin T. Dunn <fdunn@callahan-law.com>
+Subject: RE: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days
+
+ 
+
+CAUTION: This email originated from outside of the organization. Please do not click on links or open attachments from senders you do not trust. 
+
+ 
+
+Ed,
+
+ 
+
+Thank you for taking this on. Below is a template drawn from the factual record and the statutory and common-law claims that fit this matter. Please revise as you see fit — items you may want to customize are the date, the monetary demand figure, the response deadline, delivery methods, CC list, and signature block. The facts are as I have confirmed them in writing to Sunrun on multiple occasions, and the legal citations are California-specific and current (including New England Country Foods, LLC v. Vanlaw Food Products, Inc., S282968 (Cal. April 24, 2025)).
+
+ 
+
+Two clarifications on the factual record so the letter is airtight:
+
+The outage began November 10, 2025 (not November 7 as was stated in my initial April 17 demand letter, which was based on an earlier approximation). November 10 is the same date Sunrun opened Service Case No. 18181148 for a “Metering” issue, which aligns Sunrun’s internal detection with the start of zero production. The SDG&E NEM records will confirm the precise start date in any proceeding.There was no on-site Sunrun technician visit on November 10 (or any other date in November 2025); the disconnection was effected remotely or through some earlier cached action that Sunrun has not disclosed. The template does not assert an on-site November visit — that circumstance is described as Sunrun’s own “system condition” acknowledged in Service Case No. 18181148, with the precise mechanism reserved for discovery. 
+
+One additional note — as of today, April 23, 2026, Katherine Wilson (Sunrun Service Pipeline Specialist) has formally advised that she is no longer authorized to engage on substance because I have stated counsel is engaged. She has asked that the demand letter be forwarded to Sunrun’s Legal Department as soon as it is received. Sunrun’s May 4, 2026 service visit for the 2017 Costco system is on the calendar.
+
+ 
+
+I can provide any supporting exhibits (SDG&E billing history, mySunrun application screenshots, full email thread, 2012 PPA, 2017 Costco contract, CPUC closing letter) on request.
+
+ 
+
+DEMAND LETTER TEMPLATE — FOR ADAPTATION ON CALLAHAN & BLAINE LETTERHEAD
+
+ 
+
+[DATE]
+
+ 
+
+Via Electronic Mail and U.S. Certified Mail, Return Receipt Requested
+
+ 
+
+Legal Department
+
+Sunrun, Inc.
+
+225 Bush Street, 14th Floor
+
+San Francisco, California 94104
+
+ 
+
+Legal Department
+
+Sunrun Installation Services, Inc.
+
+225 Bush Street, 14th Floor
+
+San Francisco, California 94104
+
+ 
+
+With a courtesy copy to their respective agents for service of process as designated with the California Secretary of State.
+
+ 
+
+Re:  Ravi Jain — 5 Caladium, Rancho Santa Margarita, California 92688
+
+Demand for Payment; Notice Under the Consumers Legal Remedies Act (Cal. Civ. Code § 1782); Litigation-Hold Demand
+
+Sunrun Service Case No. 18181148
+
+2012 Sunrun Solar Power Service Agreement (Prepaid PPA), Document No. PI139KV7A331V-A
+
+2017 Costco Home Improvement Sales Contract (Sunrun Installation Services, Inc., CSLB License No. 750184)
+
+ 
+
+Dear Sir or Madam:
+
+ 
+
+This firm represents Ravi Jain in connection with the above-referenced matter. All further communications concerning Mr. Jain’s claims should be directed to the undersigned; please do not contact Mr. Jain directly on the subject matter of this letter.
+
+ 
+
+This letter constitutes (a) a formal demand for payment of the sums identified in Part IV below; (b) notice under the Consumers Legal Remedies Act, California Civil Code § 1782, commencing the thirty (30)-day cure period; and (c) a continuing litigation-hold demand as to the records identified in Part VII.
+
+ 
+
+I. FACTUAL BACKGROUND
+
+ 
+
+Mr. Jain owns the residential property located at 5 Caladium, Rancho Santa Margarita, California 92688 (the “Property”). The Property is served by two Sunrun-related solar energy systems with a combined nameplate capacity of 11.16 kW:
+
+ 
+
+A.  The 2012 Sunrun Solar Power Service Agreement (Prepaid Power Purchase Agreement), Document No. PI139KV7A331V-A, executed September 12, 2012. This system is owned and maintained by Sunrun, Inc. pursuant to a twenty-year agreement for which Mr. Jain paid $20,000 at inception.
+
+ 
+
+B.  The 2017 Costco Home Improvement Sales Contract, executed October 12, 2017, with Permission to Operate issued by San Diego Gas & Electric Company on March 14, 2018. This system is customer-owned. It was installed by Sunrun Installation Services, Inc. (CSLB License No. 750184), with Sunrun’s dealer representative Roland Claudio signing on Sunrun’s behalf.
+
+ 
+
+On November 10, 2025, Mr. Jain’s Solar Facility ceased producing exportable electricity. That same day, Sunrun opened Service Case No. 18181148 with subject designation “Metering,” confirming that Sunrun’s proprietary monitoring infrastructure had detected the condition. San Diego Gas & Electric Net Energy Metering Meter No. 06688420 on Account No. 0036-1837-1728-9 records zero solar export from that date forward across every Time-of-Use bucket, for five consecutive monthly billing cycles.
+
+ 
+
+The Solar Facility thereafter produced zero exportable kilowatt-hours from November 10, 2025 through April 16, 2026, a continuous period exceeding five months. Sunrun did not notify Mr. Jain that his system had been taken offline — not by telephone, by electronic mail, by text message, or through the Sunrun customer application — at any point during the first sixty-seven (67) days of the outage. The first written notice Sunrun transmitted to Mr. Jain was dated January 16, 2026, and that notice — like each subsequent Sunrun communication through April 2026 — characterized the condition only as a vague “system issue” and never disclosed that production was in fact at zero.
+
+ 
+
+When Sunrun technicians attended an emergency dispatch at the Property on April 16, 2026 (following Mr. Jain’s April 15, 2026 escalation e-mail after he discovered the outage from his SDG&E bills), those technicians advised Mr. Jain that earlier Sunrun personnel had disconnected the panels. The precise mechanism of the disconnection — whether remote, through earlier cached action, or otherwise — has not been disclosed by Sunrun and is reserved for discovery. What is not in dispute is that (i) Sunrun’s own Case No. 18181148 reflects Sunrun’s awareness of the failure as of November 10, 2025, (ii) the Solar Facility produced no exportable power between that date and April 16, 2026, (iii) Sunrun did not notify Mr. Jain during the first sixty-seven (67) days of the outage, and (iv) Sunrun’s Service Pipeline Specialist, Katherine Wilson, acknowledged in writing on April 16, 2026 at 7:19 p.m. Pacific Time that a Sunrun team had “went out today” and contemporaneously offered $450 “for missed savings from the down time.”
+
+ 
+
+Since April 17, 2026, Sunrun has engaged in a pattern of conduct that, in aggregate, is inconsistent with the duties owed by a licensed California contractor and the obligations of the underlying agreements:
+
+ 
+
+1.  On April 17, 2026, Ms. Wilson advised Mr. Jain in writing that he “do[es] not have a performance guarantee on your contract” and that Sunrun “cannot and will not compensate” him. That statement is false. Approximately two minutes earlier the same day, Sunrun’s automated system at no-reply@email.sunrun.com transmitted to Mr. Jain an e-mail entitled “Your Early Performance Guarantee Information,” affirmatively identifying an Early Performance Guarantee on the account. Section 8 of the 2012 Prepaid PPA (Guaranteed Output and Refunds) independently provides a written annual production guarantee with a refund mechanism.
+
+ 
+
+2.  On April 22, 2026, Ms. Wilson claimed that “the April 22 appointment was moved up to April 16.” That statement is also false. Sunrun’s own automated confirmation dated April 12, 2026 at 7:09 p.m. Pacific Time established April 22 as a separately scheduled appointment; no rescheduling notice was ever transmitted; and Ms. Wilson’s own April 16, 2026 e-mail describes the April 16 dispatch as a visit by the team “that went out today” — the language of an emergency response, not a rescheduled appointment.
+
+ 
+
+3.  On April 22, 2026, Sunrun offered $500 calculated on an invented methodology: the $20,000 prepaid payment divided by 240 months and multiplied by five months of downtime. This contradicts Section 8 of the Prepaid PPA, which measures refund by kilowatt-hour shortfall multiplied by the contract rate, not by a time-based slice of the prepayment.
+
+ 
+
+4.  Sunrun has improperly invoked Section 5c of the Prepaid PPA (Supplemental Energy) as a liability shield. Section 5c, by its plain terms, governs normal operation when the Solar Facility produces less than the customer consumes. It has no application to an outage caused by Sunrun’s own conduct and Sunrun’s failure to notify the customer for five months.
+
+ 
+
+5.  The 2017 Costco system remains non-operational as of the date of this letter. The mySunrun application displayed an “Outlier detected” status on April 18, 2026 — two days after Sunrun’s April 16 attempted repair — and continues to display estimated (not actual) production. A further service visit is scheduled for May 4, 2026.
+
+ 
+
+6.  Sunrun has advised Mr. Jain in writing that access to Sunrun’s Legal Department is conditioned upon retention of counsel, and that Service Pipeline personnel are authorized to offer no more than $500 to this consumer. That policy is itself evidence of a systemic barrier to consumer remedy of the kind the California Legislature sought to deter in enacting Code of Civil Procedure § 1021.5.
+
+ 
+
+II. LIABILITY
+
+ 
+
+A.  Breach of Contract and Breach of Warranty.  Sunrun has breached each of the following obligations: (i) Section 2 (Maintenance) of the 2012 Prepaid PPA; (ii) Section 8 (Guaranteed Output and Refunds) of the 2012 Prepaid PPA; (iii) Section 13(c) of the 2012 Prepaid PPA (commercially reasonable repair); (iv) Section 4 of the 2017 Limited Warranty issued by Sunrun Installation Services, Inc. (reasonable-time repair); and (v) the implied covenant of good faith and fair dealing in each agreement. Sunrun’s conduct is independently actionable under the Song-Beverly Consumer Warranty Act, Cal. Civ. Code §§ 1790 et seq., which applies to consumer goods including residential solar energy systems and which provides for mandatory recovery of attorney’s fees and costs by a prevailing consumer. Cal. Civ. Code § 1794(d).
+
+ 
+
+B.  Consumers Legal Remedies Act — Cal. Civ. Code §§ 1750 et seq.  Sunrun has violated § 1770(a)(14) by representing — through Ms. Wilson’s written denial of the performance guarantee and through Sunrun’s refusal to honor Section 8 — that the transaction “confers or involves rights, remedies, or obligations” that it does not have, or that denies rights that exist. Sunrun’s written representation that Mr. Jain must retain legal counsel to access rights under his own contract, and its invocation of Section 5c (Supplemental Energy) as a shield against workmanship claims, independently violate § 1770. Pursuant to Cal. Civ. Code § 1782, Sunrun is hereby placed on formal thirty (30)-day notice. If Sunrun fails within thirty days of receipt of this letter to correct, repair, replace, or otherwise rectify the goods and services, or to agree in writing to do so within a reasonable time, Mr. Jain will commence a CLRA action seeking actual damages, restitution, punitive damages, injunctive relief, and attorney’s fees and costs. Cal. Civ. Code §§ 1780(a), 1780(e).
+
+ 
+
+C.  Fraudulent Concealment and Deceit by Suppression — Cal. Civ. Code §§ 1572, 1709, 1710.  Sunrun owed Mr. Jain a duty of disclosure arising from (i) Sunrun’s materially superior knowledge derived from its proprietary monitoring infrastructure and (ii) the ongoing contractual maintenance obligations under Section 2 of the Prepaid PPA. Sunrun knew no later than November 10, 2025 that the Solar Facility had ceased producing exportable electricity. Sunrun suppressed that fact for sixty-seven days and thereafter systematically mischaracterized it as a mere “system issue” across more than a dozen communications, while continuing to transmit promotional materials to Mr. Jain during the outage (including a “Value Report” on March 21, 2026 and a CEO message from theCEO@sunrun.com on March 15, 2026). Sunrun’s concealment was material, intentional, and caused actual reliance damages.
+
+ 
+
+D.  Unfair Competition Law — Cal. Bus. & Prof. Code §§ 17200 et seq.  Sunrun’s conduct is “unlawful” because it violates the CLRA, Song-Beverly, and the underlying agreements, and is independently “unfair” under the non-disclosure prong of UCL jurisprudence. Remedies available include restitution, disgorgement, and injunctive relief, along with attorney’s fees under Code of Civil Procedure § 1021.5.
+
+ 
+
+E.  Punitive Damages — Cal. Civ. Code § 3294.  Concealment by a corporate defendant supports punitive damages on a clear-and-convincing showing of fraud, oppression, or malice. The documented pattern here — sixty-seven days of silence after monitoring detected the failure, four months of “system issue” communications while production remained at zero, promotional materials transmitted during the outage, and a written policy conditioning access to internal legal review on retention of counsel — will support that showing.
+
+ 
+
+F.  Civil Code § 1668 and the Limits of Contractual Disclaimers.  Any attempt by Sunrun to invoke a liability cap, a consequential-damages exclusion, or a supplemental-energy disclaimer as a shield against these claims is unenforceable under Cal. Civ. Code § 1668 as construed by the California Supreme Court in New England Country Foods, LLC v. Vanlaw Food Products, Inc., S282968 (Cal. April 24, 2025), which held that § 1668 invalidates not only complete liability waivers but also any provision that limits damages for willful misconduct, fraud, or violation of law. See also Tunkl v. Regents of the Univ. of Cal., 60 Cal. 2d 92 (1963); City of Santa Barbara v. Superior Court, 41 Cal. 4th 747 (2007); Health Net of Cal., Inc. v. Dep’t of Health Servs., 113 Cal. App. 4th 224 (2003).
+
+ 
+
+III. DAMAGES
+
+ 
+
+Mr. Jain’s documented and projected damages are as follows:
+
+ 
+
+A.  Actual out-of-pocket excess utility charges from SDG&E, November 2025 through April 2026: approximately $3,600, supported by the monthly billing records on file.
+
+ 
+
+B.  Continuing excess utility charges accruing through full restoration of the 2017 Costco system: currently estimated at an additional $2,500 through the November 6, 2026 NEM true-up, subject to adjustment based on the actual date of restoration.
+
+ 
+
+C.  Section 8 (Guaranteed Output and Refunds) refund for the current anniversary year of the 2012 Prepaid PPA: amount to be calculated per the contract formula and payable on the next anniversary date.
+
+ 
+
+D.  Loss-of-use and inconvenience damages attributable to the systemic mishandling of the matter, including Mr. Jain’s personal time expended in documentation, escalation, and agency filings.
+
+ 
+
+E.  Attorney’s fees and costs incurred in connection with this matter, recoverable from Sunrun under Cal. Civ. Code §§ 1780(e), 1794(d), and 1717 (to the extent any attorney’s fees clause in the contracts is found applicable), and Code of Civil Procedure § 1021.5. These amounts will be itemized and added to the settlement figure set forth below; they continue to accrue.
+
+ 
+
+F.  Punitive damages under Cal. Civ. Code § 3294, to be determined at trial if litigation becomes necessary.
+
+ 
+
+IV. DEMAND
+
+ 
+
+To resolve this matter without litigation, Mr. Jain hereby demands the following within fourteen (14) calendar days of receipt of this letter:
+
+ 
+
+1.  Payment of $15,000 in full settlement of the claims described in Parts III.A through III.D above, by check made payable to “Ravi Jain” or by SDG&E account credit applied directly to Account No. 0036-1837-1728-9;
+
+ 
+
+2.  Complete restoration of the 2017 Costco solar system to full operational status, at no charge to Mr. Jain, on or before May 15, 2026, with written confirmation from Sunrun and root-cause documentation delivered no later than May 22, 2026;
+
+ 
+
+3.  Written confirmation of the 2012 Prepaid PPA Section 8 Guaranteed Output refund calculation and payment schedule for the current anniversary year;
+
+ 
+
+4.  Reimbursement of reasonable attorney’s fees and costs incurred to the date of resolution, in an amount to be itemized by the undersigned; and
+
+ 
+
+5.  Sunrun’s written confirmation that Section 5c of the Prepaid PPA (Supplemental Energy) will not be asserted as a defense to the workmanship claims arising out of the conduct described in Part I.
+
+ 
+
+The $15,000 figure is a settlement number, not a damages ceiling. It is available only during this thirty-day CLRA cure window. If Sunrun does not cure within thirty days as required by Cal. Civ. Code § 1782, Mr. Jain will file suit seeking actual damages, restitution, statutory damages where available, punitive damages, injunctive relief, and attorney’s fees and costs, and the settlement figure set forth above will no longer apply.
+
+ 
+
+V. FORUM RESERVATIONS
+
+ 
+
+Mr. Jain expressly reserves his right to pursue each of the claims set forth above in the forum of his choice, including: (A) the Superior Court of California, County of Orange (as to contract, warranty, and tort claims arising from the 2017 Costco customer-owned system); (B) JAMS arbitration pursuant to Section 16 of the 2012 Prepaid PPA to the extent Sunrun elects to invoke that forum as to PPA claims; and (C) individual or class action proceedings under the CLRA and UCL.
+
+ 
+
+VI. REGULATORY FILINGS
+
+ 
+
+A workmanship complaint has been filed with the California Contractors State License Board naming License No. 750184 (Sunrun Installation Services, Inc.) and License No. 969975 (Sunrun, Inc.). A complaint was previously submitted to the California Public Utilities Commission (File No. 726931); CPUC declined jurisdiction by letter dated April 21, 2026 and referred the matter to CSLB. Additional filings, including with the Better Business Bureau and the California Department of Consumer Affairs, are reserved.
+
+ 
+
+VII. DOCUMENT PRESERVATION
+
+ 
+
+Sunrun, Inc., Sunrun Installation Services, Inc., and their respective parents, subsidiaries, affiliates, officers, directors, agents, and counsel are hereby placed on continuing notice to preserve, and to instruct custodians to preserve, all documents, communications, and electronically stored information relating to this matter, including without limitation:
+
+ 
+
+(a) the customer file for Ravi Jain, Account No. 0036-1837-1728-9, NEM Meter No. 06688420, at 5 Caladium, Rancho Santa Margarita, California 92688;
+
+ 
+
+(b) Service Case No. 18181148, including all case notes, status updates, and internal discussions regarding the classification of the condition as “Metering” rather than “System Down” or equivalent, and all records bearing on how and when the Solar Facility was taken offline on or about November 10, 2025 (including any remote-command, firmware, inverter-control, or work-order records for the Property from October 1, 2025 forward);
+
+ 
+
+(c) monitoring telemetry from the SolarEdge inverters and Sunrun’s monitoring system at the Property from October 1, 2025 through the date of full restoration, at the highest available interval resolution;
+
+ 
+
+(d) work orders, technician field notes, technician GPS and time records, photographs, and remote-monitoring readings for each Sunrun engagement with the Property from October 1, 2025 forward;
+
+ 
+
+(e) scripts, templates, and decision rules used by Sunrun’s automated communications systems (including noreply@ai.sunrun.com) relating to the characterization of the condition as “system issue” or “your issue”;
+
+ 
+
+(f) internal communications regarding the authorization cap applicable to this case, the “counsel required for Legal access” policy, and any similar policies concerning consumer claims; and
+
+ 
+
+(g) all communications among Sunrun personnel, including but not limited to Katherine Wilson and any field-operations and customer-engagement personnel, concerning Mr. Jain and/or the Property.
+
+ 
+
+Spoliation of any of the foregoing materials will be raised in any subsequent proceeding and will support a request for an adverse-inference instruction.
+
+ 
+
+VIII. RESPONSE
+
+ 
+
+Please direct all communications concerning this matter to the undersigned. A telephonic meet-and-confer within the thirty-day cure period would be welcomed. Absent resolution of the claims set forth above within the fourteen-day settlement window identified in Part IV, and absent cure within the thirty-day CLRA notice period specified in Part II.B, Mr. Jain intends to proceed as outlined above without further notice.
+
+ 
+
+Sunrun is well-advised that, given the documented concealment, misrepresentation, and the systemic nature of the conduct described in this letter, the exposure here — statutory attorney’s fees, punitive damages, and the availability of class treatment — materially exceeds the $500 authorization ceiling Sunrun’s customer-service personnel have identified.
+
+ 
+
+This letter is sent without prejudice to any of Mr. Jain’s rights, claims, defenses, or remedies, all of which are expressly reserved.
+
+ 
+
+Very truly yours,
+
+ 
+
+CALLAHAN & BLAINE
+
+ 
+
+Edward Susolik, Esq.
+
+ 
+
+cc: Ravi Jain (client)
+
+ 
+
+Let me know if you want me to adjust the demand figure ($15,000 reflects the documented ~$3,600 plus projected $2,500 plus an inconvenience/attorney-fee allocation) or any of the other terms before you finalize. Happy to send the supporting exhibits package as soon as you confirm format.
+
+ 
+
+Thank you,
+
+ 
+
+Ravi Jain
+
+CEO
+
+Technijian
+
+T: 949.379.8499 x201
+C: 714.402.3164
+S: 949.379.8501 (support)
+E: rjain@technijian.com
+W: technijian.com
+
+Book a Meeting
+
+Book time with Support
+
+USA: 18 Technology Dr., Irvine, CA 92618
+India: Plot No. 07, 1st Floor, Panchkula IT Park, Panchkula, Haryana 134109
+
+LinkedIn | Facebook | YouTube | Instagram | X | TikTok | Pinterest
+
+This email and any attachments are confidential and intended solely for the addressee. If you have received this message in error, please notify the sender immediately and delete it from your system. Unauthorized review, use, disclosure, or distribution is prohibited.
+
+ 
+
+Disclaimer
+
+The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.
+
+This email has been scanned for viruses and malware, and may have been automatically archived by Mimecast Ltd, an innovator in Software as a Service (SaaS) for business. Providing a safer and more useful place for your human generated data. Specializing in; Security, archiving and compliance. To find out more Click Here.
+
+
+

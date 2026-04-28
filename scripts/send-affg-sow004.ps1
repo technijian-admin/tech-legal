@@ -1,5 +1,14 @@
-# Send AFFG Managed Device Strategy Presentation to Iris Liu
-# Draft -> Attach pptx -> Send pattern
+# Send AFFG SOW-AFFG-004 Rev 2 (macOS fleet) to Iris Liu
+# Default mode: CREATE DRAFT ONLY (user reviews in Outlook before sending).
+# Pass -Send to actually deliver.
+#
+# Usage:
+#   .\send-affg-sow004.ps1             # creates draft in RJain@technijian.com > Drafts
+#   .\send-affg-sow004.ps1 -Send       # creates draft AND sends to iris.liu@americanfundstars.com
+
+param(
+    [switch]$Send
+)
 
 # -- Auth --
 $m365Keys     = Get-Content "C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\m365-graph.md" -Raw
@@ -16,7 +25,7 @@ $senderUpn = "RJain@technijian.com"
 $raviSignature = Get-Content "c:\vscode\tech-legal\tech-legal\scripts\ravi-signature.html" -Raw -Encoding UTF8
 
 # -- Subject --
-$subject = "AFFG Managed Device Strategy - Proposal & SOW-AFFG-004 for Review"
+$subject = "AFFG SOW-004 Rev 2 - Revised for Apple-only Fleet - Review Before Tomorrow's Meeting"
 
 # -- Body --
 $htmlBody = @"
@@ -24,75 +33,94 @@ $htmlBody = @"
 
 <p>Hi Iris,</p>
 
-<p>Attached is the <strong>AFFG Managed Device Strategy</strong> proposal. This proposes taking AFFG from the current network (per our signed Monthly Service Agreement) to a fully SEC/FINRA-compliant endpoint posture built on 9 Intune-managed company laptops, 9 Intune MDM-managed company phones, CloudBrink ZTNA, Entra Conditional Access, MyAudit endpoint DLP, and the SSO/2FA gateway on all managed endpoints.</p>
+<p>Thanks for sending over the current device inventory &mdash; I&rsquo;ve folded it into a revised <strong>SOW-AFFG-004</strong> (attached). Summary of where we landed so you can review before tomorrow&rsquo;s meeting:</p>
 
-<p><strong>SOW-AFFG-004 &mdash; Managed Device Control Deployment</strong></p>
+<p><strong>Current managed inventory (from your list):</strong></p>
 
 <table cellspacing="0" cellpadding="8" border="0" style="border-collapse:collapse; font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:11pt; width:100%; max-width:640px;">
 <tr style="background-color:#006DB6; color:#FFFFFF;">
-<td style="border:1px solid #006DB6; font-weight:600;">Phase</td>
-<td style="border:1px solid #006DB6; font-weight:600;">Deliverable</td>
+<td style="border:1px solid #006DB6; font-weight:600;">Host</td>
+<td style="border:1px solid #006DB6; font-weight:600;">Device</td>
+<td style="border:1px solid #006DB6; font-weight:600;">OS</td>
 </tr>
 <tr style="background-color:#F8F9FA;">
-<td style="border:1px solid #DEE2E6;">Phase 1</td>
-<td style="border:1px solid #DEE2E6;">Endpoint Foundation &mdash; Intune Autopilot, compliance policies, security stack, DLP, SSO/2FA, Credential Manager on 9 laptops</td>
+<td style="border:1px solid #DEE2E6;">DANIELS-MAC-MINI</td>
+<td style="border:1px solid #DEE2E6;">Mac Mini (Mac16,10), 16 GB</td>
+<td style="border:1px solid #DEE2E6;">macOS Tahoe 26.3.1</td>
 </tr>
 <tr>
-<td style="border:1px solid #DEE2E6;">Phase 2</td>
-<td style="border:1px solid #DEE2E6;">Access Control &mdash; Entra Conditional Access, CloudBrink ZTNA, Schwab/IBKR custodian access migration</td>
+<td style="border:1px solid #DEE2E6;">MACBOOK-PRO-4</td>
+<td style="border:1px solid #DEE2E6;">MacBook Pro (Mac14,9), 16 GB</td>
+<td style="border:1px solid #DEE2E6;">macOS Tahoe 26.3.1</td>
 </tr>
 <tr style="background-color:#F8F9FA;">
-<td style="border:1px solid #DEE2E6;">Phase 3</td>
-<td style="border:1px solid #DEE2E6;">Mobile Device Control &mdash; Intune MDM + App Protection on 9 company phones, remote wipe</td>
+<td style="border:1px solid #DEE2E6;">KIKI</td>
+<td style="border:1px solid #DEE2E6;">Surface Pro 8, 16 GB</td>
+<td style="border:1px solid #DEE2E6;">Windows 11 Home</td>
 </tr>
 <tr>
-<td style="border:1px solid #DEE2E6;">Phase 4</td>
-<td style="border:1px solid #DEE2E6;">User Cutover &mdash; data migration, training, 2-week pilot, legacy office-IP decommission</td>
+<td style="border:1px solid #DEE2E6;">LEON</td>
+<td style="border:1px solid #DEE2E6;">Lenovo V15 G2 IJL, 32 GB</td>
+<td style="border:1px solid #DEE2E6;">Windows 11 Pro</td>
 </tr>
 <tr style="background-color:#F8F9FA;">
-<td style="border:1px solid #DEE2E6;">Phase 5</td>
-<td style="border:1px solid #DEE2E6;">Monitoring &amp; Validation &mdash; fleet monitoring, mobile audit, end-to-end security validation, gap assessment</td>
-</tr>
-<tr>
-<td style="border:1px solid #DEE2E6;">Phase 6</td>
-<td style="border:1px solid #DEE2E6;">Documentation &mdash; compliance documentation suite, Schedule A amendment</td>
+<td style="border:1px solid #DEE2E6;">MAGGIE</td>
+<td style="border:1px solid #DEE2E6;">Surface Pro 8, 8 GB</td>
+<td style="border:1px solid #DEE2E6;">Windows 11 Home</td>
 </tr>
 </table>
 
-<p style="margin-top:16px;">Every control component maps to a specific citation under Reg S-P (2024 Amendments), FINRA 3110/4370, SEC 17a-4, and NIST SP 800-53 Rev 5.</p>
+<p style="margin-top:16px;"><strong>Offboarding under this SOW (4 devices):</strong></p>
+<ul style="line-height:1.7;">
+<li>MACBOOK-PRO-4 &mdash; MacBook Pro</li>
+<li>KIKI &mdash; Surface Pro 8</li>
+<li>LEON &mdash; Lenovo V15 G2 IJL</li>
+<li>MAGGIE &mdash; Surface Pro 8</li>
+</ul>
+<p>Each device gets a NIST SP 800-88 disk wipe plus chain-of-custody documentation (Phase 4, ticket AFFG-004-017). DANIELS-MAC-MINI stays in service.</p>
 
-<p><strong>Investment:</strong></p>
+<p><strong>Onboarding under this SOW (9 new Apple endpoints):</strong></p>
+<ul style="line-height:1.7;">
+<li>3 Mac Minis (new)</li>
+<li>6 Apple Neo notebooks (new)</li>
+</ul>
+<p>All 9 enroll via Apple Business Manager into Intune Automated Device Enrollment &mdash; macOS-only management going forward, no Windows in the managed fleet.</p>
 
-<table cellspacing="0" cellpadding="8" border="0" style="border-collapse:collapse; font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:11pt; max-width:500px;">
+<p><strong>Updated hours and cost (Rev 1 &rarr; Rev 2):</strong></p>
+
+<table cellspacing="0" cellpadding="8" border="0" style="border-collapse:collapse; font-family:Aptos,Calibri,Helvetica,sans-serif; font-size:11pt; max-width:560px;">
 <tr style="background-color:#006DB6; color:#FFFFFF;">
 <td style="border:1px solid #006DB6; font-weight:600;">Item</td>
-<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">Amount</td>
+<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">Rev 1 (Windows)</td>
+<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">Rev 2 (Apple)</td>
 </tr>
 <tr style="background-color:#F8F9FA;">
-<td style="border:1px solid #DEE2E6;">One-time implementation (26 tickets, 89 hours)</td>
-<td style="border:1px solid #DEE2E6; text-align:right;">`$6,525.00</td>
+<td style="border:1px solid #DEE2E6;">Hours</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">89 hrs</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">90 hrs</td>
 </tr>
 <tr>
-<td style="border:1px solid #DEE2E6;">Current monthly recurring (signed MSA)</td>
-<td style="border:1px solid #DEE2E6; text-align:right;">`$2,794.50/mo</td>
+<td style="border:1px solid #DEE2E6;">One-time implementation</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">`$6,525.00</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">`$6,990.00</td>
 </tr>
 <tr style="background-color:#F8F9FA;">
-<td style="border:1px solid #DEE2E6;">Proposed monthly recurring (post-implementation)</td>
-<td style="border:1px solid #DEE2E6; text-align:right;">`$3,734.90/mo</td>
+<td style="border:1px solid #DEE2E6;">Net monthly recurring change</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">+`$940.40/mo</td>
+<td style="border:1px solid #DEE2E6; text-align:right;">+`$1,003.40/mo</td>
 </tr>
 <tr style="background-color:#E8F4FD;">
-<td style="border:1px solid #006DB6; font-weight:600;">Net monthly increase</td>
-<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">+`$940.40/mo</td>
+<td style="border:1px solid #006DB6; font-weight:600;">Proposed monthly recurring</td>
+<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">`$3,734.90/mo</td>
+<td style="border:1px solid #006DB6; font-weight:600; text-align:right;">`$3,797.90/mo</td>
 </tr>
 </table>
 
-<p style="margin-top:16px;">The monthly recurring change reflects consolidating the existing desktop security stack from 16 units down to 9 managed laptops (&minus;`$185.50/mo) and adding the new managed laptop control stack: MyAudit UAM+DLP, SSO/2FA, and Credential Manager on 9 endpoints (+`$1,125.90/mo). Intune management for both laptops and phones is covered by AFFG&rsquo;s existing M365 E3 license &mdash; no additional Technijian charge. CloudBrink ZTNA subscription is procured by AFFG directly and sits outside Schedule A. Virtual Staff Support hours and rates remain unchanged.</p>
+<p style="margin-top:16px;">The hour delta reflects Apple Business Manager setup being slightly simpler than Windows Autopilot (&minus;1 hr), offset by the 4-device offboarding work added to Phase 4 (+2 hrs). The monthly uplift shifts from +`$940.40 to +`$1,003.40 because macOS patch management (PMMAC at `$11/device) runs higher than Windows (PMW at `$4/device) across the 9 endpoints.</p>
 
-<p>The SOW also includes a <strong>Section 12 amendment</strong> that brings AFFG under Technijian&rsquo;s 2026 MSA Framework (attached as Exhibit A in the SOW) &mdash; adding Confidentiality, Limitation of Liability with enhanced cap for data-protection breaches, Dispute Resolution, Personnel Transition Fee, and the CCPA/CPRA &plus; Reg S-P 48-hour breach-notification data-protection provisions your compliance program needs under the 2024 amendments.</p>
+<p>The Section 12 amendment incorporating Technijian&rsquo;s 2026 MSA Framework into our signed Monthly Service Agreement is still in place as Exhibit A of the SOW &mdash; no changes there.</p>
 
-<p>The SOW document is coming to you separately via DocuSign for signature. Please review the strategy deck first, and feel free to use the booking link in my email signature to schedule a walkthrough if you&rsquo;d like to discuss before signing.</p>
-
-<p>Looking forward to hearing from you.</p>
+<p>Let&rsquo;s walk through the inventory, offboarding plan, and cost deltas in tomorrow&rsquo;s meeting. Once we&rsquo;re aligned, I&rsquo;ll route the updated SOW through DocuSign for signature.</p>
 
 </div>
 
@@ -126,9 +154,9 @@ $draft = New-MgUserMessage -UserId $senderUpn -BodyParameter @{
 
 Write-Host "Draft created: $($draft.Id)"
 
-# -- Attach presentation --
+# -- Attach revised SOW-004 docx --
 $attachments = @(
-    "c:\vscode\tech-legal\tech-legal\clients\AFFG\03_SOW\AFFG_Managed_Device_Strategy_Technijian.pptx"
+    "c:\vscode\tech-legal\tech-legal\clients\AFFG\03_SOW\SOW-AFFG-004-Managed-Device-Migration.docx"
 )
 
 foreach ($f in $attachments) {
@@ -142,8 +170,16 @@ foreach ($f in $attachments) {
     Write-Host "Attached: $([System.IO.Path]::GetFileName($f))"
 }
 
-# -- Send --
-Send-MgUserMessage -UserId $senderUpn -MessageId $draft.Id
-Write-Host "Email sent to iris.liu@americanfundstars.com"
+# -- Send or stop at draft --
+if ($Send) {
+    Send-MgUserMessage -UserId $senderUpn -MessageId $draft.Id
+    Write-Host "Email SENT to iris.liu@americanfundstars.com"
+} else {
+    Write-Host ""
+    Write-Host "DRAFT created (not sent). Review in Outlook > Drafts, then re-run with -Send to deliver."
+    Write-Host "  Draft ID: $($draft.Id)"
+    Write-Host "  Subject:  $subject"
+    Write-Host "  To:       iris.liu@americanfundstars.com"
+}
 
 Disconnect-MgGraph | Out-Null
