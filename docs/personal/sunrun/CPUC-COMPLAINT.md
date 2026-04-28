@@ -1,60 +1,54 @@
-# CPUC Complaint #226711 — Sunrun (Filed 2026-04-20)
+# CPUC Complaint — Confirmation #226711
 
-**Property:** 5 Caladium, Rancho Santa Margarita, CA 92688
-**SDG&E Account:** 0036 1837 1728 9
-**Sunrun Case:** #18181148
-**CPUC Confirmation Number:** **226711**
 **Filed:** 2026-04-20
-**Filing method:** CPUC online complaint form (Playwright-assisted; reCAPTCHA submitted manually)
-**Portal:** https://cims.cpuc.ca.gov/complaints/
+**Portal:** https://cims.cpuc.ca.gov/complaints/Home/FileComplaint
+**Method:** Playwright automation (see [cpuc-complaint.js](cpuc-complaint.js))
+**Status Lookup:** https://cims.cpuc.ca.gov/complaints/
 
-## Why filed
-Sunrun's technicians disconnected the residential 11.16 kW solar system on or about 2025-11-07 and never disclosed it. The system produced zero exportable kWh for ~5 months (Nov 2025 – Apr 2026). Excess SDG&E charges totaled approximately $3,600. Sunrun's offered compensation was $450 (Early Performance Guarantee credit) — a small fraction of the documented loss and almost certainly conditioned on a release of further claims.
+## Complainant Information
+| Field | Value |
+|-------|-------|
+| First Name | Ravi |
+| Last Name | Jain |
+| Street (LocationService) | 5 Caladium |
+| City | Rancho Santa Margarita |
+| State | CA |
+| Zip | 92688 |
+| Mobile Phone | 714-402-3164 |
+| Email | rjain@technijian.com |
 
-## Track in parallel with
-| Track | Status |
-|---|---|
-| Round 1 demand letter ($7,500) | Sent 2026-04-17 to Katherine Wilson + membercare@ |
-| Round 2 detailed reply | Sent 2026-04-20 (this repo: scripts/send-sunrun-reply-katherine.ps1) |
-| **CPUC #226711** | **Filed 2026-04-20 — awaiting CPUC response** |
-| Ed Susolik review (class-action evaluation) | Forwarded 2026-04-20 — same counsel as Technijian v. Vintage Design (AAA) |
-| CSLB complaint (License #750184) | Pending — file if Round 2 ignored by Apr 24 |
-| Small claims (CCP §116.221, $12,500 cap) | Target filing 2026-05-15 if no resolution |
-| CLRA §1782 30-day notice | Began running 2026-04-17; ripens 2026-05-17 |
+## Utility Information
+| Field | Value |
+|-------|-------|
+| Utility Name | Sunrun, Inc. and Sunrun Installation Services, Inc. |
+| Account Number | 0036 1837 1728 9 |
 
-## Key dates going forward
-- **2026-04-22** — Sunrun-scheduled service appointment (11am-3pm). 2017 Costco system still 0 kWh as of Apr 18.
-- **2026-04-24 (Friday)** — Round 2 response deadline given to Katherine Wilson.
-- **2026-05-15** — Target small-claims filing if no settlement.
-- **2026-05-17** — CLRA 30-day notice clock ripens to lawsuit.
+## Narrative Submitted
 
-## CPUC complaint narrative (preserved)
-Filed via CPUC online form. Narrative covered:
-1. Sunrun monitoring detected failure on or before 2025-11-10 (per their own Jan 16 email)
-2. 67 days of complete silence after monitoring detected the issue
-3. Pattern of vague "system issue" language never disclosing zero production
-4. Marketing emails (CEO + "Value Report") sent during the outage
-5. Settlement offer of $450 against ~$3,600 in excess utility charges
-6. 2017 Costco system still non-operational as of Apr 18 ("Outlier detected" in Sunrun's own app)
+### 1. What is the situation that concerns you?
+> Sunrun technicians disconnected my residential solar system (11.16 kW, two Sunrun systems at the same property: a 2012 Sunrun-owned Prepaid PPA and a 2017 customer-owned Costco solar system) during a service visit on November 7, 2025 at 5 Caladium, Rancho Santa Margarita, CA 92688. The system produced ZERO exportable power from 11/7/2025 through 4/16/2026, a period of over five months. Sunrun never notified me the system was offline. I discovered the outage only when reviewing my SDG&E bills (NEM Meter 06688420) which showed zero solar export for five consecutive months. My electric bills increased by approximately $3,600 during this period. Sunrun Service Case 18181148.
 
-## CPUC form gotchas (for next time)
-- Street field is `#LocationService` (not `#Street`)
-- No single quotes/apostrophes allowed — write "Sunruns" not "Sunrun's"
-- 1000-character limit per narrative box
-- Mobile phone required (`#PhoneDayTime`)
-- reCAPTCHA must be solved manually — cannot be automated
+### 2. What did the utility say when you contacted them?
+> Sunrun completed repairs on April 16-17, 2026 after I escalated. Their representative Katherine Wilson offered only a $450 Early Performance Guarantee credit despite over five months of zero production caused by their own technicians. I submitted a formal written warranty demand on April 17, 2026 requesting $7,500 in direct damages. Sunrun acknowledged receipt but stated I must retain an attorney to access their legal resolution team, making individual pursuit financially impractical. Their customercare inbox is unmonitored per auto-response. On April 20, 2026 Sunrun unilaterally declared the case closed with the message that my system is back to normal, without addressing reimbursement.
 
-## CPUC follow-up checklist
-- [ ] Receive CPUC acknowledgment email (typically within 5 business days)
-- [ ] Track #226711 status at https://cims.cpuc.ca.gov/complaints/
-- [ ] Update CPUC if Sunrun does not substantively respond by Apr 24
-- [ ] Reference #226711 in any further Sunrun correspondence
-- [ ] Provide #226711 to Ed Susolik for class-action survey
+### 3. What action do you want the CPUC to take?
+> 1. Investigate Sunruns failure to notify California customers when their solar systems are rendered non-operational by Sunruns own technicians.
+> 2. Determine whether Sunrun has a pattern of disconnecting customer systems during service visits without notifying customers, which may affect many California solar customers.
+> 3. Require Sunrun to provide fair reimbursement of at least $3,600 for excess electricity costs caused by their negligence.
+> 4. Review Sunruns practice of requiring consumers to retain counsel before accessing internal warranty resolution, which operates as a barrier to consumer remedies.
 
-## Related files
-- [contacts.md](contacts.md) — Sunrun escalation ladder
-- [research/MASTER-SUMMARY.md](research/MASTER-SUMMARY.md) — California case-law synthesis
-- [emails/](emails/) — Sunrun email archive (Nov 2025 – Apr 2026)
-- [evidence/](evidence/) — SDG&E bills, contracts, app screenshots
-- [../../../scripts/send-sunrun-demand.ps1](../../../scripts/send-sunrun-demand.ps1) — Round 1 letter
-- [../../../scripts/send-sunrun-reply-katherine.ps1](../../../scripts/send-sunrun-reply-katherine.ps1) — Round 2 reply
+### How did you find out about CPUC?
+WEB
+
+## Form Technical Notes (for future filings)
+- The form **rejects single quotes** in narrative fields (uses them as SQL delimiters) — always write "Sunruns" not "Sunrun's"
+- 1000 character limit per narrative field (~200 words each)
+- reCAPTCHA must be completed manually — cannot be automated
+- File attachments accepted: Word, Excel, PDF, JPEG, PNG, GIF (max 4 MB)
+- Field IDs (documented by cpuc-inspect.js):
+  - `#FirstName`, `#LastName`, `#BusinessName`
+  - `#LocationService` (Street), `#ApartmentService`, `#CityService`, `#StateCodeService`, `#ZipService`
+  - `#PhoneDayTime` (Mobile — required), `#PhoneHome`, `#EmailAddress`
+  - `#UtilityName`, `#UtilityCustomerAccountNumber`
+  - `#situation-concern`, `#utility-response`, `#suggested-action`
+  - `#FindCode` (dropdown: UTILITY BILL / ADVERTISEMENT / WEB / FRIEND)

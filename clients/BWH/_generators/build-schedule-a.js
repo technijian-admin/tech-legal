@@ -8,7 +8,7 @@ const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
         BorderStyle, WidthType, ShadingType, PageBreak } = require('docx');
 const fs = require('fs');
 const path = require('path');
-const helpers = require('../../scripts/brand-helpers');
+const helpers = require('../../../scripts/brand-helpers');
 
 const {
   CORE_BLUE, CORE_ORANGE, DARK_CHARCOAL, BRAND_GREY, OFF_WHITE, WHITE, LIGHT_GREY, TEAL,
@@ -343,9 +343,9 @@ const doc = new Document({
         numbered("2.", "Any net positive balance (hours consumed but not yet billed) is carried forward into the next Cycle. The next Cycle\u2019s monthly billed amount will be recalculated per Section 3.3(b) to absorb this balance and target a zero unpaid balance by the end of the next Cycle.", 1),
         numbered("3.", "Any net negative balance (hours billed but not consumed) resets to zero. No credit or refund is issued. The actual usage data from the completed Cycle is used to calculate the monthly billed amount for the next Cycle per Section 3.3(b).", 1),
         numbered("(e)", "Cancellation. If Client terminates Virtual Staff services or this Agreement:"),
-        numbered("1.", "Any positive running balance (actual hours exceeding billed hours) shall become immediately due and payable. The unpaid hours shall be invoiced at the applicable Hourly Rate from the Rate Card (Schedule C), not the Contracted Rate. This reflects the rate that would have applied had Client engaged Technijian on an ad hoc hourly basis without a Cycle commitment.", 1),
+        numbered("1.", "Any positive running balance (actual hours under the current Cycle exceeding billed hours under the current Cycle) shall become immediately due and payable at the Rate Card Hourly Rate ($150.00 per hour) from Schedule C, not the Contracted Rate. The Contracted Rates set forth in Section 3.2 are provided in consideration for Client\u2019s commitment to the Cycle, and shall not apply to unpaid hours upon cancellation under any circumstance.", 1),
         numbered("2.", "Any negative running balance (billed hours exceeding actual hours) does not entitle Client to a credit, refund, or offset against the final invoice. The unpaid balance is simply zero and no further amounts are due from either Party with respect to that role.", 1),
-        numbered("3.", "The Cycle-Based Billing Model provides Client with Contracted Rates that are lower than the standard Hourly Rates as consideration for Client\u2019s commitment to the Cycle. The application of Hourly Rates upon cancellation reflects the removal of that commitment and the corresponding rate benefit.", 1),
+        numbered("3.", "The Legacy Balance described in Section 12.01 of the Master Service Agreement shall be governed by the termination treatment set forth in Section 12.01(c) of the Master Service Agreement, not by this subsection (e). For avoidance of doubt, no rate other than the Rate Card Hourly Rate ($150.00 per hour) per Schedule C shall apply to either the Cycle running balance under this Section 3.3 or the Legacy Balance under Section 12.01 of the Master Service Agreement upon cancellation, and no reduced or discounted rate shall apply.", 1),
         numbered("(f)", "Minimum Contracted Hours. The monthly billed hours for each role shall not fall below fifty percent (50%) of the initial contracted hours established in the Service Order for that role (the \u201CMinimum Hours\u201D). If actual usage drops below the Minimum Hours for three (3) or more consecutive months, Technijian may adjust the monthly billed hours down to the Minimum Hours at the start of the next Cycle, but shall not reduce below the Minimum Hours without mutual written agreement. The Minimum Hours provision ensures that Technijian can maintain dedicated staffing resources and reserved capacity for Client. If Client wishes to reduce hours below the Minimum, Client may request a Service Order amendment, subject to Technijian\u2019s approval and a thirty (30) day notice period."),
 
         spacer(),
@@ -358,17 +358,24 @@ const doc = new Document({
         numbered("(e)", "The current running balance for each role."),
 
         spacer(),
-        sectionHeader("3.5 Service Levels"),
+        sectionHeader("3.5 Service Level Commitments"),
+        bodyText("Technijian commits to a single measurable Service Level Agreement under this Schedule: Response Time. Resolution times are not guaranteed because Client\u2019s environment may include equipment that is out of warranty, third-party software requiring vendor escalation, and other factors outside Technijian\u2019s control."),
+        spacer(60),
         styledTable(
-          ["Service Level", "Target"],
+          ["Service Level", "Commitment"],
           [
-            ["Infrastructure Uptime", "99.9% monthly (excluding scheduled maintenance)"],
-            ["Scheduled Maintenance", "Tuesday evenings and Saturdays (with advance notice)"],
-            ["Critical Incident Response", "Within 1 hour of notification"],
-            ["Standard Support Response", "Within 4 business hours"],
+            ["Response Time (all severities)", "Within four (4) business hours of ticket creation in the Client Portal"],
+            ["Resolution Time", "Not guaranteed; commercially reasonable efforts only"],
+            ["Infrastructure Uptime (target)", "99.9% monthly, commercially reasonable efforts (no service credit unless expressly granted under Section 3.5a)"],
+            ["Scheduled Maintenance", "Tuesday evenings and Saturdays, with reasonable advance notice"],
             ["Emergency Maintenance", "As needed with reasonable notice"],
           ]
         ),
+        spacer(80),
+        numbered("(a)", "Response Time Definition. \u201CResponse\u201D means initial human acknowledgment of the support ticket in the Client Portal, including assignment to a technician and confirmation of receipt to Client. Response Time is measured from Client Portal ticket creation timestamp to ticket acknowledgment timestamp. Response Time applies to all support tickets regardless of severity classification. A timely deferral notice issued under Section 3.6 shall constitute a Response within the meaning of this subsection, and the deferred ticket shall be excluded from the breach calculation under Master Service Agreement Section 12.01(d) unless timely escalated under Section 3.6(f)."),
+        numbered("(b)", "Resolution Not Guaranteed. The Parties acknowledge that resolution timeframes depend on factors that may include third-party vendor support timelines, equipment warranty status, software vendor escalation cycles, hardware availability, and other circumstances beyond Technijian\u2019s reasonable control. Technijian shall use commercially reasonable efforts to drive each support ticket to resolution but does not commit to any specific resolution timeframe under this Schedule."),
+        numbered("(c)", "Measurement Period. Response Time compliance is measured per billing month using Client Portal ticket data. Tickets opened in a given billing month are evaluated for Response Time compliance based on the timestamps recorded in the Client Portal."),
+        numbered("(d)", "Relationship to MSA Section 12.01. Failure to meet the Response Time Service Level may, if material and uncured as defined in Section 12.01(d) of the Master Service Agreement, support a termination for cause under MSA Section 2.04(a) and trigger the Legacy Balance waiver in MSA Section 12.01(c)(2). Resolution Time and Infrastructure Uptime are not bases for the Legacy Balance waiver under MSA Section 12.01(c)(2)."),
 
         spacer(),
         sectionHeader("3.5a Service Level Remedies"),
@@ -378,7 +385,18 @@ const doc = new Document({
         numbered("(d)", "Exclusions. Service level targets and remedies do not apply during scheduled maintenance windows, force majeure events, or outages caused by Client\u2019s actions, third-party services not managed by Technijian, or factors outside Technijian\u2019s reasonable control."),
         numbered("(e)", "Sole Remedy. Service credits under this Section are Client\u2019s sole and exclusive remedy for Technijian\u2019s failure to meet the applicable service levels."),
 
-        // ── GENERAL TERMS FOR SCHEDULE A ──
+        spacer(),
+        sectionHeader("3.6 Usage Notifications and Cycle Discipline"),
+        numbered("(a)", "Notifications. Technijian shall track Client\u2019s monthly Virtual Staff hour consumption against the monthly billed hours per role and shall provide notifications to Client through the Client Portal and to Client\u2019s designated point of contact when cumulative consumption in a billing month reaches: (i) 50% of monthly billed hours; (ii) 60% of monthly billed hours; (iii) 70% of monthly billed hours; and (iv) 80% of monthly billed hours."),
+        numbered("(b)", "80% Threshold. Upon reaching 80% of monthly billed hours for any role in a billing month, Technijian shall notify Client that the monthly cap is approaching, and Technijian may decline to begin new non-emergency support requests under that role for the remainder of the billing month. Client may continue to submit emergency (P1 production-down) requests, which Technijian shall continue to address subject to the Response Time Service Level in Section 3.5. A written deferral notice issued by Technijian in response to a non-emergency request submitted at or above the 80% threshold shall constitute the Response under Section 3.5(a) for purposes of SLA compliance, and the deferred ticket shall be excluded from the breach calculation under MSA Section 12.01(d) unless Client timely escalates the ticket under subsection (f) below."),
+        numbered("(c)", "Purpose. The notification thresholds and the 80% practice are intended to maintain cycle integrity by helping ensure Client\u2019s actual consumption stays within monthly billed hours during the term of this Schedule, so that the under-utilization paydown described in Section 3.3 and Section 12.01 of the Master Service Agreement can resolve the Legacy Balance through cycle dynamics rather than through end-of-cycle invoicing or termination."),
+        numbered("(d)", "Override. Client may direct Technijian in writing to continue non-emergency work beyond 80% of monthly billed hours for a given role and billing month. Hours worked beyond 80% on Client\u2019s written direction shall be tracked and may, at Technijian\u2019s option, be billed as out-of-contract services per Schedule C if persistent overuse is observed for more than three (3) consecutive billing months."),
+        numbered("(e)", "No Service Reduction. The 80% practice does not reduce the monthly billed hours for which Client is invoiced, nor does it constitute a credit, refund, or offset of any kind. The 80% practice is a queue-management mechanism to support cycle paydown and may be adjusted by mutual written agreement of the Parties at any time."),
+        numbered("(f)", "Escalation. If Client in good faith believes a deferred ticket constitutes an Emergency (as defined in subsection (g) below) or otherwise should not have been deferred, Client shall escalate the ticket in writing within five (5) business days of the deferral notice, identifying the specific ticket and the basis for reclassification. Upon receipt of a timely escalation, Technijian shall reclassify the ticket and respond per the Response Time Service Level in Section 3.5. Tickets not escalated within the five (5) business day window shall be deemed properly deferred and shall not count toward the breach calculation in MSA Section 12.01(d). Improper deferrals identified through the escalation process do count toward the Section 12.01(d) calculation if Technijian fails to reclassify and respond within the four (4) business hour window after escalation."),
+        numbered("(g)", "Emergency Definition. For purposes of Section 3.5 and this Section 3.6, an \u201CEmergency\u201D (also \u201CP1 production-down\u201D) means a support request involving any of the following: (i) total loss of access to a production system used by five (5) or more end users; (ii) total loss of access to email, file shares, or critical line-of-business applications affecting five (5) or more end users; (iii) a confirmed cybersecurity incident involving active compromise of Client systems or data; or (iv) physical site outage at a Client location. Severity classification is initially made by Client at the time of ticket submission and may be reclassified by Technijian upon review of the ticket details, subject to Client\u2019s escalation rights under subsection (f)."),
+
+        spacer(),
+                // ── GENERAL TERMS FOR SCHEDULE A ──
         new Paragraph({ children: [new PageBreak()] }),
         colorBanner("GENERAL TERMS FOR THIS SCHEDULE", DARK_CHARCOAL, WHITE, 24),
         spacer(100),
@@ -392,7 +410,7 @@ const doc = new Document({
 
         spacer(100),
         sectionHeader("Pricing Adjustments"),
-        bodyText("Pricing for services under this Schedule is subject to the Rate Card (Schedule C). Technijian may adjust rates upon sixty (60) days written notice, effective at the start of the next Renewal Term of the Agreement."),
+        bodyText("Pricing for services under this Schedule is subject to the Rate Card (Schedule C). Technijian may adjust rates upon sixty (60) days written notice, effective at the start of any month-to-month continuation period under MSA Section 2.02, or upon mutual written agreement during the Initial Term."),
 
       ]
     },
