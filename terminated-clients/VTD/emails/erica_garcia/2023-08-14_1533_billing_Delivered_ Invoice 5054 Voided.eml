@@ -1,0 +1,223 @@
+Received: from MN2PR13MB3759.namprd13.prod.outlook.com (::1) by
+ DM6PR13MB4097.namprd13.prod.outlook.com with HTTPS; Mon, 14 Aug 2023 15:33:38
+ +0000
+Received: from BN0PR04CA0098.namprd04.prod.outlook.com (2603:10b6:408:ec::13)
+ by MN2PR13MB3759.namprd13.prod.outlook.com (2603:10b6:208:1ee::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.24; Mon, 14 Aug
+ 2023 15:33:36 +0000
+Received: from BN8NAM12FT073.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:408:ec:cafe::ce) by BN0PR04CA0098.outlook.office365.com
+ (2603:10b6:408:ec::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Mon, 14 Aug 2023 15:33:35 +0000
+Received: from ipw.inkyphishfence.com (3.231.237.226) by
+ BN8NAM12FT073.mail.protection.outlook.com (10.13.183.168) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.13 via Frontend Transport; Mon, 14 Aug 2023 15:33:35 +0000
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com (mail-mw2nam10lp2106.outbound.protection.outlook.com [104.47.55.106])
+	by o365.ipw.inkyphishfence.com (Postfix) with ESMTPS id 9D75C103292
+	for <billing@technijian.com>; Mon, 14 Aug 2023 15:33:34 +0000 (UTC)
+Received: from DS7P222CA0024.NAMP222.PROD.OUTLOOK.COM (2603:10b6:8:2e::13) by
+ SA1PR13MB4800.namprd13.prod.outlook.com (2603:10b6:806:1a8::8) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6678.24; Mon, 14 Aug 2023 15:33:29 +0000
+Received: from DM6NAM12FT040.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:8:2e:cafe::9d) by DS7P222CA0024.outlook.office365.com
+ (2603:10b6:8:2e::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Mon, 14 Aug 2023 15:33:27 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (52.100.171.200)
+ by DM6NAM12FT040.mail.protection.outlook.com (10.13.179.73) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.12 via Frontend Transport; Mon, 14 Aug 2023 15:33:26 +0000
+From: "postmaster@vintagedesigninc.com" <postmaster@vintagedesigninc.com>
+Subject: Delivered: Invoice 5054 Voided
+Thread-Topic: Invoice 5054 Voided
+Thread-Index: AQHZzsSgbmR2nLMZBUCe/zF2fg9UIa/p68fg
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Mon, 14 Aug 2023 15:33:21 +0000
+Message-ID:
+	<3a5e8f93-e143-4bb0-94f4-e082e8454310@CO1PR08MB6564.namprd08.prod.outlook.com>
+References:
+	<DM6PR13MB4097FD73D46172B59BD72540CF17A@DM6PR13MB4097.namprd13.prod.outlook.com>
+In-Reply-To:
+	<DM6PR13MB4097FD73D46172B59BD72540CF17A@DM6PR13MB4097.namprd13.prod.outlook.com>
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+	DM6NAM12FT040.eop-nam12.prod.protection.outlook.com
+X-MS-Has-Attach: yes
+X-Auto-Response-Suppress: All
+X-MS-Exchange-Organization-Network-Message-Id:
+	8445e7c3-c40c-4d9b-3753-08db9cdbd32b
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+received-spf: Pass (protection.outlook.com: domain of
+ NAM11-BN8-obe.outbound.protection.outlook.com designates 52.100.171.200 as
+ permitted sender) receiver=protection.outlook.com; client-ip=52.100.171.200;
+ helo=NAM11-BN8-obe.outbound.protection.outlook.com; pr=C
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910001)(944506478)(944626604)(920097)(930097)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?FvJVFsVWFwzqR8mE5U0cpXhq6AWDWbM4mgl7pg+usr6PnQVYxzB4Rx7gykIf?=
+ =?us-ascii?Q?pGbXUsm+tsWUpwCBxfitBoG+uiC2LcYUV5JwymBZAXykqJI6iM3ur3n1wsqu?=
+ =?us-ascii?Q?x/on/Y61RB1+Xr4am7fnTtH7ycdz881GLfHf4ixjZmwm1BYShhRE1Urfvucr?=
+ =?us-ascii?Q?q8O43+n+7r1tFFEuYjL9fJwgXAhxn4K8yQ6g2XbYAOQrTHiHpECUgRk3TVWk?=
+ =?us-ascii?Q?3nI/e5oI+jwnX+bMFNScU2NHYXF3LO2hTyc3y1ZM+SHsGQ64ICTK08wJc1aA?=
+ =?us-ascii?Q?j71P2r0YFrUO2z+K1zKSrK3oZz+ndtT06AvqAoFwa+CdThYOy1h+CNAT8IiK?=
+ =?us-ascii?Q?lYG+Qcd7HigX0mFiDOwbWiOIRlp5Y1g958yajEX51pJ39fjXukPOgHZS6TPj?=
+ =?us-ascii?Q?NR+BQ2v9wlIT/uky7E1IFKPjPSd4vQAalsMhtRSZU347+Ay2LaorFc2jn3w4?=
+ =?us-ascii?Q?uMTNb/F7gTMgiDSCu5sc79JQEMMSxwW2ePzlN23TZ3bhXzERbPvTl76KPpyM?=
+ =?us-ascii?Q?ynnkQk/Y7elhNMzrshsVQoiwgkOeRCloDpOhmbLjDHMXQpRHkGdVb1I0bq6s?=
+ =?us-ascii?Q?2bgrgn0WOZVukTHwtGEHlTrxfIgk50QGIff/DHwcjEqHw+YbLAjHHE2sfUux?=
+ =?us-ascii?Q?J7N8M9QYObTXhZ5kXuOj0NBuWBprVXljtW5ZlVBkEAonP1UWeePI5hmP2iCb?=
+ =?us-ascii?Q?DGpnNKQuvUsjW3Y4C3xqEijkKLx63a5FMePgK6oIAM5u0Ilp0P4Ju94KteYH?=
+ =?us-ascii?Q?KOyzQvZHQIxYRp3quCWanW4ZIzaZtg+WK/H9HNfuFyayN4sNwAK572aoSEQK?=
+ =?us-ascii?Q?kaF5OkLhuNKWAEvR8QuaW2XzCIGVhi832C7mSCXSQXLUg2glKsqWjnPqRbMW?=
+ =?us-ascii?Q?VZ6OimyoVjmAjCHVl38OILSx60buRQCcvpquoy0+Mm60ytGgINxrNqEoevGN?=
+ =?us-ascii?Q?n4ARiIYPGl6M/5UL3S54GJmoEq0Pvhun/5T+1LU3PcHCvIldtewcAEIokJva?=
+ =?us-ascii?Q?XIxItGeSmInaKnOz9v4e3TpYH0Cfbkv9nSUHJ6LrJwjE9W9SiW6KGlJ4t/+2?=
+ =?us-ascii?Q?qZvnjjZTXczT0C3RCS6aXcSImXQ1dzKTG39C+xbtMxdzQ0HTKNOw9nn9fOsV?=
+ =?us-ascii?Q?3aBhjLKZ/AUb2iWZ3hLjyWJeKfHsdy/c5n4dTWoJsD42BniKuwHHrjLH8WbG?=
+ =?us-ascii?Q?bFzrr5k5eVl9TztkYOjN06P7Tg8xEnPSKOcuDC8iLAauWepKTrvYG01azK6i?=
+ =?us-ascii?Q?SIRzW0X/1RQEy+f7mV+HCrWsX502wBFWIdCz56dqnB9pqB728TbboUJLcfuD?=
+ =?us-ascii?Q?c4GwN7gCHyYp1J0MehYHD5n59Z6+yspTDFoFOETdhAxliIZujyVCFzznVeXG?=
+ =?us-ascii?Q?lAeU7F7oleEwIu0coHI3y3onj0TYTQZ3a3Peyc3fmS8LmAKQZhCN0HK/X820?=
+ =?us-ascii?Q?vlI+ncUyLmAgYz+hcsiGNLRVhw4EWVHhpB4S533wk8k5ul1e46BLTNzWDo+c?=
+ =?us-ascii?Q?4aspo3UZhB0BStiwWxJ/49bInYsCRYGre5T1ounSBp1Kc4vaWisOkLDSmhcv?=
+ =?us-ascii?Q?V5S3ATdUHG9I7A4zhEq2lbMhkrzf9QQr9cL5fl7ZqpGsGSduQOhNxhxuqlr8?=
+ =?us-ascii?Q?KTFeQ0kN4JvEh0K/CaML3LwXezOHaGFSvhsAfvI5vxq2nOp2swmjg27y+U7H?=
+ =?us-ascii?Q?sFdf21HuioKGgWavxNrCUjvTEY498aO8YF0RzYcj59vF0SDPyMkzt2++/t7W?=
+ =?us-ascii?Q?HZkyy7WJE4vZ8yfLAUeS8bKUKt96Kr1oRG035zX6eRbeC92hSWDh4kDimn//?=
+ =?us-ascii?Q?6ZYxg4Zt2s1YHvCTHWIYEmEggEBsMhd7k/di0adM6nEBGdvoze5NZmogNmYT?=
+ =?us-ascii?Q?t8K/bo4TqWvFDQo7i9Mck7dUXyctB1wKnTZWdg62cL/lBMCrrraQLGbPqocZ?=
+ =?us-ascii?Q?KjSDhaytyNn/63PDnMhPjA=3D=3D?=
+Content-Type: multipart/report;
+	boundary="_000_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_";
+	report-type=delivery-status
+MIME-Version: 1.0
+
+--_000_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_
+Content-Type: multipart/alternative;
+	boundary="_002_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_"
+
+--_002_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_
+Content-Type: text/plain; charset="us-ascii"
+
+Your message has been delivered to the following recipients:
+
+ericagarcia@vintagedesigninc.com<mailto:ericagarcia@vintagedesigninc.com>
+
+Subject: Invoice 5054 Voided
+
+--_002_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_
+Content-Type: text/html; charset="us-ascii"
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+</head>
+<body>
+<p><b><font color="#000066" size="3" face="Arial">Your message has been delivered to the following recipients:</font></b></p>
+<font color="#000000" size="2" face="Tahoma">
+<p><a href="mailto:ericagarcia@vintagedesigninc.com">ericagarcia@vintagedesigninc.com</a></p>
+<p>Subject: Invoice 5054 Voided</p>
+</font>
+</body>
+</html>
+
+--_002_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_--
+
+--_000_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; CO1PR08MB6564.namprd08.prod.outlook.com
+
+Final-recipient: RFC822; ericagarcia@vintagedesigninc.com
+Action: delivered
+Status: 5.4.0
+X-Supplementary-Info: < #2.0.0 smtp;250 2.0.0 OK>
+
+
+--_000_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_
+Content-Type: message/rfc822
+Content-Disposition: attachment;
+	creation-date="Mon, 14 Aug 2023 15:33:38 GMT";
+	modification-date="Mon, 14 Aug 2023 18:20:33 GMT"
+
+Received: from BN9PR03CA0183.namprd03.prod.outlook.com (2603:10b6:408:f9::8)
+ by CO1PR08MB6564.namprd08.prod.outlook.com (2603:10b6:303:9e::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33; Mon, 14 Aug
+ 2023 15:33:18 +0000
+Received: from BN1NAM02FT034.eop-nam02.prod.protection.outlook.com
+ (2603:10b6:408:f9:cafe::8c) by BN9PR03CA0183.outlook.office365.com
+ (2603:10b6:408:f9::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Mon, 14 Aug 2023 15:33:18 +0000
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com (40.107.237.95)
+ by BN1NAM02FT034.mail.protection.outlook.com (10.13.2.146) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6699.12 via Frontend Transport; Mon, 14 Aug 2023 15:33:17 +0000
+Received: from DS7PR03CA0213.namprd03.prod.outlook.com (2603:10b6:5:3ba::8) by
+ MW5PR13MB5536.namprd13.prod.outlook.com (2603:10b6:303:191::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6678.26; Mon, 14 Aug
+ 2023 15:33:14 +0000
+Received: from DM6NAM12FT103.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:5:3ba:cafe::8b) by DS7PR03CA0213.outlook.office365.com
+ (2603:10b6:5:3ba::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6652.33 via Frontend
+ Transport; Mon, 14 Aug 2023 15:33:14 +0000
+Received: from obx-outbound.inkyphishfence.com (52.4.92.69) by
+ DM6NAM12FT103.mail.protection.outlook.com (10.13.178.62) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6678.7 via Frontend Transport; Mon, 14 Aug 2023 15:33:13 +0000
+Received: from NAM12-DM6-obe.outbound.protection.outlook.com (mail-dm6nam12lp2173.outbound.protection.outlook.com [104.47.59.173])
+	by obx-inbound.inkyphishfence.com (Postfix) with ESMTPS id 34915102DA5
+	for <ericagarcia@vintagedesigninc.com>; Mon, 14 Aug 2023 15:33:13 +0000 (UTC)
+Received: from DM6PR13MB4097.namprd13.prod.outlook.com (2603:10b6:5:2a2::9) by
+ CO1PR13MB5015.namprd13.prod.outlook.com (2603:10b6:303:db::6) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6678.26; Mon, 14 Aug 2023 15:33:09 +0000
+Received: from DM6PR13MB4097.namprd13.prod.outlook.com
+ ([fe80::fd6f:dc02:b065:282c]) by DM6PR13MB4097.namprd13.prod.outlook.com
+ ([fe80::fd6f:dc02:b065:282c%3]) with mapi id 15.20.6678.025; Mon, 14 Aug 2023
+ 15:33:09 +0000
+From: Billing <billing@technijian.com>
+To: "ericagarcia@vintagedesigninc.com" <ericagarcia@vintagedesigninc.com>
+Subject: Invoice 5054 Voided
+Thread-Topic: Invoice 5054 Voided
+Thread-Index: AQHZzsSgbmR2nLMZBUCe/zF2fg9UIQ==
+Return-Receipt-To: <billing@technijian.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Mon, 14 Aug 2023 15:33:09 +0000
+Message-ID:
+	<DM6PR13MB4097FD73D46172B59BD72540CF17A@DM6PR13MB4097.namprd13.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+	BN1NAM02FT034.eop-nam02.prod.protection.outlook.com
+X-MS-Exchange-Organization-TransportTrafficType: Email
+X-MS-Exchange-Organization-TransportTrafficSubType:
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-Network-Message-Id:
+	45c22e2d-9ca4-4b27-4df4-08db9cdbc873
+X-MS-Exchange-Organization-SCL: 1
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-exchange-organization-originalclientipaddress: 40.107.237.95
+x-ms-exchange-organization-originalserveripaddress: 10.13.2.146
+x-ms-publictraffictype: Email
+received-spf: SoftFail (protection.outlook.com: domain of transitioning
+ technijian.com discourages use of 52.4.92.69 as permitted sender)
+x-ms-exchange-organization-transporttraffictype: Email
+x-ms-exchange-organization-transporttrafficsubtype:
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+
+
+--_000_3a5e8f93e1434bb094f4e082e8454310CO1PR08MB6564namprd08pr_--

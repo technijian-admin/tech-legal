@@ -1,0 +1,224 @@
+Received: from DM8PR13MB5175.namprd13.prod.outlook.com (::1) by
+ DM6PR13MB4097.namprd13.prod.outlook.com with HTTPS; Fri, 1 Sep 2023 21:15:45
+ +0000
+Received: from DM6PR08CA0014.namprd08.prod.outlook.com (2603:10b6:5:80::27) by
+ DM8PR13MB5175.namprd13.prod.outlook.com (2603:10b6:8:d::20) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6745.21; Fri, 1 Sep 2023 21:15:43 +0000
+Received: from DM6NAM12FT083.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:5:80:cafe::bb) by DM6PR08CA0014.outlook.office365.com
+ (2603:10b6:5:80::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.27 via Frontend
+ Transport; Fri, 1 Sep 2023 21:15:43 +0000
+Received: from ipw.inkyphishfence.com (100.21.157.149) by
+ DM6NAM12FT083.mail.protection.outlook.com (10.13.178.199) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6768.17 via Frontend Transport; Fri, 1 Sep 2023 21:15:42 +0000
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (mail-mw2nam12lp2047.outbound.protection.outlook.com [104.47.66.47])
+	by o365.ipw.inkyphishfence.com (Postfix) with ESMTPS id C892A1032F1
+	for <billing@technijian.com>; Fri,  1 Sep 2023 21:15:41 +0000 (UTC)
+Received: from SJ0PR03CA0217.namprd03.prod.outlook.com (2603:10b6:a03:39f::12)
+ by MW5PR13MB5485.namprd13.prod.outlook.com (2603:10b6:303:190::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.26; Fri, 1 Sep
+ 2023 21:15:36 +0000
+Received: from DM6NAM12FT096.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:a03:39f:cafe::49) by SJ0PR03CA0217.outlook.office365.com
+ (2603:10b6:a03:39f::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6699.36 via Frontend
+ Transport; Fri, 1 Sep 2023 21:15:36 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (52.100.171.200)
+ by DM6NAM12FT096.mail.protection.outlook.com (10.13.178.168) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6768.18 via Frontend Transport; Fri, 1 Sep 2023 21:15:35 +0000
+From: "postmaster@vintagedesigninc.com" <postmaster@vintagedesigninc.com>
+Subject: Delivered: VTD : Monthly Invoice 5192 for your review
+Thread-Topic: VTD : Monthly Invoice 5192 for your review
+Thread-Index: AQHZ3Rloj/42SwTY0UWXiFGb2QjgyrAGeK7k
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Fri, 1 Sep 2023 21:15:31 +0000
+Message-ID:
+	<d9010b7d-2417-48ed-abd3-51653262b51f@SA3PR08MB8851.namprd08.prod.outlook.com>
+References:
+	<DM6PR13MB4097A29942B8BC1363DD124ECFE4A@DM6PR13MB4097.namprd13.prod.outlook.com>
+In-Reply-To:
+	<DM6PR13MB4097A29942B8BC1363DD124ECFE4A@DM6PR13MB4097.namprd13.prod.outlook.com>
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+	DM6NAM12FT096.eop-nam12.prod.protection.outlook.com
+X-MS-Has-Attach: yes
+X-Auto-Response-Suppress: All
+X-MS-Exchange-Organization-Network-Message-Id:
+	8211f372-b68d-4177-dd94-08dbab3099db
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-publictraffictype: Email
+received-spf: Pass (protection.outlook.com: domain of
+ NAM11-BN8-obe.outbound.protection.outlook.com designates 52.100.171.200 as
+ permitted sender) receiver=protection.outlook.com; client-ip=52.100.171.200;
+ helo=NAM11-BN8-obe.outbound.protection.outlook.com; pr=C
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910001)(944506478)(944626604)(920097)(930097)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?dj7SaGb86DNpcKZjFtsPWDYh9vMzZQJBexvJ3NI/0CKDDjV0OFFM333Rx3Iv?=
+ =?us-ascii?Q?ZGpEiexSRlTr8pEMdzNqvJmTtOjD7+7xUPr30Ba5tNcZdaLVFcZGug78nV5z?=
+ =?us-ascii?Q?ncNx0OvHXUvB4/SpytM2B1NpVBl6DiqxObUeF0ecMJ4Lmp7T/lIYFWTwd8LZ?=
+ =?us-ascii?Q?oxy3NFNYZu/RQbDNapNs5GxtGfNqcKFs37/jXAgtDUpn2gpln6RJIgXvOY8H?=
+ =?us-ascii?Q?r5J9MrVrseTBZ57hS1uEkBfqWq4EjgO7eQAZWLNFwa7Q8MDikNrzYMvhoSuW?=
+ =?us-ascii?Q?IyJy6jY18BJs19+9sH0Q1Suj1rhLkzMTGDP59jDLq2XaYAOTtu9GSdL6nIod?=
+ =?us-ascii?Q?jlxTqtvb2uJJ+BEJzE/HZD6eOcZS5XhBIv3oPgqECAlc5BaXSBMx+lGvsHOv?=
+ =?us-ascii?Q?c+VNbi1z//P/yOJWRo4NUxv4nFD57TS11lYKMfneLJ3usTsd1L7A6X0lbkgk?=
+ =?us-ascii?Q?HKxdXS1j/0kp1TY0CAq6Rc+OE6EsfjMZLY4wUVjCw22kvAK1YuSQTFSZD+bv?=
+ =?us-ascii?Q?2wfQhbJVRQwn6sy0bm6WeRuCJ6CwoZ1h3d89ZWU9FKDrw+SnfmEn/kCGA+Lc?=
+ =?us-ascii?Q?pbPfFQZA3vFpNWmaWfcx20JZD0NSfjHPmv4ZylS0CU4xYppGkIQrM/+SoqxP?=
+ =?us-ascii?Q?UnkQLz0m5/aWMUVuRQNGjcwrZNcgsOCrclwtKcBHlgaQoqiRqqZst9SjFHzH?=
+ =?us-ascii?Q?rM2SVhDHcm+6z2uDVFAu1tsadA17nJZn0q2QyOBtQpH9Nork1Tl6+sG+6M+6?=
+ =?us-ascii?Q?CGDuo10GzJQu8BEXX9+Eo7ZIXsiqqo3Sp03uJb6Xll4isnt/tZLYApAfFnG1?=
+ =?us-ascii?Q?zP3JbUBNuRFL+OSxkBJYL9AywOSOnNO/ThLFEaB5Qxakm+o9v420/a6OezEx?=
+ =?us-ascii?Q?pErdeUX5CmSEmF7NQsV7+Lu3cYefIqNBLFR4v5daqIDHvuMQnb1cWt9HXauv?=
+ =?us-ascii?Q?iA6fCjnosCp2La/ZMk1kP4PHvqzm4PtzwFAbJw5vL/OqggMMiOLORZBcCRUG?=
+ =?us-ascii?Q?c4DHyGZsUrqhY2tpSRaARxQu11eZpmt+ZI3O22zArcNaUsr2/a7CN8npa8UA?=
+ =?us-ascii?Q?0UIQ059exmpRpUKD7is+XWy45fKu0LHURYD8MR+fT56/HwfIYugkRZo0mrTG?=
+ =?us-ascii?Q?NlycnZvZ2B5ZEGEroeOC5u519jBVhdb1qNVMzNTjtYjwkNI4AdwjR/CYKDmO?=
+ =?us-ascii?Q?++bv1uRg3D1yiSM1nwprqd4u7jvNBCS4ciIHsGJwcHj9u+ZlKLXdRA+YkhTp?=
+ =?us-ascii?Q?4Rw5acoqN2Zk0aFkmrokxbWpVXfVDVZGiwomAx56f9nqSgKAorfJO5cAZr5I?=
+ =?us-ascii?Q?Lne/bKZlyLcBA96NF4ZIXVpxbtnZIrS4zB1WLgU+RJhjoK8FK5KGpL2tzjRO?=
+ =?us-ascii?Q?aj9V4hHBSXH2t6obDKM7sCbJ92h3NQpgF6HprLZ+yUplaHpBf1xLT8qowCnu?=
+ =?us-ascii?Q?mBrZ91Ryf91qStMx/r725j/DIEXa71/CisYvZXJkHYynmt2cC792i4PApYSC?=
+ =?us-ascii?Q?hBqiJKJ/zE583cjmWBAePPoHAfrbGd2MWjvtKSc035Vvk00pLAuqEkXrg2LY?=
+ =?us-ascii?Q?1xdt4VxlSNetZNhJNPkuYZFex7y6oYYkpbub2LROSZzKcxijsTPmz4QbL4s5?=
+ =?us-ascii?Q?n2Ut1xDqb2tIsNVyLGnznSR8IEp4IrQkqLlKnpCWIzNGvynH+mPfR1P4Xeiv?=
+ =?us-ascii?Q?waBdV2FVGf/KK8aPr/Kv5UVEWFFd3qO9OHtDHdZVLNcnjIsFGfmYFaklc+P4?=
+ =?us-ascii?Q?ZA5KOc96Y3ZT+3GpEJT6L/pGsBS9YHSR6poF1Q2RoZ3/HYZyqJDFZF23aqgO?=
+ =?us-ascii?Q?rbyL7WDci9ly9Zf5U90BMocSHLvPw7UyzpinoYWSV8mb9IH6gBAynrIb5PB5?=
+ =?us-ascii?Q?T+rAHcN+39g38y8G/uQkzhpeR6xxOjRI74olxhPxaCCIiz/23Uo9ZPe3tT0a?=
+ =?us-ascii?Q?AN0bD2h/TOGWfnTRMBDe4A=3D=3D?=
+Content-Type: multipart/report;
+	boundary="_000_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_";
+	report-type=delivery-status
+MIME-Version: 1.0
+
+--_000_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_
+Content-Type: multipart/alternative;
+	boundary="_002_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_"
+
+--_002_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_
+Content-Type: text/plain; charset="us-ascii"
+
+Your message has been delivered to the following recipients:
+
+ericagarcia@vintagedesigninc.com<mailto:ericagarcia@vintagedesigninc.com>
+
+Subject: VTD : Monthly Invoice 5192 for your review
+
+--_002_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_
+Content-Type: text/html; charset="us-ascii"
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
+</head>
+<body>
+<p><b><font color="#000066" size="3" face="Arial">Your message has been delivered to the following recipients:</font></b></p>
+<font color="#000000" size="2" face="Tahoma">
+<p><a href="mailto:ericagarcia@vintagedesigninc.com">ericagarcia@vintagedesigninc.com</a></p>
+<p>Subject: VTD : Monthly Invoice 5192 for your review</p>
+</font>
+</body>
+</html>
+
+--_002_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_--
+
+--_000_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; SA3PR08MB8851.namprd08.prod.outlook.com
+
+Final-recipient: RFC822; ericagarcia@vintagedesigninc.com
+Action: delivered
+Status: 5.4.0
+X-Supplementary-Info: < #2.0.0 smtp;250 2.0.0 OK>
+
+
+--_000_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_
+Content-Type: message/rfc822
+Content-Disposition: attachment;
+	creation-date="Fri, 01 Sep 2023 21:15:45 GMT";
+	modification-date="Tue, 05 Sep 2023 17:02:30 GMT"
+
+Received: from CY5PR13CA0047.namprd13.prod.outlook.com (2603:10b6:930:11::29)
+ by SA3PR08MB8851.namprd08.prod.outlook.com (2603:10b6:806:398::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.20; Fri, 1 Sep
+ 2023 21:15:28 +0000
+Received: from CY4PEPF0000EE39.namprd03.prod.outlook.com
+ (2603:10b6:930:11:cafe::1) by CY5PR13CA0047.outlook.office365.com
+ (2603:10b6:930:11::29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.16 via Frontend
+ Transport; Fri, 1 Sep 2023 21:15:28 +0000
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com (40.107.100.106)
+ by CY4PEPF0000EE39.mail.protection.outlook.com (10.167.242.13) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6745.16 via Frontend Transport; Fri, 1 Sep 2023 21:15:27 +0000
+Received: from MW4PR03CA0280.namprd03.prod.outlook.com (2603:10b6:303:b5::15)
+ by LV8PR13MB6325.namprd13.prod.outlook.com (2603:10b6:408:188::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.21; Fri, 1 Sep
+ 2023 21:15:23 +0000
+Received: from MW2NAM12FT014.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:303:b5:cafe::8a) by MW4PR03CA0280.outlook.office365.com
+ (2603:10b6:303:b5::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.27 via Frontend
+ Transport; Fri, 1 Sep 2023 21:15:22 +0000
+Received: from obx-outbound.inkyphishfence.com (35.166.188.152) by
+ MW2NAM12FT014.mail.protection.outlook.com (10.13.180.81) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.6768.18 via
+ Frontend Transport; Fri, 1 Sep 2023 21:15:22 +0000
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2168.outbound.protection.outlook.com [104.47.58.168])
+	by obx-inbound.inkyphishfence.com (Postfix) with ESMTPS id 11234102DB1
+	for <ericagarcia@vintagedesigninc.com>; Fri,  1 Sep 2023 21:15:21 +0000 (UTC)
+Received: from DM6PR13MB4097.namprd13.prod.outlook.com (2603:10b6:5:2a2::9) by
+ BN0PR13MB5232.namprd13.prod.outlook.com (2603:10b6:408:15b::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.23; Fri, 1 Sep
+ 2023 21:15:18 +0000
+Received: from DM6PR13MB4097.namprd13.prod.outlook.com
+ ([fe80::1f3e:e768:8d55:9b10]) by DM6PR13MB4097.namprd13.prod.outlook.com
+ ([fe80::1f3e:e768:8d55:9b10%3]) with mapi id 15.20.6745.026; Fri, 1 Sep 2023
+ 21:15:18 +0000
+From: Billing <billing@technijian.com>
+To: "ericagarcia@vintagedesigninc.com" <ericagarcia@vintagedesigninc.com>
+Subject: VTD : Monthly Invoice 5192 for your review
+Thread-Topic: VTD : Monthly Invoice 5192 for your review
+Thread-Index: AQHZ3Rloj/42SwTY0UWXiFGb2Qjgyg==
+Return-Receipt-To: <billing@technijian.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Date: Fri, 1 Sep 2023 21:15:18 +0000
+Message-ID:
+	<DM6PR13MB4097A29942B8BC1363DD124ECFE4A@DM6PR13MB4097.namprd13.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Exchange-Organization-AuthSource:
+	CY4PEPF0000EE39.namprd03.prod.outlook.com
+X-MS-Exchange-Organization-TransportTrafficType: Email
+X-MS-Exchange-Organization-TransportTrafficSubType:
+X-MS-Has-Attach:
+X-MS-Exchange-Organization-Network-Message-Id:
+	be49546a-0407-474b-ed7c-08dbab3090b9
+X-MS-Exchange-Organization-SCL: 1
+X-MS-TNEF-Correlator:
+X-MS-Exchange-Organization-RecordReviewCfmType: 0
+x-ms-exchange-organization-originalclientipaddress: 40.107.100.106
+x-ms-exchange-organization-originalserveripaddress: 10.167.242.13
+x-ms-publictraffictype: Email
+received-spf: SoftFail (protection.outlook.com: domain of transitioning
+ technijian.com discourages use of 35.166.188.152 as permitted sender)
+x-ms-exchange-organization-transporttraffictype: Email
+x-ms-exchange-organization-transporttrafficsubtype:
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+
+
+--_000_d9010b7d241748edabd351653262b51fSA3PR08MB8851namprd08pr_--
