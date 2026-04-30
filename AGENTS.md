@@ -41,7 +41,7 @@ If you are an AI coding or CLI agent working in this repository:
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **tech-legal** (1843 symbols, 3976 relationships, 105 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **tech-legal** (3251 symbols, 5566 relationships, 145 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -137,10 +137,5 @@ To check whether embeddings exist, inspect `.gitnexus/meta.json` — the `stats.
 | Rename / extract / split / refactor | `.claude/skills/gitnexus/gitnexus-refactoring/SKILL.md` |
 | Tools, resources, schema reference | `.claude/skills/gitnexus/gitnexus-guide/SKILL.md` |
 | Index, status, clean, wiki CLI commands | `.claude/skills/gitnexus/gitnexus-cli/SKILL.md` |
-| Work in the _generators area (424 symbols) | `.claude/skills/generated/generators/SKILL.md` |
-| Work in the Templates area (50 symbols) | `.claude/skills/generated/templates/SKILL.md` |
-| Work in the Scripts area (31 symbols) | `.claude/skills/generated/scripts/SKILL.md` |
-| Work in the OKL area (16 symbols) | `.claude/skills/generated/okl/SKILL.md` |
-| Work in the 03_SOW area (11 symbols) | `.claude/skills/generated/03-sow/SKILL.md` |
 
 <!-- gitnexus:end -->
