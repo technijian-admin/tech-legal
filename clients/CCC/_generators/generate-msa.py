@@ -235,25 +235,37 @@ class BrandedDoc:
     def spacer(self, pts=4):
         self.doc.add_paragraph().paragraph_format.space_after = Pt(pts)
 
+    def sig_line_with_anchor(self, label, anchor):
+        p = self.doc.add_paragraph()
+        # Invisible anchor (1pt, white) — DocuSign scans for this text to place tabs
+        r = p.add_run(anchor)
+        r.font.name = FONT
+        r.font.size = Pt(1)
+        r.font.color.rgb = WHITE
+        r2 = p.add_run(label)
+        r2.font.name = FONT
+        r2.font.size = Pt(10)
+        r2.font.color.rgb = BRAND_GREY
+        p.paragraph_format.space_after = Pt(2)
+        return p
+
     def signatures(self, client_name=CLIENT_NAME.upper()):
         self.doc.add_paragraph()
         self.section_header("SIGNATURES")
         self.spacer(8)
         p = self.doc.add_paragraph()
         self.run(p, "TECHNIJIAN, INC.", size=11, bold=True, color=DARK_CHARCOAL)
-        for label in ["By: ___________________________________", "Name: _________________________________",
-                      "Title: _________________________________", "Date: _________________________________"]:
-            p = self.doc.add_paragraph()
-            self.run(p, label, size=10, color=BRAND_GREY)
-            p.paragraph_format.space_after = Pt(2)
+        self.sig_line_with_anchor("By: ___________________________________", "/tSign/")
+        self.sig_line_with_anchor("Name: _________________________________", "/tName/")
+        self.sig_line_with_anchor("Title: _________________________________", "/tTitle/")
+        self.sig_line_with_anchor("Date: _________________________________", "/tDate/")
         self.spacer(12)
         p = self.doc.add_paragraph()
         self.run(p, client_name, size=11, bold=True, color=DARK_CHARCOAL)
-        for label in ["By: ___________________________________", "Name: _________________________________",
-                      "Title: _________________________________", "Date: _________________________________"]:
-            p = self.doc.add_paragraph()
-            self.run(p, label, size=10, color=BRAND_GREY)
-            p.paragraph_format.space_after = Pt(2)
+        self.sig_line_with_anchor("By: ___________________________________", "/cSign/")
+        self.sig_line_with_anchor("Name: _________________________________", "/cName/")
+        self.sig_line_with_anchor("Title: _________________________________", "/cTitle/")
+        self.sig_line_with_anchor("Date: _________________________________", "/cDate/")
 
     def footer_bar(self):
         self.spacer(8)
