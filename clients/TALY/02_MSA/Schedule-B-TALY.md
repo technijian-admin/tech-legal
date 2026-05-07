@@ -1,0 +1,145 @@
+# SCHEDULE B — SUBSCRIPTION AND LICENSE SERVICES
+
+**Attached to Master Service Agreement MSA-TALY-2026**
+**Effective Date:** _______________ 2026
+
+This Schedule describes the Subscription and License Services provided by Technijian, Inc. ("Technijian") to **Talley & Associates** ("Client") under the Master Service Agreement.
+
+---
+
+## 1. DESCRIPTION
+
+Technijian procures, manages, and maintains third-party software subscriptions, licenses, SSL certificates, domain registrations, and related services on Client's behalf ("Subscription Services"). These services are separate from the Monthly Managed Services described in Schedule A.
+
+## 2. SERVICE CATEGORIES
+
+### 2.1 Software Subscriptions
+
+Available categories include but are not limited to:
+
+| Category | Examples |
+|----------|----------|
+| Productivity | Microsoft 365 Business Basic, Business Standard, E3/E5 |
+| Security | Microsoft Entra ID, Defender, Intune |
+| Analytics | Power BI Pro, Power BI Premium |
+| Collaboration | Microsoft Visio, Project, Copilot |
+| Database | Microsoft SQL Server licenses (SAL, CAL) |
+| Server | Microsoft Server Standard, RDP/User CALs |
+| Specialty | Foxit PDF Business, Adobe Creative Cloud, other line-of-business applications |
+
+### 2.2 SSL Certificates
+
+| Type | Description |
+|------|-------------|
+| Standard SSL | Single-domain SSL certificate (1-year term) |
+| UCC / Multi-Domain SSL | Unified Communications Certificate covering multiple domains |
+| Wildcard SSL | SSL certificate covering all subdomains of a domain |
+
+### 2.3 Domain Registrations
+
+| Service | Description |
+|---------|-------------|
+| Domain Registration | New domain registration or annual renewal |
+| DNS Management | DNS hosting and record management |
+
+## 3. PROCUREMENT AND MANAGEMENT
+
+**3.01. Procurement.** Technijian shall procure Subscription Services from authorized vendors and resellers on Client's behalf. Client authorizes Technijian to act as its agent for purposes of procuring and managing these subscriptions.
+
+**3.02. License Management.** Technijian shall:
+
+(a) Maintain an inventory of all active subscriptions and licenses;
+
+(b) Monitor subscription terms, renewal dates, and expiration dates;
+
+(c) Notify Client at least **thirty (30) days** prior to any annual renewal; and
+
+(d) Process additions, removals, and changes to subscriptions upon Client's written request.
+
+**3.03. Vendor Terms.** Subscription Services are subject to the applicable vendor's terms and conditions (e.g., Microsoft Product Terms, Microsoft Customer Agreement, Adobe Subscription Terms). Client acknowledges that Technijian is a reseller and that certain terms are passed through from the vendor. For each Subscription Service, Technijian shall identify the applicable vendor and provide a current link or attachment to the vendor's terms in the **Subscription Order** at the time of ordering. Material changes to vendor terms shall be communicated to Client within thirty (30) days of Technijian's receipt of notice from the vendor. Where vendor terms impose data processing obligations, Client acknowledges that those obligations flow through to Client's use of the Subscription Service, and Technijian shall not be liable for vendor acts or omissions outside Technijian's control.
+
+## 4. PRICING
+
+**4.01. Subscription Fees.** Client shall pay the fees for Subscription Services as set forth in the **Subscription Order** attached to this Schedule. Fees include Technijian's management and procurement services. Per-unit rates for available subscriptions are set forth in Schedule C, Section 4.
+
+**4.02. Billing Frequency.** Subscriptions are billed as follows:
+
+| Billing Frequency | Applicable To |
+|-------------------|---------------|
+| Monthly | Software subscriptions billed on a per-user, per-month basis |
+| Annually | SSL certificates, domain registrations, and annual licenses |
+
+**4.03. Pass-Through Costs.** If a vendor increases its pricing, Technijian may adjust the corresponding Subscription Service fee upon **thirty (30) days** written notice to Client.
+
+## 5. CHANGES TO SUBSCRIPTIONS
+
+**5.01. Additions.** Client may request additional licenses or subscriptions at any time. New subscriptions shall be added at the then-current pricing and prorated for the remaining billing period.
+
+**5.02. Removals.** Client may request removal of subscriptions upon **thirty (30) days** written notice. Client acknowledges that:
+
+(a) Some subscriptions have minimum commitment terms imposed by the vendor;
+
+(b) Removal of subscriptions mid-term may not result in a refund if the vendor does not provide one; and
+
+(c) Client is responsible for fees through the end of the applicable subscription term.
+
+**5.03. Annual Renewals.**
+
+> **AUTOMATIC RENEWAL NOTICE:** Annual subscriptions will automatically renew for successive one-year terms unless you provide written notice of non-renewal at least thirty (30) days prior to the renewal date. You may cancel by sending written notice to Technijian at the address in the MSA or by email to contracts@technijian.com. Technijian will notify you at least thirty (30) days before each annual renewal per Section 3.02(c) of this Schedule.
+
+Unless Client provides written notice of non-renewal at least **thirty (30) days** prior to the renewal date, annual subscriptions shall automatically renew for successive one-year terms.
+
+## 6. DATA AND ACCESS
+
+**6.01. Account Ownership.** Client retains ownership of all accounts and data associated with Subscription Services. Upon termination of this Schedule or any specific Subscription Service:
+
+(a) Technijian shall transfer **administrative (Global Admin / Owner / root-tenant) credentials and console access** to Client or Client's designated representative within **five (5) business days** of termination. This obligation is part of the Operational Continuity Materials under MSA Section 2.05(b) and is not subject to withholding for non-payment.
+
+(b) Technijian shall complete the full reassignment of subscription billing ownership, partner-of-record relationships, and removal of Technijian-controlled service principals within **thirty (30) days** of termination.
+
+(c) Client acknowledges that some vendors (e.g., Microsoft, Adobe) impose their own transfer or partner-of-record change windows, and Technijian's obligations under (b) are subject to those vendor-imposed timelines, provided Technijian initiates the transfer promptly.
+
+**6.02. Credentials.** Client is responsible for maintaining the security of login credentials associated with Subscription Services.
+
+**6.03. Data Protection.** To the extent Subscription Services involve the processing of personal information on behalf of Client, the data protection obligations of the MSA (Section 10) apply in full to Technijian's management of such subscriptions, including CCPA/CPRA service provider obligations, security incident notification, and data return provisions.
+
+## 7. PAYMENT AND COLLECTION
+
+All payment terms, late fees, acceleration rights, collection costs, attorney's fees, lien rights, and other payment enforcement provisions set forth in Sections 3.04 through 3.10 and Section 8.04 of the Master Service Agreement apply in full to all Subscription Services under this Schedule. In the event of non-payment, Technijian may suspend Subscription Services in accordance with Section 3.06 of the MSA. Client acknowledges that failure to pay may result in lapse or cancellation of third-party subscriptions and licenses, and Technijian shall not be liable for any loss or disruption resulting from such lapse or cancellation caused by Client's non-payment. Notwithstanding the foregoing, Technijian shall not withhold credential transfers or administrative account access that Client needs to comply with applicable law or to prevent imminent data loss; such transfers shall be subject to the data return provisions of MSA Section 2.05(c).
+
+---
+
+## 8. SUBSCRIPTION ORDER
+
+### 8.1 Active Subscriptions at Execution
+
+| Subscription | Vendor | Qty | Billing | Unit Price | Monthly Total |
+|--------------|--------|----:|---------|-----------:|--------------:|
+| _None active_ | — | — | — | — | $0.00 |
+| | | | | **Subtotal** | **$0.00** |
+
+> Talley & Associates does not currently maintain any Schedule B Subscription Services through Technijian. Future additions (Microsoft 365, SSL certificates, domain registrations, etc.) will be documented by an updated Subscription Order signed by both Parties.
+
+---
+
+## SIGNATURES
+
+**TECHNIJIAN, INC.**
+
+By: ___________________________________
+
+Name: Ravi Jain
+
+Title: President
+
+Date: _________________________________
+
+**TALLEY & ASSOCIATES**
+
+By: ___________________________________
+
+Name: Robert L. Evens
+
+Title: _________________________________
+
+Date: _________________________________
