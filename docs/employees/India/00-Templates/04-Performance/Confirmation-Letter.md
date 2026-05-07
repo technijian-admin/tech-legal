@@ -1,87 +1,115 @@
 **TECHNIJIAN IT SERVICES PVT. LTD.**
-Registered Office: [Chandigarh Address - TBD]
+Registered Office: [Chandigarh Address — TBD]
 Operating Office: Plot No. 07, 1st Floor, Panchkula IT Park, Panchkula, Haryana 134109
 CIN: [TBD]  |  GSTIN: [TBD]  |  PAN: [TBD]
 Email: hr-india@technijian.com  |  www.technijian.com
 
 ---
 
-# Confirmation of Employment
-
-**Date:** __________
-**Ref:** TIJ/HR/CONF/____/____
+**Ref:** CONF/<YYYY>/<NN>
+**Date:** <DD Month YYYY>
 
 **To:**
-<Employee Name>
-<Emp ID>
-<Residential Address>
+<Mr./Ms.> <Employee Name>
+<Employee ID>
+<Designation>
+<Department>
+<Residential Address on Record>
 
-Dear <Employee Name>,
+**Subject: Confirmation of Employment**
 
-## 1. Confirmation of Employment
+Dear <Mr./Ms. Last Name>,
 
-1.01 With reference to your Appointment Letter dated <appointment date>, you joined Technijian IT Services Pvt. Ltd. (the "**Company**") as <Original Designation> on <Date of Joining> on probation for a period of six (6) months.
+This letter is issued with reference to your Offer / Appointment Letter dated <DOJ Offer Date>, your date of joining on <DOJ>, and the provisions of the **§Confirmations** clause of the Employee Handbook of Technijian IT Services Pvt. Ltd. (the "Company").
 
-1.02 Based on the probation review conducted on <review date> by your reporting manager, <Manager Name>, and the recommendation placed before Management, we are pleased to inform you that your performance during the probationary period has been found satisfactory.
+## 1. Probation Review
 
-1.03 Accordingly, your services stand **confirmed** with effect from <Confirmation Effective Date> (the "**Confirmation Date**").
+1.01 You joined the Company on **<DOJ>** as **<Designation>** on an initial probationary period of six (6) months in accordance with §Appointments → Probation of the Employee Handbook.
 
-## 2. Confirmed Designation and Grade
+1.02 The Company has, in consultation with HR and the Executive team, conducted a performance and conduct review against the criteria set out in §Confirmations §1 of the Employee Handbook, namely:
 
-2.01 **Designation (on confirmation):** <Confirmed Designation>
-2.02 **Grade / Band:** <Grade>
-2.03 **Reporting Manager:** <Manager Name, Designation>
-2.04 **Work Location:** [Panchkula, Haryana] / as assigned from time to time.
+   (a) Achievement of role-specific KPIs and performance goals;
+   (b) Adherence to attendance and punctuality norms;
+   (c) Compliance with Company policies and Code of Conduct;
+   (d) Ability to work independently and as part of a team; and
+   (e) Responsiveness to feedback and learning attitude.
 
-## 3. Revised Compensation
+1.03 The Company is satisfied that you have met the expectations set forth above.
 
-3.01 With effect from the Confirmation Date, your Annual Cost to Company (CTC) is revised to **INR <Revised Annual CTC>** (Rupees <in words> only).
+## 2. Confirmation
 
-3.02 The detailed component-wise breakup of the revised CTC, including Basic, HRA, allowances, Employer PF (EPF & MP Act, 1952), Gratuity provisioning (Payment of Gratuity Act, 1972), Group Mediclaim, variable / performance bonus and statutory deductions, is set out at **Annexure A** attached to and forming part of this letter.
+2.01 We are pleased to **confirm your services** with the Company in the position of **<Designation>**, effective **<Confirmation Effective Date>**.
 
-3.03 Your salary shall be credited on the last working day of each calendar month (or next working day if that day is a holiday), subject to deduction of Tax at Source (TDS) under the Income-tax Act, 1961, Professional Tax as applicable in the State of Haryana, and other statutory deductions.
+2.02 Your monthly compensation as on the date of confirmation is ₹<gross> (Rupees <amount in words>) per month, structured in accordance with the Company's CTC framework (see CTC Breakup Annexure A, if applicable).
 
-## 4. Notice Period — Post Confirmation
+## 3. Post-Confirmation Terms
 
-4.01 Consequent upon confirmation, the notice period for termination of employment is **thirty (30) days** in writing, or salary in lieu thereof, by either party.
+3.01 **Notice of Termination.** Pursuant to §Confirmation Letter of the Employee Handbook, your services with the Company shall hereafter be terminable by either party giving **one (1) month's written notice** to the other, or salary in lieu thereof. Either party need not assign any reason for such termination, subject to applicable Indian labour law.
 
-4.02 The Company reserves the right to accept resignation with immediate effect and pay salary in lieu of notice, or to require you to serve the entire notice period, in its sole discretion.
+3.02 **Full-Time Engagement.** You shall remain a full-time employee of the Company and shall not engage in any other work, business, or profession (whether honorary or otherwise) without prior written permission from the competent authority.
 
-## 5. Continuation of Other Terms
+3.03 **Medical Fitness.** Your continued employment is subject to your remaining medically fit for the role.
 
-5.01 Save as expressly modified by this letter, all other terms and conditions of your Appointment Letter dated <appointment date>, including those relating to confidentiality, intellectual property assignment, non-solicitation, code of conduct, prevention of sexual harassment at the workplace (POSH Act, 2013), and the Employee Handbook, continue to apply and remain binding.
+3.04 **Conflict of Interest.** You shall not have any personal financial transactions (or transactions for personal gain) with the Company's customers, suppliers, dealers, agents, distributors, or contractors, save and except as may be expressly permitted in writing.
 
-5.02 Your continuance in employment remains subject to your being and remaining medically fit, and to satisfactory background verification.
+3.05 **Compliance with Policies.** Your services shall continue to be governed by the policies, rules, and regulations (including any certified Standing Orders, where applicable, and Office Orders) of the Company, as may be in force at the time and as amended from time to time.
 
-5.03 You shall not, during the continuance of your employment, engage in any other employment, business, profession or honorary assignment without the prior written consent of the Company.
+3.06 **Salary Confidentiality.** Your salary is confidential. Disclosure to any third party (including Company employees outside your line of management or any external agency) is prohibited and may, per the Employee Handbook, constitute grounds for disciplinary action up to and including termination of employment, subject to due process.
 
-## 6. Confidentiality of Compensation
+3.07 **Continuing Obligations.** Your obligations under your Appointment Letter, the NDA, the IT Acceptable Use policy, the Code of Business Ethics and Conduct, and the POSH Policy continue in force without interruption.
 
-6.01 The details of your compensation are strictly confidential. You shall not disclose the same to any other employee, third party, or outside agency. Any breach shall be treated as misconduct and dealt with in accordance with the Company's disciplinary framework and the Industrial Employment (Standing Orders) Act, 1946, as applicable.
+## 4. Benefits and Entitlements (Post-Confirmation)
 
-## 7. Acknowledgement
+4.01 With effect from the Confirmation Effective Date, you become eligible for:
 
-Please sign and return the duplicate copy of this letter as a token of your acceptance.
+   (a) **Earned Leave** accrual in accordance with the Punjab Shops and Commercial Establishments Act, 1958 (as adopted in Haryana) and the Company Leave Policy;
+   (b) **Medical Insurance** as per the Company's group policy;
+   (c) **Provident Fund** continuation (already enrolled from date of joining);
+   (d) **Bonus / Increments**, if any, per the Company's compensation review cycle and subject to performance.
 
-We congratulate you on your confirmation and look forward to your continued contribution to the Company.
+## 5. Statutory Notes
 
-For and on behalf of **Technijian IT Services Pvt. Ltd.**
+5.01 **Gratuity** vests after five (5) years of continuous service per Section 4(1) of the Payment of Gratuity Act, 1972 / Section 53 of the Code on Social Security, 2020. Confirmation does not by itself trigger any gratuity entitlement.
 
-_______________________________
+5.02 **Continuous Service.** Your service is treated as continuous from your date of joining (<DOJ>) for the purposes of statutory entitlements (gratuity, retrenchment compensation under §70 IR Code 2020, EL accrual under Punjab S&E Act).
+
+## 6. Acceptance
+
+By signing below, you acknowledge that you have read, understood, and accept the terms of this Confirmation Letter together with the current Employee Handbook of the Company.
+
+We look forward to a continued, successful working relationship.
+
+Yours sincerely,
+
+For **Technijian IT Services Pvt. Ltd.**
+
+
+_________________________
 **Ravi Jain**
 Director
-Technijian IT Services Pvt. Ltd.
+Email: rjain@technijian.com
+
+
+_________________________
+**Ms. Shelja Mehta**
+HR Head — India
+Email: smehta@technijian.com
 
 ---
 
-**Accepted and Acknowledged**
+**Employee Acknowledgement and Acceptance**
 
-Signature: _______________________________
+I, <Employee Name>, Employee ID <Emp ID>, acknowledge and accept the terms of this Confirmation Letter dated <Date> and reaffirm my obligations under my Appointment Letter, the Employee Handbook, and all related policies of the Company.
+
+Employee Signature: _________________________
 Name: <Employee Name>
-Emp ID: <Emp ID>
-Date: __________
-Place: __________
+Date: _________________________
 
 ---
 
-**Enclosure:** Annexure A — Revised CTC Breakup
+## Drafting Notes (delete before issuance)
+
+1. **Add to register.** After issuance, add the employee's first name to [`tech-legal/technijian/India/HR/Confirmation Letters Given.docx`](tech-legal/technijian/India/HR/Confirmation%20Letters%20Given.docx). The register is the source-of-truth for confirmation status — see [[india_confirmation_letters_tracking]].
+2. **Update employee folder.** Set the confirmation date in the employee's `info.md` (if maintained) and ensure the signed PDF is filed.
+3. **Volatile probation.** If the employee did NOT meet expectations, do NOT issue this letter. Use the Probation Extension or Probation Termination template instead. Per §Confirmations §3 of the handbook, silence = automatic 6-month extension by default.
+4. **Salary on confirmation.** Confirmation typically coincides with a small increment. Cross-reference with the Increment Letter template if a raise is being granted.
