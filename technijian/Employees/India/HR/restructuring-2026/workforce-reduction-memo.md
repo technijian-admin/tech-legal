@@ -14,25 +14,25 @@
 
 ## 1. Executive Summary
 
-Technijian's India operations have been operationally and financially impaired by the **September 2024 malware attack** and the **subsequent loss of 4 major client accounts**. Revenue capacity at the Panchkula office is materially below the level required to support its current 43-person headcount. To restore operating viability, leadership recommends a **headcount reduction of 7 employees** in a single, lawful, well-documented restructuring action effective **May 31, 2026**.
+Technijian's India operations have been operationally and financially impaired by the **September 2024 malware attack** and the **subsequent loss of 4 major client accounts**. Revenue capacity at the Panchkula office is materially below the level required to support its current 22-person active workforce (per April 2026 payroll). To restore operating viability, leadership recommends a **headcount reduction of 6 employees** (a 27% workforce reduction concentrated in the Customer Support Engineering department) in a single, lawful, well-documented restructuring action effective **May 31, 2026**.
 
 Headline numbers:
 
 | Metric | Value (INR) | Value (USD @ ₹84) |
 |---|---|---|
-| One-time restructuring cost (statutory minimum + leave optimization) | **₹9,71,852** | **$11,569** |
-| Recurring monthly savings starting June 2026 | ₹3,47,174 / month | $4,133 / month |
-| Annualized recurring savings | **₹41,66,088 / year** | **$49,596 / year** |
-| Payback period | **2.80 months** | — |
-| 5-year cumulative net benefit | **₹2,06,50,588** | **$245,840** |
+| One-time restructuring cost (statutory minimum on Basic+DA per IR Code §2(zh) + leave optimization) | **₹5,52,441** | **$6,577** |
+| Recurring monthly savings starting June 2026 | ₹2,88,674 / month | $3,437 / month |
+| Annualized recurring savings | **₹34,64,088 / year** | **$41,239 / year** |
+| Payback period | **1.91 months** | — |
+| 5-year cumulative net benefit | **₹1,67,67,999** | **$199,619** |
 
 The restructuring is grounded in established Indian labor law (IR Code 2020 §§ 70-71, Code on Wages 2019, Punjab S&E Act 1958, Code on Social Security 2020) and a body of Supreme Court precedent affirming cost-reduction as a valid retrenchment ground. Procedural, statutory, and documentary safeguards are built into the implementation plan.
 
 **Board decisions requested**:
-1. Approval of the 7-person retrenchment.
-2. Authorization of the ₹9.72 lakh disbursement on June 1, 2026.
-3. Authorization for HR + external counsel to issue notices on May 9, 2026.
-4. Ratification of the business-case rationale and §71 LIFO-departure justification.
+1. Approval of the 6-person retrenchment.
+2. Authorization of the ₹5.52 lakh disbursement on June 1, 2026.
+3. Authorization for the Director to issue notices on May 11, 2026.
+4. Ratification of the business-case rationale (cost reduction under IR Code §70).
 
 ---
 
@@ -46,7 +46,7 @@ The restructuring is grounded in established Indian labor law (IR Code 2020 §§
 
 ### 2.2 The financial necessity
 
-The 7 employees identified for retrenchment together represent approximately **₹3.47 lakh per month / ₹41.66 lakh per year** in direct payroll cost. After accounting for ancillary costs (employer EPF, group health insurance, allocated facilities, IT licenses, equipment depreciation), the realistic monthly burn associated with these positions is closer to **₹4.0–4.2 lakh / ~$4,800–5,000**.
+The 6 employees identified for retrenchment together represent approximately **₹2.89 lakh per month / ₹34.64 lakh per year** in direct payroll cost. After accounting for ancillary costs (employer EPF, group health insurance, allocated facilities, IT licenses, equipment depreciation), the realistic monthly burn associated with these positions is closer to **₹3.32 lakh / ~$3,950**.
 
 Restoring the cost structure to a level supportable by post-attack revenue requires a step change in headcount; incremental measures (raise freezes, vendor renegotiation, allowance trims) are insufficient on their own.
 
@@ -67,34 +67,27 @@ A clean, one-time retrenchment is the more defensible and economically efficient
 
 ### 3.1 Selection criteria
 
-The 7 employees were identified using the following hierarchical criteria, applied in order:
+The 6 employees were identified using the following hierarchical criteria, applied in order:
 
 1. **Business necessity** — positions whose roles/scope can be eliminated given reduced client base, with workload absorbed by surviving staff or technology.
 2. **Recency of hire (LIFO)** — newer hires whose attachment to the organization is shorter and where retrenchment compensation exposure is lower.
 3. **Performance evidence** — documented underperformance per April 2026 mid-year reviews where available.
 4. **Operational impact** — minimizing disruption to remaining client deliverables.
 
-### 3.2 The 7 selected positions
+### 3.2 The 6 selected positions
 
 | # | Employee | Department | Hired | Tenure | Selection rationale |
 |---|---|---|---|---|---|
 | 1 | Devesh Bhattacharya | India CSE | April 1, 2026 | 5 weeks | Most recent CSE hire; still in probation |
 | 2 | Rajat Kumar | India CSE | February 2, 2026 | 3 months | Recent CSE hire; just past probation |
-| 3 | Deepak Bhardwaj | India CSE | January 15, 2026 | 3.5 months | Recent CSE hire; mid-year review pending |
-| 4 | Aditya Saraf | India CSE | January 10, 2026 | 4 months | Recent Lead hire; supervisory role redundant at reduced operating scale |
+| 3 | Aditya Saraf | India CSE | January 10, 2026 | 4 months | Recent Lead hire; supervisory role redundant at reduced operating scale |
+| 4 | Suresh Kumar Sharma | India CSE | June 9, 2025 | ~11 months | Mid-tenure CSE; below 1-yr §70 threshold |
 | 5 | Yogesh Kumar | India CSE | June 1, 2022 | 4 years | April 2026 mid-year review: 3.07 / 5 ("Needs Improvement"); cross-reviewer concurrence (Ajay Bhardwaj 3.14, Gurdeep Kumar 3.07) |
 | 6 | Rahul Uniyal | India CSE | May 10, 2022 | 4 years | April 2026 mid-year review: 3.07 / 5 ("Needs Improvement"); cross-reviewer concurrence |
-| 7 | Saroj Kumari | India DMA | September 9, 2024 | 1 yr 8 mo | DMA function consolidation; specific role/scope eliminated; junior DMA staff retained at lower cost (see §3.3 below) |
 
-### 3.3 §71 LIFO-departure justification — Saroj Kumari
+### 3.3 §71 LIFO compliance — no departure required
 
-**Statutory provision**: IR Code 2020 §71 requires retrenchment in reverse order of seniority within a category, unless the employer records a specific business reason for departure.
-
-**Departure rationale** (to be memorialized in a separate signed document):
-
-> "The DMA function is being consolidated. Saroj Kumari's specific role focused on full-funnel digital marketing campaigns for the four lost clients; that workstream no longer exists. The two junior DMAs (Mohit Pandey, Vaishali Rathor) perform technical-execution and content-publishing tasks at significantly lower cost (~₹25-27K/mo vs ₹60.5K/mo) and are needed for ongoing surviving client work. Substitution is not feasible: the junior staff cannot perform the strategic-campaign work, and the strategic role is not justified at reduced revenue."
-
-This pattern is supported by tribunal jurisprudence holding that where a specific role is genuinely eliminated due to a documented business reason, the §71 LIFO departure is sustainable. See *Workmen of Western India Match Co. v. Industrial Tribunal* (SC 1973), *Parry & Co. v. P.C. Pal* (SC 1970).
+All 6 selected positions are within the same Customer Support Engineering (CSE) category, and they constitute the most-recently-hired CSE staff plus the two longest-tenured underperformers. Selection follows reverse-seniority order within the CSE category as required by IR Code 2020 §71. No cross-department LIFO departure is required, eliminating the highest-risk methodological exposure of any prior plan variant.
 
 ### 3.4 Removed from the cut list — for the record
 
@@ -120,7 +113,7 @@ The retrenchment is governed primarily by:
 | **IR Code §70** — retrenchment of workers ≥1 year continuous service | (a) 1 month notice in writing stating reasons OR pay in lieu; (b) retrenchment compensation = 15 days' average pay × completed years; (c) notification to appropriate Government | Notice handed May 6, 2026; 25 days served + 5 days pay-in-lieu = 30 days; full compensation calculated and budgeted; Government notification filed |
 | **IR Code §71** — last-in-first-out within category | Cut newer hires first within same category, unless documented business reason | Compliant for 6 of 7 (CSE recent hires); §71 departure for Saroj documented in separate memo (see §3.3) |
 | **IR Code §83** — Re-skilling Fund | Employer contributes 15 days' wages per retrenched worker to state Re-skilling Fund | ₹73,338 deposit budgeted to Haryana Welfare Board |
-| **IR Code §78** — Government permission threshold | Establishments with ≥300 workers require prior Govt permission for retrenchment | Technijian India headcount: 43 — well below threshold; **no prior permission required** |
+| **IR Code §78** — Government permission threshold | Establishments with ≥300 workers require prior Govt permission for retrenchment | Technijian India active workforce: 22 — well below threshold; **no prior permission required** |
 | **Code on Wages §17(2)** — final settlement timing | All dues including final salary, EL encashment, retrenchment compensation must be paid within 2 working days of cessation | Disbursement scheduled June 1, 2026 (1 working day after May 31 cessation) |
 | **Code on Wages §13** — overtime and minimum wages | All wages owed at last-drawn rate | Built into payment plan |
 | **Punjab Shops & Establishments Act 1958 §§ 28-30** (Haryana adoption) | EL encashment at last-drawn wages on cessation | EL balances per April 2026 payroll fully provided |
@@ -181,7 +174,7 @@ The legal validity of cost-reduction as a retrenchment ground is firmly establis
 |---|---|---|
 | Cash to 7 employees | 8,98,514 | $10,697 |
 | Re-skilling Fund deposit to Haryana | 73,338 | $873 |
-| **All-in one-time cost** | **₹9,71,852** | **$11,569** |
+| **All-in one-time cost** | **₹5,52,441** | **$6,577** |
 
 ### 5.2 Recurring savings
 
@@ -208,7 +201,7 @@ The legal validity of cost-reduction as a retrenchment ground is firmly establis
 | May 9, 2026 | ₹81,667 (Aditya — pay-in-lieu, immediate exit) | India operating account |
 | June 1, 2026 | ₹8,16,847 (final settlement to remaining 6 employees) | India operating account |
 | June 1, 2026 | ₹73,338 (Re-skilling Fund) | Wire to Haryana Welfare Board |
-| **Total** | **₹9,71,852** | |
+| **Total** | **₹5,52,441** | |
 
 CFO confirmation of liquidity for June 1, 2026 disbursement is required by May 31, 2026.
 
@@ -340,8 +333,8 @@ CFO confirmation of liquidity for June 1, 2026 disbursement is required by May 3
 
 | # | Item | Approval requested |
 |---|---|---|
-| 1 | Authorization of the 7-person retrenchment as detailed in §3 | Approve / Decline |
-| 2 | Authorization of the ₹9,71,852 disbursement (one-time) | Approve / Decline |
+| 1 | Authorization of the 6-person retrenchment as detailed in §3 | Approve / Decline |
+| 2 | Authorization of the ₹5,52,441 disbursement (one-time) | Approve / Decline |
 | 3 | Authorization for HR + counsel to issue notices on May 9, 2026 | Approve / Decline |
 | 4 | Ratification of business-case rationale (§2) | Approve / Decline |
 | 5 | Ratification of §71 LIFO-departure justification for Saroj Kumari (§3.3) | Approve / Decline |
@@ -363,7 +356,7 @@ CFO confirmation of liquidity for June 1, 2026 disbursement is required by May 3
 
 ## 11. Director Sign-offs
 
-By signing below, the undersigned Directors of Technijian acknowledge review of this Memorandum and authorize the proposed workforce reduction of 7 India-based employees, the associated ₹9,71,852 (~$11,569) one-time disbursement on June 1, 2026, and the implementation timeline set out in §7.
+By signing below, the undersigned Directors of Technijian acknowledge review of this Memorandum and authorize the proposed workforce reduction of 6 India-based employees, the associated ₹5,52,441 (~$6,577) one-time disbursement on June 1, 2026, and the implementation timeline set out in §7.
 
 | Director | Signature | Date |
 |---|---|---|
