@@ -1,0 +1,86 @@
+[
+  {
+    "field_id": "Text11",
+    "description": "Client name",
+    "page": 1,
+    "value": "Ravi Jain"
+  },
+  {
+    "field_id": "Text12",
+    "description": "Business name",
+    "page": 1,
+    "value": "Technijian, Inc."
+  },
+  {
+    "field_id": "Group10",
+    "description": "Legal structure (also encompasses space-type radios; we set it to S Corp and overlay a checkmark on Commercial/warehouse separately)",
+    "page": 1,
+    "value": "/S Corp"
+  },
+  {
+    "field_id": "Text13",
+    "description": "Number of owners (including the client)",
+    "page": 1,
+    "value": "1"
+  },
+  {
+    "field_id": "Text14",
+    "description": "Percentage of business owned by the client",
+    "page": 1,
+    "value": "100%"
+  },
+  {
+    "field_id": "Text16",
+    "description": "Date business started",
+    "page": 1,
+    "value": "11/2000"
+  },
+  {
+    "field_id": "Text15",
+    "description": "Date client obtained ownership",
+    "page": 1,
+    "value": "11/2000"
+  },
+  {
+    "field_id": "Text17",
+    "description": "Business location (primary address)",
+    "page": 1,
+    "value": "18 Technology Dr., Ste 141, Irvine, CA 92618"
+  },
+  {
+    "field_id": "Text18",
+    "description": "Number of employees or contractors (excluding owners)",
+    "page": 1,
+    "value": "25"
+  },
+  {
+    "field_id": "Text25",
+    "description": "Sale of goods, services, or both",
+    "page": 1,
+    "value": "Both"
+  },
+  {
+    "field_id": "Text19",
+    "description": "Summary of business",
+    "page": 1,
+    "value": "Technijian is an IT consulting and managed-services provider (MSP) headquartered in Irvine, CA, with a development/support center in Panchkula, India. The business provides IT consulting, managed services, and technology resale (hardware/software) to small- and mid-sized businesses in the U.S. Revenue is primarily recurring monthly service agreements; project work and resale add modest variation."
+  },
+  {
+    "field_id": "Text20",
+    "description": "Preparer name (printed)",
+    "page": 2,
+    "value": "Ravi Jain"
+  },
+  {
+    "field_id": "Date24_af_date",
+    "description": "Signature date",
+    "page": 2,
+    "value": "05/09/2026"
+  },
+  {
+    "field_id": "Text21",
+    "description": "Relationship to client/business",
+    "page": 2,
+    "value": "Self / Owner & CEO (100% shareholder)"
+  }
+]
