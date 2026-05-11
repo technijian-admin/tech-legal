@@ -169,14 +169,15 @@ const employees = [
     hireDate:     'June 9, 2025',
     empNo:        'TIPL-CSE-2025-04',
     pathway:      'post-probation',
-    elBurnNote:   'Your accrued Earned Leave (EL) balance as of April 2026 payroll is 49.13 hours (approximately 6.14 working days). This balance, together with any May 2026 accrual, will be fully utilized as paid leave during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. Upon full utilization of your EL balance during the notice period, no separate EL encashment will be payable.',
+    noRehire:     true,
+    elBurnNote:   'Your accrued Earned Leave (EL) balance of 49.13 hours (approximately 6.14 working days) as of April 2026 payroll will be encashed separately as part of your full and final settlement, per your request dated May 11, 2026. EL encashment is calculated on Basic wages per IR Code 2020 §2(zh).',
     settlement: [
       ['Component', 'Amount (INR)', 'Notes'],
       ['May 2026 Salary', 'Rs. 40,000', 'Full month payroll'],
       ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 13,333', '10 days x Rs.40,000 / 30'],
       ['Retrenchment compensation', 'Rs. 0', 'Tenure < 1 year; not applicable'],
-      ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period (49.13 hrs per April 2026 payslip)'],
-      [{ text: 'Total Full and Final Settlement', opts: { bold: true } }, { text: 'Rs. 53,333', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
+      ['Earned Leave (EL) encashment', 'Rs. 4,590', '49.13 hrs / 6.14 days x Basic Rs.19,434 / 26 (per April 2026 payslip)'],
+      [{ text: 'Total Full and Final Settlement', opts: { bold: true } }, { text: 'Rs. 57,923', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
     ],
     body: null,
   },
@@ -393,6 +394,17 @@ function buildLetterBody(emp) {
   body.push(P([
     T('The Company will process your EPF UAN transfer / withdrawal and ESIC exit formalities within 15 days of your last working date. Please ensure your UAN is linked to your Aadhaar and your bank account details on the EPFO portal are current. Contact the undersigned directly if you require any assistance with the process.'),
   ], { after: 200 }));
+
+  // ── Future Re-Employment (only if employee has opted out of standard terms) ──
+  if (emp.noRehire) {
+    body.push(new Paragraph({
+      children: [new TextRun({ text: 'Future Re-Employment:', font: 'Calibri', size: 22, bold: true, color: CORE_BLUE })],
+      spacing: { before: 100, after: 80 },
+    }));
+    body.push(P([
+      T('For clarity, while a relieving letter and service certificate will be issued upon written request, you will not be eligible for re-employment with Technijian IT Services Pvt. Ltd. or its affiliated entities at any future date.'),
+    ], { after: 200 }));
+  }
 
   // ── Closing ──
   body.push(HR());

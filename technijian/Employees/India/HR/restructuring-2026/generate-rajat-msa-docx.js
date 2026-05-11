@@ -50,7 +50,7 @@ const emp = {
   name:        'Rajat Kumar',
   designation: 'Customer Support Engineer',
   department:  'Customer Support Engineering (CSE)',
-  hireDate:    'February 2, 2026',
+  hireDate:    'February 12, 2026',
   empNo:       'TIPL-CSE-2026-02',
   tenure:      'approximately three (3) months',
 };

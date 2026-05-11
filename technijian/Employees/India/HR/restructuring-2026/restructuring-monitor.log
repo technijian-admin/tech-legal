@@ -12,3 +12,17 @@
 [2026-05-11 10:21:04 Pacific Daylight Time]   rahul    folder=33686615 status=SHARED (was SHARED)
 [2026-05-11 10:21:05 Pacific Daylight Time]     -> sent reminder #1 (Ajay + Gurdeep cc'd)
 [2026-05-11 10:21:05 Pacific Daylight Time] 6 envelope(s) still pending. Next check in 12 hours.
+[2026-05-11 11:33:24 Pacific Daylight Time] Monitor run starting
+[2026-05-11 11:33:24 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was SHARED)
+[2026-05-11 11:33:26 Pacific Daylight Time]     -> sent completion email (375.7 KB PDF attached)
+[2026-05-11 11:33:27 Pacific Daylight Time]   rajat    folder=33689124 status=SHARED (was SHARED)
+[2026-05-11 11:33:28 Pacific Daylight Time]     -> sent reminder #1 (Ajay + Gurdeep cc'd)
+[2026-05-11 11:33:28 Pacific Daylight Time]   aditya   folder=33686600 status=SHARED (was SHARED)
+[2026-05-11 11:33:28 Pacific Daylight Time]     -> NOT signed; last reminder 1.2h ago (< 11h guard), skipping
+[2026-05-11 11:33:29 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was SHARED)
+[2026-05-11 11:33:31 Pacific Daylight Time]     -> sent completion email (371.7 KB PDF attached)
+[2026-05-11 11:33:31 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-11 11:33:31 Pacific Daylight Time]     -> NOT signed; last reminder 1.2h ago (< 11h guard), skipping
+[2026-05-11 11:33:31 Pacific Daylight Time]   rahul    folder=33686615 status=SHARED (was SHARED)
+[2026-05-11 11:33:31 Pacific Daylight Time]     -> NOT signed; last reminder 1.2h ago (< 11h guard), skipping
+[2026-05-11 11:33:31 Pacific Daylight Time] 4 envelope(s) still pending. Next check in 12 hours.
