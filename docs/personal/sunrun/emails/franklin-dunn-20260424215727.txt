@@ -1,0 +1,179 @@
+﻿Date:    2026-04-24T21:57:27Z
+From:    Franklin T. Dunn <fdunn@callahan-law.com>
+To:      RJain@technijian.com
+Cc:      
+Subject: RE: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days
+MessageId: <BN0PR08MB68552385560B11712D9060DB912B2@BN0PR08MB6855.namprd08.prod.outlook.com>
+
+---- BODY (html) ----
+
+Yes. Frank Dunn, Esq. CALLAHAN & BLAINE, PC 19900 MacArthur Blvd., Suite 1200 Irvine, CA 92612 Phone 714.241.4444 FAX 714.241.4445 We are pleased to announce that our firm has relocated to a new o  External (fdunn@callahan-law.com)    Graymail  Spam  Phish  More...  myQuarantine  Send Encrypted Mail 
+Yes. 
+
+ 
+
+Frank Dunn, Esq.
+
+CALLAHAN & BLAINE, PC 
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Phone  714.241.4444
+
+FAX    714.241.4445
+
+ 
+
+We are pleased to announce that our firm has relocated to a new office!
+
+All correspondence and in-person business will take place at our new address:
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Please update your records accordingly. 
+
+ 
+
+NOTICE: This message, including any accompanying attachments, is intended solely for the use of the individual to which it is addressed and others authorized to receive it. This message may contain information that is privileged, confidential or exempt from disclosure under applicable Federal or State law. If the reader of this message is not the intended recipient, or the employee or agent responsible for the delivery of the message to the intended recipient, you are hereby notified that any dissemination, distribution or copying of this communication, or taking action in relation to its contents, is strictly prohibited and may be unlawful. If you have received this email in error, please notify us immediately by telephone or return email and delete the original email and any copies thereof. Thank you.  
+
+ 
+
+From: Ravi Jain <RJain@technijian.com> 
+Sent: Friday, April 24, 2026 2:56 PM
+To: Franklin T. Dunn <fdunn@callahan-law.com>
+Cc: EDWARD SUSOLIK <ES@callahan-law.com>
+Subject: Re: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days
+
+ 
+
+CAUTION: This email originated from outside of the organization. Please do not click on links or open attachments from senders you do not trust. 
+
+ 
+
+Got stuck in a meeting can you call me after 4 pm?
+
+ 
+
+Get Outlook for Android
+
+From: Franklin T. Dunn <fdunn@callahan-law.com>
+Sent: Friday, April 24, 2026 2:54:09 PM
+To: Ravi Jain <RJain@technijian.com>
+Cc: EDWARD SUSOLIK <ES@callahan-law.com>
+Subject: RE: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days 
+
+ 
+
+Ravi,  I will call you in a minute.  Attached please find a draft demand letter. 
+
+ 
+
+Frank Dunn, Esq.
+
+CALLAHAN & BLAINE, PC 
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Phone  714.241.4444
+
+FAX    714.241.4445
+
+ 
+
+We are pleased to announce that our firm has relocated to a new office!
+
+All correspondence and in-person business will take place at our new address:
+
+19900 MacArthur Blvd., Suite 1200
+
+Irvine, CA 92612
+
+Please update your records accordingly. 
+
+ 
+
+NOTICE: This message, including any accompanying attachments, is intended solely for the use of the individual to which it is addressed and others authorized to receive it. This message may contain information that is privileged, confidential or exempt from disclosure under applicable Federal or State law. If the reader of this message is not the intended recipient, or the employee or agent responsible for the delivery of the message to the intended recipient, you are hereby notified that any dissemination, distribution or copying of this communication, or taking action in relation to its contents, is strictly prohibited and may be unlawful. If you have received this email in error, please notify us immediately by telephone or return email and delete the original email and any copies thereof. Thank you.  
+
+ 
+
+From: Ravi Jain <RJain@technijian.com> 
+Sent: Friday, April 24, 2026 12:49 PM
+To: Franklin T. Dunn <fdunn@callahan-law.com>
+Cc: EDWARD SUSOLIK <ES@callahan-law.com>
+Subject: RE: FORMAL DEMAND - Solar System Disconnected 11/7/25-4/16/26 - 5 Caladium - Acct 0036 1837 1728 9 - Response Due Within 14 Days
+
+ 
+
+CAUTION: This email originated from outside of the organization. Please do not click on links or open attachments from senders you do not trust. 
+
+ 
+
+Frank,
+
+Thank you — your factual framing is accurate in substance. Answers to your explicit question below, followed by a short list of clarifications to tighten the demand letter, and my availability for a call this afternoon.
+
+1. Monitoring / app access — yes, four channelsI have (or Sunrun has) real-time and historical production data for both systems through the following:
+
+mySunrun app and web portal (my.sunrun.com) — shows daily, monthly, and lifetime production for both systems on the account. During the outage it showed flat-zero production bars for the 2017 Costco system from November 10, 2025 forward. On April 18, 2026 (two days after the April 16 repair) the app flipped to an “Outlier detected” status and has since displayed estimated, not actual, production. Screenshots preserved.SolarEdge monitoring portal — SolarEdge optimizers on the 2017 Costco system log panel-level production locally and backfill to the cloud once the uplink is restored. Sunrun Installation Services holds admin credentials; I have requested view-only access and the full April 16–22 panel-level export in my April 22 follow-up to Katherine Wilson. That request is outstanding.SDG&E Net Energy Metering interval data (Account No. 0036-1837-1728-9, NEM Meter No. 06688420) — utility-side record of net export, independent of Sunrun. The NEM summary on every monthly SDG&E bill from December 2025 through April 2026 shows zero exported kWh across every Time-of-Use bucket. This is the strongest piece of third-party corroboration.Physical SolarEdge inverter lifetime-kWh counter — a reading on the unit itself, read by the Sunrun technician on the April 16 and April 22 site visits. I have asked for both readings in writing; the delta is the on-device answer to any later “generating but not uploading” argument.The critical point for the claim: Sunrun's own proprietary monitoring detected the failure on November 10, 2025 and opened internal Case No. 18181148 that same day with subject designation “Metering.” Sunrun then did not notify me for 67 days. That asymmetry — superior monitoring knowledge plus prolonged non-disclosure — is the core of the concealment / UCL theory.
+
+2. Short list of clarifications for the demand letterUnits — kW vs. kWh. The 2012 system is ∼5.5 kW DC nameplate capacity (not 10 kWh). The 2017 Costco system is 5.61 kWp DC nameplate. Combined nameplate on file with SDG&E: 11.16 kW. On a typical April day in Orange County each system produces on the order of 25–30 kWh. Household average daytime draw is closer to 17.5 kWh during solar hours, which is why the zero-export reading is material.2017 counterparty structure. Agreed Costco is nominally the principal on the 2017 Home Improvement Sales Contract, but the CSLB license, the 10-year Limited Warranty (performance warranty, not just labor), and the on-contract signature all come from Sunrun Installation Services, Inc. (CSLB License No. 750184; signer: Roland Claudio “on behalf of Sunrun”). Ed's April 23 template accordingly addresses the demand to both Sunrun, Inc. and Sunrun Installation Services, Inc. as co-recipients. Costco is preserved as a potential additional defendant if needed.Both systems are in play, not just the 2017. The primary outage is the 2017 Costco system (0 kWh confirmed by the April 22 on-site technician, who replaced the uplink circuit). But the 2012 Prepaid PPA is also on the table because (a) Section 8 Guaranteed Output refund obligations run regardless of which system failed, (b) Sunrun's written $500 offer was computed against the 2012 PPA prepayment ($20,000 ÷ 240 months × 5 months = $415, rounded to $500), which is itself an acknowledgment that the PPA's production was deficient during the window, and (c) Katherine Wilson has improperly invoked Section 5c (Supplemental Energy) of the PPA as a liability shield against what is fundamentally a workmanship / monitoring failure.The 2017 Limited Warranty reads on ongoing performance, not a one-time measurement. The 85%-of-DC-nameplate test runs for 10 years from permit sign-off — it is a continuing obligation, not an installation-time snapshot. Five continuous months of zero production is a textbook warranty trigger. I can pull the exact clause text if useful; the PDF is at docs/personal/sunrun/agreement-retail-cust-owned-design-plan.pdf.Disclaimer enforceability. The consequential-damages exclusion and any limitation-of-liability clause in both contracts are subject to Civ. Code § 1668 as recently construed in New England Country Foods, LLC v. Vanlaw Food Products, Inc., S282968 (Cal. Apr. 24, 2025). Vanlaw invalidates those provisions for claims sounding in fraud, willful misconduct, or violation of law — which covers every tort count here. Ed's April 23 template already cites it; worth keeping front-and-center in the letter.Sunrun's own CLRA posture. On April 22, 2026 Katherine Wilson stated in writing that $500 is the maximum authorization and that access to Sunrun's Legal Department requires retention of counsel. That is a usable fact both for CLRA § 1770(a)(14) (misrepresenting rights) and for CCP § 1021.5 private-attorney-general fee-shifting.Prior agency filings, corrected. CPUC complaint No. 726931 was closed by the CPUC by letter dated April 21, 2026 (referred to CSLB). The earlier memo referencing “#226711” was an internal tracking number; the CPUC file number is 726931. A CSLB complaint is teed up but not yet filed (awaiting your guidance on timing).3. Demand-letter templateAt Ed's request I sent him a factually scoped template on Wednesday, April 23, 2026 (8:56 AM PT — same thread). It incorporates the Vanlaw / § 1668 argument, the CLRA § 1782 30-day cure posture, the document-preservation demand, the forum reservations (JAMS for the 2012 PPA / Superior Court for the 2017 Costco), and a $15,000 settlement figure (vs. Sunrun's standing $500 offer). Ed assigned the matter to you later that afternoon and I have not yet received substantive feedback on the template itself — please treat it as a starting draft for you to revise as you see fit. Happy to resend it directly to you and to package the supporting exhibits (two contracts, six monthly SDG&E bills, mySunrun screenshots, full Sunrun correspondence thread, CPUC closing letter, April 16 and April 22 technician visit evidence) as a single PDF set — just say the word.
+
+4. Call availability today (Friday, April 24)I am free any time after 2:30 PM PT today. Cell is 714.402.3164 — call whenever works for you and I'll pick up.
+
+On matter sequencing — per my reply to you earlier today, Sunrun is the highest urgency (May 1 formal-demand response deadline, May 16 CLRA cure ripens, May 4 Sunrun site visit). Vintage is next (settlement posture). BST and the remaining items can slot in behind those.
+
+Thank you,
+
+ 
+
+Thank you,
+
+ 
+
+Ravi Jain
+
+CEO
+
+Technijian
+
+T: 949.379.8499 x201
+C: 714.402.3164
+S: 949.379.8501 (support)
+E: rjain@technijian.com
+W: technijian.com
+
+Book a Meeting
+
+Book time with Support
+
+USA: 18 Technology Dr., Ste 141, Irvine, CA 92618
+India: Plot No. 07, 1st Floor, Panchkula IT Park, Panchkula, Haryana 134109
+
+LinkedIn | Facebook | YouTube | Instagram | X | TikTok | Pinterest
+
+This email and any attachments are confidential and intended solely for the addressee. If you have received this message in error, please notify the sender immediately and delete it from your system. Unauthorized review, use, disclosure, or distribution is prohibited.
+
+ 
+
+ 
+
+Disclaimer
+
+The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.
+
+This email has been scanned for viruses and malware, and may have been automatically archived by Mimecast Ltd, an innovator in Software as a Service (SaaS) for business. Providing a safer and more useful place for your human generated data. Specializing in; Security, archiving and compliance. To find out more Click Here.
+
+Disclaimer
+
+The information contained in this communication from the sender is confidential. It is intended solely for use by the recipient and others authorized to receive it. If you are not the recipient, you are hereby notified that any disclosure, copying, distribution or taking action in relation of the contents of this information is strictly prohibited and may be unlawful.
+
+This email has been scanned for viruses and malware, and may have been automatically archived by Mimecast Ltd, an innovator in Software as a Service (SaaS) for business. Providing a safer and more useful place for your human generated data. Specializing in; Security, archiving and compliance. To find out more Click Here.
+
+
+

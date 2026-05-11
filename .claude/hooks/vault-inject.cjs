@@ -17,9 +17,25 @@ const MEM_DIR = path.join(VAULT_ROOT, 'claude-memory');
 const TOPICS_DIR = path.join(MEM_DIR, 'topics');
 const PREFERENCES = path.join(MEM_DIR, 'preferences.md');
 
-const MAX_INJECT_CHARS = 4000;
+const MAX_INJECT_CHARS = 9000;  // bumped from 4000 to fit topic catalog + high-stakes banner
 const TOP_N_TURNS = 4;
 const MAX_LOG_FILES = 14;
+
+// Keywords that mean "before acting, you MUST grep vault memory" — surfaces
+// non-content-matched topics that share a keyword in title/description/filename.
+// Triggered the Rev3 DocuSign 5-min-URL miss on 2026-04-24; expand cautiously.
+const HIGH_STAKES_KEYWORDS = [
+  'docusign','foxit','envelope','void','sign','signed','signing',
+  'send','sent','email','mail','draft','reply','respond','broadcast',
+  'contract','msa','sow','redline','agreement','amendment','exhibit','schedule a','schedule b','schedule c','schedule d',
+  'bwh','affg','aafg','bst','sunrun','vtd','aava','ampac','okl','chl','taly','brandywine','technijian',
+  'iris','dave','jeff','frank','susolik','klein','dunn','cron','barisic',
+  'invoice','payment','wire','demand','arbitration','litigation','ndr','bounce'
+];
+function detectHighStakes(prompt) {
+  const lower = (prompt || '').toLowerCase();
+  return HIGH_STAKES_KEYWORDS.filter(k => new RegExp(`\\b${k.replace(/\s+/g, '\\s+')}\\b`).test(lower));
+}
 const STOP_WORDS = new Set([
   'the','a','an','and','or','but','if','then','else','of','to','in','on','at','for','with','by','from','as','is','are','was','were','be','been','being','have','has','had','do','does','did','this','that','these','those','it','its','i','you','he','she','we','they','me','my','your','our','their','what','how','why','when','where','which','who','can','could','would','should','will','shall','may','might','must','not','no','so','too','very','just','also','about','please','make','sure','see','review'
 ]);
@@ -114,6 +130,36 @@ function loadMemoryEntries() {
   return { pinned, regular };
 }
 
+// Lightweight catalog: list ALL topic files with title + description only
+// (no body). Always injected so the model knows what memory exists and can
+// grep it on demand even when keyword scoring misses. Designed to be cheap
+// (~50 files, frontmatter only) so it stays well under the 8s hook timeout.
+function loadTopicCatalog() {
+  const dir = fs.existsSync(TOPICS_DIR) ? TOPICS_DIR : MEM_DIR;
+  if (!fs.existsSync(dir)) return [];
+  const exclude = new Set(['MEMORY.md', 'index.md', 'CHANGELOG.md', 'HEALTH.md', 'preferences.md']);
+  const out = [];
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.md') && !exclude.has(f))) {
+    try {
+      const text = fs.readFileSync(path.join(dir, f), 'utf8');
+      const fm = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
+      const meta = {};
+      if (fm) {
+        for (const line of fm[1].split(/\r?\n/)) {
+          const kv = line.match(/^([^:]+):\s*(.*)$/);
+          if (kv) meta[kv[1].trim()] = kv[2].trim().replace(/^["']|["']$/g, '');
+        }
+      }
+      out.push({
+        file: f,
+        title: meta.topic || meta.name || f.replace(/\.md$/, ''),
+        desc: (meta.description || meta.aliases || '').slice(0, 140)
+      });
+    } catch (_) {}
+  }
+  return out;
+}
+
 // Load preferences.md unconditionally — per memory-stack spec, preferences
 // are universal rules that apply to every interaction regardless of topic
 // match. This is loaded as an extra pinned entry on every prompt.
@@ -169,6 +215,8 @@ function truncate(s, n) {
   const prefs = loadPreferences();
   if (prefs) pinned.unshift(prefs);
   const pairs = loadAllPairs();
+  const catalog = loadTopicCatalog();
+  const highStakes = detectHighStakes(prompt);
 
   const ranked = pairs
     .map(p => ({ ...p, _score: scorePair(ptoks, p) }))
@@ -187,10 +235,34 @@ function truncate(s, n) {
     .sort((a, b) => b._score - a._score)
     .slice(0, 3);
 
-  if (!pinned.length && !ranked.length && !memScored.length) { process.exit(0); }
+  if (!pinned.length && !ranked.length && !memScored.length && !catalog.length && !highStakes.length) { process.exit(0); }
 
   const sections = [];
   let used = 0;
+
+  // HIGH-STAKES BANNER — first so it's most visible. Surfaces topics whose
+  // title/description/filename mentions any of the high-stakes keywords from
+  // the prompt, even if their body didn't match the keyword scoring above.
+  if (highStakes.length && catalog.length) {
+    const matched = catalog.filter(t => {
+      const hay = (t.title + ' ' + t.desc + ' ' + t.file).toLowerCase();
+      return highStakes.some(k => hay.includes(k.toLowerCase()));
+    }).slice(0, 12);
+    if (matched.length) {
+      const lines = matched.map(t => `- **${t.title}** \`(${t.file})\`${t.desc ? ' — ' + t.desc : ''}`);
+      const banner = [
+        `## HIGH-STAKES WRITE DETECTED — keywords: ${highStakes.join(', ')}`,
+        ``,
+        `**You MUST grep these vault topics before any send/sign/commit action.** Vault topics path:`,
+        `\`C:/Users/rjain/OneDrive - Technijian, Inc/Documents/obsidian/tech-legal/claude-memory/topics/\``,
+        ``,
+        `Topics whose name/description matches your keywords:`,
+        ...lines,
+        ``
+      ].join('\n');
+      if (used + banner.length <= MAX_INJECT_CHARS) { sections.push(banner); used += banner.length; }
+    }
+  }
 
   if (pinned.length) {
     const blocks = pinned.map(e => `- **${e.title}**: ${truncate(e.body.replace(/\n+/g, ' '), 400)}`);
@@ -215,6 +287,15 @@ function truncate(s, n) {
       used += block.length;
     }
     if (blocks.length) sections.push(`## Prior relevant turns from vault\n${blocks.join('\n\n')}\n`);
+  }
+
+  // FULL TOPIC CATALOG — last (lowest priority but always included if it fits).
+  // Gives the model a complete inventory of memory it can grep on demand,
+  // even for topics that didn't match keyword scoring.
+  if (catalog.length) {
+    const lines = catalog.map(t => `- ${t.title} \`(${t.file})\``);
+    const block = `## All vault topics available (grep before acting on the relevant one)\n${lines.join('\n')}\n`;
+    if (used + block.length <= MAX_INJECT_CHARS) { sections.push(block); used += block.length; }
   }
 
   if (!sections.length) { process.exit(0); }
