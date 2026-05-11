@@ -142,24 +142,7 @@ const employees = [
     ],
     body: null,
   },
-  {
-    filename: '02-Rajat-Kumar-Termination.docx',
-    name:         'Rajat Kumar',
-    designation:  'Customer Support Engineer',
-    department:   'Customer Support Engineering (CSE)',
-    hireDate:     'February 2, 2026',
-    empNo:        'TIPL-CSE-2026-02',
-    pathway:      'post-probation',
-    settlement: [
-      ['Component', 'Amount (INR)', 'Notes'],
-      ['May 2026 Salary', 'Rs. 42,500', 'Full month payroll'],
-      ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 14,167', '10 days x Rs.42,500/30'],
-      ['Retrenchment compensation', 'Rs. 0', 'Tenure < 1 year; not applicable'],
-      ['Earned Leave (EL) encashment', 'Rs. 0', 'Balance as per payroll records'],
-      [{ text: 'Total Full and Final Settlement', opts: { bold: true } }, { text: 'Rs. 56,667', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
-    ],
-    body: null,
-  },
+  // Rajat Kumar — see generate-rajat-msa-docx.js (resigned via Mutual Separation Agreement)
   {
     filename: '03-Aditya-Saraf-Termination.docx',
     name:         'Aditya Saraf',
@@ -186,14 +169,14 @@ const employees = [
     hireDate:     'June 9, 2025',
     empNo:        'TIPL-CSE-2025-04',
     pathway:      'post-probation',
-    elBurnNote:   'You are requested to utilize 20 days of your accrued Earned Leave (EL) balance during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. EL utilized during the notice period will be treated as paid leave; the remaining EL balance will be encashed in the full and final settlement.',
+    elBurnNote:   'Your accrued Earned Leave (EL) balance as of April 2026 payroll is 49.13 hours (approximately 6.14 working days). This balance, together with any May 2026 accrual, will be fully utilized as paid leave during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. Upon full utilization of your EL balance during the notice period, no separate EL encashment will be payable.',
     settlement: [
       ['Component', 'Amount (INR)', 'Notes'],
       ['May 2026 Salary', 'Rs. 40,000', 'Full month payroll'],
       ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 13,333', '10 days x Rs.40,000 / 30'],
       ['Retrenchment compensation', 'Rs. 0', 'Tenure < 1 year; not applicable'],
-      ['Earned Leave (EL) encashment (post-burn)', 'Rs. 21,777', '29.13 days remaining x Basic Rs.19,434 / 26 (per April 2026 payslip)'],
-      [{ text: 'Total Full and Final Settlement', opts: { bold: true } }, { text: 'Rs. 75,110', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
+      ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period (49.13 hrs per April 2026 payslip)'],
+      [{ text: 'Total Full and Final Settlement', opts: { bold: true } }, { text: 'Rs. 53,333', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
     ],
     body: null,
   },
@@ -205,15 +188,15 @@ const employees = [
     hireDate:     'June 1, 2022',
     empNo:        'TIPL-CSE-2022-05',
     pathway:      'retrenchment',
-    elBurnNote:   'You are requested to utilize your entire accrued Earned Leave (EL) balance of 16.51 days during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. Upon full utilization of your EL balance during the notice period, no separate EL encashment will be payable.',
+    elBurnNote:   'Your accrued Earned Leave (EL) balance as of April 2026 payroll is 17.61 hours (approximately 2.20 working days). This balance, together with any May 2026 accrual, will be fully utilized as paid leave during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. Upon full utilization of your EL balance during the notice period, no separate EL encashment will be payable.',
     settlement: [
       ['Component', 'Amount (INR)', 'Notes'],
       ['May 2026 Salary', 'Rs. 47,589', 'Full month payroll'],
       ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 15,863', '10 days x Rs.47,589 / 30'],
       ['Retrenchment compensation (IR Code 2020 §70)', 'Rs. 48,686', '15 days x 4 years x Basic Rs.24,343 / 30 (per IR Code §2(zh): wages = Basic + DA only)'],
-      ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period per leave application'],
-      ['Re-skilling Fund deposit (IR Code §83)', 'Rs. 12,171', 'Paid directly to Haryana Re-skilling Fund (15 days x Basic Rs.24,343 / 30)'],
-      [{ text: 'Total Cash to Employee', opts: { bold: true } }, { text: 'Rs. 1,12,138', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
+      ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period (17.61 hrs per April 2026 payslip)'],
+      [{ text: 'Total Cash to Employee (payable June 1, 2026)', opts: { bold: true } }, { text: 'Rs. 1,12,138', opts: { bold: true } }, { text: 'Net amount to bank account', opts: { bold: true } }],
+      ['Re-skilling Fund deposit (IR Code §83) - PAID TO STATE, NOT TO EMPLOYEE', 'Rs. 12,171', 'Company expense: paid directly to Haryana Re-skilling Fund (15 days x Basic Rs.24,343 / 30)'],
     ],
     body: null,
   },
@@ -225,15 +208,15 @@ const employees = [
     hireDate:     'May 10, 2022',
     empNo:        'TIPL-CSE-2022-06',
     pathway:      'retrenchment',
-    elBurnNote:   'You are requested to utilize 20 days of your accrued Earned Leave (EL) balance during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. The remaining EL balance after the 20-day burn will be encashed in the full and final settlement.',
+    elBurnNote:   'Your accrued Earned Leave (EL) balance as of April 2026 payroll is 89.16 hours (approximately 11.15 working days). This balance, together with any May 2026 accrual, will be fully utilized as paid leave during the notice period (May 11 to May 31, 2026). A pre-filled leave application is provided to you with this notice for signature. Upon full utilization of your EL balance during the notice period, no separate EL encashment will be payable.',
     settlement: [
       ['Component', 'Amount (INR)', 'Notes'],
       ['May 2026 Salary', 'Rs. 38,585', 'Full month payroll'],
       ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 12,862', '10 days x Rs.38,585 / 30'],
       ['Retrenchment compensation (IR Code 2020 §70)', 'Rs. 39,370', '15 days x 4 years x Basic Rs.19,685 / 30 (per IR Code §2(zh): wages = Basic + DA only)'],
-      ['Earned Leave (EL) encashment (post 20-day burn)', 'Rs. 52,362', '69.16 remaining days x Basic Rs.19,685 / 26 (per April 2026 payslip)'],
-      ['Re-skilling Fund deposit (IR Code §83)', 'Rs. 9,843', 'Paid directly to Haryana Re-skilling Fund (15 days x Basic Rs.19,685 / 30)'],
-      [{ text: 'Total Cash to Employee', opts: { bold: true } }, { text: 'Rs. 1,43,179', opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
+      ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period (89.16 hrs per April 2026 payslip)'],
+      [{ text: 'Total Cash to Employee (payable June 1, 2026)', opts: { bold: true } }, { text: 'Rs. 90,817', opts: { bold: true } }, { text: 'Net amount to bank account', opts: { bold: true } }],
+      ['Re-skilling Fund deposit (IR Code §83) - PAID TO STATE, NOT TO EMPLOYEE', 'Rs. 9,843', 'Company expense: paid directly to Haryana Re-skilling Fund (15 days x Basic Rs.19,685 / 30)'],
     ],
     body: null,
   },
@@ -367,7 +350,7 @@ function buildLetterBody(emp) {
       spacing: { before: 100, after: 80 },
     }));
     body.push(P([
-      T('This retrenchment is carried out in compliance with the Industrial Relations Code, 2020. The selection follows the last-in-first-out (LIFO) seniority order within the Customer Support Engineering department as required by §71. The required notification has been made to the appropriate Government authority under §70(c). The Re-skilling Fund contribution under §83 will be deposited with the Haryana state authority.'),
+      T('This retrenchment is carried out in compliance with the Industrial Relations Code, 2020. The selection follows the last-in-first-out (LIFO) seniority order within the Customer Support Engineering department as required by §71. The required notification under §70(c) is being filed with the appropriate Government authority concurrent with the issuance of this notice. The Company\'s establishment size is below the §77 prior-permission threshold; no prior Government permission is required. The Re-skilling Fund contribution under §83 will be deposited with the Haryana state authority.'),
     ], { after: 200 }));
   }
 
@@ -446,8 +429,30 @@ function buildLetterBody(emp) {
     T(', acknowledge receipt of this termination / retrenchment notice dated May 11, 2026. I understand the terms, the last working day of May 31, 2026, and the settlement amounts stated above.'),
   ], { after: 200 }));
 
-  body.push(P([T('Employee Signature: ___________________________    Date: _______________')], { before: 120, after: 120 }));
-  body.push(P([T('Print Name: ___________________________    Employee No.: _______________')], { after: 120 }));
+  // Foxit text tags embedded as white text inside the underscore placeholders.
+  // processTextTags: true in createfolder API will scan the PDF and convert
+  // these tags to interactive fields at their exact rendered positions.
+  // Tag format: ${type:party:required:name:width:height}
+  // Foxit text tags: signfield uses underscores INSIDE braces for width;
+  // height is derived from the text tag's font size. datefield supports
+  // explicit numeric w:h. Tags rendered in white (invisible) at 10pt to
+  // constrain signature field height. One field per line with breathing room.
+  body.push(P([
+    T('Employee Signature:  '),
+    T('${signfield:1:y:Emp_Sig:____________________}', { color: WHITE, size: 20 }),
+  ], { before: 200, after: 220 }));
+  body.push(P([
+    T('Date:  '),
+    T('${datefield:1:y:Date_Signed:80:18}', { color: WHITE, size: 20 }),
+  ], { after: 220 }));
+  body.push(P([
+    T('Print Name:  ', { color: BRAND_GREY }),
+    T(emp.name, { color: DARK_CHARCOAL, bold: true }),
+  ], { after: 160 }));
+  body.push(P([
+    T('Employee No.:  ', { color: BRAND_GREY }),
+    T(emp.empNo, { color: DARK_CHARCOAL, bold: true }),
+  ], { after: 120 }));
 
   return body;
 }

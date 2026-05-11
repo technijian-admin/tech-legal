@@ -125,7 +125,8 @@ const employees = [
     designation: 'Customer Support Engineer',
     department:  'Customer Support Engineering (CSE)',
     empNo:       'TIPL-CSE-2022-05',
-    days:        16,
+    hours:       17.61,
+    daysApprox:  '2.20',
   },
   {
     filename:    '02-Rahul-Uniyal-Leave-Application.docx',
@@ -133,7 +134,8 @@ const employees = [
     designation: 'Customer Support Engineer',
     department:  'Customer Support Engineering (CSE)',
     empNo:       'TIPL-CSE-2022-06',
-    days:        20,
+    hours:       89.16,
+    daysApprox:  '11.15',
   },
   {
     filename:    '03-Suresh-Kumar-Sharma-Leave-Application.docx',
@@ -141,7 +143,8 @@ const employees = [
     designation: 'Customer Support Engineer',
     department:  'Customer Support Engineering (CSE)',
     empNo:       'TIPL-CSE-2025-04',
-    days:        20,
+    hours:       49.13,
+    daysApprox:  '6.14',
   },
 ];
 
@@ -174,7 +177,7 @@ function buildBody(emp) {
     // Subject
     P([
       new TextRun({ text: 'Subject: ', font: 'Calibri', size: 22, bold: true, color: DARK_CHARCOAL }),
-      new TextRun({ text: `Application for ${emp.days} Days of Earned Leave (May 11 - May 31, 2026)`, font: 'Calibri', size: 22, bold: true, color: DARK_CHARCOAL }),
+      new TextRun({ text: `Application for Earned Leave (May 11 - May 31, 2026) - Full Accrued Balance`, font: 'Calibri', size: 22, bold: true, color: DARK_CHARCOAL }),
     ], { after: 240 }),
 
     // Salutation
@@ -187,17 +190,17 @@ function buildBody(emp) {
         new TextRun({ text: emp.name, font: 'Calibri', size: 22, color: DARK_CHARCOAL, bold: true }),
         new TextRun({ text: ', Employee No. ', font: 'Calibri', size: 22, color: DARK_CHARCOAL }),
         new TextRun({ text: emp.empNo, font: 'Calibri', size: 22, color: DARK_CHARCOAL, bold: true }),
-        new TextRun({ text: `, working as ${emp.designation} in the ${emp.department}, hereby apply for `, font: 'Calibri', size: 22, color: DARK_CHARCOAL }),
-        new TextRun({ text: `${emp.days} (${numberToWords(emp.days)}) days`, font: 'Calibri', size: 22, color: DARK_CHARCOAL, bold: true }),
-        new TextRun({ text: ' of Earned Leave from my accrued leave balance.', font: 'Calibri', size: 22, color: DARK_CHARCOAL }),
+        new TextRun({ text: `, working as ${emp.designation} in the ${emp.department}, hereby apply to utilize my entire accrued Earned Leave (EL) balance of `, font: 'Calibri', size: 22, color: DARK_CHARCOAL }),
+        new TextRun({ text: `${emp.hours.toFixed(2)} hours (approximately ${emp.daysApprox} working days)`, font: 'Calibri', size: 22, color: DARK_CHARCOAL, bold: true }),
+        new TextRun({ text: ', together with any May 2026 accrual, as paid leave during the notice period (May 11 - May 31, 2026).', font: 'Calibri', size: 22, color: DARK_CHARCOAL }),
       ],
       spacing: { before: 0, after: 240 },
     }),
 
     // Details block (compact)
     fieldRow('Leave period: ', 'From May 11, 2026 through May 31, 2026', true),
-    fieldRow('Number of days: ', `${emp.days} days`, true),
-    fieldRow('Type of leave: ', 'Earned Leave (EL) - from accrued balance', false),
+    fieldRow('Accrued balance (April 2026 payroll): ', `${emp.hours.toFixed(2)} hours (~${emp.daysApprox} days)`, true),
+    fieldRow('Type of leave: ', 'Earned Leave (EL) - full accrued balance, paid during notice', false),
 
     P([T('Kindly approve this leave application. I will return any company equipment in my possession on or before May 31, 2026 as instructed.')], { after: 120, before: 120 }),
 
@@ -264,16 +267,6 @@ function buildBody(emp) {
       },
     }),
   ];
-}
-
-function numberToWords(n) {
-  const map = {
-    1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five',
-    6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten',
-    11: 'Eleven', 12: 'Twelve', 13: 'Thirteen', 14: 'Fourteen', 15: 'Fifteen',
-    16: 'Sixteen', 17: 'Seventeen', 18: 'Eighteen', 19: 'Nineteen', 20: 'Twenty',
-  };
-  return map[n] ?? String(n);
 }
 
 async function generate(emp) {

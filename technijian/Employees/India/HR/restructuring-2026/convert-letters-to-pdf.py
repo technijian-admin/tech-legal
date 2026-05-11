@@ -10,7 +10,7 @@ PDF_DIR.mkdir(exist_ok=True)
 
 DOCX_FILES = [
     "01-Devesh-Bhattacharya-Termination.docx",
-    "02-Rajat-Kumar-Termination.docx",
+    "02-Rajat-Kumar-Mutual-Separation-Agreement.docx",
     "03-Aditya-Saraf-Termination.docx",
     "04-Suresh-Kumar-Sharma-Termination.docx",
     "05-Yogesh-Kumar-Retrenchment.docx",

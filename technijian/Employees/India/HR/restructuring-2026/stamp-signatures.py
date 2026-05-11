@@ -28,7 +28,7 @@ SIG_PDF = LETTERS_DIR / "signature.pdf"
 
 LETTER_FILES = [
     "01-Devesh-Bhattacharya-Termination.pdf",
-    "02-Rajat-Kumar-Termination.pdf",
+    "02-Rajat-Kumar-Mutual-Separation-Agreement.pdf",
     "03-Aditya-Saraf-Termination.pdf",
     "04-Suresh-Kumar-Sharma-Termination.pdf",
     "05-Yogesh-Kumar-Retrenchment.pdf",
