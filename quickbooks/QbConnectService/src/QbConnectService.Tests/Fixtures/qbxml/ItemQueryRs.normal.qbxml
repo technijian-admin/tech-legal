@@ -1,0 +1,15 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins ItemQuery element casing and item subtype names against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <ItemQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <ItemServiceRet>
+        <ListID>80000051-1</ListID>
+        <Name>Consulting</Name>
+      </ItemServiceRet>
+      <ItemServiceRet>
+        <ListID>80000052-1</ListID>
+        <Name>Support</Name>
+      </ItemServiceRet>
+    </ItemQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

@@ -56,6 +56,7 @@ public static class OpTestHarness
             new ListCustomersOp(builder, manager, xmlParser, reportParser, listExecutor),
             new ListVendorsOp(builder, manager, xmlParser, reportParser, listExecutor),
             new ListAccountsOp(builder, manager, xmlParser, reportParser, listExecutor),
+            new ListItemsOp(builder, manager, xmlParser, reportParser, listExecutor),
         }.ToDictionary(op => op.Name, StringComparer.Ordinal);
 
         return (fake, manager, ops);
