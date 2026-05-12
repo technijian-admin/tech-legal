@@ -7,6 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
   <!--
     Phase 1 uses a hand-written Interop/QBXMLRP2Lib.cs stub so the solution builds with no QuickBooks SDK installed.
     Replace it in Phase 9 with a tlbimp-generated Interop.QBXMLRP2Lib.dll on the QuickBooks host.

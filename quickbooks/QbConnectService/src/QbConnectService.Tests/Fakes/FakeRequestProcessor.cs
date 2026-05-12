@@ -16,6 +16,18 @@ public sealed class FakeRequestProcessor : IRequestProcessor
 
     public bool UnattendedModePreference { get; private set; }
 
+    public string? LastAppId { get; private set; }
+
+    public string? LastAppName { get; private set; }
+
+    public QbConnectionType? LastConnectionType { get; private set; }
+
+    public string? LastCompanyFilePath { get; private set; }
+
+    public QbFileMode? LastOpenMode { get; private set; }
+
+    public Func<string, string>? ProcessRequestHook { get; set; }
+
     public FakeRequestProcessor AddResponse(string requestElementName, string qbXmlResponse)
     {
         _responses[requestElementName] = qbXmlResponse;
@@ -46,17 +58,27 @@ public sealed class FakeRequestProcessor : IRequestProcessor
     public void OpenConnection(string appId, string appName, QbConnectionType connectionType)
     {
         ThrowIfScripted();
+        LastAppId = appId;
+        LastAppName = appName;
+        LastConnectionType = connectionType;
     }
 
     public string BeginSession(string companyFilePath, QbFileMode openMode)
     {
         ThrowIfScripted();
+        LastCompanyFilePath = companyFilePath;
+        LastOpenMode = openMode;
         return "FAKE-TICKET-0001";
     }
 
     public string ProcessRequest(string ticket, string qbXmlRequest)
     {
         ThrowIfScripted();
+
+        if (ProcessRequestHook is not null)
+        {
+            return ProcessRequestHook(qbXmlRequest);
+        }
 
         var document = XDocument.Parse(qbXmlRequest);
         var rqName = document.Root?
