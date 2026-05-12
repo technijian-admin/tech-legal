@@ -23,6 +23,12 @@ public abstract class ReadOpBase(
 
     public abstract Task<object?> RunAsync(IReadOnlyDictionary<string, object?> args, CancellationToken ct = default);
 
+    /// <summary>
+    /// Optional: the qbXML this read op would send, for the /dryrun endpoint. Default null (no preview).
+    /// Read ops have no side effects; this is a convenience for showing the would-be request.
+    /// </summary>
+    public virtual string? PreviewRequest(IReadOnlyDictionary<string, object?> args) => null;
+
     protected async Task<ParsedQbXmlResponse> QuerySingleAsync(XElement rq, CancellationToken ct) =>
         _xmlParser.Parse(await _manager.ExecuteAsync(_builder.BuildRequest(rq), ct));
 

@@ -47,6 +47,45 @@ public static class OpsEndpoints
             var result = await readOp.RunAsync(args, ct);
             return Results.Ok(new { op, result });
         });
+
+        app.MapPost("/ops/{op}/dryrun", async (
+            string op,
+            HttpContext ctx,
+            OpRegistry registry,
+            IOptions<SafetyOptions> safety,
+            CancellationToken ct) =>
+        {
+            if (!registry.TryGet(op, out var resolved))
+            {
+                return Results.Problem(
+                    statusCode: StatusCodes.Status404NotFound,
+                    title: "Unknown op",
+                    detail: $"No op named '{op}'. GET /api/ops for the list.");
+            }
+
+            var args = await ReadArgsAsync(ctx, ct);
+
+            if (resolved is IWriteOp writeOp)
+            {
+                var dryRun = await writeOp.DryRunAsync(args, ct);
+                return Results.Ok(new { op, dryRun });
+            }
+
+            var preview = resolved is ReadOpBase readOp ? readOp.PreviewRequest(args) : null;
+            return Results.Ok(new
+            {
+                op,
+                dryRun = new
+                {
+                    qbXml = preview,
+                    summary = (string?)null,
+                    preFlight = Array.Empty<object>(),
+                    resolvedReferences = new { },
+                    allowWrites = safety.Value.AllowWrites,
+                    note = "dry-run preview is available for write ops; this is a read op (calling it has no side effects).",
+                },
+            });
+        });
     }
 
     private static async Task<IReadOnlyDictionary<string, object?>> ReadArgsAsync(HttpContext ctx, CancellationToken ct)
