@@ -7,8 +7,7 @@
     Part of the multi-LLM build pipeline for the QuickBooks Direct-SDK Integration
     (see quickbooks/dev/MULTI-LLM.md). Claude plans (/gsd:plan-phase N), Codex executes,
     Claude reviews. This script is the plan->execute handoff.
-
-    Bootstrap version. Phase 8 (DEV-02) hardens it. Intentionally small so it's easy to
+    Runs under pwsh (PowerShell 7) and stays intentionally small so it's easy to
     tweak for whatever `codex exec` flags your installed codex-cli version uses
     (run `codex exec --help` and adjust $codexArgs below).
 
@@ -80,7 +79,7 @@ HARD RULES (this repo also contains unrelated active work — violating these co
 - For each task: implement it, then run the tests the plan specifies (and any existing test suite), and make them pass before committing. If a task is blocked or a test can't pass, STOP, commit what's safely done, and report the blocker — do not hack around it.
 - After all tasks: update the phase plan's task checkboxes, run the full test suite once more, and report a summary (commits made, tests status, anything deferred). Reviewer expects 100/100 — leave nothing dangling (commit the plan-checkbox update and any SUMMARY file the plan asks for), no duplicate-titled commits, build + full test suite green.
 
-ABOUT THE REPO'S CLAUDE.md / AGENTS.md "GitNexus impact analysis before edits" RULE: it does NOT apply to this phase. You are CREATING brand-new files in a brand-new subsystem (`quickbooks/QbConnectService/`) that nothing else depends on yet — there is no blast radius to analyze, and the GitNexus MCP isn't available to you anyway. Do NOT block on it. Likewise the "Client Portal API safety" rules in CLAUDE.md are irrelevant — this phase touches no Client Portal API. Proceed with the plan.
+ABOUT THE REPO'S CLAUDE.md / AGENTS.md "GitNexus impact analysis before edits" RULE: it does NOT apply to this phase. You are creating files in the isolated QuickBooks subsystem (`quickbooks/`, the repo-local QuickBooks skill, and QuickBooks CI/docs), so there is no existing blast radius to analyze, and the GitNexus MCP isn't available to you anyway. Do NOT block on it. Likewise the "Client Portal API safety" rules in CLAUDE.md are irrelevant — this phase touches no Client Portal API. Proceed with the plan.
 
 === GSD PHASE PLAN ===
 '@

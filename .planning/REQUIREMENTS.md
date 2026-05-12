@@ -58,14 +58,14 @@
 
 ### Python client & Claude skill (CLIENT)
 
-- [ ] **CLIENT-01**: `quickbooks/clients/qb_client.py` is an HTTPS client (bearer token, `urllib3.Retry`, config from a gitignored `.env` with a committed `.env.sample`) exposing health, raw-qbXML, op, and dry-run helpers.
-- [ ] **CLIENT-02**: Runnable examples (`pull P&L`, `list invoices`, `create_customer` dry-run) and a pinned `requirements.txt` are included; `qb_client.py` has `pytest` tests against a stub HTTP server (`responses`).
-- [ ] **CLIENT-03**: A `quickbooks-accounting` Claude skill (`SKILL.md` + `references/qbxml-cheatsheet.md` + `references/setup-and-troubleshooting.md`) teaches: health check, the op catalog, how to run a read, the **safe write workflow** (dry-run → show qbXML + summary → explicit user confirm → execute → confirm result → note the audit row), and the raw-qbXML fallback.
+- [x] **CLIENT-01**: `quickbooks/clients/qb_client.py` is an HTTPS client (bearer token, `urllib3.Retry`, config from a gitignored `.env` with a committed `.env.sample`) exposing health, raw-qbXML, op, and dry-run helpers.
+- [x] **CLIENT-02**: Runnable examples (`pull P&L`, `list invoices`, `create_customer` dry-run) and a pinned `requirements.txt` are included; `qb_client.py` has `pytest` tests against a stub HTTP server (`responses`).
+- [x] **CLIENT-03**: A `quickbooks-accounting` Claude skill (`SKILL.md` + `references/qbxml-cheatsheet.md` + `references/setup-and-troubleshooting.md`) teaches: health check, the op catalog, how to run a read, the **safe write workflow** (dry-run → show qbXML + summary → explicit user confirm → execute → confirm result → note the audit row), and the raw-qbXML fallback.
 
 ### Multi-LLM dev tooling (DEV)
 
-- [ ] **DEV-01**: `quickbooks/dev/MULTI-LLM.md` documents the build pipeline (Claude researches + GSD-plans + reviews; Codex CLI executes code-gen from each phase's `PLAN.md`; DeepSeek-CC review recipe as an option) including the exact env vars and commands.
-- [ ] **DEV-02**: `quickbooks/dev/run-codex-phase.ps1` takes a phase's `PLAN.md` and invokes `codex` to implement it on the current branch (commit-per-task), so the plan→execute handoff is one command.
+- [x] **DEV-01**: `quickbooks/dev/MULTI-LLM.md` documents the build pipeline (Claude researches + GSD-plans + reviews; Codex CLI executes code-gen from each phase's `PLAN.md`; DeepSeek-CC review recipe as an option) including the exact env vars and commands.
+- [x] **DEV-02**: `quickbooks/dev/run-codex-phase.ps1` takes a phase's `PLAN.md` and invokes `codex` to implement it on the current branch (commit-per-task), so the plan→execute handoff is one command.
 
 ### Packaging, deploy & on-box verification (DEPLOY)
 
@@ -135,11 +135,11 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | WRITE-05 | Phase 7 — Write Ops | Done |
 | WRITE-06 | Phase 7 — Write Ops | Done |
 | WRITE-07 | Phase 7 — Write Ops | Done |
-| CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
 | DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
 | DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
 | DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
@@ -147,4 +147,4 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 
 ---
 *Requirements defined: 2026-05-11*
-*Last updated: 2026-05-12 — Phase 7 write ops complete (WRITE-03..07 done)*
+*Last updated: 2026-05-12 — Phase 8 client + skill + dev tooling complete (CLIENT-01..03, DEV-01..02 done)*

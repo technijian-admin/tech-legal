@@ -9,7 +9,7 @@
 - [x] **Phase 5: REST API, Auth & Health** - minimal API (/api/health, /api/qbxml, /api/ops, /api/ops/{op}, /api/ops/{op}/dryrun), bearer auth, ProblemDetails
 - [x] **Phase 6: Write Safety, Dry-Run & Audit** - AllowWrites gate, dry-run (byte-exact qbXML + preFlight), audit log, currencyRef/exchangeRate refusal
 - [x] **Phase 7: Write Ops** - 8 write ops (create_customer/vendor/invoice/bill/check, receive_payment, create_journal_entry, mod)
-- [ ] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
+- [x] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
 - [ ] **Phase 9: Packaging, Deploy & On-Box Smoke** - cert/install/uninstall/task scripts, gitignored config + `.sample`s, integrated-app + deploy runbooks, live smoke checklist
 
 ## Phase Details
@@ -125,7 +125,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 08-01-PLAN.md — Python qb_client + .env.sample + requirements + pytest tests + examples + README; quickbooks-accounting Claude skill (SKILL.md + 2 references); harden MULTI-LLM.md + polish run-codex-phase.ps1; python-client CI job + .pytest_cache gitignore
+- [x] 08-01-PLAN.md — Python qb_client + examples + tests, quickbooks-accounting skill, hardened MULTI-LLM.md + run-codex-phase.ps1, python-client CI job
 
 ### Phase 9: Packaging, Deploy & On-Box Smoke
 **Goal**: Everything needed to install, configure, and verify the service on the live QuickBooks host — deploy scripts, portable config, runbooks, and an ordered on-box smoke checklist culminating in one real low-stakes write confirmed in QuickBooks and in the audit log.
@@ -155,5 +155,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 7. Write Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
-| 8. Python Client, Claude Skill & Dev Tooling | 0/1 | Planned | - |
+| 8. Python Client, Claude Skill & Dev Tooling | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |
