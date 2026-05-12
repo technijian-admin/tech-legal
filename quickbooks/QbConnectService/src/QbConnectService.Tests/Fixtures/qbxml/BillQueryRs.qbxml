@@ -1,0 +1,27 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins BillQuery element casing and filters against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <BillQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <BillRet>
+        <TxnID>BILL-001</TxnID>
+        <TxnDate>2025-02-10</TxnDate>
+        <RefNumber>V-2001</RefNumber>
+        <VendorRef>
+          <FullName>Office Depot</FullName>
+        </VendorRef>
+        <AmountDue>900.00</AmountDue>
+        <OpenAmount>900.00</OpenAmount>
+      </BillRet>
+      <BillRet>
+        <TxnID>BILL-002</TxnID>
+        <TxnDate>2025-02-25</TxnDate>
+        <RefNumber>V-2002</RefNumber>
+        <VendorRef>
+          <FullName>Staples</FullName>
+        </VendorRef>
+        <AmountDue>400.00</AmountDue>
+        <OpenAmount>100.00</OpenAmount>
+      </BillRet>
+    </BillQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

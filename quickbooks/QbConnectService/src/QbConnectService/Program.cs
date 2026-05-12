@@ -34,6 +34,9 @@ builder.Services.AddSingleton<IReadOp, ListCustomersOp>();
 builder.Services.AddSingleton<IReadOp, ListVendorsOp>();
 builder.Services.AddSingleton<IReadOp, ListAccountsOp>();
 builder.Services.AddSingleton<IReadOp, ListItemsOp>();
+builder.Services.AddSingleton<IReadOp, ListInvoicesOp>();
+builder.Services.AddSingleton<IReadOp, ListBillsOp>();
+builder.Services.AddSingleton<IReadOp, ListPaymentsOp>();
 
 var app = builder.Build();
 
