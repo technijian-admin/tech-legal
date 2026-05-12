@@ -19,6 +19,8 @@ builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Req
 builder.Services.Configure<ServerOptions>(builder.Configuration.GetSection("Server"));
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection("Auth"));
 builder.Services.Configure<SafetyOptions>(builder.Configuration.GetSection("Safety"));
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddSingleton<QbXmlBuilder>();
 builder.Services.AddSingleton<QbXmlParser>();
 builder.Services.AddSingleton<QbReportParser>();
@@ -75,6 +77,7 @@ builder.Services.AddSingleton<IReadOp, RunQueryOp>();
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
 app.UseMiddleware<BearerAuthMiddleware>();
 
 app.MapGet("/", () => "QbConnectService is running.");
