@@ -106,10 +106,10 @@ Plans:
   2. `POST /api/ops/{op}/dryrun` returns the byte-exact qbXML that would be sent, a resolved-reference echo (names → ListID/TxnID/EditSequence), a plain-English summary (field-level before/after diff for `mod_*`), and pre-flight validation results (referenced entities exist? journal entry balanced? `AllowWrites` state? multi-currency refused?) — with zero side effects.
   3. The `/dryrun` endpoint is itself not write-gated: it works and writes nothing even when `AllowWrites` is false.
   4. Every executed write appends a record to an append-only, hash-chained audit log on the QuickBooks host (UTC timestamp, op, args, qbXML sent, response statusCode/severity/message, calling token id); the dry-run path appends nothing; a test verifies a tampered row breaks the hash chain.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01-PLAN.md — Write-safety machinery: hash-chained AuditLog, IWriteOp/WriteOpBase pipeline, POST /api/ops/{op}/dryrun, AllowWrites 3-layer gate, QbWriteForbiddenException, FakeWriteOp
 
 ### Phase 7: Write Ops
 **Goal**: Every v1 write operation implemented behind the safety gate, dry-run, and audit log, with stale-`EditSequence` and full-replace `mod_*` semantics handled correctly.
@@ -166,7 +166,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. qbXML Engine | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 4. Read Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
-| 6. Write Safety, Dry-Run & Audit | 0/TBD | Not started | - |
+| 6. Write Safety, Dry-Run & Audit | 0/1 | Not started | - |
 | 7. Write Ops | 0/TBD | Not started | - |
 | 8. Python Client, Claude Skill & Dev Tooling | 0/TBD | Not started | - |
 | 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |
