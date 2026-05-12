@@ -1,3 +1,5 @@
+using QbConnectService.Qb;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddWindowsService(options =>
@@ -7,8 +9,8 @@ builder.Services.AddWindowsService(options =>
 
 builder.Services.AddHostedService<QbConnectService.Worker>();
 
-// Phase 2 will register the real QbConnectionManager and, on Windows outside tests,
-// the RealRequestProcessor implementation here.
+builder.Services.Configure<QbOptions>(builder.Configuration.GetSection("Qb"));
+builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Request"));
 
 var app = builder.Build();
 
