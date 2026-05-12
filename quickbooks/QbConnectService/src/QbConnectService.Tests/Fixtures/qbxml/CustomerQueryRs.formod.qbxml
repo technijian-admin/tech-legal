@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <CustomerQueryRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CustomerRet>
+        <ListID>80000001-AAAAAAAA</ListID>
+        <Name>Acme Co</Name>
+        <FullName>Acme Co</FullName>
+        <IsActive>true</IsActive>
+        <CompanyName>Acme Company</CompanyName>
+        <FirstName>Jane</FirstName>
+        <LastName>Doe</LastName>
+        <BillAddress>
+          <Addr1>1 Main St</Addr1>
+          <City>Irvine</City>
+          <State>CA</State>
+          <PostalCode>92614</PostalCode>
+          <Country>USA</Country>
+        </BillAddress>
+        <Phone>949-555-0100</Phone>
+        <Email>jane@acme.example</Email>
+        <Balance>1500.00</Balance>
+        <TotalBalance>1500.00</TotalBalance>
+        <EditSequence>1700000123</EditSequence>
+        <TimeCreated>2026-01-01T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-01T00:00:00-08:00</TimeModified>
+      </CustomerRet>
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
