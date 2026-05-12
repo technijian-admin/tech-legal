@@ -175,7 +175,238 @@ public sealed class CreateTransactionOpsTests
         }
     }
 
+    [Fact]
+    public async Task create_bill_dryrun_is_byte_exact_and_only_reads_for_preflight()
+    {
+        var fixture = CreateFixture(allowWrites: false, CreateBill);
+        var args = BillArgs();
+        fixture.Fake.AddResponse(
+            "VendorQueryRq",
+            """
+            <QBXML>
+              <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+                <VendorQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+                  <VendorRet>
+                    <ListID>80000010-VENDOR</ListID>
+                    <Name>Office Supplies LLC</Name>
+                    <FullName>Office Supplies LLC</FullName>
+                  </VendorRet>
+                </VendorQueryRs>
+              </QBXMLMsgsRs>
+            </QBXML>
+            """);
+        fixture.Fake.AddResponse(
+            "AccountQueryRq",
+            """
+            <QBXML>
+              <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+                <AccountQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+                  <AccountRet>
+                    <ListID>80000020-ACCT</ListID>
+                    <Name>Office Expenses</Name>
+                    <FullName>Office Expenses</FullName>
+                  </AccountRet>
+                </AccountQueryRs>
+              </QBXMLMsgsRs>
+            </QBXML>
+            """);
+
+        try
+        {
+            var result = await fixture.Op.DryRunAsync(args);
+
+            Assert.Equal(fixture.Op.BuildRequest(args), result.QbXml);
+            Assert.Equal(2, fixture.Fake.ProcessRequests.Count);
+            Assert.All(fixture.Fake.ProcessRequests, request => Assert.DoesNotContain("<BillAddRq>", request, StringComparison.Ordinal));
+            Assert.False(File.Exists(Path.Combine(fixture.AuditDir, "audit.jsonl")));
+
+            var add = RequestBody(result.QbXml, "BillAddRq").Element("BillAdd")!;
+            Assert.Equal("Office Supplies LLC", add.Element("VendorRef")?.Element("FullName")?.Value);
+            var line = add.Element("ExpenseLineAdd");
+            Assert.NotNull(line);
+            Assert.Equal("Office Expenses", line!.Element("AccountRef")?.Element("FullName")?.Value);
+            Assert.Equal("250.00", line.Element("Amount")?.Value);
+            Assert.Null(line.Element("TxnLineID"));
+        }
+        finally
+        {
+            await fixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_check_dryrun_is_byte_exact_and_only_reads_for_preflight()
+    {
+        var fixture = CreateFixture(allowWrites: false, CreateCheck);
+        var args = CheckArgs();
+        fixture.Fake.AddResponse("AccountQueryRq", Fixture("AccountQueryRs.qbxml"));
+
+        try
+        {
+            var result = await fixture.Op.DryRunAsync(args);
+
+            Assert.Equal(fixture.Op.BuildRequest(args), result.QbXml);
+            Assert.Equal(2, fixture.Fake.ProcessRequests.Count);
+            Assert.All(fixture.Fake.ProcessRequests, request => Assert.DoesNotContain("<CheckAddRq>", request, StringComparison.Ordinal));
+            Assert.False(File.Exists(Path.Combine(fixture.AuditDir, "audit.jsonl")));
+
+            var add = RequestBody(result.QbXml, "CheckAddRq").Element("CheckAdd")!;
+            Assert.Equal("Checking", add.Element("AccountRef")?.Element("FullName")?.Value);
+            var line = add.Element("ExpenseLineAdd");
+            Assert.NotNull(line);
+            Assert.Equal("Office Expenses", line!.Element("AccountRef")?.Element("FullName")?.Value);
+            Assert.Equal("250.00", line.Element("Amount")?.Value);
+            Assert.Null(line.Element("TxnLineID"));
+        }
+        finally
+        {
+            await fixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_bill_and_check_missing_lines_throw_argumentexception()
+    {
+        var billFixture = CreateFixture(allowWrites: false, CreateBill);
+        var checkFixture = CreateFixture(allowWrites: false, CreateCheck);
+
+        try
+        {
+            var billArgs = new Dictionary<string, object?>(StringComparer.Ordinal) { ["vendorRef"] = "Office Supplies LLC" };
+            await Assert.ThrowsAsync<ArgumentException>(() => billFixture.Op.DryRunAsync(billArgs));
+            Assert.Throws<ArgumentException>(() => billFixture.Op.BuildRequest(billArgs));
+
+            var checkArgs = new Dictionary<string, object?>(StringComparer.Ordinal) { ["accountRef"] = "Checking" };
+            await Assert.ThrowsAsync<ArgumentException>(() => checkFixture.Op.DryRunAsync(checkArgs));
+            Assert.Throws<ArgumentException>(() => checkFixture.Op.BuildRequest(checkArgs));
+        }
+        finally
+        {
+            await billFixture.DisposeAsync();
+            await checkFixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_bill_and_check_missing_required_refs_throw_argumentexception()
+    {
+        var billFixture = CreateFixture(allowWrites: false, CreateBill);
+        var checkFixture = CreateFixture(allowWrites: false, CreateCheck);
+
+        try
+        {
+            var billArgs = new Dictionary<string, object?>(StringComparer.Ordinal)
+            {
+                ["expenseLines"] = new List<object?>
+                {
+                    new Dictionary<string, object?> { ["accountRef"] = "Office Expenses", ["amount"] = "250.00" },
+                },
+            };
+            Assert.Equal("'vendorRef' is required.", Assert.Throws<ArgumentException>(() => billFixture.Op.BuildRequest(billArgs)).Message);
+
+            var checkArgs = new Dictionary<string, object?>(StringComparer.Ordinal)
+            {
+                ["expenseLines"] = new List<object?>
+                {
+                    new Dictionary<string, object?> { ["accountRef"] = "Office Expenses", ["amount"] = "250.00" },
+                },
+            };
+            Assert.Equal(
+                "'accountRef' (the bank account to draw the check from) is required.",
+                Assert.Throws<ArgumentException>(() => checkFixture.Op.BuildRequest(checkArgs)).Message);
+        }
+        finally
+        {
+            await billFixture.DisposeAsync();
+            await checkFixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_bill_execute_happy_path_writes_exactly_one_audit_row()
+    {
+        var fixture = CreateFixture(allowWrites: true, CreateBill);
+        fixture.Fake.AddResponse("BillAddRq", Fixture("BillAddRs.qbxml"));
+
+        try
+        {
+            var result = Assert.IsType<Dictionary<string, object?>>(await fixture.Op.RunAsync(BillArgs()));
+
+            Assert.Equal(fixture.Op.BuildRequest(BillArgs()), fixture.Fake.ProcessRequests.Last());
+            var status = Assert.IsType<QbStatus>(result["status"]);
+            Assert.Equal("0", status.Code);
+            Assert.Single(ReadAuditRows(fixture.AuditDir));
+            Assert.Equal("create_bill", ReadAuditRows(fixture.AuditDir)[0]["op"]!.GetValue<string>());
+        }
+        finally
+        {
+            await fixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_check_execute_happy_path_writes_exactly_one_audit_row()
+    {
+        var fixture = CreateFixture(allowWrites: true, CreateCheck);
+        fixture.Fake.AddResponse("CheckAddRq", Fixture("CheckAddRs.qbxml"));
+
+        try
+        {
+            var result = Assert.IsType<Dictionary<string, object?>>(await fixture.Op.RunAsync(CheckArgs()));
+
+            Assert.Equal(fixture.Op.BuildRequest(CheckArgs()), fixture.Fake.ProcessRequests.Last());
+            var status = Assert.IsType<QbStatus>(result["status"]);
+            Assert.Equal("0", status.Code);
+            Assert.Single(ReadAuditRows(fixture.AuditDir));
+            Assert.Equal("create_check", ReadAuditRows(fixture.AuditDir)[0]["op"]!.GetValue<string>());
+        }
+        finally
+        {
+            await fixture.DisposeAsync();
+        }
+    }
+
+    [Fact]
+    public async Task create_bill_and_check_with_writes_disabled_throw_without_side_effects()
+    {
+        var billFixture = CreateFixture(allowWrites: false, CreateBill);
+        var checkFixture = CreateFixture(allowWrites: false, CreateCheck);
+
+        try
+        {
+            await Assert.ThrowsAsync<QbWriteForbiddenException>(() => billFixture.Op.RunAsync(BillArgs()));
+            await Assert.ThrowsAsync<QbWriteForbiddenException>(() => checkFixture.Op.RunAsync(CheckArgs()));
+            Assert.Empty(billFixture.Fake.ProcessRequests);
+            Assert.Empty(checkFixture.Fake.ProcessRequests);
+        }
+        finally
+        {
+            await billFixture.DisposeAsync();
+            await checkFixture.DisposeAsync();
+        }
+    }
+
     private static CreateInvoiceOp CreateInvoice(
+        QbXmlBuilder builder,
+        QbConnectionManager manager,
+        QbXmlParser parser,
+        QbReportParser reportParser,
+        QbListExecutor listExecutor,
+        AuditLog audit,
+        IOptions<SafetyOptions> safety) =>
+        new(builder, manager, parser, reportParser, listExecutor, audit, safety);
+
+    private static CreateBillOp CreateBill(
+        QbXmlBuilder builder,
+        QbConnectionManager manager,
+        QbXmlParser parser,
+        QbReportParser reportParser,
+        QbListExecutor listExecutor,
+        AuditLog audit,
+        IOptions<SafetyOptions> safety) =>
+        new(builder, manager, parser, reportParser, listExecutor, audit, safety);
+
+    private static CreateCheckOp CreateCheck(
         QbXmlBuilder builder,
         QbConnectionManager manager,
         QbXmlParser parser,
@@ -200,6 +431,42 @@ public sealed class CreateTransactionOpsTests
                     ["desc"] = "Consulting",
                     ["quantity"] = "1",
                     ["rate"] = "100.00",
+                },
+            },
+        };
+    }
+
+    private static IReadOnlyDictionary<string, object?> BillArgs()
+    {
+        return new Dictionary<string, object?>(StringComparer.Ordinal)
+        {
+            ["vendorRef"] = "Office Supplies LLC",
+            ["txnDate"] = "2026-05-11",
+            ["dueDate"] = "2026-06-10",
+            ["expenseLines"] = new List<object?>
+            {
+                new Dictionary<string, object?>(StringComparer.Ordinal)
+                {
+                    ["accountRef"] = "Office Expenses",
+                    ["amount"] = "250.00",
+                },
+            },
+        };
+    }
+
+    private static IReadOnlyDictionary<string, object?> CheckArgs()
+    {
+        return new Dictionary<string, object?>(StringComparer.Ordinal)
+        {
+            ["accountRef"] = "Checking",
+            ["refNumber"] = "1042",
+            ["txnDate"] = "2026-05-11",
+            ["expenseLines"] = new List<object?>
+            {
+                new Dictionary<string, object?>(StringComparer.Ordinal)
+                {
+                    ["accountRef"] = "Office Expenses",
+                    ["amount"] = "250.00",
                 },
             },
         };
