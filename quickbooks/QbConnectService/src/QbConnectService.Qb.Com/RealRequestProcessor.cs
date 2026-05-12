@@ -1,50 +1,72 @@
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using QbConnectService.Qb;
+using QbConnectService.Qb.Com.Interop;
 
 namespace QbConnectService.Qb.Com;
 
 [SupportedOSPlatform("windows")]
 public sealed class RealRequestProcessor : IRequestProcessor
 {
-    private const string NotYet =
-        "RealRequestProcessor is implemented in Phase 2. Phase 1 intentionally ships a throwing stub so the solution builds with no QuickBooks SDK installed.";
+    private IRequestProcessor2? _rp;
+
+    public RealRequestProcessor()
+    {
+        try
+        {
+            _rp = (IRequestProcessor2)new RequestProcessor2();
+        }
+        catch (COMException ex)
+        {
+            throw new QbException(QbErrors.Lookup(ex.HResult), ex);
+        }
+        catch (InvalidCastException ex)
+        {
+            throw new QbException(QbErrors.CastFailure(ex.Message), ex);
+        }
+    }
 
     public void OpenConnection(string appId, string appName, QbConnectionType connectionType)
     {
-        throw new NotImplementedException(NotYet);
+        _rp!.OpenConnection2(appId, appName, (int)connectionType);
     }
 
     public string BeginSession(string companyFilePath, QbFileMode openMode)
     {
-        throw new NotImplementedException(NotYet);
+        return _rp!.BeginSession(companyFilePath, (int)openMode);
     }
 
     public string ProcessRequest(string ticket, string qbXmlRequest)
     {
-        throw new NotImplementedException(NotYet);
+        return _rp!.ProcessRequest(ticket, qbXmlRequest);
     }
 
     public string[] GetSupportedQbXmlVersions(string ticket)
     {
-        throw new NotImplementedException(NotYet);
+        return _rp!.QBXMLVersionsForSession(ticket);
     }
 
     public void EndSession(string ticket)
     {
-        throw new NotImplementedException(NotYet);
+        _rp!.EndSession(ticket);
     }
 
     public void CloseConnection()
     {
-        throw new NotImplementedException(NotYet);
+        _rp!.CloseConnection();
     }
 
     public void SetUnattendedModePreference(bool required)
     {
-        throw new NotImplementedException(NotYet);
+        _rp!.AuthPreferences().PutUnattendedModePref(required);
     }
 
     public void Dispose()
     {
+        if (_rp is not null)
+        {
+            Marshal.FinalReleaseComObject(_rp);
+            _rp = null;
+        }
     }
 }
