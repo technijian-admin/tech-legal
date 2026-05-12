@@ -200,3 +200,38 @@ This is a review of a single GSD phase that produced a **.NET solution skeleton 
 ## Recommendation
 
 **Proceed to Phase 5 (REST API, Auth & Health — API-01..06).** Phase 4 → 100/100. Loop continues.
+
+---
+
+# Phase 5: REST API, Auth & Health — Review
+
+**Date:** 2026-05-12 · **Reviewer:** Claude (post-Codex; `05-01-PLAN.md` plan-checker **PASSED first round** — it verified the plan's signatures against the actual Phase 1–4 code. Codex then executed 7 `feat(05-01)` task commits `d2234b3`…`54daaa6` + 1 `docs(05-01)` commit `6c367ef`, all distinct titles.)
+**Health Score:** **100 / 100 (Grade A — proceed to Phase 6)** — build + tests green, all 6 API requirements met, scope clean, hygiene clean, zero dangling output, one intentional test-only NuGet (`Microsoft.AspNetCore.Mvc.Testing 8.0.*`), zero new runtime packages.
+
+## Build / tests
+
+`dotnet build -c Release` → 0 errors, 0 warnings. `dotnet test -c Release` → **152/152** passed (Phase 4's 106 + Phase 5's 46).
+
+## Requirement coverage (API-01..06)
+
+| Req | Verified |
+|---|---|
+| API-01 HTTPS-only + bearer | ✅ `ConfigureKestrel` parses `Server:BindUrls` via `ServerBinding.ParseHttpsOnly` (throws `InvalidOperationException` on non-`https://`), loads a `.pfx` from `Server:CertPath`/`CertPassword` else `UseHttps()` dev fallback (doc-commented that prod requires the file cert), `MaxRequestBodySize` from `Server:MaxRequestBodyBytes`. `ServerOptions`/`AuthOptions` POCOs bound. Tested via `KestrelHttpsOnlyTests` (the bind validation is unit-tested off `ServerBinding`; `WebApplicationFactory` swaps in `TestServer` so the listeners themselves don't run in tests — documented in `Program.cs`) |
+| API-02 bearer auth | ✅ `BearerAuthMiddleware` over `/api/*` only (root `/` open); `CryptographicOperations.FixedTimeEquals` with an `_expected.Length > 0` guard; missing/malformed/wrong → `401` + `WWW-Authenticate: Bearer` + `ProblemDetails`. Tested (no-token / wrong-token → 401, right-token → 200) |
+| API-03 `GET /api/health` | ✅ `HealthEndpoints` — probes COM via the `company_info` op inside a try/catch with a linked `CancellationTokenSource` (`min(5,max(1,TimeoutSeconds))` timeout); catches `QbBusyException`→degraded, `QbException`→down, `QbTimeoutException`/`OperationCanceledException`→down (synthetic `QB_TIMEOUT`); status state machine (`down` if probe error or `State` Disconnected/Poisoned; `degraded` if busy / `LastError` set / `State≠SessionOpen`; else `healthy`); payload = status, connectionState, allowWrites, sdkVersion (best of supported / configured), qbXmlVersionConfigured, qbXmlVersionsSupported, companyFile, quickBooksVersion, lastError {code,name,message,remediationHint}, time. Never crashes without QuickBooks. Tested (healthy / 200-with-`status:down`-on-`0x80040154` / 401) |
+| API-04 `POST /api/qbxml` | ✅ `QbXmlEndpoints` — reads body (size-guarded by Kestrel's `MaxRequestBodySize`), empty→400; `!AllowWrites && QbWriteDetector.IsWriteRequest(body)`→`403` `ProblemDetails`; else `manager.ExecuteAsync(body)` → `Results.Content(raw, "application/xml")`. `QbWriteDetector` (in `QbConnectService.Qb.Com`, reusable by Phase 6) parses XLinq and checks `Descendants().Any(e => IsWriteVerb(e.Name.LocalName))` — element **local name** (`*AddRq`/`*ModRq`/`*DelRq`/`*VoidRq` + `ListDelRq`/`TxnDelRq`/`TxnVoidRq`), NOT substring; MEDIUM-confidence set with a doc note Phase 9 re-pins it. Tested (read round-trips, `<CustomerAddRq>`→403, malformed→400) |
+| API-05 `POST /api/ops/{op}` | ✅ `OpsEndpoints` — `OpRegistry.TryGet` (404 `ProblemDetails` on miss); reads JSON body → `ArgReader.ToDictionary(JsonElement)` (lifted to `public static`; numbers→string, nested→dict, arrays→list — compatible with the Phase-4 ops' `ArgReader`); non-object body → `ArgumentException`→400; calls `op.RunAsync` → `200 { op, result }` (result is the op's dict, which already embeds `status`/`rows`/`count`/`rawSpilledTo`). `GET /api/ops` lists names. `OpRegistry(IEnumerable<IReadOp>)` throws on duplicate `Name`. Tested (`company_info`→200, unknown→404, bad-args→400, scripted COM error→503) |
+| API-06 status-code invariant | ✅ `ApiExceptionHandler : IExceptionHandler` (+ `AddProblemDetails()`) maps `ArgumentException`/`QbXmlParseException`→400, `QbBusyException`→409, `QbTimeoutException`→504, `QbException`→503 (+ `qbErrorCode` extension), other→500 — all `ProblemDetails`, no stack trace; 401/403/404 produced directly by the middleware/endpoints. A non-zero qbXML `statusCode` is **never thrown** by the engine (it's in `QbStatus`) → flows out as a normal `200` body — verified by reading `QbXmlParser`/`ReadOpBase`/`get_transaction`. Tested (op with a non-zero-statusCode fake response → 200 with `status.code != "0"`) |
+| (integration) | ✅ `QbWebAppFactory : WebApplicationFactory<Program>` sets `UseEnvironment("Testing")` (so `Program.cs` skips `RealRequestProcessor`), registers a captured `FakeRequestProcessor` via `Func<IRequestProcessor>`, `UseSetting("Auth:ApiToken","test-token")`; the integration tests cover all of API-01..06 |
+
+## Scope / hygiene
+
+✅ **Zero Phase 6–9 work** — no `/api/ops/{op}/dryrun`, no full in-depth `AllowWrites` enforcement, no audit log (Phase 6 — Phase 5 only does the API-04 verb-scan 403 on the raw passthrough + the `SafetyOptions` POCO + the reusable `QbWriteDetector`); no write op (Phase 7 — `OpRegistry` kept on `IEnumerable<IReadOp>`, `ReadOpBase` NOT refactored to carry raw qbXML); no Python client/skill (Phase 8); no deploy scripts / `make-cert.ps1` / real `.pfx` (Phase 9 — Kestrel just reads `Server:CertPath`/`CertPassword` with a dev self-signed fallback). ✅ 7 distinct-titled `feat(05-01)` commits + a `docs(05-01)` commit (SUMMARY + ROADMAP + REQUIREMENTS + STATE) — no duplicate titles; Codex committed its own bookkeeping. ✅ Minimal-API endpoint groups in `src/QbConnectService/Api/`, options in `Options/`. ✅ **One** new package — test-only `Microsoft.AspNetCore.Mvc.Testing 8.0.*` (intentional, per STACK.md); zero new runtime packages. ✅ The long-running `Program.cs` "Phase 1 skeleton" placeholder string is now **replaced** with `"QbConnectService is running."` — that INFO from Phases 2–4 is resolved. ✅ Nothing outside `quickbooks/` touched.
+
+## Findings
+
+0 Blocker · 0 High · 0 Medium · 0 Low · **1 INFO** — the `QbWriteDetector` write-verb element-name set (`*AddRq`/`*ModRq`/`*DelRq`/`*VoidRq` + `ListDelRq`/`TxnDelRq`/`TxnVoidRq`) is MEDIUM-confidence; flagged in the file's doc comment + in `05-01-SUMMARY.md` for Phase 9 re-pinning against the live host's OSR enumeration. Not a defect — a documented dev-time approximation, and Phase 6 layers full enforcement-in-depth on top regardless.
+
+## Recommendation
+
+**Proceed to Phase 6 (Write Safety, Dry-Run & Audit — WRITE-01, WRITE-02, WRITE-08).** Phase 5 → 100/100. Loop continues.
