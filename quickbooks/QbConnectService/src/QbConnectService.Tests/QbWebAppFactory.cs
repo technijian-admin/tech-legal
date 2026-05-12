@@ -25,4 +25,7 @@ public sealed class QbWebAppFactory : WebApplicationFactory<Program>
             services.AddSingleton<Func<IRequestProcessor>>(_ => () => Fake);
         });
     }
+
+    public static string Fixture(string name) =>
+        File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "Fixtures", "qbxml", name));
 }

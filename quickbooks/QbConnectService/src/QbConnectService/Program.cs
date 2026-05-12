@@ -83,6 +83,7 @@ app.UseMiddleware<BearerAuthMiddleware>();
 
 app.MapGet("/", () => "QbConnectService is running.");
 var api = app.MapGroup("/api");
+api.MapHealthEndpoints();
 api.MapOpsEndpoints();
 
 app.Run();
