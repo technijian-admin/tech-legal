@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -229,6 +230,44 @@ public sealed class QbConnectionManagerTests
         Assert.Equal("QB_COULD_NOT_START", manager.LastError?.Name);
         Assert.Single(created);
         Assert.Equal(1, created[0].CallLog.Count(entry => entry == nameof(IRequestProcessor.ProcessRequest)));
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Watchdog_timeout_poison_the_session_and_the_next_request_rebuilds_cleanly()
+    {
+        var (manager, created) = CreateManager(new RequestOptions
+        {
+            TimeoutSeconds = 1,
+            BusyWaitSeconds = 60,
+        });
+        created.Add(new FakeRequestProcessor().AddResponse("CompanyQueryRq", "<ok/>"));
+        created[0].ProcessRequestHook = _ =>
+        {
+            Thread.Sleep(5000);
+            return "<late/>";
+        };
+
+        var stopwatch = Stopwatch.StartNew();
+        await Assert.ThrowsAsync<QbTimeoutException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+        stopwatch.Stop();
+
+        Assert.InRange(stopwatch.Elapsed, TimeSpan.Zero, TimeSpan.FromSeconds(3));
+        Assert.Equal(QbConnectionState.Poisoned, manager.State);
+
+        var response = await manager.ExecuteAsync(CompanyQueryRequest);
+
+        Assert.Equal("<ok/>", response);
+        Assert.Equal(QbConnectionState.SessionOpen, manager.State);
+        Assert.Equal(
+            [
+                nameof(IRequestProcessor.SetUnattendedModePreference),
+                nameof(IRequestProcessor.OpenConnection),
+                nameof(IRequestProcessor.BeginSession),
+                nameof(IRequestProcessor.ProcessRequest),
+            ],
+            created[1].CallLog);
 
         await manager.DisposeAsync();
     }

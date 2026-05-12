@@ -72,6 +72,11 @@ public sealed class QbConnectionManager : IAsyncDisposable
                 .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
                 .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
         }
+        catch (TimeoutException)
+        {
+            Poison();
+            throw new QbTimeoutException(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+        }
         catch (COMException ex)
         {
             var exception = QbException.From(ex);
@@ -213,7 +218,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
         catch (TimeoutException)
         {
-            throw;
+            Poison();
+            throw new QbTimeoutException(TimeSpan.FromSeconds(_req.TimeoutSeconds));
         }
         catch (COMException ex) when (QbErrors.IsDeadTicket(ex.HResult))
         {
@@ -231,7 +237,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
             }
             catch (TimeoutException)
             {
-                throw;
+                Poison();
+                throw new QbTimeoutException(TimeSpan.FromSeconds(_req.TimeoutSeconds));
             }
             catch (COMException retryException)
             {
@@ -290,6 +297,28 @@ public sealed class QbConnectionManager : IAsyncDisposable
             {
             }
         });
+
+    private void Poison()
+    {
+        _state = QbConnectionState.Poisoned;
+        _log.LogWarning(
+            "QuickBooks request exceeded {TimeoutSeconds}s; poisoning the session — it will be rebuilt on the next request.",
+            _req.TimeoutSeconds);
+
+        var old = _sta;
+        _sta = new StaThread("qb-com-sta");
+
+        try
+        {
+            old.Dispose();
+        }
+        catch
+        {
+        }
+
+        _rp = null;
+        _ticket = null;
+    }
 
     private void LogMappedError(QbException exception)
     {
