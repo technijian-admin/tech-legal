@@ -60,6 +60,7 @@ public static class OpTestHarness
             new ListInvoicesOp(builder, manager, xmlParser, reportParser, listExecutor),
             new ListBillsOp(builder, manager, xmlParser, reportParser, listExecutor),
             new ListPaymentsOp(builder, manager, xmlParser, reportParser, listExecutor),
+            new GetTransactionOp(builder, manager, xmlParser, reportParser, listExecutor),
         }.ToDictionary(op => op.Name, StringComparer.Ordinal);
 
         return (fake, manager, ops);
