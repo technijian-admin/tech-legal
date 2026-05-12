@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using QbConnectService.Qb;
 using QbConnectService.Tests.Fakes;
 
@@ -92,6 +93,50 @@ public sealed class HostStartupTests
         try
         {
             await host.StartAsync();
+            await host.StopAsync(TimeSpan.FromSeconds(5));
+        }
+        finally
+        {
+            host.Dispose();
+        }
+    }
+
+    [Fact]
+    public async Task Host_resolves_the_qbXML_engine_singletons_and_QbXmlOptions_defaults()
+    {
+        var host = Host.CreateDefaultBuilder()
+            .ConfigureServices(services =>
+            {
+                services.Configure<QbOptions>(_ => { });
+                services.Configure<RequestOptions>(_ => { });
+                services.Configure<QbXmlOptions>(_ => { });
+                services.AddSingleton<Func<IRequestProcessor>>(_ => () => new FakeRequestProcessor());
+                services.AddSingleton<QbConnectionManager>();
+                services.AddSingleton<QbXmlBuilder>();
+                services.AddSingleton<QbXmlParser>();
+                services.AddSingleton<QbReportParser>();
+                services.AddSingleton<QbResponseSpiller>();
+                services.AddSingleton<QbListExecutor>();
+            })
+            .Build();
+
+        try
+        {
+            await host.StartAsync();
+
+            Assert.NotNull(host.Services.GetRequiredService<QbXmlBuilder>());
+            Assert.NotNull(host.Services.GetRequiredService<QbXmlParser>());
+            Assert.NotNull(host.Services.GetRequiredService<QbReportParser>());
+            Assert.NotNull(host.Services.GetRequiredService<QbResponseSpiller>());
+            Assert.NotNull(host.Services.GetRequiredService<QbListExecutor>());
+
+            var options = host.Services.GetRequiredService<IOptions<QbXmlOptions>>().Value;
+            Assert.Equal("16.0", options.Version);
+            Assert.False(options.OwnerIdZero);
+            Assert.Equal(100, options.MaxReturned);
+            Assert.Equal(5_000_000, options.MaxResponseBytes);
+            Assert.Equal(string.Empty, options.SpillPath);
+
             await host.StopAsync(TimeSpan.FromSeconds(5));
         }
         finally
