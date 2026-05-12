@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 3: qbXML Engine** - `QbXmlBuilder` / `QbXmlParser`, separate report parser, iterators, size-guard spill, `OwnerID` config
 - [ ] **Phase 4: Read Ops** - `company_info`, `get_company_preferences`, `report`, `list_*`, `get_transaction`, `run_query`
 - [x] **Phase 5: REST API, Auth & Health** - Kestrel HTTPS-only, bearer middleware, `/api/health`, raw `/api/qbxml` passthrough, `OpRegistry`
-- [ ] **Phase 6: Write Safety, Dry-Run & Audit** - `AllowWrites` default-false 403 gate, `/api/ops/{op}/dryrun`, immutable hash-chained audit log
+- [x] **Phase 6: Write Safety, Dry-Run & Audit** - `AllowWrites` default-false 403 gate, `/api/ops/{op}/dryrun`, immutable hash-chained audit log
 - [ ] **Phase 7: Write Ops** - `create_customer`/`vendor`/`invoice`/`bill`/`check`, `receive_payment`, `create_journal_entry`, `mod_*`
 - [ ] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
 - [ ] **Phase 9: Packaging, Deploy & On-Box Smoke** - cert/install/uninstall/task scripts, gitignored config + `.sample`s, integrated-app + deploy runbooks, live smoke checklist
@@ -109,7 +109,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 06-01-PLAN.md — Write-safety machinery: hash-chained AuditLog, IWriteOp/WriteOpBase pipeline, POST /api/ops/{op}/dryrun, AllowWrites 3-layer gate, QbWriteForbiddenException, FakeWriteOp
+- [x] 06-01-PLAN.md — Write-safety machinery: hash-chained AuditLog, IWriteOp/WriteOpBase pipeline, POST /api/ops/{op}/dryrun, AllowWrites 3-layer gate, QbWriteForbiddenException, FakeWriteOp
 
 ### Phase 7: Write Ops
 **Goal**: Every v1 write operation implemented behind the safety gate, dry-run, and audit log, with stale-`EditSequence` and full-replace `mod_*` semantics handled correctly.
@@ -166,7 +166,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. qbXML Engine | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 4. Read Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
-| 6. Write Safety, Dry-Run & Audit | 0/1 | Not started | - |
+| 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete | 2026-05-11 |
 | 7. Write Ops | 0/TBD | Not started | - |
 | 8. Python Client, Claude Skill & Dev Tooling | 0/TBD | Not started | - |
 | 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |

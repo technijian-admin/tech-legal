@@ -127,9 +127,9 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | API-04 | Phase 5 — REST API, Auth & Health | Done |
 | API-05 | Phase 5 — REST API, Auth & Health | Done |
 | API-06 | Phase 5 — REST API, Auth & Health | Done |
-| WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
-| WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
-| WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
+| WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
+| WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
+| WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
 | WRITE-03 | Phase 7 — Write Ops | Pending |
 | WRITE-04 | Phase 7 — Write Ops | Pending |
 | WRITE-05 | Phase 7 — Write Ops | Pending |

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-05-11)
 
 **Core value:** Claude can run a QuickBooks read and get an answer in seconds — and can create/update a transaction only after an explicit dry-run-and-confirm step, with every write in an immutable audit log.
-**Current focus:** Phase 6 — Write Safety, Dry-Run & Audit
+**Current focus:** Phase 7 — Write Ops
 
 ## Current Position
 
-Phase: 6 of 9 (Write Safety, Dry-Run & Audit)
+Phase: 7 of 9 (Write Ops)
 Plan: 0 of TBD in current phase
-Status: Phase 5 complete; ready to plan Phase 6
-Last activity: 2026-05-11 — Phase 5 complete (REST API, auth & health; Debug+Release build green, 152/152 tests green)
+Status: Phase 6 complete; ready to plan Phase 7
+Last activity: 2026-05-11 — Phase 6 complete (write safety, dry-run, audit; Debug+Release build green, 181/181 tests green)
 
-Progress: [██████░░░░] 56%
+Progress: [███████░░░] 67%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 1 plan per completed phase
-- Total execution time: 5 sessions
+- Total execution time: 6 sessions
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: [██████░░░░] 56%
 | 3 | 1 | 1 | 1 |
 | 4 | 1 | 1 | 1 |
 | 5 | 1 | 1 | 1 |
+| 6 | 1 | 1 | 1 |
 
 **Recent Trend:**
-- Last 5 plans: 01-01, 02-01, 03-01, 04-01, 05-01
+- Last 5 plans: 02-01, 03-01, 04-01, 05-01, 06-01
 - Trend: steady - each phase landed green and reviewed complete
 
 *Updated after each plan completion*
@@ -53,6 +54,9 @@ Recent decisions affecting current work:
 - [Phase 5]: `/api/health` is bearer-gated because it exposes company-file and QuickBooks version facts.
 - [Phase 5]: `SafetyOptions` and `QbWriteDetector` live in `QbConnectService.Qb.Com` so Phase 6 can reuse them.
 - [Phase 5]: `/api/ops/{op}` returns `{ op, result }`; non-zero QuickBooks `statusCode` values stay in normal 200 bodies.
+- [Phase 6]: `IWriteOp : IReadOp` and `WriteOpBase` landed before any production write op; the only Phase-6 write implementation is the test-only `FakeWriteOp`.
+- [Phase 6]: `AllowWrites` is enforced in depth at the ops endpoint, the raw qbXML passthrough, and the connection manager, with `WriteOpBase` adding a fourth defensive belt.
+- [Phase 6]: `AuditLog` writes executed-writes-only JSONL rows using canonical `Utf8JsonWriter` bytes, a 64-zero genesis `prevHash`, and `requesterId = tok-<8hex>`.
 
 ### Pending Todos
 
@@ -61,13 +65,13 @@ None yet.
 ### Blockers/Concerns
 
 - [Phase 2 & 9]: Environment facts unconfirmed — exact QuickBooks Enterprise build on `10.120.254.13` (pins qbXML spec ceiling + bitness), whether the `.QBW` is hosted multi-user, whether PII is enabled (could block unattended mode), `RequestProcessor` vs `RequestProcessor2` ProgID, `svc_qbsdk` creatability + "log on as a service" rights, firewall path for the HTTPS port.
-- [Phase 7]: Write-op dispatch shape still needs a deliberate `IReadOp`/`OpRegistry` widening decision; Phase 5 intentionally stayed read-only.
+- [Phase 7]: Real `create_*` / `mod_*` implementations still need to be added, including live pre-flight reads, field-level mod diffs from current records, and stale-`EditSequence` handling.
 - [Phase 9]: The qbXML write-verb enumeration and production `.pfx` flow still need live-host re-pin work.
 
 ## Session Continuity
 
-Last session: 2026-05-12
-Stopped at: Phases 1, 2, 3, 4 & 5 COMPLETE (Codex-executed, Claude-reviewed, all 100/100; Debug+Release build green; tests 152/152 green). **Autonomous mode** — user asked to run the full loop to completion: for each remaining phase (6→9) run `/gsd:plan-phase N` (research→plan→checker) → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase N` → review & fix to 100/100 → next. Next: Phase 6 (Write Safety, Dry-Run & Audit — WRITE-01, WRITE-02, WRITE-08). Phase 9's on-box smoke run requires the live QuickBooks host (10.120.254.13 + SDK + integrated-app auth) so its checklist is built/reviewed but the live run is left for the user.
+Last session: 2026-05-11
+Stopped at: Phases 1, 2, 3, 4, 5 & 6 COMPLETE (Codex-executed, Claude-reviewed for earlier phases, Debug+Release build green; tests 181/181 green after Phase 6). **Autonomous mode** — user asked to run the full loop to completion: for each remaining phase (7→9) run `/gsd:plan-phase N` (research→plan→checker) → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase N` → review & fix to 100/100 → next. Next: Phase 7 (Write Ops — WRITE-03..07) using the landed `IWriteOp`/`WriteOpBase`/`/dryrun`/audit spine. Phase 9's on-box smoke run still requires the live QuickBooks host (10.120.254.13 + SDK + integrated-app auth) so its checklist is built/reviewed but the live run is left for the user.
 Resume file: None
 
 **Quality bar (user expectation):** every phase review must land at 100/100. The reviewer scores the *code/functionality/quality*; a process nit (e.g. Codex using a duplicate commit message) is recorded as INFO — not a deduction — only when (a) the code is genuinely defect-free, (b) the proper fix isn't safely doable here (e.g. history rewrite on a pushed branch with concurrent unrelated automated git activity and no interactive rebase), AND (c) a durable forward-fix is in place (e.g. the `run-codex-phase.ps1` prompt now tells Codex to amend / use `fix(...)` when revising an already-committed task). Otherwise: fix it before declaring the phase done.
@@ -79,3 +83,4 @@ Resume file: None
 - **Phase 3 — qbXML Engine** (READ-01,02,03,11): `QbXmlOptions` (relocated `OwnerIdZero` here from `QbOptions`; `Version`/`MaxReturned`/`MaxResponseBytes`/`SpillPath`), `QbXmlModels` (`QbStatus`/`ParsedElement`/`ParsedQbXmlResponse`/`ParsedReport`/...), `QbXmlBuilder` (pure — `<?xml?>` decl + `<?qbxml version?>` PI + `QBXMLMsgsRq onError` envelope via `XDocument.Save`; `WithIterator`/`WithOwnerIdZero`), `QbXmlParser` (pure — per-message+per-element status, zero-row=success, `DataExtRet`→`customFields`, polymorphic Item→`type`), `QbReportParser` (pure, separate — `ColDesc`-driven, `ColData` by `colID`), `QbResponseSpiller` (size-guard → spill to `SpillPath`??`Audit:Path`??`%TEMP%`), `QbListExecutor` (iterator Start→Continue loop over `QbConnectionManager`, accumulate, mid-iteration-error abort, spill-after-parse), 8 qbXML golden fixtures, `FakeRequestProcessor.AddResponses` multi-response queue + `ProcessRequests` capture, DI wiring. Commits `d2f130d`..`712818a` (8 distinct-titled `feat(03-01)` + `54b155c` `docs(03-01)` — no duplicate titles). Reviewed 100/100. Zero new NuGet packages. Test count 44→76. NOTE: the P&L report fixture is constructed (not live-captured) — Phase 9 should re-pin its `ColDesc`/`ColTitle`/`ColType` casing on the real host.
 - **Phase 4 — Read Ops** (READ-04..10): `IReadOp` + `ReadOpBase` (`QuerySingleAsync`/`QueryListAsync`/`QueryReportAsync`/`ListResult`) + `ArgReader` + 12 ops in `Qb/Ops/` (`namespace QbConnectService.Qb.Ops`): `company_info` (Host+Company in one message, navigates by element name; edition from `HostRet.ProductName`), `get_company_preferences` (`PreferencesQueryRq` + AR/AP `AccountQueryRq` follow-up), `report` (one op, ProfitAndLoss/BalanceSheet → `GeneralSummaryReportQueryRq`, AgingAR/AgingAP → `AgingReportQueryRq`; exactly-one-of range|macro), `list_customers`/`list_vendors`/`list_accounts`/`list_items` (ActiveStatus+name filter via `QbListExecutor`; Item polymorphism free via parser `type`), `list_invoices`/`list_bills`/`list_payments` (`TxnDateRangeFilter`+entity filter via `QbListExecutor`), `get_transaction` (TxnID|RefNumber → `{matches,count,ambiguous}`, never collapses), `run_query` (hard-coded read-only-entity whitelist + key-validated simple-child filters; Company/Host/Preferences single-shot else `QbListExecutor`). All 12 registered as `IReadOp` singletons in `Program.cs` (so Phase 5's `OpRegistry` is `IEnumerable<IReadOp>`→dict). Plan revised once per plan-checker (3 real blockers caught & fixed pre-execution). Commits `26a522f`..`8e509ca` (8 distinct-titled `feat(04-01)` + `6b2cfc6` `docs(04-01)` — no dup titles; Codex committed its own SUMMARY+checkbox+ROADMAP). Reviewed 100/100. Zero new NuGet packages. Test count 76→106. NOTE: the new `*Rs` fixtures are constructed — Phase 9 re-pins qbXML element/enum names.
 - **Phase 5 — REST API, Auth & Health** (API-01..06): `ServerOptions`/`AuthOptions`/`SafetyOptions`, HTTPS-only Kestrel bind with file-cert or dev-cert fallback, static bearer middleware over `/api` with `FixedTimeEquals`, global `IExceptionHandler` → `ProblemDetails`, `OpRegistry`, `GET /api/health`, `POST /api/qbxml`, `GET /api/ops`, `POST /api/ops/{op}`, reusable `QbWriteDetector`, and `WebApplicationFactory<Program>` integration coverage against the fake processor. Commits `d2234b3`..`54daaa6` (7 distinct-titled `feat(05-01)` task commits). Reviewed 100/100. One new test-only NuGet package: `Microsoft.AspNetCore.Mvc.Testing 8.0.*`. Test count 106→152. NOTE: the write-verb enumeration is MEDIUM-confidence and should be re-pinned on the live host in Phase 9; write-op widening is deferred to Phase 7.
+- **Phase 6 — Write Safety, Dry-Run & Audit** (WRITE-01,02,08): hash-chained `AuditLog` + `AuditOptions`/`AuditAuthOptions`/`AuditRecord`, `IWriteOp`/`WriteOpBase`/`DryRunResult`, `QbWriteForbiddenException`, `POST /api/ops/{op}/dryrun`, and three-layer `AllowWrites` enforcement (ops endpoint, raw qbXML passthrough, defensive `QbConnectionManager`) landed before any real write op exists. **Phase 6 ships ZERO real write ops BY DESIGN**; the test-only `FakeWriteOp` exercises the machinery and Phase 7 adds the real `create_*` / `mod_*` ops. Commits `1d67f7f`..this docs commit. Zero new NuGet packages. Test count 152→181. NOTE: dry-run, refused 403 writes, and COM/parse failures append no audit rows; `VerifyChainAsync` reports a torn or malformed last line as a break in v1.
