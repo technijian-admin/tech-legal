@@ -14,7 +14,6 @@ public sealed class QbOptionsBindingTests
                 ["Qb:CompanyFilePath"] = @"C:\path\to\company.QBW",
                 ["Qb:AppId"] = "REPLACE-WITH-APP-ID",
                 ["Qb:AppName"] = "QbConnectService",
-                ["Qb:OwnerIdZero"] = "false",
                 ["Qb:ConnectionType"] = "LocalQBD",
                 ["Qb:OpenMode"] = "DoNotCare",
                 ["Request:TimeoutSeconds"] = "60",

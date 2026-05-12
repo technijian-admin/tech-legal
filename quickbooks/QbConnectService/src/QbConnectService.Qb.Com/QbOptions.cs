@@ -8,8 +8,6 @@ public sealed class QbOptions
 
     public string AppName { get; set; } = "QbConnectService";
 
-    public bool OwnerIdZero { get; set; }
-
     public QbConnectionType ConnectionType { get; set; } = QbConnectionType.LocalQBD;
 
     public QbFileMode OpenMode { get; set; } = QbFileMode.DoNotCare;
