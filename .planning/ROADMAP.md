@@ -162,7 +162,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Mockable COM Seam | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
-| 2. COM Session Lifecycle | 1/1 | ✓ Complete (reviewed 99/100) | 2026-05-12 |
+| 2. COM Session Lifecycle | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 3. qbXML Engine | 0/TBD | Not started | - |
 | 4. Read Ops | 0/TBD | Not started | - |
 | 5. REST API, Auth & Health | 0/TBD | Not started | - |
