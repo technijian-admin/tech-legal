@@ -56,9 +56,12 @@ const emp = {
 };
 
 const settlement = {
-  may:         42500,
-  exGratia:    14167,
-  total:       56667,
+  may:            42500,
+  exGratia:       14167,
+  shiftNights:    9,        // full Third-Shift (night) duties worked in May 2026, confirmed vs roster + attendance
+  shiftRate:      300,      // Rs. per full Third Shift (Handbook Compensation & Benefits §3; offer letter cl. 2)
+  shiftAllowance: 2700,     // = shiftNights × shiftRate
+  total:          59367,    // = may + exGratia + shiftAllowance
 };
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────
@@ -266,7 +269,8 @@ function buildBody() {
     ['(c) Earned Leave (EL) encashment', 'Rs. 0', 'Balance as per payroll records; nil residual'],
     ['(d) Statutory retrenchment compensation', 'Rs. 0', 'Tenure < 1 year; not applicable'],
     ['(e) Ex-gratia / severance payment', `Rs. ${settlement.exGratia.toLocaleString('en-IN')}`, 'Voluntary payment over and above statutory dues, in consideration of releases in §4'],
-    [{ text: 'TOTAL Separation Consideration (gross)', opts: { bold: true } }, { text: `Rs. ${settlement.total.toLocaleString('en-IN')}`, opts: { bold: true } }, { text: 'Payable June 1, 2026', opts: { bold: true } }],
+    ['(f) Shift allowance — May 2026 night shifts', `Rs. ${settlement.shiftAllowance.toLocaleString('en-IN')}`, `${settlement.shiftNights} full Third-Shift (10:30 PM–7:30 AM) duties worked in May 2026 × Rs. ${settlement.shiftRate}/shift per Employee Handbook §3 (Compensation & Benefits) and offer letter cl. 2; earned wage paid in the ordinary course`],
+    [{ text: 'TOTAL Separation Consideration + earned wages (gross)', opts: { bold: true } }, { text: `Rs. ${settlement.total.toLocaleString('en-IN')}`, opts: { bold: true } }, { text: 'Payable June 1, 2026 (less applicable TDS)', opts: { bold: true } }],
   ]));
 
   body.push(blankLine());
@@ -285,6 +289,12 @@ function buildBody() {
 
   body.push(P([
     T('2.04  '),
+    T('Shift allowance (clause 2.01(f))', { bold: true, color: DARK_CHARCOAL }),
+    T(` represents the night-shift (Third Shift, 10:30 PM to 7:30 AM) allowance of Rs. ${settlement.shiftRate} per full shift under the Employee Handbook (Compensation & Benefits, §3) and clause 2 of the Employee's offer letter, for the ${settlement.shiftNights} full Third-Shift duties worked by the Employee during May 2026 as confirmed against the shift roster and attendance records (Rs. ${settlement.shiftAllowance.toLocaleString('en-IN')} in total). This is an earned wage payable through the May 2026 payroll in the ordinary course; it is in addition to, and not in substitution for, any other component of the Separation Consideration, and is not affected by the release in §4.01. Should the Employee work any further full Third- or Second-Shift duties in May 2026 prior to the date of execution of this Agreement, those shall likewise be paid at the applicable Handbook rate.`),
+  ], { after: 160 }));
+
+  body.push(P([
+    T('2.05  '),
     T('Form 16', { bold: true, color: DARK_CHARCOAL }),
     T(' for the relevant financial year shall be issued by the Company on or before 15 June 2027 per Rule 31 of the Income Tax Rules, 1962. All amounts above are subject to applicable TDS deductions as per the Income-tax Act, 1961.'),
   ], { after: 200 }));
@@ -323,7 +333,7 @@ function buildBody() {
     T('), from any and all claims, demands, dues, complaints, suits, actions, causes of action, damages, losses, costs, and expenses (whether known or unknown, asserted or unasserted, contingent or accrued, statutory or contractual) arising out of or in any manner connected with the Employee\'s employment with the Company or the cessation thereof, including without limitation:'),
   ], { after: 160 }));
 
-  body.push(P([T('(a) Any unpaid wages, allowances, bonus, incentive, leave encashment, gratuity, retrenchment compensation, notice pay, or any other monetary entitlement;')], { after: 80 }));
+  body.push(P([T('(a) Any unpaid wages, allowances, bonus, incentive, leave encashment, gratuity, retrenchment compensation, notice pay, or any other monetary entitlement; provided, however, that this clause shall NOT release or extinguish the Employee’s entitlement to the shift allowances described in clause 2.01(f) and clause 2.04 above, which are payable in addition to, and independently of, the Separation Consideration;')], { after: 80 }));
   body.push(P([T('(b) Any claim under the Code on Wages, 2019; the Industrial Relations Code, 2020; the Code on Social Security, 2020; the Code on Occupational Safety, Health & Working Conditions, 2020; the Punjab Shops and Commercial Establishments Act, 1958; the Payment of Gratuity Act, 1972; the EPF Act, 1952; the ESI Act, 1948; or any other Indian labour law;')], { after: 80 }));
   body.push(P([T('(c) Any claim of wrongful termination, constructive dismissal, retrenchment without compliance, unfair labour practice, or violation of natural justice;')], { after: 80 }));
   body.push(P([T('(d) Any claim under the Sexual Harassment Act, 2013 (POSH); provided that this release does NOT cover any then-pending POSH complaint, which shall continue per its statutory process;')], { after: 80 }));
