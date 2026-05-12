@@ -1,0 +1,39 @@
+name: quickbooks-ci
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "quickbooks/QbConnectService/**"
+      - ".github/workflows/quickbooks-ci.yml"
+  pull_request:
+    paths:
+      - "quickbooks/QbConnectService/**"
+      - ".github/workflows/quickbooks-ci.yml"
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: quickbooks/QbConnectService
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        # If "Failed to download dotnet-sdk-8.0.x" flakes on a Windows hosted runner, retry the run or pin a
+        # specific patch such as 8.0.404. That is an infra issue, not a code defect.
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore QbConnectService.sln
+
+      - name: Build (Release)
+        run: dotnet build QbConnectService.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test QbConnectService.sln -c Release --no-build --verbosity normal --collect:"XPlat Code Coverage"
+
+      - name: Publish (x86 single-file) smoke
+        run: dotnet publish src/QbConnectService -c Release -r win-x86 --self-contained true -p:PublishSingleFile=true -o publish
