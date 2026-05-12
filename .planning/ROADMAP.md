@@ -62,10 +62,10 @@ Plans:
   2. A separate report parser reads `ColDesc` headers and positional `ColData`/`RowData` (DataRow/SubtotalRow/TotalRow/TextRow) with no ordinal guessing — covered by sample-response golden tests.
   3. List parsing follows qbXML iterators (`Start`/`Continue`, `iteratorID`, `iteratorRemainingCount`) so a multi-page result comes back complete; a response over the configured size threshold spills the raw qbXML to a file beside the audit log and returns a reference plus the parsed summary.
   4. Whether read requests pass `OwnerID="0"` (to include `DataExtRet` custom fields) is a documented config setting with a sensible default — not implicit.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — qbXML engine: QbXmlBuilder/QbXmlModels, QbXmlParser, QbReportParser, QbResponseSpiller, QbListExecutor (iterators), QbXmlOptions (+OwnerIdZero relocation), FakeRequestProcessor multi-response, DI
 
 ### Phase 4: Read Ops
 **Goal**: Every v1 read operation implemented on top of the qbXML engine and exercised end-to-end against the fake processor.
