@@ -136,10 +136,10 @@ Plans:
   2. All machine-specifics live only in gitignored `QbConnectService/appsettings.json` and `clients/.env`, each with a committed `.sample` version; nothing machine-specific is hardcoded in source.
   3. `register-integrated-app.md` documents the one-time QuickBooks-side authorization (Admin, single-user mode, "allow to login automatically", bound to `svc_qbsdk`, with the "Reauthorize" recovery path and the PII gotcha), and `README.md` is the full `10.120.254.13` deploy runbook including the QBWC-fallback note and the HRESULT troubleshooting table.
   4. An on-box smoke checklist verifies, in order, `GET /api/health` → `company_info` → a `report` → `create_customer` dry-run (inspect the qbXML) → with `AllowWrites=true`, one real low-stakes write → confirm it in QuickBooks → confirm the audit-log row — and records the environment facts to verify (QuickBooks Enterprise year/version, multi-user hosting status, `svc_qbsdk` account + "log on as a service" rights, firewall path for the HTTPS port).
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 09-01: TBD
+- [ ] 09-01-PLAN.md — deploy/cert/install/uninstall/task scripts, sample-parity test, register-integrated-app + deploy README + HRESULT table, on-box smoke checklist, qbXML re-pin guide, --verify-audit CLI
 
 ## Progress
 
