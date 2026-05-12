@@ -3,8 +3,9 @@
 **Reviewed:** 2026-05-12
 **Component:** `quickbooks/QbConnectService/` — .NET 8 solution skeleton + mockable COM seam + fakes + CI (Phase 1 of 9)
 **Files reviewed:** 16 tracked source files (3 `.csproj` + `.sln`, `Program.cs`, `Worker.cs`, `IRequestProcessor.cs`, `QBXMLRP2Lib.cs`, `RealRequestProcessor.cs`, `FakeRequestProcessor.cs`, 3 test files, `appsettings.sample.json`, 2 READMEs, `.github/workflows/quickbooks-ci.yml`, appended `.gitignore`)
-**Findings:** 0 Blocker | 0 High | 0 Medium | 2 Low (+ 3 Info, documented)
+**Findings:** 0 Blocker | 0 High | 0 Medium | 2 Low — **both RESOLVED 2026-05-12** (+ 3 Info, documented)
 **Build:** `dotnet build -c Release` PASS (0/0) · `dotnet test -c Release` PASS (7/7) · CI run `25708034197` PASS
+**Health (post-remediation):** 100/100
 
 ## Blocker
 

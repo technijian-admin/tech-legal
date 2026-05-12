@@ -4,7 +4,9 @@
 **Branch:** `quickbooks/direct-sdk-integration-2026-05-11`
 **Date:** 2026-05-12
 **Reviewer:** Claude (post-Codex-execution review; Codex executed `01-01-PLAN.md`, 7 tasks + 1 CI fix)
-**Health Score:** **99 / 100 (Grade A — ready to proceed to Phase 2)**
+**Health Score:** **100 / 100 (Grade A — ready to proceed to Phase 2)**
+
+> **Update 2026-05-12 (post-review remediation):** both LOW findings resolved. LOW-1 (executor left `01-01-PLAN.md`/`01-01-SUMMARY.md` uncommitted) → committed as `9f3bab4`. LOW-2 (`bin`/`obj`/`publish` build artifacts in the working tree) → `git clean -fdX quickbooks/` removed them; they're gitignored, so they'll naturally reappear on the next `dotnet build` (Phase 2) and that is expected and fine. Score raised to 100/100.
 
 ## Scope of this review
 
