@@ -1,0 +1,25 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins ReceivePaymentQuery element casing and filters against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <ReceivePaymentQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <ReceivePaymentRet>
+        <TxnID>PAY-001</TxnID>
+        <TxnDate>2025-03-05</TxnDate>
+        <RefNumber>R-1001</RefNumber>
+        <CustomerRef>
+          <FullName>Acme Roofing Inc</FullName>
+        </CustomerRef>
+        <TotalAmount>2500.00</TotalAmount>
+      </ReceivePaymentRet>
+      <ReceivePaymentRet>
+        <TxnID>PAY-002</TxnID>
+        <TxnDate>2025-04-20</TxnDate>
+        <RefNumber>R-1002</RefNumber>
+        <CustomerRef>
+          <FullName>Globex</FullName>
+        </CustomerRef>
+        <TotalAmount>1500.00</TotalAmount>
+      </ReceivePaymentRet>
+    </ReceivePaymentQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

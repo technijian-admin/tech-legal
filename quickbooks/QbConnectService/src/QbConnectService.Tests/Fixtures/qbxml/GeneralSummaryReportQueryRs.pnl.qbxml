@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <GeneralSummaryReportQueryRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <ReportRet>
+        <ReportTitle>Profit &amp; Loss</ReportTitle>
+        <ReportSubtitle>January 2026</ReportSubtitle>
+        <ReportBasis>AccrualBasis</ReportBasis>
+        <ColDesc colID="1">
+          <ColTitle titleRow="1" value="" />
+          <ColType>Amount</ColType>
+        </ColDesc>
+        <ColDesc colID="2">
+          <ColTitle titleRow="1" value="TOTAL" />
+          <ColType>Amount</ColType>
+        </ColDesc>
+        <ReportData>
+          <TextRow rowNumber="1">
+            <RowData rowType="text" value="Ordinary Income/Expense" />
+          </TextRow>
+          <DataRow rowNumber="3">
+            <RowData rowType="account" value="Consulting" />
+            <ColData colID="1" value="12000.00" />
+            <ColData colID="2" value="12000.00" />
+          </DataRow>
+          <SubtotalRow rowNumber="4">
+            <RowData rowType="subtotal" value="Total Income" />
+            <ColData colID="1" value="12000.00" />
+            <ColData colID="2" value="12000.00" />
+          </SubtotalRow>
+          <TotalRow rowNumber="12">
+            <RowData rowType="total" value="Net Income" />
+            <ColData colID="1" value="3500.00" />
+            <ColData colID="2" value="3500.00" />
+          </TotalRow>
+        </ReportData>
+      </ReportRet>
+    </GeneralSummaryReportQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
