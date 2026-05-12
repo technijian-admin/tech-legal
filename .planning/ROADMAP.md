@@ -166,7 +166,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. qbXML Engine | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 4. Read Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
-| 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete | 2026-05-11 |
+| 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 7. Write Ops | 0/TBD | Not started | - |
 | 8. Python Client, Claude Skill & Dev Tooling | 0/TBD | Not started | - |
 | 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |
