@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <InvoiceQueryRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <InvoiceRet>
+        <TxnID>1A2B-3C4D5E6F7G</TxnID>
+        <TxnNumber>42</TxnNumber>
+        <RefNumber>INV-1001</RefNumber>
+        <CustomerRef>
+          <ListID>80000001-AAAAAAAA</ListID>
+          <FullName>Acme Co</FullName>
+        </CustomerRef>
+        <TxnDate>2026-05-11</TxnDate>
+        <DueDate>2026-06-10</DueDate>
+        <Memo>original memo</Memo>
+        <Subtotal>100.00</Subtotal>
+        <TotalAmount>100.00</TotalAmount>
+        <BalanceRemaining>100.00</BalanceRemaining>
+        <IsPaid>false</IsPaid>
+        <EditSequence>1700000777</EditSequence>
+        <TimeCreated>2026-05-11T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-11T00:00:00-08:00</TimeModified>
+        <InvoiceLineRet>
+          <TxnLineID>1A2B-LINE001</TxnLineID>
+          <ItemRef>
+            <ListID>80000005-ITEM</ListID>
+            <FullName>Consulting</FullName>
+          </ItemRef>
+          <Desc>Consulting</Desc>
+          <Quantity>1</Quantity>
+          <Rate>100.00</Rate>
+          <Amount>100.00</Amount>
+        </InvoiceLineRet>
+      </InvoiceRet>
+    </InvoiceQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

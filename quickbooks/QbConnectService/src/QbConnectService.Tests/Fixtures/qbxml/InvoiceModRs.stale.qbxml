@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema. The 3200 stale-EditSequence status is also MEDIUM-confidence and gets re-pinned live in Phase 9. -->
+  <QBXMLMsgsRs statusCode="3200" statusSeverity="Error" statusMessage="The provided edit sequence is out-of-date.">
+    <InvoiceModRs requestID="1" statusCode="3200" statusSeverity="Error" statusMessage="The provided edit sequence is out-of-date." />
+  </QBXMLMsgsRs>
+</QBXML>
