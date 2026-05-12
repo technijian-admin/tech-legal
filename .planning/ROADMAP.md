@@ -48,10 +48,10 @@ Plans:
   3. On a simulated dead ticket / dropped session the manager rebuilds the COM object and retries exactly once, then surfaces the QuickBooks error verbatim (no second retry).
   4. A `QbErrors` map turns the `0x8004xxxx` family plus "Class not registered" / `RequestProcessor2`-cast cases into a human message + remediation hint, and that mapping shows up in API/health responses.
   5. A watchdog aborts a `ProcessRequest` that exceeds the configured timeout and returns a clear timeout error without leaving the session wedged.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — COM session lifecycle: QbConnectionManager (STA thread, SemaphoreSlim gate, watchdog, dead-ticket rebuild+retry-once), QbErrors map, RealRequestProcessor adapter, DI wiring
 
 ### Phase 3: qbXML Engine
 **Goal**: Pure, I/O-free qbXML request building and response parsing — including a dedicated header-aware report parser, iterator handling, and a size-guard that spills oversized raw qbXML to disk — all unit-testable on a dev box against the fake.
@@ -162,7 +162,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Mockable COM Seam | 0/1 | Not started | - |
-| 2. COM Session Lifecycle | 0/TBD | Not started | - |
+| 2. COM Session Lifecycle | 0/1 | Not started | - |
 | 3. qbXML Engine | 0/TBD | Not started | - |
 | 4. Read Ops | 0/TBD | Not started | - |
 | 5. REST API, Auth & Health | 0/TBD | Not started | - |
