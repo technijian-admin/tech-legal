@@ -49,11 +49,11 @@
 
 - [ ] **WRITE-01**: `Safety:AllowWrites` defaults to **false**; while false every write op (`create_*`, `mod_*`, and raw qbXML containing `Add`/`Mod`/`Del`/`Void`) is rejected with 403 — enforced in the ops controller, the raw passthrough, and defensively in the connection manager.
 - [ ] **WRITE-02**: `POST /api/ops/{op}/dryrun` returns the byte-exact qbXML that would be sent, a resolved-reference echo (names → ListID/TxnID/EditSequence), a plain-English summary (field-level before/after diff for `mod_*`), and pre-flight validation results (referenced entities exist? journal entry balanced? `AllowWrites` state? multi-currency refused?) — with **zero side effects**, and the `/dryrun` endpoint itself is **not** write-gated.
-- [ ] **WRITE-03**: `op: create_customer` / `create_vendor` add a customer/vendor.
-- [ ] **WRITE-04**: `op: create_invoice` / `create_bill` / `create_check` add the respective transaction.
-- [ ] **WRITE-05**: `op: receive_payment` records a customer payment against invoices.
-- [ ] **WRITE-06**: `op: create_journal_entry` adds a balanced journal entry (rejected pre-flight if it doesn't balance).
-- [ ] **WRITE-07**: `op: mod_*` updates an existing object by `ListID`/`TxnID` + `EditSequence` (full-replace semantics), using the `EditSequence` from a fresh read; a stale `EditSequence` (`0x800404C5`) is returned verbatim, never retried/auto-fixed.
+- [x] **WRITE-03**: `op: create_customer` / `create_vendor` add a customer/vendor.
+- [x] **WRITE-04**: `op: create_invoice` / `create_bill` / `create_check` add the respective transaction.
+- [x] **WRITE-05**: `op: receive_payment` records a customer payment against invoices.
+- [x] **WRITE-06**: `op: create_journal_entry` adds a balanced journal entry (rejected pre-flight if it doesn't balance).
+- [x] **WRITE-07**: `op: mod` updates an existing object by `ListID`/`TxnID` + `EditSequence` (full-replace semantics), using the `EditSequence` from a fresh read; a stale `EditSequence` (`3200`) is returned verbatim, never retried/auto-fixed.
 - [ ] **WRITE-08**: Every **executed** write appends a record to an append-only, hash-chained audit log on the QuickBooks host (UTC timestamp, op, args, qbXML sent, response statusCode/severity/message, calling token id); the dry-run path writes nothing.
 
 ### Python client & Claude skill (CLIENT)
@@ -130,11 +130,11 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
 | WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
 | WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
-| WRITE-03 | Phase 7 — Write Ops | Pending |
-| WRITE-04 | Phase 7 — Write Ops | Pending |
-| WRITE-05 | Phase 7 — Write Ops | Pending |
-| WRITE-06 | Phase 7 — Write Ops | Pending |
-| WRITE-07 | Phase 7 — Write Ops | Pending |
+| WRITE-03 | Phase 7 — Write Ops | Done |
+| WRITE-04 | Phase 7 — Write Ops | Done |
+| WRITE-05 | Phase 7 — Write Ops | Done |
+| WRITE-06 | Phase 7 — Write Ops | Done |
+| WRITE-07 | Phase 7 — Write Ops | Done |
 | CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
 | CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
 | CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
@@ -147,4 +147,4 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 
 ---
 *Requirements defined: 2026-05-11*
-*Last updated: 2026-05-11 — traceability populated by gsd-roadmapper (9-phase roadmap)*
+*Last updated: 2026-05-12 — Phase 7 write ops complete (WRITE-03..07 done)*

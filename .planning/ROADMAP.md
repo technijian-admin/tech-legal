@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 4: Read Ops** - `company_info`, `get_company_preferences`, `report`, `list_*`, `get_transaction`, `run_query`
 - [x] **Phase 5: REST API, Auth & Health** - Kestrel HTTPS-only, bearer middleware, `/api/health`, raw `/api/qbxml` passthrough, `OpRegistry`
 - [x] **Phase 6: Write Safety, Dry-Run & Audit** - `AllowWrites` default-false 403 gate, `/api/ops/{op}/dryrun`, immutable hash-chained audit log
-- [ ] **Phase 7: Write Ops** - `create_customer`/`vendor`/`invoice`/`bill`/`check`, `receive_payment`, `create_journal_entry`, `mod_*`
+- [x] **Phase 7: Write Ops** - `create_customer`/`vendor`/`invoice`/`bill`/`check`, `receive_payment`, `create_journal_entry`, `mod`
 - [ ] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
 - [ ] **Phase 9: Packaging, Deploy & On-Box Smoke** - cert/install/uninstall/task scripts, gitignored config + `.sample`s, integrated-app + deploy runbooks, live smoke checklist
 
@@ -112,19 +112,19 @@ Plans:
 - [x] 06-01-PLAN.md — Write-safety machinery: hash-chained AuditLog, IWriteOp/WriteOpBase pipeline, POST /api/ops/{op}/dryrun, AllowWrites 3-layer gate, QbWriteForbiddenException, FakeWriteOp
 
 ### Phase 7: Write Ops
-**Goal**: Every v1 write operation implemented behind the safety gate, dry-run, and audit log, with stale-`EditSequence` and full-replace `mod_*` semantics handled correctly.
+**Goal**: Every v1 write operation implemented behind the safety gate, dry-run, and audit log, with stale-`EditSequence` and full-replace `mod` semantics handled correctly.
 **Depends on**: Phase 6
 **Requirements**: WRITE-03, WRITE-04, WRITE-05, WRITE-06, WRITE-07
 **Success Criteria** (what must be TRUE):
   1. `op: create_customer` / `create_vendor` add a customer/vendor; `op: create_invoice` / `create_bill` / `create_check` add the respective transaction (all exercised via dry-run + a gated execute against the fake).
   2. `op: receive_payment` records a customer payment against invoices.
   3. `op: create_journal_entry` adds a balanced journal entry and is rejected at pre-flight when it doesn't balance.
-  4. `op: mod_*` updates an existing object by `ListID`/`TxnID` + `EditSequence` with full-replace semantics, using an `EditSequence` from a fresh read; a stale `EditSequence` (`0x800404C5`) is returned verbatim, never retried or auto-fixed.
+  4. `op: mod` updates an existing object by `ListID`/`TxnID` + `EditSequence` with full-replace semantics, using an `EditSequence` from a fresh read; a stale `EditSequence` (`3200`) is returned verbatim, never retried or auto-fixed.
   5. Each executed write in these ops produces exactly one audit-log row; each dry-run produces none — verified by tests.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 07-01-PLAN.md — v1 WRITE ops (7 create_* + generic mod) on the Phase-6 safety/dry-run/audit spine
+- [x] 07-01-PLAN.md — v1 WRITE ops (7 create_* + generic mod) on the Phase-6 safety/dry-run/audit spine
 
 ### Phase 8: Python Client, Claude Skill & Dev Tooling
 **Goal**: A workstation-side Python client, the `quickbooks-accounting` Claude skill that drives the API safely, and the documented multi-LLM build pipeline tooling.
@@ -167,6 +167,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 4. Read Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
-| 7. Write Ops | 0/TBD | Not started | - |
+| 7. Write Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 8. Python Client, Claude Skill & Dev Tooling | 0/TBD | Not started | - |
 | 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |
