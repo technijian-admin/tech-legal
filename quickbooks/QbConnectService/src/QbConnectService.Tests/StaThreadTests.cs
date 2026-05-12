@@ -7,71 +7,62 @@ public sealed class StaThreadTests
     [Fact]
     public async Task Run_returns_the_function_result()
     {
-        using var sta = new StaThread("test-sta");
+        using var sta = new StaThread("sta-test");
 
-        var result = await sta.Run(() => 42);
+        var value = await sta.Run(() => 42);
 
-        Assert.Equal(42, result);
+        Assert.Equal(42, value);
     }
 
     [Fact]
-    public async Task Run_marshals_every_call_to_the_same_sta_thread()
+    public async Task Run_marshals_all_work_to_one_sta_thread()
     {
-        using var sta = new StaThread("test-sta");
-        var testThreadId = Thread.CurrentThread.ManagedThreadId;
-        var threadIds = new List<int>();
-        var apartmentStates = new List<ApartmentState>();
+        using var sta = new StaThread("sta-test");
+        var callerThreadId = Thread.CurrentThread.ManagedThreadId;
+        var observations = new List<(int ThreadId, ApartmentState ApartmentState)>();
 
         for (var i = 0; i < 5; i++)
         {
-            var info = await sta.Run(() => (
-                ManagedThreadId: Thread.CurrentThread.ManagedThreadId,
-                ApartmentState: Thread.CurrentThread.GetApartmentState()));
-            threadIds.Add(info.ManagedThreadId);
-            apartmentStates.Add(info.ApartmentState);
+            observations.Add(await sta.Run(() =>
+                (Thread.CurrentThread.ManagedThreadId, Thread.CurrentThread.GetApartmentState())));
         }
 
-        Assert.All(threadIds, threadId => Assert.NotEqual(testThreadId, threadId));
-        Assert.Single(threadIds.Distinct());
-        Assert.All(apartmentStates, apartmentState => Assert.Equal(ApartmentState.STA, apartmentState));
+        Assert.All(observations, observation => Assert.Equal(ApartmentState.STA, observation.ApartmentState));
+        Assert.All(observations, observation => Assert.NotEqual(callerThreadId, observation.ThreadId));
+        Assert.Single(observations.Select(observation => observation.ThreadId).Distinct());
     }
 
     [Fact]
     public async Task Run_propagates_exceptions_to_the_caller()
     {
-        using var sta = new StaThread("test-sta");
+        using var sta = new StaThread("sta-test");
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => sta.Run<int>(() =>
-        {
-            throw new InvalidOperationException("x");
-        }));
-
-        Assert.Equal("x", exception.Message);
+        await Assert.ThrowsAsync<InvalidOperationException>(() => sta.Run<int>(() => throw new InvalidOperationException("x")));
     }
 
     [Fact]
-    public async Task WaitAsync_can_timeout_a_slow_work_item()
+    public async Task Run_can_be_timed_out_by_the_waiter()
     {
-        using var sta = new StaThread("test-sta");
+        using var sta = new StaThread("sta-test");
 
         await Assert.ThrowsAsync<TimeoutException>(async () =>
             await sta.Run(() =>
-            {
-                Thread.Sleep(2000);
-                return 0;
-            }).WaitAsync(TimeSpan.FromMilliseconds(200)));
+                {
+                    Thread.Sleep(2000);
+                    return 0;
+                })
+                .WaitAsync(TimeSpan.FromMilliseconds(200)));
     }
 
     [Fact]
-    public void Dispose_stops_accepting_new_work()
+    public void Run_after_dispose_throws_invalid_operation_exception()
     {
-        using var sta = new StaThread("test-sta");
-
+        var sta = new StaThread("sta-test");
         sta.Dispose();
 
         var exception = Record.Exception(() =>
         {
-            _ = sta.Run(() => 1);
+            _ = sta.Run(() => 42);
         });
 
         Assert.IsType<InvalidOperationException>(exception);

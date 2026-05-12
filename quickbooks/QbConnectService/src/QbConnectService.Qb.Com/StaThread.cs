@@ -17,46 +17,8 @@ internal sealed class StaThread : IDisposable
             IsBackground = true,
             Name = name,
         };
-
         _thread.SetApartmentState(ApartmentState.STA);
         _thread.Start();
-    }
-
-    public Task Run(Action action, CancellationToken ct = default) =>
-        Run<object?>(() =>
-        {
-            action();
-            return null;
-        }, ct);
-
-    public Task<T> Run<T>(Func<T> func, CancellationToken ct = default)
-    {
-        var tcs = new TaskCompletionSource<T>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var registration = ct.Register(() => tcs.TrySetCanceled(ct));
-        _ = tcs.Task.ContinueWith(
-            _ => registration.Dispose(),
-            CancellationToken.None,
-            TaskContinuationOptions.ExecuteSynchronously,
-            TaskScheduler.Default);
-
-        _queue.Add(() =>
-        {
-            try
-            {
-                tcs.TrySetResult(func());
-            }
-            catch (Exception ex)
-            {
-                tcs.TrySetException(ex);
-            }
-        });
-
-        return tcs.Task;
-    }
-
-    public void Dispose()
-    {
-        _queue.CompleteAdding();
     }
 
     private void Pump()
@@ -69,8 +31,54 @@ internal sealed class StaThread : IDisposable
             }
             catch
             {
-                // The queued work captures its own exception into its TaskCompletionSource.
             }
+        }
+    }
+
+    public Task<T> Run<T>(Func<T> func, CancellationToken ct = default)
+    {
+        var tcs = new TaskCompletionSource<T>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var registration = ct.Register(() => tcs.TrySetCanceled(ct));
+
+        try
+        {
+            _queue.Add(() =>
+            {
+                try
+                {
+                    tcs.TrySetResult(func());
+                }
+                catch (Exception ex)
+                {
+                    tcs.TrySetException(ex);
+                }
+                finally
+                {
+                    registration.Dispose();
+                }
+            });
+        }
+        catch
+        {
+            registration.Dispose();
+            throw;
+        }
+
+        return tcs.Task;
+    }
+
+    public Task Run(Action action, CancellationToken ct = default) =>
+        Run<object?>(() =>
+        {
+            action();
+            return null;
+        }, ct);
+
+    public void Dispose()
+    {
+        if (!_queue.IsAddingCompleted)
+        {
+            _queue.CompleteAdding();
         }
     }
 }
