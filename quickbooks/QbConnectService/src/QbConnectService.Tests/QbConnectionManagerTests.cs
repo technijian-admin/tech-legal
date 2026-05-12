@@ -95,6 +95,73 @@ public sealed class QbConnectionManagerTests
         await manager.DisposeAsync();
     }
 
+    [Fact]
+    public async Task Concurrent_execute_calls_do_not_interleave_ProcessRequest()
+    {
+        var (manager, created) = CreateManager();
+        var inside = 0;
+        var reentered = false;
+        var calls = 0;
+        created[0].ProcessRequestHook = _ =>
+        {
+            if (Interlocked.Exchange(ref inside, 1) == 1)
+            {
+                reentered = true;
+            }
+
+            try
+            {
+                Thread.Sleep(150);
+                Interlocked.Increment(ref calls);
+                return "<ok/>";
+            }
+            finally
+            {
+                Interlocked.Exchange(ref inside, 0);
+            }
+        };
+
+        var first = Task.Run(() => manager.ExecuteAsync(CompanyQueryRequest));
+        var second = Task.Run(() => manager.ExecuteAsync(CompanyQueryRequest));
+        var results = await Task.WhenAll(first, second);
+
+        Assert.False(reentered);
+        Assert.Equal(2, calls);
+        Assert.All(results, result => Assert.Equal("<ok/>", result));
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task ExecuteAsync_throws_QbBusyException_when_the_gate_stays_held_past_the_wait_window()
+    {
+        var (manager, created) = CreateManager(new RequestOptions
+        {
+            BusyWaitSeconds = 1,
+            TimeoutSeconds = 60,
+        });
+        using var entered = new ManualResetEventSlim();
+        using var release = new ManualResetEventSlim();
+        created[0].ProcessRequestHook = _ =>
+        {
+            entered.Set();
+            release.Wait();
+            return "<ok/>";
+        };
+
+        var first = Task.Run(() => manager.ExecuteAsync(CompanyQueryRequest));
+        Assert.True(entered.Wait(TimeSpan.FromSeconds(5)));
+
+        var exception = await Assert.ThrowsAsync<QbBusyException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(TimeSpan.FromSeconds(1), exception.WaitedFor);
+
+        release.Set();
+        Assert.Equal("<ok/>", await first);
+
+        await manager.DisposeAsync();
+    }
+
     private static (QbConnectionManager Manager, List<FakeRequestProcessor> Created) CreateManager(RequestOptions? request = null)
     {
         var created = new List<FakeRequestProcessor> { new FakeRequestProcessor() };
