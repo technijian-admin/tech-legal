@@ -92,10 +92,10 @@ Plans:
   3. `POST /api/qbxml` accepts a raw qbXML request and returns the raw qbXML response (size-guarded); when `AllowWrites` is false a request whose qbXML contains an `Add`/`Mod`/`Del`/`Void` request — detected by parsing element names, not substrings — is rejected with 403.
   4. `POST /api/ops/{op}` dispatches through an `OpRegistry` (validates args, builds qbXML, executes, returns parsed JSON plus the raw qbXML plus the status fields); an unknown op returns 404; a `statusCode != 0` from QuickBooks comes back as a normal 200 body.
   5. `WebApplicationFactory` integration tests against the fake processor cover health, auth (401), the raw passthrough (including the 403 verb-scan), and op dispatch (including 404 and the 200-with-nonzero-statusCode case).
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 05-01: TBD
+- [ ] 05-01-PLAN.md — REST API, auth & health: Kestrel HTTPS-only bind, static-bearer middleware, ProblemDetails exception mapping (API-06 invariant), OpRegistry, GET /api/health, POST /api/qbxml raw passthrough + 403 verb-scan, POST /api/ops/{op} dispatch, reusable QbWriteDetector, WebApplicationFactory integration tests
 
 ### Phase 6: Write Safety, Dry-Run & Audit
 **Goal**: The full write-safety machinery — a default-off AllowWrites gate enforced in depth, a zero-side-effect dry-run endpoint, and an immutable hash-chained audit log — landed before any write op exists.
