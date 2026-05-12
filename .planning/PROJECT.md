@@ -63,6 +63,15 @@ Claude can run a QuickBooks read (a report, a list, a transaction lookup) and ge
 | Live in `tech-legal/quickbooks/` (existing repo) | User's choice; keep the subsystem self-contained/portable | — Pending |
 | COM behind `IRequestProcessor` | Build & test anywhere without the QB SDK | — Pending |
 | Build through GSD (this workflow) | User chose the GSD full-project path | — Pending |
+| Multi-LLM split: Claude researches + GSD-plans + reviews; Codex CLI executes code-gen from each phase's PLAN.md | Offload the highest-token-volume work (the edit/test/fix loop) to Codex's bill; keep judgment-heavy planning + review on Claude; GSD `PLAN.md` files are explicit enough to hand off cleanly. DeepSeek not used (per-phase research too small to be worth the handoff). | — Pending |
+
+## Build pipeline (multi-LLM)
+
+- **Research** — Claude. Project-level research done 2026-05-11 (`.planning/research/`); per-phase research via GSD's researcher (also Claude).
+- **Plan** — Claude / GSD `gsd-planner` (`/gsd:plan-phase N` → `.planning/phases/phase-N/PLAN.md`). The leverage point — kept premium.
+- **Execute** — **Codex CLI** (`codex-cli` 0.110.0, installed). After a phase is planned, `quickbooks/dev/run-codex-phase.ps1` hands the `PLAN.md` to `codex` which implements it on branch `quickbooks/direct-sdk-integration-2026-05-11`, commit-per-task. (Replaces GSD's own executor for this project.)
+- **Review / verify** — Claude (`/gsd:code-review` / `/gsd:verify-work`), optionally a Codex review pass too.
+- **Not used:** DeepSeek (a DeepSeek-backed Claude Code session via `ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic` is documented in `quickbooks/dev/MULTI-LLM.md` as an optional cheap reviewer, but not in the default loop).
 
 ---
-*Last updated: 2026-05-11 after initialization*
+*Last updated: 2026-05-11 after initialization (multi-LLM pipeline added)*
