@@ -78,18 +78,31 @@ HARD RULES (this repo also contains unrelated active work — violating these co
     }
 
     # --- codex invocation ---
-    # NOTE: adjust these flags to match your installed codex-cli (`codex exec --help`).
-    # --full-auto runs without per-action approval; -C sets the working dir.
-    $codexArgs = @("exec", "--full-auto", "-C", "$repoRoot", $prompt)
+    # codex-cli >= 0.110: `codex exec [OPTIONS] [PROMPT]`. We pipe the (large) prompt via STDIN
+    # (pass `-` as the prompt arg) to avoid command-line length limits.
+    #   --full-auto  = `-a on-request --sandbox workspace-write` (sandboxed, low-friction)
+    #   -C <dir>     = working root for the agent
+    #   -c sandbox_workspace_write.network_access=true  = let `dotnet restore` reach NuGet
+    # If the sandbox still blocks the .NET build/restore on your machine, swap the two flags
+    # `--full-auto -c sandbox_workspace_write.network_access=true` for `--dangerously-bypass-approvals-and-sandbox`
+    # (acceptable here — it's your own trusted dev box and this is an intentional autonomous run).
+    # Run `codex exec --help` if your installed version's flags differ, and adjust $codexArgs.
+    $codexArgs = @(
+        "exec",
+        "--full-auto",
+        "-C", "$repoRoot",
+        "-c", "sandbox_workspace_write.network_access=true",
+        "-"        # read PROMPT from stdin
+    )
 
     Write-Host "Repo:   $repoRoot"
     Write-Host "Branch: $branch"
     Write-Host "Plan:   $planPath"
-    Write-Host "Codex:  codex $($codexArgs[0..($codexArgs.Count-2)] -join ' ') <prompt: $($prompt.Length) chars>"
+    Write-Host "Codex:  codex $($codexArgs -join ' ')   <prompt: $($prompt.Length) chars via stdin>"
     Write-Host ""
 
     if ($DryRun) {
-        Write-Host "---- DRY RUN: prompt that would be sent to Codex ----`n"
+        Write-Host "---- DRY RUN: prompt that would be piped to Codex ----`n"
         Write-Host $prompt
         return
     }
@@ -98,7 +111,7 @@ HARD RULES (this repo also contains unrelated active work — violating these co
         throw "codex CLI not found on PATH. Install codex-cli, then re-run."
     }
 
-    & codex @codexArgs
+    $prompt | & codex @codexArgs
     $exit = $LASTEXITCODE
     Write-Host ""
     Write-Host "codex exited with code $exit"
