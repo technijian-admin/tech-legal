@@ -1,0 +1,41 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins HostRet.ProductName format / element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <HostQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <HostRet>
+        <ProductName>QuickBooks Enterprise Solutions: Manufacturing and Wholesale 24.0</ProductName>
+        <MajorVersion>34</MajorVersion>
+        <MinorVersion>0</MinorVersion>
+        <Country>US</Country>
+        <SupportedQBXMLVersionList>
+          <SupportedQBXMLVersion>13.0</SupportedQBXMLVersion>
+          <SupportedQBXMLVersion>16.0</SupportedQBXMLVersion>
+        </SupportedQBXMLVersionList>
+      </HostRet>
+    </HostQueryRs>
+    <CompanyQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CompanyRet>
+        <CompanyName>Acme Roofing Inc</CompanyName>
+        <LegalCompanyName>Acme Roofing Incorporated</LegalCompanyName>
+        <Address>
+          <Addr1>42 Skyline Blvd</Addr1>
+          <City>Irvine</City>
+          <State>CA</State>
+          <PostalCode>92614</PostalCode>
+        </Address>
+        <LegalAddress>
+          <Addr1>42 Skyline Blvd</Addr1>
+          <City>Irvine</City>
+          <State>CA</State>
+          <PostalCode>92614</PostalCode>
+        </LegalAddress>
+        <Phone>949-555-0100</Phone>
+        <Email>books@acmeroofing.example</Email>
+        <FirstMonthFiscalYear>January</FirstMonthFiscalYear>
+        <FirstMonthIncomeTaxYear>January</FirstMonthIncomeTaxYear>
+        <TaxForm>Corporation</TaxForm>
+        <CompanyType>Construction</CompanyType>
+      </CompanyRet>
+    </CompanyQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

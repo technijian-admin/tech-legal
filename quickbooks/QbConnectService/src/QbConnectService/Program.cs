@@ -1,4 +1,5 @@
 using QbConnectService.Qb;
+using QbConnectService.Qb.Ops;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,9 @@ if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing")
 }
 
 builder.Services.AddSingleton<QbConnectionManager>();
+
+// Phase 4: read ops (registered as IReadOp so Phase 5's OpRegistry is IEnumerable<IReadOp> -> dictionary by Name)
+builder.Services.AddSingleton<IReadOp, CompanyInfoOp>();
 
 var app = builder.Build();
 
