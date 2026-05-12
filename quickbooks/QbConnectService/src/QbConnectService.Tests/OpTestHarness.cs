@@ -53,6 +53,9 @@ public static class OpTestHarness
             new CompanyInfoOp(builder, manager, xmlParser, reportParser, listExecutor),
             new CompanyPreferencesOp(builder, manager, xmlParser, reportParser, listExecutor),
             new ReportOp(builder, manager, xmlParser, reportParser, listExecutor),
+            new ListCustomersOp(builder, manager, xmlParser, reportParser, listExecutor),
+            new ListVendorsOp(builder, manager, xmlParser, reportParser, listExecutor),
+            new ListAccountsOp(builder, manager, xmlParser, reportParser, listExecutor),
         }.ToDictionary(op => op.Name, StringComparer.Ordinal);
 
         return (fake, manager, ops);

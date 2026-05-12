@@ -30,6 +30,9 @@ builder.Services.AddSingleton<QbConnectionManager>();
 builder.Services.AddSingleton<IReadOp, CompanyInfoOp>();
 builder.Services.AddSingleton<IReadOp, CompanyPreferencesOp>();
 builder.Services.AddSingleton<IReadOp, ReportOp>();
+builder.Services.AddSingleton<IReadOp, ListCustomersOp>();
+builder.Services.AddSingleton<IReadOp, ListVendorsOp>();
+builder.Services.AddSingleton<IReadOp, ListAccountsOp>();
 
 var app = builder.Build();
 
