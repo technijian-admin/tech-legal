@@ -121,10 +121,10 @@ Plans:
   3. `op: create_journal_entry` adds a balanced journal entry and is rejected at pre-flight when it doesn't balance.
   4. `op: mod_*` updates an existing object by `ListID`/`TxnID` + `EditSequence` with full-replace semantics, using an `EditSequence` from a fresh read; a stale `EditSequence` (`0x800404C5`) is returned verbatim, never retried or auto-fixed.
   5. Each executed write in these ops produces exactly one audit-log row; each dry-run produces none — verified by tests.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 07-01: TBD
+- [ ] 07-01-PLAN.md — v1 WRITE ops (7 create_* + generic mod) on the Phase-6 safety/dry-run/audit spine
 
 ### Phase 8: Python Client, Claude Skill & Dev Tooling
 **Goal**: A workstation-side Python client, the `quickbooks-accounting` Claude skill that drives the API safely, and the documented multi-LLM build pipeline tooling.
