@@ -266,3 +266,37 @@ This is a review of a single GSD phase that produced a **.NET solution skeleton 
 ## Recommendation
 
 **Proceed to Phase 7 (Write Ops — WRITE-03..07).** Phase 6 → 100/100. The write-safety spine is in; Phase 7 adds the real `create_*`/`mod_*`/`receive_payment`/`create_journal_entry` ops as thin `WriteOpBase` subclasses (with real pre-flight reads + `EditSequence` handling). Loop continues.
+
+---
+
+# Phase 7: Write Ops — Review
+
+**Date:** 2026-05-12 · **Reviewer:** Claude (post-Codex; `07-01-PLAN.md` plan-checker PASSED + its 3 warnings applied pre-execution. Codex executed 8 `feat(07-01)` task commits `4334825`…`4f3dd2d` + 1 `docs(07-01)` commit `963769e`, all distinct titles; SUMMARY notes 1 auto-fixed deviation — `OpRegistryTests` expanded-op-set count, no scope creep.)
+**Health Score:** **100 / 100 (Grade A — proceed to Phase 8)** — build + tests green, all 5 WRITE requirements met, scope clean, hygiene clean, zero dangling output, zero new packages.
+
+## Build / tests
+
+`dotnet build -c Release` → 0 errors, 0 warnings. `dotnet test -c Release` → **255/255** passed (Phase 6's 181 + Phase 7's 74).
+
+## Requirement coverage (WRITE-03..07 + the audit-row criterion)
+
+| Req | Verified |
+|---|---|
+| WRITE-03 `create_customer` / `create_vendor` | ✅ `CreateCustomerOp`/`CreateVendorOp` — thin `WriteOpBase` subclasses; pure `BuildRequest` → `<{Entity}AddRq><{Entity}Add>...</{Entity}Add></{Entity}AddRq>` (`Name` required; optional company/address/phone/email/terms; refs by `FullName` or `ListID` via `WriteOpHelpers.RefElement`); overridden `DryRunAsync` with name-exists pre-flight (warn-not-fail). Inherited `WriteOpBase.RunAsync` does the gate→`ExecuteAsync`→`Parse`→`AuditLog.AppendAsync`→return |
+| WRITE-04 `create_invoice` / `create_bill` / `create_check` | ✅ `CreateInvoiceOp` (`CustomerRef` + ≥1 `InvoiceLineAdd`), `CreateBillOp` (`VendorRef` + `ExpenseLineAdd`/`ItemLineAdd`), `CreateCheckOp` (`AccountRef` bank + `PayeeEntityRef` + expense/item lines) — line-item arrays via `ArgReader.List`; shared expense/item-line builders in `WriteOpHelpers`. Empty/missing required fields → `ArgumentException`→400 |
+| WRITE-05 `receive_payment` | ✅ `ReceivePaymentOp` — `<ReceivePaymentAddRq><ReceivePaymentAdd>` (`CustomerRef` + `TotalAmount` + `IsAutoApply` or `AppliedToTxnAdd[]` `{TxnID, PaymentAmount}` against open invoices; optional `PaymentMethodRef`/`DepositToAccountRef`/`RefNumber`) |
+| WRITE-06 `create_journal_entry` | ✅ `CreateJournalEntryOp` — `Validate(args)` (called at the **top of both** `BuildRequest` and `DryRunAsync`): `MultiCurrencyGuard.Reject`, non-empty `debits`+`credits`, `amount` on each line, **debits-total == credits-total** (invariant-culture `decimal`) — imbalance → `ArgumentException`→400, **the qbXML is never built/sent/audited**. Builds `<JournalEntryAddRq><JournalEntryAdd>...<JournalDebitLine>...<JournalCreditLine>...` (`Amount` formatted `0.00`). Tested balanced (builds+executes) and imbalanced (400, nothing sent) |
+| WRITE-07 `mod` | ✅ `ModOp` — ONE generic op (`{entity ∈ {customer,vendor,invoice,bill,check}, ref:{txnID?|listID?|fullName?} (exactly one; fullName only for customer/vendor), fields:{...header-level only...}}`). **Overrides `RunAsync`**: `MultiCurrencyGuard.Reject` → `ParseModArgs` (rejects line-touching `fields` keys → `ArgumentException`) → **`AllowWrites` check BEFORE the read** (no pointless read) → `FetchCurrentAsync` (fresh read → current `*Ret` + `EditSequence`) → `MergeStrip` (clone current → overlay `fields` → strip `TimeCreated`/`TimeModified`/`DataExtRet` + entity-specific computed children + `EditSequence`/`FullName`/`customFields`/the ID + any line-touching keys; deep-clone so the current record isn't mutated; case-insensitive overlay + AR/AP-prefix canonicalization) → `BuildModXml` (`<{Entity}ModRq><{Entity}Mod><{ListID|TxnID}>...<EditSequence>{from the read}</EditSequence>...merged fields...`) → `ExecuteAsync` (which has the layer-3 defensive `AllowWrites` check too) → `Parse` → **`AuditLog.AppendAsync` regardless of `status.Severity`** (so a stale-`EditSequence` Error is audited) → return `{status, rows, auditSeq, rawSpilledTo}`. **NO retry / no auto-fix on a stale `EditSequence`** — the response (carrying `statusCode=3200`, severity Error) is returned verbatim. `BuildRequest(args)` throws `InvalidOperationException` ("mod builds its qbXML inside DryRunAsync/RunAsync after a fresh read…") unless `args` carries the `__resolvedRecord`+`__editSequence` escape hatch — `mod` can't be pure (it needs a read). `DryRunAsync` does the read→merge→build (no execute, no audit) + a `DiffFields` before/after summary. v1 `mod` is header-level only; v1 refuses multi-currency |
+| audit-row criterion | ✅ Each executed write (via the inherited `WriteOpBase.RunAsync` for `create_*`, or `ModOp.RunAsync` for `mod`) appends **exactly one** `AuditRecord` (with the parsed response `status.Code/Severity/Message` — even on a QB business error); each dry-run appends **none**. Tested per op |
+
+## Scope / hygiene
+
+✅ All 8 v1 write ops landed; **no new endpoints** — `IWriteOp : IReadOp` plugs into the existing `OpRegistry` / `POST /api/ops/{op}` / `POST /api/ops/{op}/dryrun` / layer-1-403-gate machinery; all 8 registered as `IReadOp` singletons in `Program.cs`. `WriteOpBase` gained the `FetchByNameAsync`/`FetchCurrentAsync` pre-flight read helpers (filling the Phase-6 `// TODO(Phase 7)` slot, using the inherited `ReadOpBase.QuerySingleAsync` — no new DI dep; `FetchByNameAsync` uses the `<FullNameList><FullName>…</FullName></FullNameList>` filter-wrapper form to match `FetchCurrentAsync`/`GetTransactionOp`'s `<TxnIDList>` pattern). `WriteOpHelpers` (`MultiCurrencyGuard.Reject`, `RefElement`/`AddressElement`/expense+item-line builders), `ArgReader` extensions (`List` with non-object-element → `ArgumentException("'{key}[{i}]' must be an object.")`, `Decimal` invariant-culture, `RequiredString`). ✅ 8 distinct-titled `feat(07-01)` commits + a `docs(07-01)` commit (SUMMARY + ROADMAP + REQUIREMENTS + STATE) — no duplicate titles; Codex committed its own bookkeeping; 1 auto-fixed deviation (`OpRegistryTests` count) documented. ✅ **Zero new packages** (runtime or test). ✅ Nothing outside `quickbooks/` touched. No Python client/skill (Phase 8), no deploy scripts (Phase 9).
+
+## Findings
+
+0 Blocker · 0 High · 0 Medium · 0 Low · **1 INFO** — the new write-op qbXML fixtures (`*AddRq`/`*ModRq` element/child names) + the stale-`EditSequence` `statusCode=3200` + the `<FullNameList>`/`<ListIDList>`/`<TxnIDList>` query-filter wrappers are MEDIUM-confidence constructed values; flagged in-file + in `07-01-SUMMARY.md` for Phase 9 re-pinning against the live host's OSR. The fake-fixture tests pass regardless (fixtures are constructed to match). Not a defect.
+
+## Recommendation
+
+**Proceed to Phase 8 (Python Client, Claude Skill & Dev Tooling — CLIENT-01..03, DEV-01,02).** Phase 7 → 100/100. The eight-op write surface is stable; Phase 8 builds `qb_client.py` + examples + pytest, the `quickbooks-accounting` Claude skill, and hardens `quickbooks/dev/{MULTI-LLM.md,run-codex-phase.ps1}`. Loop continues.
