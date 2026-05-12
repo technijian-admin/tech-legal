@@ -96,8 +96,55 @@
 
 ## Traceability
 
-Populated by `gsd-roadmapper` during roadmap creation. Coverage target: every v1 requirement above mapped to exactly one phase.
+Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.planning/ROADMAP.md` for phase details.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| SVC-01 | Phase 1 — Foundation & Mockable COM Seam | Pending |
+| SVC-02 | Phase 1 — Foundation & Mockable COM Seam | Pending |
+| SVC-03 | Phase 1 — Foundation & Mockable COM Seam | Pending |
+| SVC-04 | Phase 1 — Foundation & Mockable COM Seam | Pending |
+| SVC-05 | Phase 1 — Foundation & Mockable COM Seam | Pending |
+| SESS-01 | Phase 2 — COM Session Lifecycle | Pending |
+| SESS-02 | Phase 2 — COM Session Lifecycle | Pending |
+| SESS-03 | Phase 2 — COM Session Lifecycle | Pending |
+| SESS-04 | Phase 2 — COM Session Lifecycle | Pending |
+| SESS-05 | Phase 2 — COM Session Lifecycle | Pending |
+| READ-01 | Phase 3 — qbXML Engine | Pending |
+| READ-02 | Phase 3 — qbXML Engine | Pending |
+| READ-03 | Phase 3 — qbXML Engine | Pending |
+| READ-11 | Phase 3 — qbXML Engine | Pending |
+| READ-04 | Phase 4 — Read Ops | Pending |
+| READ-05 | Phase 4 — Read Ops | Pending |
+| READ-06 | Phase 4 — Read Ops | Pending |
+| READ-07 | Phase 4 — Read Ops | Pending |
+| READ-08 | Phase 4 — Read Ops | Pending |
+| READ-09 | Phase 4 — Read Ops | Pending |
+| READ-10 | Phase 4 — Read Ops | Pending |
+| API-01 | Phase 5 — REST API, Auth & Health | Pending |
+| API-02 | Phase 5 — REST API, Auth & Health | Pending |
+| API-03 | Phase 5 — REST API, Auth & Health | Pending |
+| API-04 | Phase 5 — REST API, Auth & Health | Pending |
+| API-05 | Phase 5 — REST API, Auth & Health | Pending |
+| API-06 | Phase 5 — REST API, Auth & Health | Pending |
+| WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
+| WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
+| WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
+| WRITE-03 | Phase 7 — Write Ops | Pending |
+| WRITE-04 | Phase 7 — Write Ops | Pending |
+| WRITE-05 | Phase 7 — Write Ops | Pending |
+| WRITE-06 | Phase 7 — Write Ops | Pending |
+| WRITE-07 | Phase 7 — Write Ops | Pending |
+| CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
+| DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
+| DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
+| DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
+| DEPLOY-04 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
 
 ---
 *Requirements defined: 2026-05-11*
-*Last updated: 2026-05-11 after initial definition*
+*Last updated: 2026-05-11 — traceability populated by gsd-roadmapper (9-phase roadmap)*
