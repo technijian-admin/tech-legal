@@ -13,6 +13,7 @@ builder.Services.Configure<QbOptions>(builder.Configuration.GetSection("Qb"));
 builder.Services.Configure<QbXmlOptions>(builder.Configuration.GetSection("QbXml"));
 builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Request"));
 builder.Services.AddSingleton<QbXmlBuilder>();
+builder.Services.AddSingleton<QbXmlParser>();
 
 if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing"))
 {

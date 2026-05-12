@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <CustomerQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CustomerRet>
+        <ListID>80000001-1</ListID>
+        <FullName>Acme Roofing</FullName>
+        <DataExtRet>
+          <OwnerID>0</OwnerID>
+          <DataExtName>Region</DataExtName>
+          <DataExtType>STR255TYPE</DataExtType>
+          <DataExtValue>West</DataExtValue>
+        </DataExtRet>
+        <DataExtRet>
+          <OwnerID>0</OwnerID>
+          <DataExtName>Tier</DataExtName>
+          <DataExtType>STR255TYPE</DataExtType>
+          <DataExtValue>Gold</DataExtValue>
+        </DataExtRet>
+      </CustomerRet>
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

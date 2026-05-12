@@ -29,4 +29,10 @@
     <ProjectReference Include="..\QbConnectService\QbConnectService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Fixtures\qbxml\*.qbxml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

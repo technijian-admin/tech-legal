@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <CustomerQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CustomerRet>
+        <ListID>80000001-1</ListID>
+        <FullName>Acme Roofing</FullName>
+        <BillAddress>
+          <Addr1>123 Main St</Addr1>
+          <City>Seattle</City>
+        </BillAddress>
+      </CustomerRet>
+      <CustomerRet>
+        <ListID>80000002-1</ListID>
+        <FullName>Globex</FullName>
+      </CustomerRet>
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
