@@ -77,10 +77,10 @@ Plans:
   3. `op: list_customers` / `list_vendors` / `list_items` / `list_accounts` return the lists with optional active-only / name filtering, and the item parser normalizes the polymorphic `ItemServiceRet`/`ItemInventoryRet`/… shapes.
   4. `op: list_invoices` / `list_bills` / `list_payments` return transactions filtered by date range and/or entity, and `op: get_transaction` looks up a transaction by `TxnID` or `RefNumber` (handling that `RefNumber` is non-unique).
   5. `op: run_query` runs a generic entity query (Employee, OtherName, SalesReceipt, Estimate, PurchaseOrder, CreditMemo, Deposit, Class, …) with filters and returns parsed rows.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — IReadOp + ReadOpBase + ArgReader + the 12 v1 read ops (company_info, get_company_preferences, report, list_*, get_transaction, run_query) + DI + tests
 
 ### Phase 5: REST API, Auth & Health
 **Goal**: An HTTPS-only, bearer-authenticated REST surface that exposes health, a raw qbXML passthrough, and high-level op dispatch — with HTTP status codes used only for transport/auth/safety/COM-availability and QuickBooks business outcomes returned as 200s.
@@ -164,7 +164,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 1. Foundation & Mockable COM Seam | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 2. COM Session Lifecycle | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 3. qbXML Engine | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
-| 4. Read Ops | 0/TBD | Not started | - |
+| 4. Read Ops | 0/1 | Planned | - |
 | 5. REST API, Auth & Health | 0/TBD | Not started | - |
 | 6. Write Safety, Dry-Run & Audit | 0/TBD | Not started | - |
 | 7. Write Ops | 0/TBD | Not started | - |
