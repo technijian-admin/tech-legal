@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <CheckAddRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CheckRet>
+        <TxnID>CHK-0001-ABC</TxnID>
+        <TxnNumber>1042</TxnNumber>
+        <TimeCreated>2026-05-11T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-11T00:00:00-08:00</TimeModified>
+        <AccountRef>
+          <ListID>80000030-BANK</ListID>
+          <FullName>Checking</FullName>
+        </AccountRef>
+        <RefNumber>1042</RefNumber>
+        <TxnDate>2026-05-11</TxnDate>
+        <Amount>250.00</Amount>
+        <EditSequence>1700002222</EditSequence>
+        <ExpenseLineRet>
+          <TxnLineID>CHK-0001-LINE1</TxnLineID>
+          <AccountRef>
+            <ListID>80000020-ACCT</ListID>
+            <FullName>Office Expenses</FullName>
+          </AccountRef>
+          <Amount>250.00</Amount>
+        </ExpenseLineRet>
+      </CheckRet>
+    </CheckAddRs>
+  </QBXMLMsgsRs>
+</QBXML>

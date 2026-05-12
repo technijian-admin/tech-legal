@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <ReceivePaymentAddRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <ReceivePaymentRet>
+        <TxnID>RCP-0001-AAA</TxnID>
+        <TxnNumber>77</TxnNumber>
+        <TimeCreated>2026-05-11T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-11T00:00:00-08:00</TimeModified>
+        <CustomerRef>
+          <ListID>80000001-AAAAAAAA</ListID>
+          <FullName>Acme Co</FullName>
+        </CustomerRef>
+        <TxnDate>2026-05-11</TxnDate>
+        <TotalAmount>100.00</TotalAmount>
+        <UnusedPayment>0.00</UnusedPayment>
+        <EditSequence>1700003333</EditSequence>
+        <AppliedToTxnRet>
+          <TxnID>1A2B-3C4D5E6F7G</TxnID>
+          <TxnType>Invoice</TxnType>
+          <RefNumber>INV-1001</RefNumber>
+          <BalanceRemaining>0.00</BalanceRemaining>
+          <Amount>100.00</Amount>
+        </AppliedToTxnRet>
+      </ReceivePaymentRet>
+    </ReceivePaymentAddRs>
+  </QBXMLMsgsRs>
+</QBXML>

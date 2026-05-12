@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <CustomerAddRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <CustomerRet>
+        <ListID>80000001-1234567890</ListID>
+        <Name>Acme Co</Name>
+        <FullName>Acme Co</FullName>
+        <IsActive>true</IsActive>
+        <EditSequence>1700000000</EditSequence>
+        <TimeCreated>2026-05-11T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-11T00:00:00-08:00</TimeModified>
+      </CustomerRet>
+    </CustomerAddRs>
+  </QBXMLMsgsRs>
+</QBXML>

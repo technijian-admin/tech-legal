@@ -6,7 +6,8 @@ public sealed class ServerOptions
 
     /// <summary>
     /// Path to the server TLS .pfx. When empty, a development self-signed cert is used (UseHttps() with no args).
-    /// Production MUST set this; see Phase 9 deploy notes / make-cert.ps1.
+    /// Production MUST set this; see quickbooks/QbConnectService/deploy/make-cert.ps1 and
+    /// quickbooks/QbConnectService/README.md.
     /// </summary>
     public string? CertPath { get; set; }
 

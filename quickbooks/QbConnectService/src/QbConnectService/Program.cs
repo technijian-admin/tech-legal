@@ -1,8 +1,18 @@
 using System.Net;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using QbConnectService;
 using QbConnectService.Api;
 using QbConnectService.Qb;
 using QbConnectService.Qb.Ops;
+
+if (args.Contains("--verify-audit", StringComparer.Ordinal))
+{
+    var verifyArgs = args.Where(arg => !string.Equals(arg, "--verify-audit", StringComparison.Ordinal)).ToArray();
+    var configuration = Program.BuildVerifyAuditConfiguration(verifyArgs);
+    Environment.ExitCode = await Program.RunVerifyAuditAsync(configuration);
+    return;
+}
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -77,6 +87,14 @@ builder.Services.AddSingleton<IReadOp, ListBillsOp>();
 builder.Services.AddSingleton<IReadOp, ListPaymentsOp>();
 builder.Services.AddSingleton<IReadOp, GetTransactionOp>();
 builder.Services.AddSingleton<IReadOp, RunQueryOp>();
+builder.Services.AddSingleton<IReadOp, CreateCustomerOp>();
+builder.Services.AddSingleton<IReadOp, CreateVendorOp>();
+builder.Services.AddSingleton<IReadOp, CreateInvoiceOp>();
+builder.Services.AddSingleton<IReadOp, CreateBillOp>();
+builder.Services.AddSingleton<IReadOp, CreateCheckOp>();
+builder.Services.AddSingleton<IReadOp, ReceivePaymentOp>();
+builder.Services.AddSingleton<IReadOp, CreateJournalEntryOp>();
+builder.Services.AddSingleton<IReadOp, ModOp>();
 builder.Services.AddSingleton<OpRegistry>();
 
 var app = builder.Build();
@@ -94,6 +112,40 @@ app.Run();
 
 public partial class Program
 {
+    public static IConfiguration BuildVerifyAuditConfiguration(string[] args)
+    {
+        var builder = Host.CreateApplicationBuilder(args);
+        return builder.Configuration;
+    }
+
+    public static async Task<int> RunVerifyAuditAsync(
+        IConfiguration configuration,
+        TextWriter? output = null,
+        TextWriter? error = null,
+        CancellationToken ct = default)
+    {
+        output ??= Console.Out;
+        error ??= Console.Error;
+
+        var services = new ServiceCollection();
+        services.AddLogging();
+        services.Configure<AuditOptions>(configuration.GetSection("Audit"));
+        services.Configure<AuditAuthOptions>(configuration.GetSection("Auth"));
+        services.AddSingleton<AuditLog>();
+
+        await using var provider = services.BuildServiceProvider();
+        var auditLog = provider.GetRequiredService<AuditLog>();
+        var result = await auditLog.VerifyChainAsync(ct);
+
+        if (result.Ok)
+        {
+            await output.WriteLineAsync("audit chain OK");
+            return 0;
+        }
+
+        await error.WriteLineAsync($"audit chain BROKEN at seq {result.FirstBrokenSeq}");
+        return 1;
+    }
 }
 
 public static class ServerBinding

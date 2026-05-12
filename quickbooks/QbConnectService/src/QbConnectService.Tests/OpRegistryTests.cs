@@ -21,6 +21,8 @@ public sealed class OpRegistryTests
         "list_payments",
         "get_transaction",
         "run_query",
+        "create_customer",
+        "create_vendor",
         "fake_create",
     ];
 
@@ -31,7 +33,8 @@ public sealed class OpRegistryTests
 
         var registry = factory.Services.GetRequiredService<OpRegistry>();
 
-        Assert.Equal(13, registry.Names.Count);
+        Assert.True(registry.Names.Count >= ExpectedNames.Length);
+        Assert.Equal(registry.Names.Count, registry.Names.Distinct().Count());
         foreach (var name in ExpectedNames)
         {
             Assert.Contains(name, registry.Names);

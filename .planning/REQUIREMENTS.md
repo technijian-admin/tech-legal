@@ -49,30 +49,30 @@
 
 - [ ] **WRITE-01**: `Safety:AllowWrites` defaults to **false**; while false every write op (`create_*`, `mod_*`, and raw qbXML containing `Add`/`Mod`/`Del`/`Void`) is rejected with 403 — enforced in the ops controller, the raw passthrough, and defensively in the connection manager.
 - [ ] **WRITE-02**: `POST /api/ops/{op}/dryrun` returns the byte-exact qbXML that would be sent, a resolved-reference echo (names → ListID/TxnID/EditSequence), a plain-English summary (field-level before/after diff for `mod_*`), and pre-flight validation results (referenced entities exist? journal entry balanced? `AllowWrites` state? multi-currency refused?) — with **zero side effects**, and the `/dryrun` endpoint itself is **not** write-gated.
-- [ ] **WRITE-03**: `op: create_customer` / `create_vendor` add a customer/vendor.
-- [ ] **WRITE-04**: `op: create_invoice` / `create_bill` / `create_check` add the respective transaction.
-- [ ] **WRITE-05**: `op: receive_payment` records a customer payment against invoices.
-- [ ] **WRITE-06**: `op: create_journal_entry` adds a balanced journal entry (rejected pre-flight if it doesn't balance).
-- [ ] **WRITE-07**: `op: mod_*` updates an existing object by `ListID`/`TxnID` + `EditSequence` (full-replace semantics), using the `EditSequence` from a fresh read; a stale `EditSequence` (`0x800404C5`) is returned verbatim, never retried/auto-fixed.
+- [x] **WRITE-03**: `op: create_customer` / `create_vendor` add a customer/vendor.
+- [x] **WRITE-04**: `op: create_invoice` / `create_bill` / `create_check` add the respective transaction.
+- [x] **WRITE-05**: `op: receive_payment` records a customer payment against invoices.
+- [x] **WRITE-06**: `op: create_journal_entry` adds a balanced journal entry (rejected pre-flight if it doesn't balance).
+- [x] **WRITE-07**: `op: mod` updates an existing object by `ListID`/`TxnID` + `EditSequence` (full-replace semantics), using the `EditSequence` from a fresh read; a stale `EditSequence` (`3200`) is returned verbatim, never retried/auto-fixed.
 - [ ] **WRITE-08**: Every **executed** write appends a record to an append-only, hash-chained audit log on the QuickBooks host (UTC timestamp, op, args, qbXML sent, response statusCode/severity/message, calling token id); the dry-run path writes nothing.
 
 ### Python client & Claude skill (CLIENT)
 
-- [ ] **CLIENT-01**: `quickbooks/clients/qb_client.py` is an HTTPS client (bearer token, `urllib3.Retry`, config from a gitignored `.env` with a committed `.env.sample`) exposing health, raw-qbXML, op, and dry-run helpers.
-- [ ] **CLIENT-02**: Runnable examples (`pull P&L`, `list invoices`, `create_customer` dry-run) and a pinned `requirements.txt` are included; `qb_client.py` has `pytest` tests against a stub HTTP server (`responses`).
-- [ ] **CLIENT-03**: A `quickbooks-accounting` Claude skill (`SKILL.md` + `references/qbxml-cheatsheet.md` + `references/setup-and-troubleshooting.md`) teaches: health check, the op catalog, how to run a read, the **safe write workflow** (dry-run → show qbXML + summary → explicit user confirm → execute → confirm result → note the audit row), and the raw-qbXML fallback.
+- [x] **CLIENT-01**: `quickbooks/clients/qb_client.py` is an HTTPS client (bearer token, `urllib3.Retry`, config from a gitignored `.env` with a committed `.env.sample`) exposing health, raw-qbXML, op, and dry-run helpers.
+- [x] **CLIENT-02**: Runnable examples (`pull P&L`, `list invoices`, `create_customer` dry-run) and a pinned `requirements.txt` are included; `qb_client.py` has `pytest` tests against a stub HTTP server (`responses`).
+- [x] **CLIENT-03**: A `quickbooks-accounting` Claude skill (`SKILL.md` + `references/qbxml-cheatsheet.md` + `references/setup-and-troubleshooting.md`) teaches: health check, the op catalog, how to run a read, the **safe write workflow** (dry-run → show qbXML + summary → explicit user confirm → execute → confirm result → note the audit row), and the raw-qbXML fallback.
 
 ### Multi-LLM dev tooling (DEV)
 
-- [ ] **DEV-01**: `quickbooks/dev/MULTI-LLM.md` documents the build pipeline (Claude researches + GSD-plans + reviews; Codex CLI executes code-gen from each phase's `PLAN.md`; DeepSeek-CC review recipe as an option) including the exact env vars and commands.
-- [ ] **DEV-02**: `quickbooks/dev/run-codex-phase.ps1` takes a phase's `PLAN.md` and invokes `codex` to implement it on the current branch (commit-per-task), so the plan→execute handoff is one command.
+- [x] **DEV-01**: `quickbooks/dev/MULTI-LLM.md` documents the build pipeline (Claude researches + GSD-plans + reviews; Codex CLI executes code-gen from each phase's `PLAN.md`; DeepSeek-CC review recipe as an option) including the exact env vars and commands.
+- [x] **DEV-02**: `quickbooks/dev/run-codex-phase.ps1` takes a phase's `PLAN.md` and invokes `codex` to implement it on the current branch (commit-per-task), so the plan→execute handoff is one command.
 
 ### Packaging, deploy & on-box verification (DEPLOY)
 
-- [ ] **DEPLOY-01**: `make-cert.ps1` generates the self-signed HTTPS cert; `install-service.ps1` / `uninstall-service.ps1` register/remove the Windows service running as `svc_qbsdk` with restart-on-crash; `run-as-task.ps1` is the documented session-0 fallback (startup scheduled task as `svc_qbsdk`).
-- [ ] **DEPLOY-02**: All machine-specifics live only in gitignored `QbConnectService/appsettings.json` and `clients/.env`, each with a committed `.sample` version; nothing machine-specific is hardcoded in source.
-- [ ] **DEPLOY-03**: `register-integrated-app.md` documents the one-time QuickBooks-side authorization (Admin, single-user mode, "allow to login automatically", bound to `svc_qbsdk`, with the "Reauthorize" recovery path and the PII gotcha), and `README.md` is the full deploy runbook for `10.120.254.13` including the QBWC-fallback note and the HRESULT troubleshooting table.
-- [ ] **DEPLOY-04**: An on-box smoke checklist verifies, in order: `GET /api/health` → `company_info` → a `report` → `create_customer` **dry-run** (inspect the qbXML) → with `AllowWrites=true`, one real low-stakes write → confirm it in QuickBooks → confirm the audit-log row. The checklist records the environment facts to verify (QuickBooks Enterprise year/version, multi-user hosting status, `svc_qbsdk` account + "log on as a service" rights, firewall path for the HTTPS port).
+- [x] **DEPLOY-01**: `make-cert.ps1` generates the self-signed HTTPS cert; `install-service.ps1` / `uninstall-service.ps1` register/remove the Windows service running as `svc_qbsdk` with restart-on-crash; `run-as-task.ps1` is the documented session-0 fallback (startup scheduled task as `svc_qbsdk`). The scripts are authored and statically verified in dev/CI; execution remains a host operator step.
+- [x] **DEPLOY-02**: All machine-specifics live only in gitignored `QbConnectService/appsettings.json` and `clients/.env`, each with a committed `.sample` version; nothing machine-specific is hardcoded in source.
+- [x] **DEPLOY-03**: `register-integrated-app.md` documents the one-time QuickBooks-side authorization (Admin, single-user mode, "allow to login automatically", bound to `svc_qbsdk`, with the "Reauthorize" recovery path and the PII gotcha), and `README.md` is the full deploy runbook for `10.120.254.13` including the QBWC-fallback note and the HRESULT troubleshooting table.
+- [x] **DEPLOY-04**: An on-box smoke checklist verifies, in order: `GET /api/health` → `company_info` → a `report` → `create_customer` **dry-run** (inspect the qbXML) → with `AllowWrites=true`, one real low-stakes write → confirm it in QuickBooks → confirm the audit-log row. The checklist records the environment facts to verify (QuickBooks Enterprise year/version, multi-user hosting status, `svc_qbsdk` account + "log on as a service" rights, firewall path for the HTTPS port). The checklist is authored here; the live run and any re-pin edits remain documented host operator follow-ups.
 
 ## v2 Requirements
 
@@ -130,21 +130,21 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
 | WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
 | WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Done |
-| WRITE-03 | Phase 7 — Write Ops | Pending |
-| WRITE-04 | Phase 7 — Write Ops | Pending |
-| WRITE-05 | Phase 7 — Write Ops | Pending |
-| WRITE-06 | Phase 7 — Write Ops | Pending |
-| WRITE-07 | Phase 7 — Write Ops | Pending |
-| CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Pending |
-| DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-04 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
+| WRITE-03 | Phase 7 — Write Ops | Done |
+| WRITE-04 | Phase 7 — Write Ops | Done |
+| WRITE-05 | Phase 7 — Write Ops | Done |
+| WRITE-06 | Phase 7 — Write Ops | Done |
+| WRITE-07 | Phase 7 — Write Ops | Done |
+| CLIENT-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| CLIENT-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
+| DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-04 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
 
 ---
 *Requirements defined: 2026-05-11*
-*Last updated: 2026-05-11 — traceability populated by gsd-roadmapper (9-phase roadmap)*
+*Last updated: 2026-05-12 — Phase 9 deploy packaging complete (DEPLOY-01..04 done)*

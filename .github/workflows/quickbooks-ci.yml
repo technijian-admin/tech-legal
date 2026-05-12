@@ -5,13 +5,23 @@ on:
     branches: ["**"]
     paths:
       - "quickbooks/QbConnectService/**"
+      - "quickbooks/clients/**"
       - ".github/workflows/quickbooks-ci.yml"
   pull_request:
     paths:
       - "quickbooks/QbConnectService/**"
+      - "quickbooks/clients/**"
       - ".github/workflows/quickbooks-ci.yml"
 
 jobs:
+  powershell-lint:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PowerShell lint
+        run: pwsh -Command "Invoke-ScriptAnalyzer -Path quickbooks,'quickbooks/dev/*.ps1' -Recurse -Severity Warning,Error -EnableExit"
+
   build-test:
     runs-on: windows-latest
     defaults:
@@ -37,3 +47,21 @@ jobs:
 
       - name: Publish (x86 single-file) smoke
         run: dotnet publish src/QbConnectService -c Release -r win-x86 --self-contained true -p:PublishSingleFile=true -o publish
+
+  python-client:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: quickbooks/clients
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: pip install -r requirements.txt
+
+      - name: Test
+        run: python -m pytest tests/ -q
