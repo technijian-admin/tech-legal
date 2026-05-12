@@ -1,0 +1,22 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins aging report enums and date elements against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <AgingReportQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <ReportRet>
+        <ReportTitle>A/P Aging Summary</ReportTitle>
+        <ReportSubtitle>FY 2025</ReportSubtitle>
+        <ReportBasis>AccrualBasis</ReportBasis>
+        <ColDesc colID="1">
+          <ColTitle titleRow="1" value="Current" />
+          <ColType>Amount</ColType>
+        </ColDesc>
+        <ReportData>
+          <DataRow>
+            <RowData rowType="vendor" value="Office Depot" />
+            <ColData colID="1" value="900.00" />
+          </DataRow>
+        </ReportData>
+      </ReportRet>
+    </AgingReportQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

@@ -29,6 +29,7 @@ builder.Services.AddSingleton<QbConnectionManager>();
 // Phase 4: read ops (registered as IReadOp so Phase 5's OpRegistry is IEnumerable<IReadOp> -> dictionary by Name)
 builder.Services.AddSingleton<IReadOp, CompanyInfoOp>();
 builder.Services.AddSingleton<IReadOp, CompanyPreferencesOp>();
+builder.Services.AddSingleton<IReadOp, ReportOp>();
 
 var app = builder.Build();
 
