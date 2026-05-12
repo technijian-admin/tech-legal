@@ -69,10 +69,10 @@
 
 ### Packaging, deploy & on-box verification (DEPLOY)
 
-- [ ] **DEPLOY-01**: `make-cert.ps1` generates the self-signed HTTPS cert; `install-service.ps1` / `uninstall-service.ps1` register/remove the Windows service running as `svc_qbsdk` with restart-on-crash; `run-as-task.ps1` is the documented session-0 fallback (startup scheduled task as `svc_qbsdk`).
-- [ ] **DEPLOY-02**: All machine-specifics live only in gitignored `QbConnectService/appsettings.json` and `clients/.env`, each with a committed `.sample` version; nothing machine-specific is hardcoded in source.
-- [ ] **DEPLOY-03**: `register-integrated-app.md` documents the one-time QuickBooks-side authorization (Admin, single-user mode, "allow to login automatically", bound to `svc_qbsdk`, with the "Reauthorize" recovery path and the PII gotcha), and `README.md` is the full deploy runbook for `10.120.254.13` including the QBWC-fallback note and the HRESULT troubleshooting table.
-- [ ] **DEPLOY-04**: An on-box smoke checklist verifies, in order: `GET /api/health` → `company_info` → a `report` → `create_customer` **dry-run** (inspect the qbXML) → with `AllowWrites=true`, one real low-stakes write → confirm it in QuickBooks → confirm the audit-log row. The checklist records the environment facts to verify (QuickBooks Enterprise year/version, multi-user hosting status, `svc_qbsdk` account + "log on as a service" rights, firewall path for the HTTPS port).
+- [x] **DEPLOY-01**: `make-cert.ps1` generates the self-signed HTTPS cert; `install-service.ps1` / `uninstall-service.ps1` register/remove the Windows service running as `svc_qbsdk` with restart-on-crash; `run-as-task.ps1` is the documented session-0 fallback (startup scheduled task as `svc_qbsdk`). The scripts are authored and statically verified in dev/CI; execution remains a host operator step.
+- [x] **DEPLOY-02**: All machine-specifics live only in gitignored `QbConnectService/appsettings.json` and `clients/.env`, each with a committed `.sample` version; nothing machine-specific is hardcoded in source.
+- [x] **DEPLOY-03**: `register-integrated-app.md` documents the one-time QuickBooks-side authorization (Admin, single-user mode, "allow to login automatically", bound to `svc_qbsdk`, with the "Reauthorize" recovery path and the PII gotcha), and `README.md` is the full deploy runbook for `10.120.254.13` including the QBWC-fallback note and the HRESULT troubleshooting table.
+- [x] **DEPLOY-04**: An on-box smoke checklist verifies, in order: `GET /api/health` → `company_info` → a `report` → `create_customer` **dry-run** (inspect the qbXML) → with `AllowWrites=true`, one real low-stakes write → confirm it in QuickBooks → confirm the audit-log row. The checklist records the environment facts to verify (QuickBooks Enterprise year/version, multi-user hosting status, `svc_qbsdk` account + "log on as a service" rights, firewall path for the HTTPS port). The checklist is authored here; the live run and any re-pin edits remain documented host operator follow-ups.
 
 ## v2 Requirements
 
@@ -140,11 +140,11 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | CLIENT-03 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
 | DEV-01 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
 | DEV-02 | Phase 8 — Python Client, Claude Skill & Dev Tooling | Done |
-| DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
-| DEPLOY-04 | Phase 9 — Packaging, Deploy & On-Box Smoke | Pending |
+| DEPLOY-01 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-02 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-03 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
+| DEPLOY-04 | Phase 9 — Packaging, Deploy & On-Box Smoke | Done |
 
 ---
 *Requirements defined: 2026-05-11*
-*Last updated: 2026-05-12 — Phase 8 client + skill + dev tooling complete (CLIENT-01..03, DEV-01..02 done)*
+*Last updated: 2026-05-12 — Phase 9 deploy packaging complete (DEPLOY-01..04 done)*

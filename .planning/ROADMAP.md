@@ -10,7 +10,7 @@
 - [x] **Phase 6: Write Safety, Dry-Run & Audit** - AllowWrites gate, dry-run (byte-exact qbXML + preFlight), audit log, currencyRef/exchangeRate refusal
 - [x] **Phase 7: Write Ops** - 8 write ops (create_customer/vendor/invoice/bill/check, receive_payment, create_journal_entry, mod)
 - [x] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
-- [ ] **Phase 9: Packaging, Deploy & On-Box Smoke** - cert/install/uninstall/task scripts, gitignored config + `.sample`s, integrated-app + deploy runbooks, live smoke checklist
+- [x] **Phase 9: Packaging, Deploy & On-Box Smoke** - cert/install/uninstall/task scripts, gitignored config + `.sample`s, integrated-app + deploy runbooks, live smoke checklist
 
 ## Phase Details
 
@@ -139,7 +139,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 09-01-PLAN.md — deploy/cert/install/uninstall/task scripts, sample-parity test, register-integrated-app + deploy README + HRESULT table, on-box smoke checklist, qbXML re-pin guide, --verify-audit CLI
+- [x] 09-01-PLAN.md — deploy/cert/install/uninstall/task scripts, sample-parity test, register-integrated-app + deploy README + HRESULT table, on-box smoke checklist, qbXML re-pin guide, --verify-audit CLI
 
 ## Progress
 
@@ -156,4 +156,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 6. Write Safety, Dry-Run & Audit | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 7. Write Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 8. Python Client, Claude Skill & Dev Tooling | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
-| 9. Packaging, Deploy & On-Box Smoke | 0/TBD | Not started | - |
+| 9. Packaging, Deploy & On-Box Smoke | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
