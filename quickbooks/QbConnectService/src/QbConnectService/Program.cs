@@ -18,7 +18,9 @@ builder.Services.Configure<QbXmlOptions>(builder.Configuration.GetSection("QbXml
 builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Request"));
 builder.Services.Configure<ServerOptions>(builder.Configuration.GetSection("Server"));
 builder.Services.Configure<AuthOptions>(builder.Configuration.GetSection("Auth"));
+builder.Services.Configure<AuditAuthOptions>(builder.Configuration.GetSection("Auth"));
 builder.Services.Configure<SafetyOptions>(builder.Configuration.GetSection("Safety"));
+builder.Services.Configure<AuditOptions>(builder.Configuration.GetSection("Audit"));
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddSingleton<QbXmlBuilder>();
@@ -26,6 +28,7 @@ builder.Services.AddSingleton<QbXmlParser>();
 builder.Services.AddSingleton<QbReportParser>();
 builder.Services.AddSingleton<QbResponseSpiller>();
 builder.Services.AddSingleton<QbListExecutor>();
+builder.Services.AddSingleton<AuditLog>();
 
 builder.WebHost.ConfigureKestrel((ctx, kestrel) =>
 {
