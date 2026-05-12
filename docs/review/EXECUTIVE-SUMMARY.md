@@ -165,3 +165,38 @@ This is a review of a single GSD phase that produced a **.NET solution skeleton 
 ## Recommendation
 
 **Proceed to Phase 4 (Read Ops — READ-04..10).** Phase 3 is solid → 100/100. Loop continues: `/gsd:plan-phase 4` → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 4` → review.
+
+---
+
+# Phase 4: Read Ops — Review
+
+**Date:** 2026-05-12 · **Reviewer:** Claude (post-Codex; `04-01-PLAN.md` revised once per plan-checker — it caught 3 real blockers pre-execution: a test-harness constructor mismatch, the `company_info` two-`*Rq`-in-one-message + fake-routing subtlety, and missing `iteratorRemainingCount="0"` on list fixtures — all fixed before Codex ran. Codex then executed 8 task commits `26a522f`…`8e509ca` + 1 `docs(04-01)` commit `6b2cfc6`, all distinct titles.)
+**Health Score:** **100 / 100 (Grade A — proceed to Phase 5)** — build + tests green, all 7 READ requirements met, scope clean, hygiene clean, zero dangling output, zero new NuGet packages.
+
+## Build / tests
+
+`dotnet build -c Release` → 0 errors, 0 warnings. `dotnet test -c Release` → **106/106** passed (Phase 3's 76 + Phase 4's 30).
+
+## Requirement coverage (READ-04..10)
+
+| Req | Verified |
+|---|---|
+| READ-04 `company_info` | ✅ `CompanyInfoOp` — one message with `HostQueryRq`+`CompanyQueryRq`, navigates `parsed.Elements` **by name** (`HostQueryRs`/`CompanyQueryRs`), returns companyName/legalName/address/fiscalYearStartMonth/taxForm/companyType + edition (`HostRet.ProductName`)/QB major+minor/country/supportedQbXmlVersions + `rawCompanyRet`/`rawHostRet`. Tested incl. `Assert.Single(fake.ProcessRequests)` |
+| READ-05 `get_company_preferences` | ✅ `CompanyPreferencesOp` — `PreferencesQueryRq` (sales-tax-enabled, decimal places, multi-currency-enabled, …) + an `AccountQueryRq` AR/AP follow-up for the default A/R & A/P accounts (the plan's authoritative spec — the research example had omitted it) + `rawPreferencesRet`. Tested |
+| READ-06 `report` | ✅ `ReportOp` — one op; `type` ∈ {ProfitAndLoss → `GeneralSummaryReportQueryRq`/`GeneralSummaryReportType=ProfitAndLossStandard`, BalanceSheet → `…/BalanceSheetStandard`, AgingAR → `AgingReportQueryRq`/`AgingReportType=ARAgingSummary`, AgingAP → `…/APAgingSummary`}; validates "exactly one of (fromDate+toDate) or dateMacro" (`ReportPeriod`/`FromReportDate`+`ToReportDate` vs `ReportDateMacro`); `QbReportParser` → `ParsedReport`. Tested ×4 types |
+| READ-07 `list_customers`/`vendors`/`items`/`accounts` | ✅ `ListCustomersOp`/`ListVendorsOp`/`ListAccountsOp`/`ListItemsOp` — `CustomerQueryRq`/`VendorQueryRq`/`AccountQueryRq`/`ItemQueryRq` with `ActiveStatus` + name filter, driven through `QbListExecutor`; polymorphic Item shapes normalized free via the parser's `type` discriminator. Tested incl. request-shape assertions |
+| READ-08 `list_invoices`/`bills`/`payments` + `get_transaction` | ✅ `ListInvoicesOp`/`ListBillsOp`/`ListPaymentsOp` — `InvoiceQueryRq`/`BillQueryRq`/`ReceivePaymentQueryRq` with `TxnDateRangeFilter` + entity filter via `QbListExecutor`. `GetTransactionOp` — by `TxnID` or `RefNumber`, returns `{matches:[…], count, ambiguous}` — never collapses to one (RefNumber non-unique); per-element error status surfaced not thrown. Tested |
+| READ-10 `run_query` | ✅ `RunQueryOp` — hard-coded read-only-entity whitelist (Employee/OtherName/SalesReceipt/Estimate/PurchaseOrder/CreditMemo/Deposit/Class/… plus the first-class entities, with a doc note to prefer the dedicated ops), builds `<{entity}QueryRq>`, filters as simple child elements with key validation (rejects `/`,`<`,`>`,`:`,whitespace; catches bad-XML-name exceptions), `Company`/`Host`/`Preferences` single-shot else `QbListExecutor`. Tested incl. whitelist-rejection |
+| (all ops registered) | ✅ 12 `AddSingleton<IReadOp, …>()` in `Program.cs`; `OpRegistrationTests` builds a minimal `Host` (mirroring `HostStartupTests`, no `WebApplicationFactory`) and asserts all 12 resolve with unique names |
+
+## Scope / hygiene
+
+✅ **Zero Phase 5–9 work** — no `OpRegistry`, no REST controller / `/api/ops/{op}` / `/api/health` / `/api/qbxml` / bearer auth (Phase 5), no write op / dry-run / `AllowWrites` gate / audit log (Phase 6/7), no Python client / skill (Phase 8), no deploy scripts (Phase 9). ✅ 8 distinct-titled `feat(04-01)` commits + a `docs(04-01)` commit — no duplicate titles; Codex committed its own output (`04-01-SUMMARY.md` + plan checkbox + ROADMAP tick in `6b2cfc6`). ✅ Ops in `Qb/Ops/` namespace `QbConnectService.Qb.Ops`; per-element `statusCode != 0` / zero-row results surfaced in the body, never thrown (only transport/COM + arg-validation `ArgumentException`s propagate). ✅ Zero new NuGet packages. ✅ Nothing outside `quickbooks/` touched.
+
+## Findings
+
+0 Blocker · 0 High · 0 Medium · 0 Low · **2 INFO** — (1) `Program.cs` root endpoint still returns the `"Phase 1 skeleton"` string (Phase 5 replaces it with `/api/*`); (2) the new `*Rs` fixtures are *constructed* (not live-captured), flagged with `<!-- CONSTRUCTED … Phase 9 re-pins … -->` headers in each + listed in `04-01-SUMMARY.md` — the ops/parsers are written tolerantly; Phase 9 re-pins exact qbXML element/enum names against the live host. Not defects — documented dev-time choices.
+
+## Recommendation
+
+**Proceed to Phase 5 (REST API, Auth & Health — API-01..06).** Phase 4 → 100/100. Loop continues.
