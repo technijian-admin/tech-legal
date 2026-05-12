@@ -27,7 +27,7 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore
-        run: dotnet restore QbConnectService.sln
+        run: dotnet restore QbConnectService.sln -r win-x86
 
       - name: Build (Release)
         run: dotnet build QbConnectService.sln -c Release --no-restore
