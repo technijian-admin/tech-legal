@@ -44,7 +44,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
         try
         {
             await EnsureConnectedAsync();
-            return await ProcessRequestCoreAsync(qbXmlRequest);
+            return await ProcessWithRetryAsync(qbXmlRequest);
         }
         catch (QbException exception)
         {
@@ -178,13 +178,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
                 _log.LogWarning("Ignoring configured QuickBooks open mode SingleUser; forcing DoNotCare.");
             }
 
-            await _sta.Run(() =>
-            {
-                _rp = _factory();
-                _rp.SetUnattendedModePreference(true);
-                _rp.OpenConnection(_qb.AppId, _qb.AppName, QbConnectionType.LocalQBD);
-                _ticket = _rp.BeginSession(_qb.CompanyFilePath, QbFileMode.DoNotCare);
-            });
+            await OpenFreshConnectionAsync();
 
             _state = QbConnectionState.SessionOpen;
             _log.LogInformation("Opened the QuickBooks connection and session.");
@@ -209,7 +203,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
     }
 
-    private async Task<string> ProcessRequestCoreAsync(string qbXmlRequest)
+    private async Task<string> ProcessWithRetryAsync(string qbXmlRequest)
     {
         try
         {
@@ -217,11 +211,85 @@ public sealed class QbConnectionManager : IAsyncDisposable
                 .Run(() => _rp!.ProcessRequest(_ticket!, qbXmlRequest))
                 .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
         }
+        catch (TimeoutException)
+        {
+            throw;
+        }
+        catch (COMException ex) when (QbErrors.IsDeadTicket(ex.HResult))
+        {
+            _log.LogInformation(
+                "Dead ticket 0x{Hresult:X8}; rebuilding the QuickBooks connection and retrying once.",
+                ex.HResult);
+
+            await RebuildConnectionAsync();
+
+            try
+            {
+                return await _sta
+                    .Run(() => _rp!.ProcessRequest(_ticket!, qbXmlRequest))
+                    .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+            }
+            catch (TimeoutException)
+            {
+                throw;
+            }
+            catch (COMException retryException)
+            {
+                throw QbException.From(retryException);
+            }
+        }
         catch (COMException ex)
         {
             throw QbException.From(ex);
         }
     }
+
+    private async Task RebuildConnectionAsync()
+    {
+        await DisposeCurrentConnectionAsync();
+        _rp = null;
+        _ticket = null;
+        _state = QbConnectionState.Disconnected;
+
+        await ConnectAsync();
+    }
+
+    private Task OpenFreshConnectionAsync() =>
+        _sta.Run(() =>
+        {
+            _rp = _factory();
+            _rp.SetUnattendedModePreference(true);
+            _rp.OpenConnection(_qb.AppId, _qb.AppName, QbConnectionType.LocalQBD);
+            _ticket = _rp.BeginSession(_qb.CompanyFilePath, QbFileMode.DoNotCare);
+        });
+
+    private Task DisposeCurrentConnectionAsync() =>
+        _sta.Run(() =>
+        {
+            try
+            {
+                _rp?.EndSession(_ticket!);
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                _rp?.CloseConnection();
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                _rp?.Dispose();
+            }
+            catch
+            {
+            }
+        });
 
     private void LogMappedError(QbException exception)
     {

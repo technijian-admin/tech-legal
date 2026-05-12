@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using QbConnectService.Qb;
@@ -158,6 +159,76 @@ public sealed class QbConnectionManagerTests
 
         release.Set();
         Assert.Equal("<ok/>", await first);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Dead_ticket_error_rebuilds_the_connection_and_retries_once()
+    {
+        var (manager, created) = CreateManager();
+        created.Add(new FakeRequestProcessor().AddResponse("CompanyQueryRq", "<canned/>"));
+        created[0].ProcessRequestHook = _ => throw new COMException("invalid ticket", unchecked((int)0x8004040D));
+
+        var response = await manager.ExecuteAsync(CompanyQueryRequest);
+
+        Assert.Equal("<canned/>", response);
+        Assert.Equal(2, created.Count);
+        Assert.Equal(
+            [
+                nameof(IRequestProcessor.SetUnattendedModePreference),
+                nameof(IRequestProcessor.OpenConnection),
+                nameof(IRequestProcessor.BeginSession),
+                nameof(IRequestProcessor.ProcessRequest),
+                nameof(IRequestProcessor.EndSession),
+                nameof(IRequestProcessor.CloseConnection),
+                nameof(IDisposable.Dispose),
+            ],
+            created[0].CallLog);
+        Assert.Equal(
+            [
+                nameof(IRequestProcessor.SetUnattendedModePreference),
+                nameof(IRequestProcessor.OpenConnection),
+                nameof(IRequestProcessor.BeginSession),
+                nameof(IRequestProcessor.ProcessRequest),
+            ],
+            created[1].CallLog);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Second_dead_ticket_failure_surfaces_verbatim_without_a_third_attempt()
+    {
+        var (manager, created) = CreateManager();
+        created.Add(new FakeRequestProcessor
+        {
+            ProcessRequestHook = _ => throw new COMException("invalid ticket", unchecked((int)0x8004040D)),
+        });
+        created[0].ProcessRequestHook = _ => throw new COMException("invalid ticket", unchecked((int)0x8004040D));
+
+        var exception = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal("QB_INVALID_TICKET", exception.Error.Name);
+        Assert.Equal("QB_INVALID_TICKET", manager.LastError?.Name);
+        Assert.Equal(2, created.Count);
+        Assert.Equal(2, created.Sum(fake => fake.CallLog.Count(entry => entry == nameof(IRequestProcessor.ProcessRequest))));
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Non_dead_ticket_com_error_surfaces_immediately_without_rebuild()
+    {
+        var (manager, created) = CreateManager();
+        created[0].ProcessRequestHook = _ => throw new COMException("could not start", unchecked((int)0x80040408));
+
+        var exception = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal("QB_COULD_NOT_START", exception.Error.Name);
+        Assert.Equal("QB_COULD_NOT_START", manager.LastError?.Name);
+        Assert.Single(created);
+        Assert.Equal(1, created[0].CallLog.Count(entry => entry == nameof(IRequestProcessor.ProcessRequest)));
 
         await manager.DisposeAsync();
     }
