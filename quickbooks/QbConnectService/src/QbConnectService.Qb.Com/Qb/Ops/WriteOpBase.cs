@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Options;
+using System.Xml.Linq;
 
 namespace QbConnectService.Qb.Ops;
 
@@ -13,6 +14,20 @@ public abstract class WriteOpBase(
     : ReadOpBase(builder, manager, xmlParser, reportParser, listExecutor), IWriteOp
 {
     protected readonly AuditLog _audit = audit;
+    private static readonly HashSet<string> TxnEntities = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "Invoice",
+        "Bill",
+        "Check",
+        "ReceivePayment",
+        "JournalEntry",
+        "SalesReceipt",
+        "CreditMemo",
+        "PurchaseOrder",
+        "Estimate",
+        "BillPaymentCheck",
+        "Deposit",
+    };
     private readonly SafetyOptions _safety = safety.Value;
 
     protected bool AllowWrites => _safety.AllowWrites;
@@ -66,5 +81,54 @@ public abstract class WriteOpBase(
         return new PreFlightCheck(label, true, changes.Length == 0 ? "no changes" : string.Join("; ", changes));
     }
 
-    // TODO(Phase 7): add current-record resolution helpers for mod_* pre-flight lookups.
+    /// <summary>
+    /// Phase 9 re-pins whether list-entity name queries should use FullNameList, NameFilter, or NameRangeFilter
+    /// on the live host. The fake fixtures are constructed to match the wrapper style below.
+    /// </summary>
+    protected async Task<IReadOnlyDictionary<string, object?>?> FetchByNameAsync(
+        string entity,
+        string fullName,
+        CancellationToken ct)
+    {
+        var rq = QbXmlBuilder.Rq(
+            entity + "QueryRq",
+            new XElement(
+                "FullNameList",
+                new XElement("FullName", fullName)));
+
+        var parsed = await QuerySingleAsync(rq, ct);
+        return parsed.Elements.Count > 0 ? parsed.First.Rows.FirstOrDefault() : null;
+    }
+
+    /// <summary>
+    /// Phase 9 re-pins the exact ListIDList/FullNameList/TxnIDList query-filter wrappers per entity on the
+    /// live host. GetTransactionOp already uses TxnIDList in-repo, so that pattern is the current baseline.
+    /// </summary>
+    protected async Task<(IReadOnlyDictionary<string, object?> Record, string EditSequence)?> FetchCurrentAsync(
+        string entity,
+        string refKind,
+        string refValue,
+        CancellationToken ct)
+    {
+        var idElement = refKind switch
+        {
+            "txnID" => new XElement("TxnIDList", new XElement("TxnID", refValue)),
+            "listID" => new XElement("ListIDList", new XElement("ListID", refValue)),
+            "fullName" => new XElement("FullNameList", new XElement("FullName", refValue)),
+            _ => throw new ArgumentException($"mod: ref must be one of txnID/listID/fullName; got '{refKind}'."),
+        };
+
+        var queryName = TxnEntities.Contains(entity) ? entity + "QueryRq" : entity + "QueryRq";
+        var parsed = await QuerySingleAsync(QbXmlBuilder.Rq(queryName, idElement), ct);
+        var row = parsed.Elements.Count > 0 ? parsed.First.Rows.FirstOrDefault() : null;
+        if (row is null)
+        {
+            return null;
+        }
+
+        var editSequence = row.GetValueOrDefault("EditSequence") as string
+            ?? throw new ArgumentException($"mod: {entity} record has no EditSequence - cannot modify.");
+
+        return (row, editSequence);
+    }
 }

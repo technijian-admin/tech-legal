@@ -75,6 +75,55 @@ public static class ArgReader
         };
     }
 
+    public static IReadOnlyList<IReadOnlyDictionary<string, object?>>? List(IReadOnlyDictionary<string, object?> args, string key)
+    {
+        if (!args.TryGetValue(key, out var value) || value is null)
+        {
+            return null;
+        }
+
+        IEnumerable<object?> items = value switch
+        {
+            JsonElement json when json.ValueKind == JsonValueKind.Array => json.EnumerateArray().Select(item => (object?)item),
+            IEnumerable<object?> enumerable => enumerable,
+            _ when value is System.Collections.IEnumerable enumerable && value is not string => enumerable.Cast<object?>(),
+            _ => throw new ArgumentException($"'{key}' must be an array of objects."),
+        };
+
+        var result = new List<IReadOnlyDictionary<string, object?>>();
+        var index = 0;
+        foreach (var item in items)
+        {
+            result.Add(ToObjectDictionary(item, $"{key}[{index}]"));
+            index++;
+        }
+
+        return result;
+    }
+
+    public static decimal? Decimal(IReadOnlyDictionary<string, object?> args, string key)
+    {
+        var text = String(args, key);
+        if (text is null)
+        {
+            return null;
+        }
+
+        if (decimal.TryParse(
+                text,
+                NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint,
+                CultureInfo.InvariantCulture,
+                out var parsed))
+        {
+            return parsed;
+        }
+
+        throw new ArgumentException($"'{key}' must be a decimal number; got '{text}'.");
+    }
+
+    public static string RequiredString(IReadOnlyDictionary<string, object?> args, string key) =>
+        String(args, key) ?? throw new ArgumentException($"'{key}' is required.");
+
     private static DateOnly? ParseDate(string key, string? value)
     {
         if (string.IsNullOrWhiteSpace(value))
@@ -124,5 +173,14 @@ public static class ArgReader
             JsonValueKind.Object => ToDictionary(value),
             JsonValueKind.Array => value.EnumerateArray().Select(ConvertJson).ToList(),
             _ => value.ToString(),
+        };
+
+    private static IReadOnlyDictionary<string, object?> ToObjectDictionary(object? value, string path) =>
+        value switch
+        {
+            IReadOnlyDictionary<string, object?> readOnly => readOnly,
+            IDictionary<string, object?> dict => new Dictionary<string, object?>(dict, StringComparer.Ordinal),
+            JsonElement json when json.ValueKind == JsonValueKind.Object => ToDictionary(json),
+            _ => throw new ArgumentException($"'{path}' must be an object."),
         };
 }
