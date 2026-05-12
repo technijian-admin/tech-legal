@@ -9,6 +9,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
     private readonly Func<IRequestProcessor> _factory;
     private readonly QbOptions _qb;
     private readonly RequestOptions _req;
+    private readonly SafetyOptions _safety;
     private readonly ILogger<QbConnectionManager> _log;
     private readonly SemaphoreSlim _gate = new(1, 1);
 
@@ -27,6 +28,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
         _factory = factory;
         _qb = qb.Value;
         _req = req.Value;
+        _safety = safety.Value;
         _log = log;
         _sta = new StaThread("qb-com-sta");
     }
@@ -37,6 +39,11 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
     public async Task<string> ExecuteAsync(string qbXmlRequest, CancellationToken ct = default)
     {
+        if (!_safety.AllowWrites && QbWriteDetector.IsWriteRequest(qbXmlRequest))
+        {
+            throw new QbWriteForbiddenException("Refused write qbXML: Safety:AllowWrites is false.");
+        }
+
         if (!await _gate.WaitAsync(TimeSpan.FromSeconds(_req.BusyWaitSeconds), ct))
         {
             throw new QbBusyException(TimeSpan.FromSeconds(_req.BusyWaitSeconds));
