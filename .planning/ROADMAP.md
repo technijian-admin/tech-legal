@@ -33,10 +33,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. A `FakeRequestProcessor` implements `IRequestProcessor`, returns canned qbXML responses, and can be scripted to raise specific COM-style errors — and a test exercises it.
   3. The service project targets `net8.0-windows`, publishes as a single x86 executable, and that one executable starts as a console app, can be registered as a Windows service, and can be launched by Task Scheduler with no code change.
   4. A CI workflow runs on push, builds the solution, runs all tests, and is green without QuickBooks installed on the runner.
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Scaffold solution + 3 projects, IRequestProcessor seam, FakeRequestProcessor + RealRequestProcessor stub, tri-mode host, tests, CI
 
 ### Phase 2: COM Session Lifecycle
 **Goal**: A long-lived connection manager that owns the real QuickBooks COM connection+session lifecycle correctly, serializes all COM calls, recovers from a dropped session exactly once, and translates QuickBooks HRESULTs into actionable messages.
@@ -161,7 +161,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Mockable COM Seam | 0/TBD | Not started | - |
+| 1. Foundation & Mockable COM Seam | 0/1 | Not started | - |
 | 2. COM Session Lifecycle | 0/TBD | Not started | - |
 | 3. qbXML Engine | 0/TBD | Not started | - |
 | 4. Read Ops | 0/TBD | Not started | - |
