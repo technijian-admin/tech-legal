@@ -1,0 +1,30 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins PreferencesRet element casing and enum names against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <PreferencesQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <PreferencesRet>
+        <SalesTaxPreferences>
+          <DefaultItemSalesTaxRef>
+            <FullName>CA Sales Tax</FullName>
+          </DefaultItemSalesTaxRef>
+        </SalesTaxPreferences>
+        <AccountingPreferences>
+          <IsUsingClassTracking>true</IsUsingClassTracking>
+          <IsRequiringAccounts>true</IsRequiringAccounts>
+          <IsUsingAccountNumbers>false</IsUsingAccountNumbers>
+        </AccountingPreferences>
+        <MultiCurrencyPreferences>
+          <IsMultiCurrencyOn>false</IsMultiCurrencyOn>
+        </MultiCurrencyPreferences>
+        <PurchasesAndVendorsPreferences>
+          <DefaultDiscountAccountRef>
+            <FullName>Vendor Discounts</FullName>
+          </DefaultDiscountAccountRef>
+        </PurchasesAndVendorsPreferences>
+        <ItemsAndInventoryPreferences>
+          <QuantityDecimals>2</QuantityDecimals>
+        </ItemsAndInventoryPreferences>
+      </PreferencesRet>
+    </PreferencesQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
