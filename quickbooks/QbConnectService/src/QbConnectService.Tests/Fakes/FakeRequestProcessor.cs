@@ -8,9 +8,12 @@ namespace QbConnectService.Tests.Fakes;
 public sealed class FakeRequestProcessor : IRequestProcessor
 {
     private readonly Dictionary<string, string> _responses = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, Queue<string>> _responseQueues = new(StringComparer.OrdinalIgnoreCase);
     private readonly Queue<Exception> _errors = new();
 
     public List<string> CallLog { get; } = new();
+
+    public List<string> ProcessRequests { get; } = new();
 
     public string[] SupportedQbXmlVersions { get; set; } = ["13.0", "16.0"];
 
@@ -31,6 +34,12 @@ public sealed class FakeRequestProcessor : IRequestProcessor
     public FakeRequestProcessor AddResponse(string requestElementName, string qbXmlResponse)
     {
         _responses[requestElementName] = qbXmlResponse;
+        return this;
+    }
+
+    public FakeRequestProcessor AddResponses(string requestElementName, params string[] responsesInOrder)
+    {
+        _responseQueues[requestElementName] = new Queue<string>(responsesInOrder);
         return this;
     }
 
@@ -74,6 +83,7 @@ public sealed class FakeRequestProcessor : IRequestProcessor
     public string ProcessRequest(string ticket, string qbXmlRequest)
     {
         ThrowIfScripted();
+        ProcessRequests.Add(qbXmlRequest);
 
         if (ProcessRequestHook is not null)
         {
@@ -88,6 +98,11 @@ public sealed class FakeRequestProcessor : IRequestProcessor
             .Name.LocalName
             ?? document.Descendants().FirstOrDefault(element => element.Name.LocalName.EndsWith("Rq", StringComparison.Ordinal))?.Name.LocalName;
 
+        if (rqName is not null && _responseQueues.TryGetValue(rqName, out var queue) && queue.Count > 0)
+        {
+            return queue.Dequeue();
+        }
+
         if (rqName is not null && _responses.TryGetValue(rqName, out var response))
         {
             return response;
@@ -99,7 +114,7 @@ public sealed class FakeRequestProcessor : IRequestProcessor
         }
 
         throw new InvalidOperationException(
-            $"FakeRequestProcessor: no canned response for request '{rqName ?? "<unparsed>"}'. Call AddResponse(...).");
+            $"FakeRequestProcessor: no canned response for request '{rqName ?? "<unparsed>"}'. Call AddResponse(...) or AddResponses(...).");
     }
 
     public string[] GetSupportedQbXmlVersions(string ticket)
