@@ -49,19 +49,22 @@ point `QB_VERIFY_TLS` at the correct `.cer` / CA bundle path.
 
 ## Deploy and host docs
 
-These arrive in Phase 9 and are referenced here so operators know where the
-deeper host-specific guidance will live:
+These live under the service folder:
 
-- `quickbooks/QbConnectService/README.md` (arrives in Phase 9) for the
-  `10.120.254.13` deploy runbook and HRESULT troubleshooting table
-- `register-integrated-app.md` (arrives in Phase 9) for the one-time
-  QuickBooks-side authorization flow, the PII gotcha, and the Reauthorize
-  recovery path
-- `make-cert.ps1`, `install-service.ps1`, `uninstall-service.ps1`, and
-  `run-as-task.ps1` (arrive in Phase 9) for cert creation and service/task
-  installation
-- The on-box smoke checklist (arrives in Phase 9) for the ordered live-host
-  validation flow
+- `quickbooks/QbConnectService/README.md` for the `10.120.254.13` deploy
+  runbook and HRESULT troubleshooting table
+- `quickbooks/QbConnectService/docs/register-integrated-app.md` for the
+  one-time QuickBooks-side authorization flow, the PII gotcha, and the
+  Reauthorize recovery path
+- `quickbooks/QbConnectService/deploy/make-cert.ps1`,
+  `quickbooks/QbConnectService/deploy/install-service.ps1`,
+  `quickbooks/QbConnectService/deploy/uninstall-service.ps1`, and
+  `quickbooks/QbConnectService/deploy/run-as-task.ps1` for cert creation and
+  service/task installation
+- `quickbooks/QbConnectService/docs/SMOKE-CHECKLIST.md` for the ordered
+  live-host validation flow
+- `quickbooks/QbConnectService/docs/QBXML-REPIN.md` for the live-host qbXML
+  re-pin procedure and inventory
 
 ## Build pipeline pointer
 

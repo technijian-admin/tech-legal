@@ -14,6 +14,14 @@ on:
       - ".github/workflows/quickbooks-ci.yml"
 
 jobs:
+  powershell-lint:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: PowerShell lint
+        run: pwsh -Command "Invoke-ScriptAnalyzer -Path quickbooks,'quickbooks/dev/*.ps1' -Recurse -Severity Warning,Error -EnableExit"
+
   build-test:
     runs-on: windows-latest
     defaults:

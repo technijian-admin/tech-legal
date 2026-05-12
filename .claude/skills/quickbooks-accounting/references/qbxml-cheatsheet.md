@@ -150,5 +150,6 @@ These shapes are medium-confidence until validated on the live host:
 - Some report column/title casing in report responses
 - Some `*QueryRq` child-element names when using raw ad-hoc filters
 
-Verify those against the live host's qbXML reference and the service parser in
-Phase 9.
+Verify those against
+`quickbooks/QbConnectService/docs/QBXML-REPIN.md`,
+the live host's qbXML reference, and the service parser in Phase 9.
