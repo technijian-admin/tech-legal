@@ -1,0 +1,19 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins EmployeeQuery element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <EmployeeQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <EmployeeRet>
+        <ListID>80000061-1</ListID>
+        <Name>rjain</Name>
+        <FullName>Rohan Jain</FullName>
+        <IsActive>true</IsActive>
+      </EmployeeRet>
+      <EmployeeRet>
+        <ListID>80000062-1</ListID>
+        <Name>adoe</Name>
+        <FullName>Ada Doe</FullName>
+        <IsActive>true</IsActive>
+      </EmployeeRet>
+    </EmployeeQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

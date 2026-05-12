@@ -1,0 +1,29 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins InvoiceQuery element casing and filters against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <InvoiceQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <InvoiceRet>
+        <TxnID>INV-001</TxnID>
+        <TxnDate>2025-03-01</TxnDate>
+        <RefNumber>1001</RefNumber>
+        <CustomerRef>
+          <FullName>Acme Roofing Inc</FullName>
+        </CustomerRef>
+        <BalanceRemaining>500.00</BalanceRemaining>
+        <Subtotal>2000.00</Subtotal>
+        <TotalAmount>2500.00</TotalAmount>
+      </InvoiceRet>
+      <InvoiceRet>
+        <TxnID>INV-002</TxnID>
+        <TxnDate>2025-04-15</TxnDate>
+        <RefNumber>1002</RefNumber>
+        <CustomerRef>
+          <FullName>Acme Roofing Inc</FullName>
+        </CustomerRef>
+        <BalanceRemaining>0.00</BalanceRemaining>
+        <Subtotal>1500.00</Subtotal>
+        <TotalAmount>1500.00</TotalAmount>
+      </InvoiceRet>
+    </InvoiceQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

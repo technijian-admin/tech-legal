@@ -1,0 +1,27 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins TransactionQuery element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <TransactionQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <TransactionRet>
+        <TxnID>INV-2024-1001</TxnID>
+        <TxnType>Invoice</TxnType>
+        <TxnDate>2024-11-15</TxnDate>
+        <RefNumber>1001</RefNumber>
+        <EntityRef>
+          <FullName>Acme Roofing Inc</FullName>
+        </EntityRef>
+        <Amount>1800.00</Amount>
+      </TransactionRet>
+      <TransactionRet>
+        <TxnID>CHK-2025-1001</TxnID>
+        <TxnType>Check</TxnType>
+        <TxnDate>2025-03-20</TxnDate>
+        <RefNumber>1001</RefNumber>
+        <EntityRef>
+          <FullName>Acme Roofing Inc</FullName>
+        </EntityRef>
+        <Amount>2500.00</Amount>
+      </TransactionRet>
+    </TransactionQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

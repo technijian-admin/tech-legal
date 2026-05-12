@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <ItemQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <ItemServiceRet>
+        <ListID>80000011-1</ListID>
+        <Name>Consulting</Name>
+        <SalesOrPurchase>
+          <Desc>Professional services</Desc>
+        </SalesOrPurchase>
+      </ItemServiceRet>
+      <ItemInventoryRet>
+        <ListID>80000012-1</ListID>
+        <Name>Router</Name>
+        <QuantityOnHand>8</QuantityOnHand>
+      </ItemInventoryRet>
+    </ItemQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

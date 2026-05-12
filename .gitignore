@@ -4,3 +4,11 @@
 __pycache__/
 *.pyc
 .gitnexus
+# --- QuickBooks Direct-SDK service (added Phase 1) ---
+quickbooks/QbConnectService/src/QbConnectService/appsettings.json
+quickbooks/clients/.env
+# .NET build artifacts
+quickbooks/**/bin/
+quickbooks/**/obj/
+quickbooks/QbConnectService/publish/
+quickbooks/QbConnectService/**/*.user

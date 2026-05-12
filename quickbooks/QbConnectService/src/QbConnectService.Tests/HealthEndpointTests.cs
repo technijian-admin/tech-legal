@@ -1,0 +1,68 @@
+using System.Net;
+using System.Net.Http.Headers;
+using System.Text.Json;
+
+namespace QbConnectService.Tests;
+
+public sealed class HealthEndpointTests
+{
+    [Fact]
+    public async Task health_reports_healthy_when_probe_succeeds()
+    {
+        await using var factory = new QbWebAppFactory();
+        factory.Fake.AddResponse("HostQueryRq", QbWebAppFactory.Fixture("HostCompanyQueryRs.qbxml"));
+
+        using var client = factory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", QbWebAppFactory.Token);
+
+        var response = await client.GetAsync("/api/health");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal("healthy", document.RootElement.GetProperty("status").GetString());
+        Assert.Equal("SessionOpen", document.RootElement.GetProperty("connectionState").GetString());
+        Assert.False(document.RootElement.GetProperty("allowWrites").GetBoolean());
+        Assert.Equal("16.0", document.RootElement.GetProperty("qbXmlVersionConfigured").GetString());
+        Assert.Equal(@"C:\co.QBW", document.RootElement.GetProperty("companyFile").GetString());
+        Assert.False(string.IsNullOrWhiteSpace(document.RootElement.GetProperty("quickBooksVersion").GetString()));
+        Assert.Equal(JsonValueKind.Null, document.RootElement.GetProperty("lastError").ValueKind);
+    }
+
+    [Fact]
+    public async Task health_reports_down_when_com_not_registered()
+    {
+        await using var factory = new QbWebAppFactory();
+        factory.Fake.EnqueueComError(unchecked((int)0x80040154));
+
+        using var client = factory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", QbWebAppFactory.Token);
+
+        var response = await client.GetAsync("/api/health");
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal("down", document.RootElement.GetProperty("status").GetString());
+        Assert.Equal("Disconnected", document.RootElement.GetProperty("connectionState").GetString());
+        Assert.Equal(@"C:\co.QBW", document.RootElement.GetProperty("companyFile").GetString());
+
+        var lastError = document.RootElement.GetProperty("lastError");
+        Assert.Equal("REGDB_E_CLASSNOTREG", lastError.GetProperty("name").GetString());
+        Assert.Equal("0x80040154", lastError.GetProperty("code").GetString());
+        Assert.Equal(0, lastError.ValueKind == JsonValueKind.Null
+            ? -1
+            : document.RootElement.GetProperty("qbXmlVersionsSupported").GetArrayLength());
+    }
+
+    [Fact]
+    public async Task health_requires_token()
+    {
+        await using var factory = new QbWebAppFactory();
+        using var client = factory.CreateClient();
+
+        var response = await client.GetAsync("/api/health");
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+}

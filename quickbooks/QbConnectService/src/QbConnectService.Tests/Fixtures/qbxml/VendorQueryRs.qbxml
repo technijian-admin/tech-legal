@@ -1,0 +1,17 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins VendorQuery element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <VendorQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <VendorRet>
+        <ListID>80000031-1</ListID>
+        <Name>Office Depot</Name>
+        <FullName>Office Depot</FullName>
+      </VendorRet>
+      <VendorRet>
+        <ListID>80000032-1</ListID>
+        <Name>Staples</Name>
+        <FullName>Staples</FullName>
+      </VendorRet>
+    </VendorQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

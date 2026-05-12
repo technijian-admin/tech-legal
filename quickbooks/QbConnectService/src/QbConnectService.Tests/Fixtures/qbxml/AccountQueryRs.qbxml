@@ -1,0 +1,19 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins AccountQuery element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <AccountQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="0">
+      <AccountRet>
+        <ListID>80000041-1</ListID>
+        <Name>Checking</Name>
+        <FullName>Checking</FullName>
+        <AccountType>Bank</AccountType>
+      </AccountRet>
+      <AccountRet>
+        <ListID>80000042-1</ListID>
+        <Name>Accounts Receivable</Name>
+        <FullName>Accounts Receivable</FullName>
+        <AccountType>AccountsReceivable</AccountType>
+      </AccountRet>
+    </AccountQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>

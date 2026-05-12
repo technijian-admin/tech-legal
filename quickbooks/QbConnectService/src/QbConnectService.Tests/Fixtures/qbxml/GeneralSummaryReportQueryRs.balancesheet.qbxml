@@ -1,0 +1,32 @@
+<!-- CONSTRUCTED fixture (not live-captured). Phase 9 re-pins report query enums and element casing against 10.120.254.13. -->
+<QBXML>
+  <QBXMLMsgsRs>
+    <GeneralSummaryReportQueryRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <ReportRet>
+        <ReportTitle>Balance Sheet</ReportTitle>
+        <ReportSubtitle>FY 2025</ReportSubtitle>
+        <ReportBasis>AccrualBasis</ReportBasis>
+        <ColDesc colID="1">
+          <ColTitle titleRow="1" value="" />
+          <ColType>Amount</ColType>
+        </ColDesc>
+        <ColDesc colID="2">
+          <ColTitle titleRow="1" value="TOTAL" />
+          <ColType>Amount</ColType>
+        </ColDesc>
+        <ReportData>
+          <DataRow>
+            <RowData rowType="account" value="Checking" />
+            <ColData colID="1" value="15000.00" />
+            <ColData colID="2" value="15000.00" />
+          </DataRow>
+          <TotalRow>
+            <RowData rowType="total" value="Total Assets" />
+            <ColData colID="1" value="15000.00" />
+            <ColData colID="2" value="15000.00" />
+          </TotalRow>
+        </ReportData>
+      </ReportRet>
+    </GeneralSummaryReportQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
