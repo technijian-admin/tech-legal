@@ -74,6 +74,7 @@ builder.Services.AddSingleton<IReadOp, ListBillsOp>();
 builder.Services.AddSingleton<IReadOp, ListPaymentsOp>();
 builder.Services.AddSingleton<IReadOp, GetTransactionOp>();
 builder.Services.AddSingleton<IReadOp, RunQueryOp>();
+builder.Services.AddSingleton<OpRegistry>();
 
 var app = builder.Build();
 
@@ -81,7 +82,8 @@ app.UseExceptionHandler();
 app.UseMiddleware<BearerAuthMiddleware>();
 
 app.MapGet("/", () => "QbConnectService is running.");
-app.MapGet("/api/ping", () => Results.Ok(new { ping = "pong" }));
+var api = app.MapGroup("/api");
+api.MapOpsEndpoints();
 
 app.Run();
 

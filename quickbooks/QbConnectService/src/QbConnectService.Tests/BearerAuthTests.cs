@@ -11,7 +11,7 @@ public sealed class BearerAuthTests
         await using var factory = new QbWebAppFactory();
         using var client = factory.CreateClient();
 
-        var response = await client.GetAsync("/api/ping");
+        var response = await client.GetAsync("/api/ops");
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         Assert.Contains("Bearer", response.Headers.WwwAuthenticate.ToString(), StringComparison.Ordinal);
@@ -24,7 +24,7 @@ public sealed class BearerAuthTests
         using var client = factory.CreateClient();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "not-the-token");
 
-        var response = await client.GetAsync("/api/ping");
+        var response = await client.GetAsync("/api/ops");
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
@@ -36,7 +36,7 @@ public sealed class BearerAuthTests
         using var client = factory.CreateClient();
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", QbWebAppFactory.Token);
 
-        var response = await client.GetAsync("/api/ping");
+        var response = await client.GetAsync("/api/ops");
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
