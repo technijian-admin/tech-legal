@@ -21,7 +21,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
         Func<IRequestProcessor> factory,
         IOptions<QbOptions> qb,
         IOptions<RequestOptions> req,
-        ILogger<QbConnectionManager> log)
+        ILogger<QbConnectionManager> log,
+        IOptions<SafetyOptions> safety)
     {
         _factory = factory;
         _qb = qb.Value;

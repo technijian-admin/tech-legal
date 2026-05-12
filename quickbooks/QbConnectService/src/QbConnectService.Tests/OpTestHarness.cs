@@ -26,7 +26,11 @@ public static class OpTestHarness
                 TimeoutSeconds = 30,
                 BusyWaitSeconds = 5,
             }),
-            NullLogger<QbConnectionManager>.Instance);
+            NullLogger<QbConnectionManager>.Instance,
+            Options.Create(new SafetyOptions
+            {
+                AllowWrites = true,
+            }));
         var xmlOptions = options ?? new QbXmlOptions
         {
             Version = "16.0",

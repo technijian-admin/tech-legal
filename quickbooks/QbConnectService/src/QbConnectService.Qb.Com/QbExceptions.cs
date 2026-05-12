@@ -36,3 +36,11 @@ public sealed class QbTimeoutException : Exception
 
     public TimeSpan Timeout { get; }
 }
+
+public sealed class QbWriteForbiddenException : Exception
+{
+    public QbWriteForbiddenException(string message)
+        : base(message)
+    {
+    }
+}

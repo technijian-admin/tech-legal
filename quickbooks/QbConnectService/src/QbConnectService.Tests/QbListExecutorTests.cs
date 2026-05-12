@@ -174,7 +174,11 @@ public sealed class QbListExecutorTests
                 TimeoutSeconds = 30,
                 BusyWaitSeconds = 5,
             }),
-            NullLogger<QbConnectionManager>.Instance);
+            NullLogger<QbConnectionManager>.Instance,
+            Options.Create(new SafetyOptions
+            {
+                AllowWrites = true,
+            }));
         var xmlOptions = Options.Create(options ?? new QbXmlOptions
         {
             MaxReturned = 1,
