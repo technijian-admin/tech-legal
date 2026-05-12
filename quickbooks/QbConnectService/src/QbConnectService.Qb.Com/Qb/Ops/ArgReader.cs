@@ -96,7 +96,12 @@ public static class ArgReader
         throw new ArgumentException($"Argument '{key}' must be a yyyy-MM-dd date.");
     }
 
-    private static IReadOnlyDictionary<string, object?> ToDictionary(JsonElement json)
+    /// <summary>
+    /// Converts a JSON object element into the arg dictionary the read/write ops consume. Numbers become strings,
+    /// nested objects become Dictionary&lt;string, object?&gt;, arrays become List&lt;object?&gt;, and bool/null are preserved.
+    /// /api/ops/{op} reuses the same conversion the ops were already written and tested against.
+    /// </summary>
+    public static IReadOnlyDictionary<string, object?> ToDictionary(JsonElement json)
     {
         var result = new Dictionary<string, object?>(StringComparer.Ordinal);
 
@@ -108,7 +113,7 @@ public static class ArgReader
         return result;
     }
 
-    private static object? ConvertJson(JsonElement value) =>
+    public static object? ConvertJson(JsonElement value) =>
         value.ValueKind switch
         {
             JsonValueKind.Null or JsonValueKind.Undefined => null,
