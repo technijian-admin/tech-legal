@@ -14,6 +14,7 @@ builder.Services.Configure<QbXmlOptions>(builder.Configuration.GetSection("QbXml
 builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Request"));
 builder.Services.AddSingleton<QbXmlBuilder>();
 builder.Services.AddSingleton<QbXmlParser>();
+builder.Services.AddSingleton<QbReportParser>();
 
 if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing"))
 {
