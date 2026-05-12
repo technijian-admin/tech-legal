@@ -42,7 +42,7 @@
 - [ ] **API-02**: Every API call requires `Authorization: Bearer <token>` (token from config, compared with `CryptographicOperations.FixedTimeEquals`); missing/wrong → 401.
 - [ ] **API-03**: `GET /api/health` reports liveness plus: company-file name, QuickBooks version, SDK version, supported qbXML versions (from `HostQueryRq`), last error, current mode, and the `AllowWrites` flag — and never reports "healthy" when the COM session is actually down.
 - [ ] **API-04**: `POST /api/qbxml` accepts a raw qbXML request and returns the raw qbXML response (size-guarded); if `AllowWrites` is false the request is rejected with 403 when its qbXML contains an `Add`/`Mod`/`Del`/`Void` request — detected by parsing **element names**, not substring matching.
-- [ ] **API-05**: `POST /api/ops/{op}` dispatches a high-level op through an `OpRegistry` (validates args, builds qbXML, executes, returns parsed JSON **and** the raw qbXML **and** the status fields); unknown op → 404.
+- [ ] **API-05**: `POST /api/ops/{op}` dispatches a high-level op through an `OpRegistry` (validates args, builds qbXML, executes, returns `200 { op, result }` where `result` carries the status fields); unknown op → 404.
 - [ ] **API-06**: A `statusCode != 0` from QuickBooks is returned as a normal `200` body (it's a business outcome); HTTP 4xx/5xx are reserved for transport/auth/safety-gate/COM-unavailable.
 
 ### Write ops, dry-run & safety (WRITE)
@@ -121,12 +121,12 @@ Coverage: 44 / 44 v1 requirements mapped, each to exactly one phase. See `.plann
 | READ-08 | Phase 4 — Read Ops | Pending |
 | READ-09 | Phase 4 — Read Ops | Pending |
 | READ-10 | Phase 4 — Read Ops | Pending |
-| API-01 | Phase 5 — REST API, Auth & Health | Pending |
-| API-02 | Phase 5 — REST API, Auth & Health | Pending |
-| API-03 | Phase 5 — REST API, Auth & Health | Pending |
-| API-04 | Phase 5 — REST API, Auth & Health | Pending |
-| API-05 | Phase 5 — REST API, Auth & Health | Pending |
-| API-06 | Phase 5 — REST API, Auth & Health | Pending |
+| API-01 | Phase 5 — REST API, Auth & Health | Done |
+| API-02 | Phase 5 — REST API, Auth & Health | Done |
+| API-03 | Phase 5 — REST API, Auth & Health | Done |
+| API-04 | Phase 5 — REST API, Auth & Health | Done |
+| API-05 | Phase 5 — REST API, Auth & Health | Done |
+| API-06 | Phase 5 — REST API, Auth & Health | Done |
 | WRITE-01 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
 | WRITE-02 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |
 | WRITE-08 | Phase 6 — Write Safety, Dry-Run & Audit | Pending |

@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 2: COM Session Lifecycle** - `QbConnectionManager` state machine on an STA worker thread, dead-ticket retry, `QbErrors`, real adapter
 - [ ] **Phase 3: qbXML Engine** - `QbXmlBuilder` / `QbXmlParser`, separate report parser, iterators, size-guard spill, `OwnerID` config
 - [ ] **Phase 4: Read Ops** - `company_info`, `get_company_preferences`, `report`, `list_*`, `get_transaction`, `run_query`
-- [ ] **Phase 5: REST API, Auth & Health** - Kestrel HTTPS-only, bearer middleware, `/api/health`, raw `/api/qbxml` passthrough, `OpRegistry`
+- [x] **Phase 5: REST API, Auth & Health** - Kestrel HTTPS-only, bearer middleware, `/api/health`, raw `/api/qbxml` passthrough, `OpRegistry`
 - [ ] **Phase 6: Write Safety, Dry-Run & Audit** - `AllowWrites` default-false 403 gate, `/api/ops/{op}/dryrun`, immutable hash-chained audit log
 - [ ] **Phase 7: Write Ops** - `create_customer`/`vendor`/`invoice`/`bill`/`check`, `receive_payment`, `create_journal_entry`, `mod_*`
 - [ ] **Phase 8: Python Client, Claude Skill & Dev Tooling** - `qb_client.py` + examples + tests, `quickbooks-accounting` skill, `MULTI-LLM.md` + `run-codex-phase.ps1`
@@ -90,12 +90,12 @@ Plans:
   1. The service binds HTTPS-only via Kestrel with a file `.pfx` cert on a configurable URL/port and refuses plain HTTP; every API call requires `Authorization: Bearer <token>` compared with `CryptographicOperations.FixedTimeEquals`, and a missing/wrong token gets 401.
   2. `GET /api/health` reports liveness plus company-file name, QuickBooks version, SDK version, supported qbXML versions (from `HostQueryRq`), last error, current mode, and the `AllowWrites` flag — and never reports "healthy" when the COM session is actually down.
   3. `POST /api/qbxml` accepts a raw qbXML request and returns the raw qbXML response (size-guarded); when `AllowWrites` is false a request whose qbXML contains an `Add`/`Mod`/`Del`/`Void` request — detected by parsing element names, not substrings — is rejected with 403.
-  4. `POST /api/ops/{op}` dispatches through an `OpRegistry` (validates args, builds qbXML, executes, returns parsed JSON plus the raw qbXML plus the status fields); an unknown op returns 404; a `statusCode != 0` from QuickBooks comes back as a normal 200 body.
+  4. `POST /api/ops/{op}` dispatches through an `OpRegistry` (validates args, builds qbXML, executes, returns `200 { op, result }` where `result` already carries the status fields); an unknown op returns 404; a `statusCode != 0` from QuickBooks comes back as a normal 200 body.
   5. `WebApplicationFactory` integration tests against the fake processor cover health, auth (401), the raw passthrough (including the 403 verb-scan), and op dispatch (including 404 and the 200-with-nonzero-statusCode case).
 **Plans**: 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — REST API, auth & health: Kestrel HTTPS-only bind, static-bearer middleware, ProblemDetails exception mapping (API-06 invariant), OpRegistry, GET /api/health, POST /api/qbxml raw passthrough + 403 verb-scan, POST /api/ops/{op} dispatch, reusable QbWriteDetector, WebApplicationFactory integration tests
+- [x] 05-01-PLAN.md — REST API, auth & health: Kestrel HTTPS-only bind, static-bearer middleware, ProblemDetails exception mapping (API-06 invariant), OpRegistry, GET /api/health, POST /api/qbxml raw passthrough + 403 verb-scan, POST /api/ops/{op} dispatch, reusable QbWriteDetector, WebApplicationFactory integration tests
 
 ### Phase 6: Write Safety, Dry-Run & Audit
 **Goal**: The full write-safety machinery — a default-off AllowWrites gate enforced in depth, a zero-side-effect dry-run endpoint, and an immutable hash-chained audit log — landed before any write op exists.
@@ -165,7 +165,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 2. COM Session Lifecycle | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 3. qbXML Engine | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-12 |
 | 4. Read Ops | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
-| 5. REST API, Auth & Health | 0/TBD | Not started | - |
+| 5. REST API, Auth & Health | 1/1 | ✓ Complete (reviewed 100/100) | 2026-05-11 |
 | 6. Write Safety, Dry-Run & Audit | 0/TBD | Not started | - |
 | 7. Write Ops | 0/TBD | Not started | - |
 | 8. Python Client, Claude Skill & Dev Tooling | 0/TBD | Not started | - |
