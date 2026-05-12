@@ -120,3 +120,48 @@ This is a review of a single GSD phase that produced a **.NET solution skeleton 
 ## Recommendation
 
 **Proceed to Phase 3 (qbXML Engine — READ-01,02,03,11).** Phase 2 is solid: build + 44/44 tests green, all five SESS requirements met with concrete assertions, scope clean, hygiene clean, zero dangling output, zero code defects → 100/100. The one process nit (duplicate-titled revision commits) is recorded as INFO with a durable forward-fix in the Codex prompt. Loop continues: `/gsd:plan-phase 3` → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 3` → review.
+
+---
+
+# Phase 3: qbXML Engine — Review
+
+**Date:** 2026-05-12 · **Reviewer:** Claude (post-Codex review; Codex executed `03-01-PLAN.md`, 8 task commits `d2f130d`…`712818a` + 1 `docs(03-01)` commit `54b155c` — **no duplicate-titled commits** ✓ the prompt hardening worked)
+**Health Score:** **100 / 100 (Grade A — ready to proceed to Phase 4)** — build + tests green, all four READ requirements met with golden-fixture tests, scope clean, hygiene clean, zero dangling output, zero new NuGet packages, zero code defects.
+
+## Build / tests
+
+`dotnet build -c Release` → **0 errors, 0 warnings**. `dotnet test -c Release` → **76/76** passed, 0 failed (Phase 2's 44 + Phase 3's 32). CI runs on next push.
+
+## Requirement coverage (READ-01, READ-02, READ-03, READ-11)
+
+| Req | Verified |
+|---|---|
+| READ-01: `QbXmlBuilder` always emits `<?qbxml version?>` PI from config; `QbXmlParser` surfaces per-message **and** per-element `statusCode`/`statusSeverity`/`statusMessage`; zero-row = success not error | ✅ `QbXmlBuilder.BuildRequest` emits `<?xml?>` decl + `<?qbxml version="16.0"?>` PI via `XDocument.Save` to a `Utf8StringWriter` (handles the XLinq `<?xml?>`-drop trap); `QbXmlParser.Parse` reads message-level status (from `QBXMLMsgsRs` if present, else default OK) and per-element status (`QbStatus.FromElement` on each `*Rs`); `QbStatus.IsError` is true only for `Severity == "Error"`, so a `statusCode="1"`/`Info` zero-row response parses as a successful empty `Rows` list. Golden tests: `CustomerQueryRs.normal`/`.zerorows`/`.dataext` fixtures + `InvoiceAddRs.error` fixture |
+| READ-02: separate `ColDesc`-driven report parser, no ordinal guessing, golden tests | ✅ `QbReportParser` (own class) reads `ColDesc` for `colID` → title, maps each row's `ColData` **by `colID`** to the column title (never by position), walks `ReportData` children typing each by `rowElement.Name.LocalName` (DataRow/SubtotalRow/TotalRow/TextRow), handles `RowData` for label/rowType; tolerant attribute casing. Golden test against `GeneralSummaryReportQueryRs.pnl.qbxml` (a *constructed* P&L fixture — flagged in `03-01-SUMMARY.md`; Phase 9 re-pins exact casing on a live host) |
+| READ-03: list parsing follows qbXML iterators (`Start`/`Continue`/`iteratorID`/`iteratorRemainingCount`) → complete multi-page result; over-threshold response spills raw qbXML to a file beside the audit log + returns a reference + parsed summary | ✅ `QbListExecutor.RunAsync` builds Start (`WithIterator(Start, MaxReturned)` + optional `WithOwnerIdZero`), executes via `QbConnectionManager.ExecuteAsync`, loops `Continue iteratorID=…` while `remaining>0`, accumulates rows, copies `new XElement(queryRq)` per page (doesn't mutate the caller's element), aborts + surfaces a per-page `Error`; `QbResponseSpiller` (singleton) — `ExceedsThreshold` on UTF-8 byte count vs `QbXml:MaxResponseBytes` (default 5 MB), `SpillAsync` writes to `QbXml:SpillPath ?? Audit:Path ?? %TEMP%/QbConnectService/spill` with a timestamp-guid filename, result carries `RawSpilledTo`. Tests: `CustomerQueryRs.page1`/`.page2` fixtures (two-page accumulation via `FakeRequestProcessor.AddResponses`), spill-on-threshold, mid-iteration error |
+| READ-11: `OwnerID="0"` is a documented config setting with a sensible default | ✅ Relocated `OwnerIdZero` out of `QbOptions` into the new `QbXmlOptions` (default **false**), documented in `appsettings.sample.json` under `QbXml`; `QbXmlBuilder.WithOwnerIdZero` adds `<OwnerID>0</OwnerID>`; `QbListExecutor` reads `_opts.OwnerIdZero` (overridable per-call); parser surfaces `DataExtRet` → `customFields`. Tested via `CustomerQueryRs.dataext.qbxml` |
+
+## Scope discipline
+
+✅ **Zero Phase 4–9 work present.** No actual read OPS (`company_info`/`get_company_preferences`/`report`/`list_*`/`get_transaction`/`run_query` — Phase 4); no REST controllers/`/api/health`/`/api/qbxml`/bearer auth (Phase 5); no write op/dry-run/`AllowWrites` gate/audit log (Phase 6/7); no Python client/skill (Phase 8); no deploy scripts (Phase 9). `QbXmlBuilder`/`QbXmlParser`/`QbReportParser` are pure (no I/O); only `QbListExecutor`/`QbResponseSpiller` do I/O. The parser *exposes* `statusCode` (so Phase 7 can later surface stale-`EditSequence` nicely) but doesn't *handle* it.
+
+## Repo hygiene
+
+✅ Stayed on the feature branch. ✅ 8 distinct-titled `feat(03-01)` task commits + a `docs(03-01)` commit — **no duplicate-titled commits** (Phase-2 issue not repeated). ✅ Codex committed its own output (`03-01-SUMMARY.md` + plan checkboxes in `54b155c`) — nothing dangling. ✅ `appsettings.sample.json` extended (not rewritten). ✅ `FakeRequestProcessor` extension is in the test project, BC-preserving (`AddResponses` alongside `AddResponse` + a `ProcessRequests` capture). ✅ Fixtures committed under `Tests/Fixtures/qbxml/` with a copy-to-output csproj rule. ✅ **Zero new NuGet packages** — pure `System.Xml.Linq`. ✅ Nothing outside `quickbooks/` touched.
+
+## Findings
+
+| Severity | Count |
+|---|---|
+| Blocker | 0 |
+| High | 0 |
+| Medium | 0 |
+| Low | 0 |
+| Info | 2 |
+
+**INFO-1** — `Program.cs`'s root endpoint still returns `"QbConnectService (Phase 1 skeleton). REST API arrives in Phase 5."` — cosmetic; Phase 5 replaces this line with the real `/api/*` surface.
+**INFO-2** — the P&L report fixture (`GeneralSummaryReportQueryRs.pnl.qbxml`) is *constructed*, not captured from a live SDKTestPlus3/OSR source — flagged in `03-01-SUMMARY.md`; the parser is written tolerantly (case-insensitive element/attribute matching) and Phase 9 should re-pin the exact `ColDesc`/`ColTitle`/`ColType`/`RowData` attribute casing against the live QuickBooks host. Not a defect — a deliberate, documented dev-time choice.
+
+## Recommendation
+
+**Proceed to Phase 4 (Read Ops — READ-04..10).** Phase 3 is solid → 100/100. Loop continues: `/gsd:plan-phase 4` → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 4` → review.
