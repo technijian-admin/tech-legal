@@ -16,6 +16,7 @@ public sealed class ApiExceptionHandler(IProblemDetailsService pds) : IException
             QbBusyException => (StatusCodes.Status409Conflict, "QuickBooks busy"),
             QbTimeoutException => (StatusCodes.Status504GatewayTimeout, "QuickBooks timeout"),
             QbException => (StatusCodes.Status503ServiceUnavailable, "QuickBooks unavailable"),
+            QbWriteForbiddenException => (StatusCodes.Status403Forbidden, "Writes disabled"),
             _ => (StatusCodes.Status500InternalServerError, "Unexpected error"),
         };
 

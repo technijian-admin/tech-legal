@@ -1,5 +1,7 @@
 using System.Text;
 using System.Text.Json;
+using Microsoft.Extensions.Options;
+using QbConnectService.Qb;
 using QbConnectService.Qb.Ops;
 
 namespace QbConnectService.Api;
@@ -18,6 +20,8 @@ public static class OpsEndpoints
             string op,
             HttpContext ctx,
             OpRegistry registry,
+            IOptions<SafetyOptions> safety,
+            ILoggerFactory loggerFactory,
             CancellationToken ct) =>
         {
             if (!registry.TryGet(op, out var readOp))
@@ -26,6 +30,17 @@ public static class OpsEndpoints
                     statusCode: StatusCodes.Status404NotFound,
                     title: "Unknown op",
                     detail: $"No op named '{op}'. GET /api/ops for the list.");
+            }
+
+            if (readOp is IWriteOp && !safety.Value.AllowWrites)
+            {
+                loggerFactory.CreateLogger("QbConnectService.Api.OpsEndpoints")
+                    .LogWarning("Refused write op {Op}: Safety:AllowWrites is false.", op);
+
+                return Results.Problem(
+                    statusCode: StatusCodes.Status403Forbidden,
+                    title: "Writes disabled",
+                    detail: $"Op '{op}' is a write op and Safety:AllowWrites is false. Set Safety:AllowWrites=true to enable writes.");
             }
 
             var args = await ReadArgsAsync(ctx, ct);

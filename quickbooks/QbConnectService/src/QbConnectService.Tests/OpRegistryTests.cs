@@ -21,16 +21,17 @@ public sealed class OpRegistryTests
         "list_payments",
         "get_transaction",
         "run_query",
+        "fake_create",
     ];
 
     [Fact]
-    public async Task registry_resolves_all_12_ops()
+    public async Task registry_resolves_all_registered_ops()
     {
         await using var factory = new QbWebAppFactory();
 
         var registry = factory.Services.GetRequiredService<OpRegistry>();
 
-        Assert.Equal(12, registry.Names.Count);
+        Assert.Equal(13, registry.Names.Count);
         foreach (var name in ExpectedNames)
         {
             Assert.Contains(name, registry.Names);
