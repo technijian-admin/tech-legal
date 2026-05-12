@@ -79,6 +79,7 @@ builder.Services.AddSingleton<IReadOp, GetTransactionOp>();
 builder.Services.AddSingleton<IReadOp, RunQueryOp>();
 builder.Services.AddSingleton<IReadOp, CreateCustomerOp>();
 builder.Services.AddSingleton<IReadOp, CreateVendorOp>();
+builder.Services.AddSingleton<IReadOp, CreateInvoiceOp>();
 builder.Services.AddSingleton<OpRegistry>();
 
 var app = builder.Build();
