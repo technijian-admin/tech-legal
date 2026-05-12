@@ -12,6 +12,13 @@ builder.Services.AddHostedService<QbConnectService.Worker>();
 builder.Services.Configure<QbOptions>(builder.Configuration.GetSection("Qb"));
 builder.Services.Configure<RequestOptions>(builder.Configuration.GetSection("Request"));
 
+if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing"))
+{
+    builder.Services.AddSingleton<Func<IRequestProcessor>>(_ => () => new QbConnectService.Qb.Com.RealRequestProcessor());
+}
+
+builder.Services.AddSingleton<QbConnectionManager>();
+
 var app = builder.Build();
 
 app.MapGet("/", () => "QbConnectService (Phase 1 skeleton). REST API arrives in Phase 5.");
