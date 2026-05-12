@@ -1,5 +1,6 @@
 using System.Net;
 using QbConnectService;
+using QbConnectService.Api;
 using QbConnectService.Qb;
 using QbConnectService.Qb.Ops;
 
@@ -74,7 +75,10 @@ builder.Services.AddSingleton<IReadOp, RunQueryOp>();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "QbConnectService (Phase 1 skeleton). REST API arrives in Phase 5.");
+app.UseMiddleware<BearerAuthMiddleware>();
+
+app.MapGet("/", () => "QbConnectService is running.");
+app.MapGet("/api/ping", () => Results.Ok(new { ping = "pong" }));
 
 app.Run();
 
