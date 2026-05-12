@@ -16,6 +16,7 @@ builder.Services.AddSingleton<QbXmlBuilder>();
 builder.Services.AddSingleton<QbXmlParser>();
 builder.Services.AddSingleton<QbReportParser>();
 builder.Services.AddSingleton<QbResponseSpiller>();
+builder.Services.AddSingleton<QbListExecutor>();
 
 if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing"))
 {

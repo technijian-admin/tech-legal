@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <QBXMLMsgsRs>
+    <CustomerQueryRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK" iteratorRemainingCount="1" iteratorID="{eb05f701-e727-472f-8ade-6753c4f67a46}">
+      <CustomerRet>
+        <ListID>80000001-1</ListID>
+        <Name>Acme Roofing</Name>
+      </CustomerRet>
+    </CustomerQueryRs>
+  </QBXMLMsgsRs>
+</QBXML>
