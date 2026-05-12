@@ -1,17 +1,18 @@
+using System.Runtime.InteropServices;
+
 namespace QbConnectService.Qb;
 
 public class QbException : Exception
 {
     public QbException(QbError error, Exception? inner = null)
-        : base($"{error.Name} (0x{error.Code:X8}): {error.Message} — {error.RemediationHint}", inner)
+        : base($"{error.Name} (0x{error.Code:X8}): {error.Message} - {error.RemediationHint}", inner)
     {
         Error = error;
     }
 
     public QbError Error { get; }
 
-    public static QbException From(System.Runtime.InteropServices.COMException ex) =>
-        new(QbErrors.Lookup(ex.HResult), ex);
+    public static QbException From(COMException ex) => new(QbErrors.Lookup(ex.HResult), ex);
 }
 
 public sealed class QbBusyException : Exception

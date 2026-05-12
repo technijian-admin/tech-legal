@@ -11,7 +11,7 @@ public static class QbErrors
             "Could not access QuickBooks (connection attempt failed; the QuickBooks install may be incomplete or broken).",
             "Check QuickBooks is installed/repaired under the service account; check the session-0 setup; see qbsdklog.txt."),
         [unchecked((int)0x80040402)] = new(unchecked((int)0x80040402), "QB_UNEXPECTED_ERROR",
-            "Unexpected QuickBooks SDK error — see qbsdklog.txt for details.",
+            "Unexpected QuickBooks SDK error - see qbsdklog.txt for details.",
             "Pull qbsdklog.txt from the QuickBooks host."),
         [unchecked((int)0x80040408)] = new(unchecked((int)0x80040408), "QB_COULD_NOT_START",
             "Could not start QuickBooks (launch failed; install incomplete or session-0 instability).",
@@ -21,7 +21,7 @@ public static class QbErrors
             "Close the other company file, or fix Qb:CompanyFilePath."),
         [unchecked((int)0x8004040D)] = new(unchecked((int)0x8004040D), "QB_INVALID_TICKET",
             "Invalid or expired session ticket (the session was dropped, e.g. QuickBooks restarted).",
-            "Transient — the service rebuilds the connection and retries once automatically."),
+            "Transient - the service rebuilds the connection and retries once automatically."),
         [unchecked((int)0x80040410)] = new(unchecked((int)0x80040410), "QB_MODE_MISMATCH",
             "The company file is open in a mode other than the one specified.",
             "A human has the file open single-user; switch the file to multi-user (hosted) mode."),
@@ -48,10 +48,7 @@ public static class QbErrors
             "Install the QuickBooks SDK on the host; confirm the service runs as x86; see Phase 9 deploy notes."),
     };
 
-    private static readonly HashSet<int> DeadTicket =
-    [
-        unchecked((int)0x8004040D),
-    ];
+    private static readonly HashSet<int> DeadTicket = [unchecked((int)0x8004040D)];
 
     public static bool IsDeadTicket(int hresult) => DeadTicket.Contains(hresult);
 

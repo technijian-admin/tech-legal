@@ -5,7 +5,7 @@ namespace QbConnectService.Tests;
 
 public sealed class QbErrorsTests
 {
-    public static TheoryData<int, string> KnownCodes => new()
+    public static TheoryData<int, string> KnownErrorCodes => new()
     {
         { unchecked((int)0x80040401), "QB_ACCESS_FAILED" },
         { unchecked((int)0x80040402), "QB_UNEXPECTED_ERROR" },
@@ -23,10 +23,10 @@ public sealed class QbErrorsTests
     };
 
     [Theory]
-    [MemberData(nameof(KnownCodes))]
-    public void Lookup_returns_expected_mapping_for_known_code(int code, string expectedName)
+    [MemberData(nameof(KnownErrorCodes))]
+    public void Lookup_returns_expected_mapping_for_known_hresult(int hresult, string expectedName)
     {
-        var error = QbErrors.Lookup(code);
+        var error = QbErrors.Lookup(hresult);
 
         Assert.Equal(expectedName, error.Name);
         Assert.False(string.IsNullOrWhiteSpace(error.Message));
@@ -34,7 +34,7 @@ public sealed class QbErrorsTests
     }
 
     [Fact]
-    public void Lookup_returns_unknown_mapping_for_unmapped_code()
+    public void Lookup_returns_unknown_mapping_for_unmapped_hresult()
     {
         var error = QbErrors.Lookup(unchecked((int)0x80041234));
 
@@ -42,14 +42,14 @@ public sealed class QbErrorsTests
     }
 
     [Fact]
-    public void IsDeadTicket_identifies_only_the_dead_ticket_code()
+    public void IsDeadTicket_only_matches_invalid_ticket_code()
     {
         Assert.True(QbErrors.IsDeadTicket(unchecked((int)0x8004040D)));
         Assert.False(QbErrors.IsDeadTicket(unchecked((int)0x80040420)));
     }
 
     [Fact]
-    public void QbException_From_maps_the_hresult()
+    public void QbException_from_com_exception_uses_mapped_error()
     {
         var exception = QbException.From(new COMException("boom", unchecked((int)0x80040408)));
 
@@ -57,7 +57,7 @@ public sealed class QbErrorsTests
     }
 
     [Fact]
-    public void CastFailure_returns_the_cast_failure_mapping()
+    public void CastFailure_returns_specific_mapping()
     {
         var error = QbErrors.CastFailure("no interface");
 
