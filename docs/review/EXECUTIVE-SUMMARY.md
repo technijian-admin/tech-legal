@@ -69,3 +69,55 @@ This is a review of a single GSD phase that produced a **.NET solution skeleton 
 - Commit the dangling Phase-1 output (LOW-1): `git add .planning/phases/01-foundation-mockable-com-seam/01-01-PLAN.md .planning/phases/01-foundation-mockable-com-seam/01-01-SUMMARY.md && git commit -m "chore(phase-1): commit task checkboxes + 01-01-SUMMARY"`
 - `/gsd:plan-phase 2` → then `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 2` → then `/gsd:code-review`
 - (optional) `git clean -fdnX quickbooks/` to preview removing ignored build artifacts
+
+---
+
+# Phase 2: COM Session Lifecycle — Review
+
+**Date:** 2026-05-12 · **Reviewer:** Claude (post-Codex review; Codex executed `02-01-PLAN.md`, 9 tasks + 2 same-message revision commits = 11 total `02-01` commits)
+**Health Score:** **99 / 100 (Grade A — ready to proceed to Phase 3)** — the one LOW (two redundant revision commits) is harmless history clutter; no code defects, nothing dangling, build + tests green.
+
+## Build status
+
+| Check | Result |
+|---|---|
+| `dotnet build -c Release` (local, .NET 10 SDK → `net8.0-windows`) | **PASS** — 0 errors, 0 warnings |
+| `dotnet test -c Release` | **PASS** — **44/44** tests passed, 0 failed (Phase 1 had 7; Phase 2 added 37: `QbOptionsBindingTests`, `QbErrorsTests` per-code theory, `StaThreadTests`, `QbConnectionManagerTests` (lifecycle/serialization/busy/retry/watchdog), `RealRequestProcessorSmokeTests`, extended `HostStartupTests`) |
+| GitHub Actions `quickbooks-ci` | Runs on next push of the branch (16 local commits ahead of `origin`); the workflow is unchanged and the local build/test it runs are green |
+
+## Requirement coverage (SESS-01..05)
+
+| Req | Verified |
+|---|---|
+| SESS-01: `QbConnectionManager` singleton drives `OpenConnection2 → BeginSession → ProcessRequest → EndSession → CloseConnection`, lazy connect, `OpenMode=DoNotCare`/`connectionType=LocalQBD`, never `SingleUser` | ✅ `QbConnectionManager.cs` — `EnsureConnectedAsync` called inside `ExecuteAsync` (not ctor); `OpenFreshConnectionAsync` hard-codes `LocalQBD`/`DoNotCare`, logs a warning if config differs; `HostStartupTests.Host_resolves_QbConnectionManager_as_a_singleton...` asserts `Assert.Same` + the CallLog order; `QbConnectionManagerTests` asserts the recorded args |
+| SESS-02: one STA worker thread, `SemaphoreSlim(1,1)` serialization, concurrent caller → bounded busy-wait → `QbBusyException` | ✅ `StaThread.cs` (single STA `Thread` + `BlockingCollection<Action>` pump + `TaskCompletionSource(RunContinuationsAsynchronously)`); manager `_gate = new SemaphoreSlim(1,1)`, `WaitAsync(BusyWaitSeconds)` → `QbBusyException`; `StaThreadTests` asserts same-thread-id + STA apartment; serialization/busy test in `QbConnectionManagerTests` |
+| SESS-03: dead ticket → rebuild the COM object (not revive) → retry exactly once → second failure verbatim | ✅ `ProcessWithRetryAsync` catches `COMException when QbErrors.IsDeadTicket` → `RebuildConnectionAsync` (dispose old → `_factory()` again → `OpenConnection` → `BeginSession`) → one retry → on second `COMException`: `QbException.From` (no third); non-dead-ticket → no retry. `IsDeadTicket` = just `0x8004040D` (conservative; widen on the real host in Phase 9). Tests cover all three branches |
+| SESS-04: `QbErrors` map (`0x8004xxxx` + `0x80040154` + cast) → human message + remediation; surfaced in errors | ✅ `QbErrors.cs` — 12-code table + `0x80040154` + `QB_UNKNOWN` fallback + `CastFailure` helper; `QbException` carries the `QbError`; manager sets `LastError` and `LogMappedError`; `QbErrorsTests` per-code theory |
+| SESS-05: watchdog aborts an over-budget `ProcessRequest`, returns a clear timeout error, doesn't wedge the session | ✅ `ProcessWithRetryAsync` does `_sta.Run(...).WaitAsync(TimeoutSeconds)` → on `TimeoutException`: `Poison()` (state→Poisoned, swap in a fresh `StaThread`, null out `_rp`/`_ticket`) + `QbTimeoutException`; next `ExecuteAsync` → `EnsureConnectedAsync` reconnects cleanly. `QbConnectionManagerTests` watchdog tests assert the timeout + that the next call rebuilds with a clean CallLog. (A `CancellationToken` can't cancel a blocking COM call — `WaitAsync` is the right tool; the abandoned STA thread is left to finish/leak, a documented, accepted tradeoff.) |
+
+## Scope discipline
+
+✅ **Zero Phase 3–9 work present.** No `QbXmlBuilder`/`QbXmlParser` or report parser, no read/write ops, no REST controllers / `/api/health` / `/api/qbxml` / bearer auth, no `AllowWrites` gate, no audit log, no Python client, no skill, no deploy scripts. The manager exposes `LastError`/`State` (which Phase 5 will surface over HTTP) but does NOT add any HTTP code itself. `RealRequestProcessor` is now a real COM forwarder (`new RequestProcessor2()` → cast → forward 7 methods → `Marshal.FinalReleaseComObject` on dispose), wrapping activation failures into `QbException` — its COM activation can't actually succeed without the QuickBooks SDK + the real interop DLL (placeholder GUIDs from Phase 1, replaced in Phase 9), so the only `RealRequestProcessor` test is `RealRequestProcessorSmokeTests` (activation failure → `QbException`, not a bare `COMException`) — by design, not a gap.
+
+## Repo hygiene
+
+✅ Stayed on the feature branch. ✅ `appsettings.sample.json` extended (not rewritten) with `Qb:ConnectionType`/`Qb:OpenMode` + `Request:BusyWaitSeconds`. ✅ Codex committed its own output this time — `02-01-PLAN.md` checkboxes + `02-01-SUMMARY.md` are in commit `aca78bb` (no dangling files). ✅ `InternalsVisibleTo("QbConnectService.Tests")` for `StaThread` is in `StaThread.cs` (not a sln-wide hack). ✅ Nothing outside `quickbooks/` touched. ✅ Zero new NuGet packages — all in-box (`Thread`/`ApartmentState.STA`, `BlockingCollection`, `TaskCompletionSource`, `SemaphoreSlim`, `Task.WaitAsync`, `Marshal.FinalReleaseComObject`, `IOptions<T>`).
+
+## Findings
+
+| Severity | Count |
+|---|---|
+| Blocker | 0 |
+| High | 0 |
+| Medium | 0 |
+| Low | 1 |
+| Info | 2 |
+
+**LOW-1** — Codex committed Task 2 (`ff9e53f` "add QbErrors map + Qb exception types") and Task 3 (`43c342b` "add StaThread STA worker pump") and then immediately committed *revisions* of each (`1cf60d7` / `1cb97e6`) using the **same commit message** instead of amending or using a `fix(...)` message. Result: 11 `02-01` commits instead of ~9, with two pairs of same-titled commits. End state is correct (44 tests green). **Won't fix** — squashing would require `git rebase -i` which rewrites branch history while an unrelated team's automated work also uses this checkout; the clutter isn't worth that risk. Note for the PR reviewer: the second of each pair is the final intent.
+
+**INFO-1** — `Program.cs`'s root endpoint still returns the literal string `"QbConnectService (Phase 1 skeleton). REST API arrives in Phase 5."` — cosmetic; the real `/api/*` endpoints land in Phase 5 anyway, which will replace this line.
+**INFO-2** — `GetSupportedQbXmlVersionsAsync` has the watchdog but not the dead-ticket retry (only `ExecuteAsync`/`ProcessWithRetryAsync` does). Acceptable — `GetSupportedQbXmlVersions` is only ever called right after a fresh connect, so a dead ticket there is implausible.
+
+## Recommendation
+
+**Proceed to Phase 3 (qbXML Engine — READ-01,02,03,11).** Phase 2 is solid: build + 44/44 tests green, all five SESS requirements met with concrete assertions, scope clean, hygiene clean, zero dangling output. The one LOW is cosmetic git history. Loop continues: `/gsd:plan-phase 3` → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 3` → review.

@@ -56,6 +56,11 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-05-11
-Stopped at: ROADMAP.md and STATE.md written; REQUIREMENTS.md traceability populated; committed on branch quickbooks/direct-sdk-integration-2026-05-11.
+Last session: 2026-05-12
+Stopped at: Phases 1 & 2 COMPLETE (Codex-executed, Claude-reviewed: Phase 1 100/100, Phase 2 99/100 — one cosmetic-git-history LOW; build + 44/44 tests green; reviews in docs/review/EXECUTIVE-SUMMARY.md). Next: `/gsd:plan-phase 3` (qbXML Engine — READ-01,02,03,11) → `pwsh quickbooks/dev/run-codex-phase.ps1 -Phase 3` → review.
 Resume file: None
+
+### Completed phases
+
+- **Phase 1 — Foundation & Mockable COM Seam** (SVC-01..05): 3-project .NET 8 solution, `IRequestProcessor` seam, `[ComImport]` placeholder interop stub + throwing `RealRequestProcessor` stub, tri-mode host, `FakeRequestProcessor`, CI. Commits `6477ead`..`3d6426c`. Reviewed 100/100.
+- **Phase 2 — COM Session Lifecycle** (SESS-01..05): `QbConnectionManager` (STA worker thread + `SemaphoreSlim(1,1)` gate + bounded busy-wait → `QbBusyException` + watchdog → `QbTimeoutException`+poison + dead-ticket → rebuild-COM-object + retry-once), `QbErrors` HRESULT map, `QbException`/`QbBusyException`/`QbTimeoutException`, `StaThread`, real `RealRequestProcessor` COM forwarder + activation-failure smoke test, DI wiring (`Func<IRequestProcessor>` → `RealRequestProcessor` on Windows-non-test; `QbConnectionManager` singleton `IAsyncDisposable`). Commits `00ce1a8`..`aca78bb` (incl. 2 same-message revision commits — cosmetic). Reviewed 99/100. Zero new NuGet packages.
