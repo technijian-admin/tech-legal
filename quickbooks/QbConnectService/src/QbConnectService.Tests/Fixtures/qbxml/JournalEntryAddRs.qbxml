@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<QBXML>
+  <!-- CONSTRUCTED - element names MEDIUM-confidence; Phase 9 re-pins against 10.120.254.13's qbXML 16.0 schema -->
+  <QBXMLMsgsRs statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+    <JournalEntryAddRs requestID="1" statusCode="0" statusSeverity="Info" statusMessage="Status OK">
+      <JournalEntryRet>
+        <TxnID>JE-0001-AAA</TxnID>
+        <TxnNumber>88</TxnNumber>
+        <TimeCreated>2026-05-11T00:00:00-08:00</TimeCreated>
+        <TimeModified>2026-05-11T00:00:00-08:00</TimeModified>
+        <TxnDate>2026-05-11</TxnDate>
+        <RefNumber>JE-001</RefNumber>
+        <IsAdjustment>false</IsAdjustment>
+        <EditSequence>1700004444</EditSequence>
+        <JournalDebitLine>
+          <TxnLineID>JE-0001-D1</TxnLineID>
+          <AccountRef>
+            <ListID>80000040-EXP</ListID>
+            <FullName>Office Expenses</FullName>
+          </AccountRef>
+          <Amount>100.00</Amount>
+        </JournalDebitLine>
+        <JournalCreditLine>
+          <TxnLineID>JE-0001-C1</TxnLineID>
+          <AccountRef>
+            <ListID>80000030-BANK</ListID>
+            <FullName>Checking</FullName>
+          </AccountRef>
+          <Amount>100.00</Amount>
+        </JournalCreditLine>
+      </JournalEntryRet>
+    </JournalEntryAddRs>
+  </QBXMLMsgsRs>
+</QBXML>
