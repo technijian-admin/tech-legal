@@ -12,11 +12,11 @@
     },
     "rajat": {
       "folder_id": 33696977,
-      "status": "SHARED",
-      "executed_at": null,
+      "status": "EXECUTED",
+      "executed_at": "2026-05-13T05:30:08.465345+00:00",
       "reminders_sent": 0,
       "last_reminder_at": null,
-      "completion_email_sent": false,
+      "completion_email_sent": true,
       "revised_doj_at": "2026-05-11T18:31:34.482936+00:00",
       "prior_folder_id_v1": 33686595,
       "prior_folder_id_v2": 33689124,
@@ -24,11 +24,11 @@
     },
     "aditya": {
       "folder_id": 33686600,
-      "status": "SHARED",
-      "executed_at": null,
+      "status": "EXECUTED",
+      "executed_at": "2026-05-13T05:30:10.562977+00:00",
       "reminders_sent": 2,
       "last_reminder_at": "2026-05-12T05:30:34.319997+00:00",
-      "completion_email_sent": false
+      "completion_email_sent": true
     },
     "suresh": {
       "folder_id": 33688737,
@@ -46,17 +46,17 @@
       "folder_id": 33686612,
       "status": "SHARED",
       "executed_at": null,
-      "reminders_sent": 2,
-      "last_reminder_at": "2026-05-12T05:30:37.243763+00:00",
+      "reminders_sent": 6,
+      "last_reminder_at": "2026-05-15T17:30:08.376043+00:00",
       "completion_email_sent": false
     },
     "rahul": {
       "folder_id": 33686615,
-      "status": "SHARED",
-      "executed_at": null,
+      "status": "EXECUTED",
+      "executed_at": "2026-05-13T05:30:14.598005+00:00",
       "reminders_sent": 2,
       "last_reminder_at": "2026-05-12T05:30:39.293856+00:00",
-      "completion_email_sent": false
+      "completion_email_sent": true
     }
   }
 }

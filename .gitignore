@@ -10,6 +10,7 @@ quickbooks/clients/.env
 # .NET build artifacts
 quickbooks/**/bin/
 quickbooks/**/obj/
+*.lscache
 quickbooks/QbConnectService/publish/
 quickbooks/QbConnectService/**/*.user
 .pytest_cache/
