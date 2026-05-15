@@ -1,0 +1,20 @@
+{
+  "folder_name": "TEST-2PARTY-Sequential-Tech-First",
+  "subject": "Technijian — Test: Sequential 2-Party Sign-Through (Tech First)",
+  "doc_subject": "Test Envelope — Sequential Tech-Then-Client",
+  "include_ravi_signature": true,
+  "documents": [
+    { "path": "clients/BBC/03_SOW/SOW-BBC-001-AutoLeadGen-Build.docx",
+      "label": "Test Document" }
+  ],
+  "parties": [
+    { "first": "Ravi", "last": "Test-Tech", "email": "rjain557@hotmail.com",
+      "sequence": 1, "role": "tech",
+      "intro": "TEST envelope — Tech party (seq 1) signs FIRST. Verify your fields render and the post-sign page is NOT the Foxit error page." },
+    { "first": "Ravi", "last": "Test-Client", "email": "rjain557@gmail.com",
+      "sequence": 2, "role": "client",
+      "intro": "TEST envelope — Client party (seq 2) signs AFTER Tech. You should only be able to access this AFTER the hotmail party signs. Verify your fields render and the post-sign page is NOT the Foxit error page." }
+  ],
+  "signing_mode": "sequential",
+  "cc": []
+}

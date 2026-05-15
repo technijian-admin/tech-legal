@@ -1,0 +1,20 @@
+{
+  "folder_name": "TEST-2PARTY-EmbeddedSessionFix",
+  "subject": "Technijian — Test: 2-Party Sign-Through Verification",
+  "doc_subject": "Test Envelope — 2-Party Email-Based Signing",
+  "include_ravi_signature": true,
+  "documents": [
+    { "path": "clients/BBC/03_SOW/SOW-BBC-001-AutoLeadGen-Build.docx",
+      "label": "Test Document" }
+  ],
+  "parties": [
+    { "first": "Ravi", "last": "Test-A", "email": "rjain557@gmail.com",
+      "sequence": 1, "role": "client",
+      "intro": "TEST envelope - party 1 of 2. Verify you can sign your fields and the post-sign page is NOT the Foxit 'Looks like something went wrong' error." },
+    { "first": "Ravi", "last": "Test-B", "email": "rjain557@hotmail.com",
+      "sequence": 2, "role": "client",
+      "intro": "TEST envelope - party 2 of 2. Verify you can sign your fields and the post-sign page is NOT the Foxit 'Looks like something went wrong' error." }
+  ],
+  "signing_mode": "parallel",
+  "cc": []
+}

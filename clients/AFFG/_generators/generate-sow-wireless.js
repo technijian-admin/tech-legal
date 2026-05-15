@@ -19,7 +19,7 @@ const FONT = "Open Sans";
 
 // Logo
 let logoBuffer = null;
-const logoPath = path.join(__dirname, "../../../templates/logo.jpg");
+const logoPath = path.join(__dirname, "../../../templates/logo.png");
 try {
   logoBuffer = fs.readFileSync(logoPath);
 } catch (e) {

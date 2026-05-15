@@ -18,7 +18,7 @@ const WHITE = "FFFFFF";
 const FONT = "Open Sans";
 
 let logoBuffer = null;
-const logoPath = path.join(__dirname, "../../../templates/logo.jpg");
+const logoPath = path.join(__dirname, "../../../templates/logo.png");
 try { logoBuffer = fs.readFileSync(logoPath); } catch (e) {}
 
 // ===== STYLES =====
@@ -156,7 +156,7 @@ function coverPage(title, subtitle) {
     items.push(new Paragraph({
       alignment: AlignmentType.CENTER, spacing: { after: 200 },
       children: [new ImageRun({
-        type: "jpg", data: logoBuffer,
+        type: "png", data: logoBuffer,
         transformation: { width: 250, height: 63 },
         altText: { title: "Technijian Logo", description: "Technijian Inc.", name: "logo" }
       })]
@@ -185,7 +185,7 @@ function makeHeader() {
     children.push(new Paragraph({
       alignment: AlignmentType.LEFT,
       children: [new ImageRun({
-        type: "jpg", data: logoBuffer,
+        type: "png", data: logoBuffer,
         transformation: { width: 130, height: 33 },
         altText: { title: "Technijian", description: "Technijian Inc.", name: "logo" }
       })]

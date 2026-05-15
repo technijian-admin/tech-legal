@@ -1,0 +1,17 @@
+{
+  "folder_name": "SOW-PCAP-001-AI-Advisory",
+  "subject": "Technijian — SOW for Signature: AI Advisory — Pet Care Plus",
+  "doc_subject": "Statement of Work — AI Consulting and Automation (Fractional CTO Advisory)",
+  "include_ravi_signature": true,
+  "documents": [
+    { "path": "clients/PCAP/03_SOW/SOW-PCAP-001-AI-Advisory.pdf",
+      "label": "Statement of Work — AI Consulting and Automation" }
+  ],
+  "parties": [
+    { "first": "Chris", "last": "Stavrianos", "email": "chris@petcp.com",
+      "sequence": 1, "role": "client",
+      "intro": "Please review and sign the attached Statement of Work for the AI Consulting and Automation Fractional CTO Advisory engagement. This is a time-and-materials engagement at $250/hr CTO Advisory, invoiced weekly every Friday for hours worked in that week. The document has already been counter-signed by Ravi Jain on Technijian's side." }
+  ],
+  "signing_mode": "sequential",
+  "cc": []
+}
