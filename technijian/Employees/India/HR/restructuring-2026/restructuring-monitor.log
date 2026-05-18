@@ -96,3 +96,87 @@
 [2026-05-15 10:30:09 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
 [2026-05-15 10:30:09 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
 [2026-05-15 10:30:09 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-15 22:30:04 Pacific Daylight Time] Monitor run starting
+[2026-05-15 22:30:06 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-15 22:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-15 22:30:12 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-15 22:30:12 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-15 22:30:13 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-15 22:30:13 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-15 22:30:15 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-15 22:30:15 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-15 22:30:16 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-15 22:30:19 Pacific Daylight Time]     -> sent reminder #7 (Ajay + Gurdeep cc'd)
+[2026-05-15 22:30:19 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-15 22:30:19 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-15 22:30:19 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-16 10:30:05 Pacific Daylight Time] Monitor run starting
+[2026-05-16 10:30:06 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-16 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 10:30:06 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-16 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 10:30:06 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-16 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 10:30:07 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-16 10:30:07 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 10:30:07 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-16 10:30:08 Pacific Daylight Time]     -> sent reminder #8 (Ajay + Gurdeep cc'd)
+[2026-05-16 10:30:09 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-16 10:30:09 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 10:30:09 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-16 22:30:04 Pacific Daylight Time] Monitor run starting
+[2026-05-16 22:30:05 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-16 22:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 22:30:05 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-16 22:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 22:30:06 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-16 22:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 22:30:06 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-16 22:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 22:30:07 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-16 22:30:07 Pacific Daylight Time]     -> NOT signed; reminder cap (8) reached, no further reminders
+[2026-05-16 22:30:07 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-16 22:30:07 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-16 22:30:07 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-17 10:30:03 Pacific Daylight Time] Monitor run starting
+[2026-05-17 10:30:04 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-17 10:30:04 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 10:30:05 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-17 10:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 10:30:05 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-17 10:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 10:30:06 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-17 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 10:30:06 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-17 10:30:06 Pacific Daylight Time]     -> NOT signed; reminder cap (8) reached, no further reminders
+[2026-05-17 10:30:07 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-17 10:30:07 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 10:30:07 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-17 22:30:03 Pacific Daylight Time] Monitor run starting
+[2026-05-17 22:30:04 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-17 22:30:04 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 22:30:05 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-17 22:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 22:30:05 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-17 22:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 22:30:05 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-17 22:30:05 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 22:30:06 Pacific Daylight Time]   yogesh   folder=33686612 status=SHARED (was SHARED)
+[2026-05-17 22:30:06 Pacific Daylight Time]     -> NOT signed; reminder cap (8) reached, no further reminders
+[2026-05-17 22:30:06 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-17 22:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-17 22:30:06 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.
+[2026-05-18 10:30:04 Pacific Daylight Time] Monitor run starting
+[2026-05-18 10:30:06 Pacific Daylight Time]   devesh   folder=33686594 status=EXECUTED (was EXECUTED)
+[2026-05-18 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-18 10:30:06 Pacific Daylight Time]   rajat    folder=33696977 status=EXECUTED (was EXECUTED)
+[2026-05-18 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-18 10:30:06 Pacific Daylight Time]   aditya   folder=33686600 status=EXECUTED (was EXECUTED)
+[2026-05-18 10:30:06 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-18 10:30:07 Pacific Daylight Time]   suresh   folder=33688737 status=EXECUTED (was EXECUTED)
+[2026-05-18 10:30:07 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-18 10:30:07 Pacific Daylight Time]   yogesh   folder=33809815 status=SHARED (was SHARED)
+[2026-05-18 10:30:08 Pacific Daylight Time]     -> sent reminder #1 (Ajay + Gurdeep cc'd)
+[2026-05-18 10:30:09 Pacific Daylight Time]   rahul    folder=33686615 status=EXECUTED (was EXECUTED)
+[2026-05-18 10:30:09 Pacific Daylight Time]     -> already executed; completion email already sent on a prior run
+[2026-05-18 10:30:09 Pacific Daylight Time] 1 envelope(s) still pending. Next check in 12 hours.

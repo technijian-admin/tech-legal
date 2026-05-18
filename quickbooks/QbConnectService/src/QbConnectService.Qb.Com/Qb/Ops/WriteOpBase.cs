@@ -54,8 +54,9 @@ public abstract class WriteOpBase(
         var parsed = _xmlParser.Parse(rawResponse);
         var status = parsed.Message;
         var rows = parsed.Elements.Count > 0 ? parsed.First.Rows : new List<Dictionary<string, object?>>();
+        var company = _manager.CurrentCompanyKey ?? QbCompanyContext.Current ?? "default";
         var seq = await _audit.AppendAsync(
-            new AuditRecord(Name, args, requestXml, status.Code, status.Severity, status.Message),
+            new AuditRecord(Name, args, requestXml, status.Code, status.Severity, status.Message, company),
             ct);
 
         return new Dictionary<string, object?>

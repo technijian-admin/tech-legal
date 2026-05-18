@@ -45,6 +45,7 @@ public sealed class AuditLog
                 seq,
                 timestampUtc,
                 rec.Op,
+                rec.Company,
                 writer => JsonSerializer.Serialize(writer, rec.Args),
                 rec.QbXmlRequest,
                 rec.ResponseStatusCode,
@@ -109,6 +110,7 @@ public sealed class AuditLog
                 var storedPrevHash = row["prevHash"]?.GetValue<string>();
                 var timestampText = row["timestampUtc"]?.GetValue<string>();
                 var op = row["op"]?.GetValue<string>();
+                var company = row["company"]?.GetValue<string>();
                 var qbXmlRequest = row["qbXmlRequest"]?.GetValue<string>();
                 var responseStatusCode = row["responseStatusCode"]?.GetValue<string>();
                 var responseStatusSeverity = row["responseStatusSeverity"]?.GetValue<string>();
@@ -120,6 +122,7 @@ public sealed class AuditLog
                     storedPrevHash is null ||
                     timestampText is null ||
                     op is null ||
+                    company is null ||
                     qbXmlRequest is null ||
                     responseStatusCode is null ||
                     responseStatusSeverity is null ||
@@ -145,6 +148,7 @@ public sealed class AuditLog
                     seq,
                     timestampUtc,
                     op,
+                    company,
                     writer => argsNode.WriteTo(writer),
                     qbXmlRequest,
                     responseStatusCode,
@@ -222,6 +226,7 @@ public sealed class AuditLog
         long seq,
         DateTime timestampUtc,
         string op,
+        string company,
         Action<Utf8JsonWriter> writeArgs,
         string qbXmlRequest,
         string responseStatusCode,
@@ -238,6 +243,7 @@ public sealed class AuditLog
                 seq,
                 timestampUtc,
                 op,
+                company,
                 writeArgs,
                 qbXmlRequest,
                 responseStatusCode,
@@ -258,6 +264,7 @@ public sealed class AuditLog
         long seq,
         DateTime timestampUtc,
         string op,
+        string company,
         Action<Utf8JsonWriter> writeArgs,
         string qbXmlRequest,
         string responseStatusCode,
@@ -270,6 +277,7 @@ public sealed class AuditLog
         writer.WriteNumber("seq", seq);
         writer.WriteString("timestampUtc", timestampUtc.ToString("O", CultureInfo.InvariantCulture));
         writer.WriteString("op", op);
+        writer.WriteString("company", company);
         writer.WritePropertyName("args");
         writeArgs(writer);
         writer.WriteString("qbXmlRequest", qbXmlRequest);

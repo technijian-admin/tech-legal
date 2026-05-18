@@ -202,6 +202,7 @@ public sealed class AuditLogTests
                 DateTime.Parse(row["timestampUtc"]!.GetValue<string>(), CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind)
                     .ToString("O", CultureInfo.InvariantCulture));
             writer.WriteString("op", row["op"]!.GetValue<string>());
+            writer.WriteString("company", row["company"]!.GetValue<string>());
             writer.WritePropertyName("args");
             row["args"]!.WriteTo(writer);
             writer.WriteString("qbXmlRequest", row["qbXmlRequest"]!.GetValue<string>());

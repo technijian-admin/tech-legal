@@ -7,7 +7,7 @@ using QbConnectService.Tests.Fakes;
 
 namespace QbConnectService.Tests;
 
-public sealed class QbWebAppFactory : WebApplicationFactory<Program>
+public class QbWebAppFactory : WebApplicationFactory<Program>
 {
     public const string Token = "test-token";
 

@@ -12,6 +12,7 @@ public static class QbXmlEndpoints
             HttpContext ctx,
             QbConnectionManager manager,
             IOptions<SafetyOptions> safety,
+            IOptions<QbOptions> qb,
             CancellationToken ct) =>
         {
             string body;
@@ -36,8 +37,16 @@ public static class QbXmlEndpoints
                     detail: "Safety:AllowWrites is false; this qbXML contains an Add/Mod/Del/Void request. Set Safety:AllowWrites=true to enable writes.");
             }
 
-            var raw = await manager.ExecuteAsync(body, ct);
-            return Results.Content(raw, "application/xml");
+            if (!OpsEndpoints.TryResolveCompany(ctx, qb.Value, out var rawRequested, out _, out var companyError))
+            {
+                return companyError!;
+            }
+
+            using (QbCompanyContext.Push(rawRequested))
+            {
+                var raw = await manager.ExecuteAsync(body, ct);
+                return Results.Content(raw, "application/xml");
+            }
         });
     }
 }

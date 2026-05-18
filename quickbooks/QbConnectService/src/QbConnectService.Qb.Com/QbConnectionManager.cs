@@ -17,6 +17,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
     private IRequestProcessor? _rp;
     private string? _ticket;
     private QbConnectionState _state = QbConnectionState.Disconnected;
+    private string? _currentCompanyKey;
 
     public QbConnectionManager(
         Func<IRequestProcessor> factory,
@@ -37,12 +38,17 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
     public QbConnectionState State => _state;
 
+    /// <summary>Currently open company key, or null if no session is open. Useful for tests and diagnostics.</summary>
+    public string? CurrentCompanyKey => _currentCompanyKey;
+
     public async Task<string> ExecuteAsync(string qbXmlRequest, CancellationToken ct = default)
     {
         if (!_safety.AllowWrites && QbWriteDetector.IsWriteRequest(qbXmlRequest))
         {
             throw new QbWriteForbiddenException("Refused write qbXML: Safety:AllowWrites is false.");
         }
+
+        var (requestedKey, company) = _qb.ResolveCompany(QbCompanyContext.Current);
 
         if (!await _gate.WaitAsync(TimeSpan.FromSeconds(_req.BusyWaitSeconds), ct))
         {
@@ -51,8 +57,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         try
         {
-            await EnsureConnectedAsync();
-            return await ProcessWithRetryAsync(qbXmlRequest);
+            await EnsureConnectedForAsync(requestedKey, company);
+            return await ProcessWithRetryAsync(qbXmlRequest, requestedKey, company);
         }
         catch (QbException exception)
         {
@@ -68,6 +74,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
     public async Task<string[]> GetSupportedQbXmlVersionsAsync(CancellationToken ct = default)
     {
+        var (requestedKey, company) = _qb.ResolveCompany(QbCompanyContext.Current);
+
         if (!await _gate.WaitAsync(TimeSpan.FromSeconds(_req.BusyWaitSeconds), ct))
         {
             throw new QbBusyException(TimeSpan.FromSeconds(_req.BusyWaitSeconds));
@@ -75,7 +83,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         try
         {
-            await EnsureConnectedAsync();
+            await EnsureConnectedForAsync(requestedKey, company);
             return await _sta
                 .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
                 .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
@@ -143,6 +151,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
                 _rp = null;
                 _ticket = null;
+                _currentCompanyKey = null;
                 _state = QbConnectionState.Disconnected;
                 _log.LogInformation("Closed the QuickBooks session.");
             }
@@ -162,17 +171,33 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
     }
 
-    private async Task EnsureConnectedAsync()
+    private async Task EnsureConnectedForAsync(string requestedKey, QbCompany company)
     {
-        if (_state == QbConnectionState.SessionOpen && _rp is not null)
+        if (_state == QbConnectionState.SessionOpen
+            && _rp is not null
+            && string.Equals(_currentCompanyKey, requestedKey, StringComparison.OrdinalIgnoreCase))
         {
             return;
         }
 
-        await ConnectAsync();
+        if (_state == QbConnectionState.SessionOpen && _rp is not null)
+        {
+            // Active session is for a DIFFERENT company. Close it before opening the new one.
+            _log.LogInformation(
+                "Switching QuickBooks session from company '{From}' to '{To}'.",
+                _currentCompanyKey ?? "(unknown)",
+                requestedKey);
+            await DisposeCurrentConnectionAsync();
+            _rp = null;
+            _ticket = null;
+            _currentCompanyKey = null;
+            _state = QbConnectionState.Disconnected;
+        }
+
+        await ConnectAsync(requestedKey, company);
     }
 
-    private async Task ConnectAsync()
+    private async Task ConnectAsync(string requestedKey, QbCompany company)
     {
         _state = QbConnectionState.Connecting;
         LastError = null;
@@ -191,10 +216,11 @@ public sealed class QbConnectionManager : IAsyncDisposable
                 _log.LogWarning("Ignoring configured QuickBooks open mode SingleUser; forcing DoNotCare.");
             }
 
-            await OpenFreshConnectionAsync();
+            await OpenFreshConnectionAsync(company);
 
+            _currentCompanyKey = requestedKey;
             _state = QbConnectionState.SessionOpen;
-            _log.LogInformation("Opened the QuickBooks connection and session.");
+            _log.LogInformation("Opened QuickBooks connection + session for company '{Key}'.", requestedKey);
         }
         catch (COMException ex)
         {
@@ -216,7 +242,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
     }
 
-    private async Task<string> ProcessWithRetryAsync(string qbXmlRequest)
+    private async Task<string> ProcessWithRetryAsync(string qbXmlRequest, string requestedKey, QbCompany company)
     {
         try
         {
@@ -235,7 +261,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
                 "Dead ticket 0x{Hresult:X8}; rebuilding the QuickBooks connection and retrying once.",
                 ex.HResult);
 
-            await RebuildConnectionAsync();
+            await RebuildConnectionAsync(requestedKey, company);
 
             try
             {
@@ -259,23 +285,24 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
     }
 
-    private async Task RebuildConnectionAsync()
+    private async Task RebuildConnectionAsync(string requestedKey, QbCompany company)
     {
         await DisposeCurrentConnectionAsync();
         _rp = null;
         _ticket = null;
+        _currentCompanyKey = null;
         _state = QbConnectionState.Disconnected;
 
-        await ConnectAsync();
+        await ConnectAsync(requestedKey, company);
     }
 
-    private Task OpenFreshConnectionAsync() =>
+    private Task OpenFreshConnectionAsync(QbCompany company) =>
         _sta.Run(() =>
         {
             _rp = _factory();
             _rp.SetUnattendedModePreference(true);
-            _rp.OpenConnection(_qb.AppId, _qb.AppName, QbConnectionType.LocalQBD);
-            _ticket = _rp.BeginSession(_qb.CompanyFilePath, QbFileMode.DoNotCare);
+            _rp.OpenConnection(company.AppId, company.AppName, QbConnectionType.LocalQBD);
+            _ticket = _rp.BeginSession(company.CompanyFilePath, QbFileMode.DoNotCare);
         });
 
     private Task DisposeCurrentConnectionAsync() =>
@@ -326,6 +353,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         _rp = null;
         _ticket = null;
+        _currentCompanyKey = null;
     }
 
     private void LogMappedError(QbException exception)

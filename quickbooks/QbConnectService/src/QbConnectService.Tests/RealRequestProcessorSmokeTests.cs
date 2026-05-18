@@ -13,9 +13,17 @@ public sealed class RealRequestProcessorSmokeTests
             return;
         }
 
-        // Phase 1's placeholder COM GUIDs are intentionally not registered on the test machine, so the only
-        // behavior in scope here is that activation fails cleanly as a mapped QbException. Real COM activation
-        // against the SDK-generated interop is a Phase 9 concern on the QuickBooks host.
+        // RealRequestProcessor uses late-bound COM via Type.GetTypeFromProgID. On the QuickBooks host
+        // (or any box that has the QB SDK / Desktop registered), construction SUCCEEDS - nothing to assert.
+        // Skip in that case; this test only exercises the no-COM-registered failure-mapping path.
+        var registered =
+            Type.GetTypeFromProgID("QBXMLRP2.RequestProcessor2") is not null ||
+            Type.GetTypeFromProgID("QBXMLRP2.RequestProcessor") is not null;
+        if (registered)
+        {
+            return;
+        }
+
         var exception = Assert.Throws<QbException>(() => new RealRequestProcessor());
 
         Assert.True(
