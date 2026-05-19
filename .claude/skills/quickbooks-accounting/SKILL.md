@@ -7,15 +7,27 @@ description: Top-level navigator for the QuickBooks Desktop accounting integrati
 
 This is the umbrella skill. **For specific tasks, route to a focused sub-skill**:
 
+### Transactional (CRUD) skills
+
 | User wants to… | Use sub-skill |
 |---|---|
 | Create / list / modify customer invoices, manage AR | [quickbooks-invoices](../quickbooks-invoices/SKILL.md) |
 | Enter / list vendor bills, manage AP | [quickbooks-bills](../quickbooks-bills/SKILL.md) |
 | Write a check, record a wire/debit/EFT, record customer payment, apply payment to invoices | [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) |
 | Look up chart of accounts, items (with their tied accounts), or classes | [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) |
-| Pull P&L, Balance Sheet, A/R Aging, A/P Aging, by-class reports | [quickbooks-reports](../quickbooks-reports/SKILL.md) |
 | Post a journal entry, reclassify between classes, accrue, depreciate | [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) |
-| Read or match bank-feed downloads | [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) |
+| Read or match bank-feed downloads (raw qbXML mechanics) | [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) |
+| Auto-categorize downloaded bank/ACH transactions to the right account + class | [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) |
+
+### Analytical / reporting skills
+
+| User wants to… | Use sub-skill |
+|---|---|
+| Pull P&L, Balance Sheet, A/R Aging, A/P Aging, by-class reports | [quickbooks-reports](../quickbooks-reports/SKILL.md) |
+| Analyze gross margin by class / service line; flag classes under-margin | [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) |
+| Understand what items drive revenue per class; sales-by-item analysis | [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) |
+| Check current cash position, working capital, AR/AP aging impact | [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) |
+| Project cash, revenue, expenses 30/60/90 days forward | [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) |
 
 Common scaffolding (multi-tenant, safe-write workflow, op catalog, raw-qbXML fallback) lives here in this top-level skill.
 
@@ -180,15 +192,23 @@ gated by `AllowWrites` and still needs explicit user confirmation first.
 
 ## Pointers
 
-### Focused sub-skills
+### Focused sub-skills — transactional / CRUD
 
 - [quickbooks-invoices](../quickbooks-invoices/SKILL.md) — AR invoices
 - [quickbooks-bills](../quickbooks-bills/SKILL.md) — AP bills
 - [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) — direct checks + receive_payment
 - [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) — CoA, items, classes lookup
-- [quickbooks-reports](../quickbooks-reports/SKILL.md) — P&L, BS, aging, by-class
 - [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) — GL JEs
-- [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) — bank-feed downloads (raw-qbXML for now)
+- [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) — bank-feed download mechanics (raw-qbXML)
+- [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) — auto-categorization rules
+
+### Focused sub-skills — analytical / reporting
+
+- [quickbooks-reports](../quickbooks-reports/SKILL.md) — P&L, BS, aging, by-class
+- [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) — gross margin by service line
+- [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) — items → revenue → class
+- [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) — current cash position + working capital
+- [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) — forward projections
 
 ### References
 

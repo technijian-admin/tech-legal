@@ -18,3 +18,11 @@ quickbooks/QbConnectService/**/*.user
 quickbooks/QbConnectService/deploy/appsettings.json
 quickbooks/QbConnectService/deploy/*.pfx
 quickbooks/QbConnectService/deploy/*.cer
+# qb-accountant agent state (per-workstation runtime artifacts — never commit)
+quickbooks/agent/state/config.json
+quickbooks/agent/state/audit-log.jsonl
+quickbooks/agent/state/last-*-run.json
+quickbooks/agent/state/harness-logs/
+quickbooks/agent/state/snapshots/
+quickbooks/agent/state/reports/
+quickbooks/agent/state/pending-review/

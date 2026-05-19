@@ -1,0 +1,32 @@
+{
+  "_comment": "Copy to config.json (which is .gitignore'd) and edit as needed. The agent reads this on every run.",
+  "default_company": "technijian",
+  "auto_send_friendly_reminders": false,
+  "_auto_send_friendly_reminders_help": "If true, daily routine sends AR reminder emails for the 1-15 day friendly bucket without confirmation. All other buckets still require human review.",
+  "cash_low_water_mark": 50000,
+  "_cash_low_water_mark_help": "Forecast flags days where projected cash drops below this dollar amount.",
+  "target_margins": {
+    "Office 365 (Online Services)": 45,
+    "Cisco Umbrella": 50,
+    "Sophos": 45,
+    "Huntress": 50,
+    "Inky": 45,
+    "NinJio": 50,
+    "Kaseya": 45,
+    "ManageEngine": 45,
+    "Data Center - Other (Data Center)": 55,
+    "Support (India)": 45,
+    "CS": 50,
+    "Development (US)": 40,
+    "Development (India)": 50,
+    "Leases (Finance)": 5,
+    "My OPS": 40,
+    "DIDForSale": 40
+  },
+  "margin_variance_alert_pts": 5,
+  "_margin_variance_alert_pts_help": "Alert when a class's gross margin declines by this many percentage points vs trailing 4-week average.",
+  "ar_aging_buckets_days": [15, 30, 60, 90],
+  "summary_email_to": "rjain@technijian.com",
+  "summary_email_cc": [],
+  "exception_email_to": "rjain@technijian.com"
+}
