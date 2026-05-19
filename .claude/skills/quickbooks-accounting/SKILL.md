@@ -1,23 +1,43 @@
 ---
 name: quickbooks-accounting
-description: Drive the QuickBooks Desktop accounting integration: pull reports and lists (P&L, balance sheet, invoices, bills, customers, vendors, accounts, items), look up transactions, run safe read queries, and perform write operations (create customer/vendor/invoice/bill/check, receive payment, journal entry, modify a record) through the dry-run-and-confirm workflow. Use when the user mentions QuickBooks, QbConnectService, pulling the P&L, listing invoices, creating an invoice or customer in QuickBooks, or the quickbooks/clients Python client.
+description: Top-level navigator for the QuickBooks Desktop accounting integration. Routes the work to a focused sub-skill (invoices, bills, checks-and-payments, accounts-items-classes, reports, journal-entries, bank-feeds) and owns the canonical safe-write workflow + the full op catalog. Use when the user mentions QuickBooks, QbConnectService, accounting, P&L, AR, AP, invoices, bills, checks, or the Python client at quickbooks/clients/.
 ---
 
-# QuickBooks Accounting
+# QuickBooks Accounting (Navigator)
 
-## When to use
+This is the umbrella skill. **For specific tasks, route to a focused sub-skill**:
 
-Use this skill when the task is to read or write accounting data through the
-QuickBooks Desktop `QbConnectService` integration.
+| User wants to… | Use sub-skill |
+|---|---|
+| Create / list / modify customer invoices, manage AR | [quickbooks-invoices](../quickbooks-invoices/SKILL.md) |
+| Enter / list vendor bills, manage AP | [quickbooks-bills](../quickbooks-bills/SKILL.md) |
+| Write a check, record a wire/debit/EFT, record customer payment, apply payment to invoices | [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) |
+| Look up chart of accounts, items (with their tied accounts), or classes | [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) |
+| Pull P&L, Balance Sheet, A/R Aging, A/P Aging, by-class reports | [quickbooks-reports](../quickbooks-reports/SKILL.md) |
+| Post a journal entry, reclassify between classes, accrue, depreciate | [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) |
+| Read or match bank-feed downloads | [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) |
 
-Typical triggers:
+Common scaffolding (multi-tenant, safe-write workflow, op catalog, raw-qbXML fallback) lives here in this top-level skill.
 
-- Pull a Profit & Loss or Balance Sheet
-- List invoices, bills, customers, vendors, items, or accounts
-- Look up a transaction by `TxnID` or `RefNumber`
-- Run a safe ad-hoc query through `run_query`
-- Create or modify a QuickBooks object through the dry-run workflow
-- Send raw qbXML because no wrapped op fits
+## Multi-tenant
+
+The QbConnectService serves multiple `.QBW` company files on the same QuickBooks host. Every API call picks a company via the `?company=<key>` query param (or `X-Qb-Company` header). The Python client honors a `default_company` and per-call `company=` override.
+
+| Company key | .QBW path | Authorization status (as of 2026-05-19) |
+|---|---|---|
+| `technijian` (DEFAULT) | `D:\Quickbooks\technijian.qbw` | ✅ Authorized — full unattended access |
+| `electronic-corporation-of-america` | `D:\Quickbooks\Electronic Corporation of America.qbw` | ✅ Authorized — full unattended access |
+| `technijian-pvt-ltd` | `D:\Quickbooks\Technijian PVT Ltd..qbw` | ⏳ Configured but not yet integrated-app-authorized |
+| `kutumba-holdings-llc` | `D:\Quickbooks\Kutumba Holdings LLC.qbw` | ⏳ Configured but not yet integrated-app-authorized |
+
+Calls against unauthorized companies will return `0x80040408 QB_COULD_NOT_START`.
+
+## When to use this top-level skill
+
+- Generic QuickBooks / accounting questions that don't fit a specific sub-skill
+- The full safe-write workflow (the steps below)
+- Looking up the v1 op catalog
+- The raw-qbXML fallback envelope
 
 ## Quick start
 
@@ -25,15 +45,16 @@ Typical triggers:
    `pip install -r quickbooks/clients/requirements.txt`
 2. Copy the sample env file:
    `cp quickbooks/clients/.env.sample quickbooks/clients/.env`
-3. Fill in `QB_API_BASE_URL` and `QB_API_TOKEN`.
-4. Ensure the QuickBooks-side service is running on the host.
-5. Always start with `c.health()` and confirm:
+3. Fill in `QB_API_BASE_URL`, `QB_API_TOKEN`, and optionally `QB_DEFAULT_COMPANY=technijian`.
+4. Ensure the QbConnectService scheduled task is running on the host (10.120.254.13).
+5. Always start with `client.health()` and confirm:
    - `status == "healthy"`
-   - `connectionState` is usable
+   - `connectionState == "SessionOpen"` (or be ready to wait for cold-start QB launch)
    - `allowWrites` before considering any write
 
-If the dev cert is self-signed, set `QB_VERIFY_TLS=false` or point it at a CA
-bundle / `.cer`.
+If the dev cert is self-signed, set `QB_VERIFY_TLS=false` or point at a CA
+bundle / `.cer`. (On the QB server itself the cert is already trusted in
+`Cert:\LocalMachine\Root`.)
 
 ## Invocation patterns
 
@@ -54,19 +75,23 @@ Run a small inline script from `quickbooks/clients/`:
 ```bash
 cd quickbooks/clients && python -c "
 from qb_client import QbClient
-client = QbClient.from_env()
+client = QbClient.from_env()    # picks up QB_DEFAULT_COMPANY if set
 print(client.health())
 print(client.op('list_customers', {'activeStatus': 'Active', 'name': 'Acme'}))
 "
 ```
 
-The client surface is:
+The client surface (with multi-tenant `company` support):
 
 - `client.health()`
 - `client.ops()`
-- `client.op(name, args_dict)`
-- `client.dryrun(name, args_dict)`
-- `client.qbxml(raw_xml_string)`
+- `client.op(name, args_dict, company=None)`
+- `client.dryrun(name, args_dict, company=None)`
+- `client.qbxml(raw_xml_string, company=None)`
+- `client.with_company(key)` — returns a shallow clone scoped to that company
+
+Each method's `company=` is optional. If omitted, the client uses
+`default_company` (from `QB_DEFAULT_COMPANY` env var, default `technijian`).
 
 Errors raise `QbApiError` with `.status_code`, `.title`, `.detail`, and
 `.qb_error_code`.
@@ -155,13 +180,30 @@ gated by `AllowWrites` and still needs explicit user confirmation first.
 
 ## Pointers
 
+### Focused sub-skills
+
+- [quickbooks-invoices](../quickbooks-invoices/SKILL.md) — AR invoices
+- [quickbooks-bills](../quickbooks-bills/SKILL.md) — AP bills
+- [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) — direct checks + receive_payment
+- [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) — CoA, items, classes lookup
+- [quickbooks-reports](../quickbooks-reports/SKILL.md) — P&L, BS, aging, by-class
+- [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) — GL JEs
+- [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) — bank-feed downloads (raw-qbXML for now)
+
+### References
+
 - `references/qbxml-cheatsheet.md`
   Raw qbXML envelope, common Query/Add/Mod/Delete/Void shapes, iterators, and
   the `3200` stale-`EditSequence` rule.
 - `references/setup-and-troubleshooting.md`
-  Health/auth/write-gate/TLS/busy/timeout failure modes. Deploy scripts and
-  host runbooks arrive in Phase 9.
+  Health/auth/write-gate/TLS/busy/timeout failure modes.
 - `quickbooks/clients/README.md`
   Local setup and example usage for the Python client.
 - `quickbooks/dev/MULTI-LLM.md`
   The documented build and review pipeline used for this subsystem.
+
+### Operational pointers (not in repo)
+
+- Bearer token + per-company AppName/AppId — `D:\QbConnectService\INSTALL-RESULT.txt` on the QB host.
+- DPAPI cred file for remote PSRemoting from rjain's workstation — `C:\Users\rjain\.qb-server-cred.xml`.
+- Full host credentials + drives + scheduled task setup — `C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\te-hq-app-qb.md`.
