@@ -224,6 +224,7 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
         catch (COMException ex)
         {
+            await CleanupPartialConnectionAsync();
             var exception = QbException.From(ex);
             LastError = exception.Error;
             _state = QbConnectionState.Disconnected;
@@ -231,15 +232,40 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
         catch (QbException exception)
         {
+            await CleanupPartialConnectionAsync();
             LastError = exception.Error;
             _state = QbConnectionState.Disconnected;
             throw;
         }
         catch
         {
+            await CleanupPartialConnectionAsync();
             _state = QbConnectionState.Disconnected;
             throw;
         }
+    }
+
+    /// <summary>
+    /// If a partially-constructed _rp is left over from a failed ConnectAsync (e.g. OpenConnection succeeded
+    /// but BeginSession threw), tear it down before the caller retries. Without this, the next ConnectAsync
+    /// would overwrite _rp via OpenFreshConnectionAsync, leaking the previous COM ref.
+    /// </summary>
+    private async Task CleanupPartialConnectionAsync()
+    {
+        if (_rp is null)
+        {
+            return;
+        }
+        try
+        {
+            await DisposeCurrentConnectionAsync();
+        }
+        catch
+        {
+        }
+        _rp = null;
+        _ticket = null;
+        _currentCompanyKey = null;
     }
 
     private async Task<string> ProcessWithRetryAsync(string qbXmlRequest, string requestedKey, QbCompany company)

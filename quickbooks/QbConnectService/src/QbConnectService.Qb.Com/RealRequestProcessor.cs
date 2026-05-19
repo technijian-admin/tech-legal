@@ -7,17 +7,40 @@ namespace QbConnectService.Qb.Com;
 
 /// <summary>
 /// Late-bound COM wrapper for QBXMLRP2.RequestProcessor / RequestProcessor2. Uses Type.InvokeMember (IDispatch
-/// path) so the service has NO compile-time dependency on a tlbimp-generated Interop DLL. Only the QuickBooks
-/// SDK COM registration on the host is required at runtime - no Windows SDK / tlbimp needed.
+/// path) so the service has NO compile-time dependency on a tlbimp-generated Interop DLL - only the QuickBooks
+/// SDK COM registration on the host is required at runtime.
 ///
-/// NOTE: 'dynamic' dispatch is intentionally NOT used here - the DLR in .NET Core/.NET 5+ does not bind against
-/// __ComObject the way .NET Framework did, so 'dynamic' silently returns __ComObject values you cannot then
-/// invoke methods on. InvokeMember goes through the COM IDispatch path and works on every IDispatch interface
-/// (including sub-objects like AuthPreferences()).
+/// Implementation notes:
+///   - 'dynamic' is intentionally NOT used. The DLR in .NET Core/.NET 5+ does not bind against __ComObject the
+///     way .NET Framework did, so 'dynamic' silently returns __ComObject values you cannot then invoke methods
+///     on. InvokeMember goes through COM IDispatch and works on every IDispatch interface (including sub-objects
+///     such as AuthPreferences()).
+///   - All InvokeMember calls use BindingFlags.IgnoreCase. IDispatch::GetIDsOfNames is case-insensitive, so
+///     adding IgnoreCase avoids spurious DISP_E_MEMBERNOTFOUND for casing differences across SDK versions.
+///   - "Newer-interface only" methods (OpenConnection2, QBXMLVersionsForSession, AuthPreferences) gracefully
+///     degrade to either the older equivalent (OpenConnection without connection-type) or a no-op when the
+///     activated COM object only exposes the older IRequestProcessor as its default IDispatch.
 /// </summary>
 [SupportedOSPlatform("windows")]
 public sealed class RealRequestProcessor : IRequestProcessor
 {
+    // IDispatch "this name isn't on this interface" errors. Both can be returned depending on which COM layer
+    // reports the lookup miss (Invoke vs GetIDsOfNames). Treat them identically when deciding fall-back paths.
+    //   0x80020003 DISP_E_MEMBERNOTFOUND - IDispatch::Invoke says member not found.
+    //   0x80020006 DISP_E_UNKNOWNNAME    - IDispatch::GetIDsOfNames says name not in dispatch table.
+    private const int DispMemberNotFound = unchecked((int)0x80020003);
+    private const int DispUnknownName = unchecked((int)0x80020006);
+
+    private static bool IsNameNotFound(int hresult) =>
+        hresult == DispMemberNotFound || hresult == DispUnknownName;
+
+    // Combined flags for late-bound IDispatch calls (case-insensitive method invocation).
+    private const BindingFlags InvokeFlags = BindingFlags.InvokeMethod | BindingFlags.IgnoreCase;
+
+    // Combined flags for members that may be declared as either a method or a propget in the type library.
+    private const BindingFlags FlexibleFlags =
+        BindingFlags.InvokeMethod | BindingFlags.GetProperty | BindingFlags.IgnoreCase;
+
     private static readonly string[] ProgIds =
     {
         "QBXMLRP2.RequestProcessor2",
@@ -62,13 +85,13 @@ public sealed class RealRequestProcessor : IRequestProcessor
 
     public void OpenConnection(string appId, string appName, QbConnectionType connectionType)
     {
-        // Prefer OpenConnection2 (IRequestProcessor2 - takes connection type). Fall back to OpenConnection
-        // (older IRequestProcessor) when IDispatch only exposes the older interface.
+        // Prefer OpenConnection2 (IRequestProcessor2 - takes a connection-type parameter). Fall back to the
+        // older single-argument OpenConnection when IDispatch only exposes the older IRequestProcessor.
         try
         {
             InvokeVoid(Target, "OpenConnection2", appId, appName, (int)connectionType);
         }
-        catch (COMException ex) when (ex.HResult == DispMemberNotFound)
+        catch (COMException ex) when (IsNameNotFound(ex.HResult))
         {
             InvokeVoid(Target, "OpenConnection", appId, appName);
         }
@@ -86,13 +109,13 @@ public sealed class RealRequestProcessor : IRequestProcessor
 
     public string[] GetSupportedQbXmlVersions(string ticket)
     {
-        // Newer-interface only. Older IRequestProcessor doesn't expose this - return empty (callers tolerate it).
+        // Newer-interface only. Older IRequestProcessor doesn't expose this - return empty.
         object? result;
         try
         {
             result = Invoke<object>(Target, "QBXMLVersionsForSession", ticket);
         }
-        catch (COMException ex) when (ex.HResult == DispMemberNotFound)
+        catch (COMException ex) when (IsNameNotFound(ex.HResult))
         {
             return Array.Empty<string>();
         }
@@ -119,14 +142,13 @@ public sealed class RealRequestProcessor : IRequestProcessor
     {
         // AuthPreferences is only on IRequestProcessor2. If IDispatch only exposes IRequestProcessor (older),
         // we silently skip setting unattended mode - the user can still enable it via QuickBooks Preferences
-        // -> Integrated Applications when authorizing the app. Service continues normally.
+        // -> Integrated Applications when authorizing the app.
         object? prefs;
         try
         {
-            // Try both InvokeMethod and GetProperty - 'AuthPreferences' is declared as a propget in IDL.
             prefs = InvokeFlexible(Target, "AuthPreferences");
         }
-        catch (COMException ex) when (ex.HResult == DispMemberNotFound)
+        catch (COMException ex) when (IsNameNotFound(ex.HResult))
         {
             return;
         }
@@ -140,38 +162,35 @@ public sealed class RealRequestProcessor : IRequestProcessor
         {
             InvokeVoid(prefs, "PutUnattendedModePref", required);
         }
-        catch (COMException ex) when (ex.HResult == DispMemberNotFound)
+        catch (COMException ex) when (IsNameNotFound(ex.HResult))
         {
-            // AuthPreferences exists but PutUnattendedModePref doesn't - shouldn't normally happen, ignore.
+            // AuthPreferences exists but PutUnattendedModePref doesn't - shouldn't normally happen.
         }
-        finally
-        {
-            try { Marshal.FinalReleaseComObject(prefs); } catch { }
-        }
+        // DO NOT call Marshal.FinalReleaseComObject(prefs) - some QBXMLRP2 builds return the
+        // RequestProcessor itself (or a tear-off interface backed by the same IUnknown) for
+        // AuthPreferences. Releasing prefs in that case kills _rp's RCW and the next COM call
+        // throws InvalidComObjectException ("no backing class factory"). The RCW for prefs will
+        // be GC'd when this method returns; that's safe regardless of whether it aliases _rp.
     }
 
     public void Dispose()
     {
         if (_rp is not null)
         {
-            Marshal.FinalReleaseComObject(_rp);
+            ReleaseCom(_rp);
             _rp = null;
         }
     }
 
-    // DISP_E_MEMBERNOTFOUND - IDispatch::GetIDsOfNames couldn't find the method/property on this interface.
-    private const int DispMemberNotFound = unchecked((int)0x80020003);
+    // ------------------------------------------------------------------------
+    // Late-bound helpers
+    // ------------------------------------------------------------------------
 
     private static T? Invoke<T>(object target, string method, params object?[] args)
     {
         try
         {
-            var result = target.GetType().InvokeMember(
-                method,
-                BindingFlags.InvokeMethod,
-                binder: null,
-                target: target,
-                args: args);
+            var result = target.GetType().InvokeMember(method, InvokeFlags, binder: null, target: target, args: args);
             return (T?)result;
         }
         catch (TargetInvocationException ex) when (ex.InnerException is not null)
@@ -185,12 +204,7 @@ public sealed class RealRequestProcessor : IRequestProcessor
     {
         try
         {
-            target.GetType().InvokeMember(
-                method,
-                BindingFlags.InvokeMethod,
-                binder: null,
-                target: target,
-                args: args);
+            target.GetType().InvokeMember(method, InvokeFlags, binder: null, target: target, args: args);
         }
         catch (TargetInvocationException ex) when (ex.InnerException is not null)
         {
@@ -206,16 +220,30 @@ public sealed class RealRequestProcessor : IRequestProcessor
     {
         try
         {
-            return target.GetType().InvokeMember(
-                name,
-                BindingFlags.InvokeMethod | BindingFlags.GetProperty,
-                binder: null,
-                target: target,
-                args: args);
+            return target.GetType().InvokeMember(name, FlexibleFlags, binder: null, target: target, args: args);
         }
         catch (TargetInvocationException ex) when (ex.InnerException is not null)
         {
             throw ex.InnerException;
+        }
+    }
+
+    /// <summary>
+    /// Release a COM RCW safely. Marshal.FinalReleaseComObject throws ArgumentException for non-COM objects, so
+    /// guard with IsComObject; any other failure is silently ignored (this is cleanup, not a load-bearing path).
+    /// </summary>
+    private static void ReleaseCom(object? obj)
+    {
+        if (obj is null || !Marshal.IsComObject(obj))
+        {
+            return;
+        }
+        try
+        {
+            Marshal.FinalReleaseComObject(obj);
+        }
+        catch
+        {
         }
     }
 }
