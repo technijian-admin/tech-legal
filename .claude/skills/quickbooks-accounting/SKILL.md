@@ -52,12 +52,32 @@ The QbConnectService serves multiple `.QBW` company files on the same QuickBooks
 
 | Company key | .QBW path | Authorization status (as of 2026-05-19) |
 |---|---|---|
-| `technijian` (DEFAULT) | `D:\Quickbooks\technijian.qbw` | ✅ Authorized — full unattended access |
-| `electronic-corporation-of-america` | `D:\Quickbooks\Electronic Corporation of America.qbw` | ✅ Authorized — full unattended access |
+| `technijian` (DEFAULT) | `D:\Quickbooks\technijian.qbw` | ✅ Authorized — full unattended access (signs in as `jian` QB user) |
+| `electronic-corporation-of-america` | `D:\Quickbooks\Electronic Corporation of America.qbw` | ✅ Authorized — full unattended access (signs in as `jian` QB user) |
 | `technijian-pvt-ltd` | `D:\Quickbooks\Technijian PVT Ltd..qbw` | ⏳ Configured but not yet integrated-app-authorized |
 | `kutumba-holdings-llc` | `D:\Quickbooks\Kutumba Holdings LLC.qbw` | ⏳ Configured but not yet integrated-app-authorized |
 
 Calls against unauthorized companies will return `0x80040408 QB_COULD_NOT_START`.
+
+### Cross-company switching is now transparent (since 2026-05-19)
+
+QuickBooks Desktop is hard-locked to one company file at a time per machine (Intuit QB SDK 16.0 Programmer's Guide, p.53), but the service handles the switch automatically. Just pass `?company=<key>` and the service:
+
+1. Detects that QBW.EXE has the wrong file open (`0x8004040A` or `0x80010105`).
+2. Kills QBW.EXE (refuses only if a human is interactively using QB Desktop on the server console).
+3. Cold-starts a fresh QB Desktop on the requested file (~30-40s on the switch).
+4. Retries the request and returns the data.
+
+So a call sequence like this just works without manual intervention:
+
+```text
+POST /api/ops/list_customers                                              # technijian (default)
+POST /api/ops/list_customers?company=electronic-corporation-of-america    # auto-switch, ~30-40s
+POST /api/ops/list_invoices?company=electronic-corporation-of-america     # fast, same company
+POST /api/ops/list_customers?company=technijian                            # auto-switch back
+```
+
+If an interactive QB Desktop session is detected, the switch returns `409 Conflict` with a clean remediation hint. Use `POST /api/connection/restart-qb` to force the kill manually (see "Connection lifecycle" below).
 
 ## When to use this top-level skill
 
@@ -204,6 +224,54 @@ When no wrapped op fits, use `client.qbxml(raw_xml_string)` and build the reques
 carefully. See `references/qbxml-cheatsheet.md` for the envelope, common
 request shapes, iterators, and status handling. A raw qbXML write is still
 gated by `AllowWrites` and still needs explicit user confirmation first.
+
+## Connection lifecycle (since 2026-05-19)
+
+Three behaviors make multi-company unattended access "just work" — all on by default in `appsettings.json` `Qb` section. Full details in `quickbooks/QbConnectService/README.md` and the topic page `quickbooks_direct_sdk_integration` in the vault.
+
+| Setting | Default | Effect |
+|---|---|---|
+| `Qb:ReleaseAfterEachRequest` | `true` | SDK ticket released after each call so the `.qbw` is free between requests. ~500ms-1s reconnect cost on the next call. |
+| `Qb:AutoRecoverFromQbwStuck` | `true` | Catches `0x8004040A` / `0x80040414` / `0x80010105` and kills QBW.EXE + retries once. Lets cross-company switches work transparently. |
+| `Qb:AbortRecoveryIfInteractiveQbDesktop` | `true` | Safety guard - won't kill QBW if a human is using QB Desktop interactively. Returns 409. |
+| `Qb:MaxQbwKillsPerMinute` | `3` | Circuit breaker against kill-loops. Beyond the cap, auto-recovery refuses (503) and asks for manual intervention. |
+| `Qb:QbwKillExitTimeoutSeconds` | `10` | How long to wait for QBW.EXE to exit after Kill() before proceeding to the retry. |
+
+### Explicit connection-management endpoints
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/connection/release` | Drop the SDK ticket only. QBW.EXE stays running. Idempotent. Use to free the file for QB Desktop without killing QB. |
+| `POST /api/connection/restart-qb` | Drop ticket AND kill all QBW.EXE. Idempotent. Returns pre/post snapshot of process counts. Use to force a clean cold-start when an interactive session has blocked auto-recovery. |
+
+### `/api/health` diagnostic fields
+
+`/api/health` exposes the lifecycle state - use `lastProbe = "ok"` as the load-bearing health signal, NOT `connectionState` (which is normally `Disconnected` immediately after auto-release):
+
+```json
+{
+  "status": "healthy",
+  "lastProbe": "ok",
+  "connectionState": "Disconnected",
+  "releaseAfterEachRequest": true,
+  "autoRecoverFromQbwStuck": true,
+  "qbwProcesses": 1,
+  "qbwInteractiveSession": false,
+  "recentQbwKills": 0,
+  "maxQbwKillsPerMinute": 3,
+  "openMode": "MultiUser",
+  "openModeInt": 1,
+  ...
+}
+```
+
+### Authoritative SDK constraint
+
+The "must kill QBW.EXE to switch files" design isn't ours - it's dictated by Intuit. From the QB SDK 16.0 Programmer's Guide (page 53, "Limitations on Accessing Company Files"):
+
+> Only one company file at a time can be accessed by integrated applications on any given machine running QuickBooks.
+
+The SDK has no "switch file" API. The escape hatch is to terminate QBW.EXE and let the next BeginSession cold-launch a fresh QB Desktop on the new file. The full PDF lives at `C:\Program Files\Intuit\IDN\QBSDK16.0\doc\pdf\QBSDK_ProGuide.pdf` on the server.
 
 ## Pointers
 
