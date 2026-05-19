@@ -1,13 +1,29 @@
 # Agent Guide
 
-This repo contains a shared Client Portal agent playbook under `.codex/skills/`.
+This repo has TWO agent skill layers:
+
+- **`.codex/skills/`** — Client Portal skills (Codex format)
+- **`.claude/skills/`** — QuickBooks Desktop integration skills + many others (Claude Code format)
+- **`.claude/agents/qb-accountant.md`** — autonomous virtual-accountant agent that drives the QB skills on a schedule (see `quickbooks/agent/`)
 
 If you are an AI coding or CLI agent working in this repository:
+
+## For Client Portal work (api-clientportal.technijian.com)
 
 1. Start with `.codex/skills/client-portal-core/SKILL.md`.
 2. Use `.codex/skills/client-portal-core/references/domain-map.md` to pick the correct business-domain skill.
 3. Use `.codex/skills/client-portal-core/scripts/client_portal_api.py` for live Client Portal discovery and execution.
 4. Treat the repo copy of `.codex/skills/` as the source of truth.
+
+## For QuickBooks Desktop work (10.120.254.13 via QbConnectService)
+
+1. Start with `.claude/skills/quickbooks-accounting/SKILL.md` — the navigator. It routes to one of 14 focused sub-skills:
+   - Transactional: `quickbooks-{invoices, bills, checks-and-payments, accounts-items-classes, journal-entries, bank-feeds, bank-feed-classifier}`
+   - Workflow: `quickbooks-{ar-collections, ap-management, period-close, vendor-spend-and-1099}`
+   - Analytical: `quickbooks-{reports, class-margin-analysis, customer-profitability, item-revenue-analysis, cash-flow, forecasting, budget-vs-actual}`
+2. Use the Python client at `quickbooks/clients/qb_client.py` (HTTPS bearer, multi-tenant via `default_company` + `with_company(key)` + `company=` kwarg).
+3. **Always dry-run writes first** + get explicit user confirmation per write. The QbConnectService enforces this server-side (`Safety:AllowWrites=false` default).
+4. For autonomous / scheduled accounting work, see `.claude/agents/qb-accountant.md` + the harness scripts under `quickbooks/agent/scripts/`. Setup guide: `quickbooks/agent/WORKSTATION.md`.
 
 ## Shared Skill Layout
 

@@ -19,15 +19,30 @@ This is the umbrella skill. **For specific tasks, route to a focused sub-skill**
 | Read or match bank-feed downloads (raw qbXML mechanics) | [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) |
 | Auto-categorize downloaded bank/ACH transactions to the right account + class | [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) |
 
+### Workflow / operational skills
+
+| User wants to… | Use sub-skill |
+|---|---|
+| Chase overdue AR, draft collection reminders, calculate DSO | [quickbooks-ar-collections](../quickbooks-ar-collections/SKILL.md) |
+| Plan a bill-payment run, capture early-pay discounts, prioritize AP under cash constraint | [quickbooks-ap-management](../quickbooks-ap-management/SKILL.md) |
+| Close the month/quarter/year (accruals, depreciation, reconciliation prep) | [quickbooks-period-close](../quickbooks-period-close/SKILL.md) |
+| 1099 prep / vendor spend analysis / concentration risk | [quickbooks-vendor-spend-and-1099](../quickbooks-vendor-spend-and-1099/SKILL.md) |
+
 ### Analytical / reporting skills
 
 | User wants to… | Use sub-skill |
 |---|---|
 | Pull P&L, Balance Sheet, A/R Aging, A/P Aging, by-class reports | [quickbooks-reports](../quickbooks-reports/SKILL.md) |
 | Analyze gross margin by class / service line; flag classes under-margin | [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) |
+| Per-customer P&L; which customers are profitable | [quickbooks-customer-profitability](../quickbooks-customer-profitability/SKILL.md) |
 | Understand what items drive revenue per class; sales-by-item analysis | [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) |
 | Check current cash position, working capital, AR/AP aging impact | [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) |
 | Project cash, revenue, expenses 30/60/90 days forward | [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) |
+| Compare actuals to budget, flag variances | [quickbooks-budget-vs-actual](../quickbooks-budget-vs-actual/SKILL.md) |
+
+### Autonomous agent
+
+For unattended / scheduled accounting work, see the **qb-accountant** agent in `.claude/agents/qb-accountant.md` and the scheduled-task harness under `quickbooks/agent/`. The agent uses all the skills above and runs daily/weekly/monthly routines.
 
 Common scaffolding (multi-tenant, safe-write workflow, op catalog, raw-qbXML fallback) lives here in this top-level skill.
 
@@ -192,7 +207,7 @@ gated by `AllowWrites` and still needs explicit user confirmation first.
 
 ## Pointers
 
-### Focused sub-skills — transactional / CRUD
+### Focused sub-skills — transactional / CRUD (7)
 
 - [quickbooks-invoices](../quickbooks-invoices/SKILL.md) — AR invoices
 - [quickbooks-bills](../quickbooks-bills/SKILL.md) — AP bills
@@ -202,13 +217,27 @@ gated by `AllowWrites` and still needs explicit user confirmation first.
 - [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) — bank-feed download mechanics (raw-qbXML)
 - [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) — auto-categorization rules
 
-### Focused sub-skills — analytical / reporting
+### Focused sub-skills — workflow / operational (4)
+
+- [quickbooks-ar-collections](../quickbooks-ar-collections/SKILL.md) — overdue AR follow-up
+- [quickbooks-ap-management](../quickbooks-ap-management/SKILL.md) — strategic bill paying
+- [quickbooks-period-close](../quickbooks-period-close/SKILL.md) — month/quarter/year close
+- [quickbooks-vendor-spend-and-1099](../quickbooks-vendor-spend-and-1099/SKILL.md) — vendor analysis + tax prep
+
+### Focused sub-skills — analytical / reporting (6)
 
 - [quickbooks-reports](../quickbooks-reports/SKILL.md) — P&L, BS, aging, by-class
 - [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) — gross margin by service line
+- [quickbooks-customer-profitability](../quickbooks-customer-profitability/SKILL.md) — per-customer P&L
 - [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) — items → revenue → class
 - [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) — current cash position + working capital
 - [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) — forward projections
+- [quickbooks-budget-vs-actual](../quickbooks-budget-vs-actual/SKILL.md) — budget variance
+
+### Autonomous agent
+
+- `.claude/agents/qb-accountant.md` — the agent persona
+- `quickbooks/agent/` — scheduled-task harness + state directory + README
 
 ### References
 

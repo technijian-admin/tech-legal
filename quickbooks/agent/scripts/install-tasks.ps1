@@ -30,6 +30,47 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $scriptDir = Join-Path $RepoRoot 'quickbooks\agent\scripts'
+$stateDir  = Join-Path $RepoRoot 'quickbooks\agent\state'
+
+# Pre-flight: state directory structure + config
+if (-not $Remove) {
+    $subdirs = 'harness-logs', 'snapshots', 'reports', 'pending-review'
+    foreach ($sd in $subdirs) {
+        $p = Join-Path $stateDir $sd
+        if (-not (Test-Path $p)) {
+            New-Item -ItemType Directory -Path $p -Force | Out-Null
+            Write-Host "Created: $p"
+        }
+    }
+
+    $configPath = Join-Path $stateDir 'config.json'
+    $samplePath = Join-Path $stateDir 'config.json.sample'
+    if (-not (Test-Path $configPath)) {
+        if (Test-Path $samplePath) {
+            Write-Host "WARNING: $configPath not found. Copying from sample." -ForegroundColor Yellow
+            Copy-Item $samplePath $configPath
+            Write-Host "       Please review and edit $configPath before the first scheduled run." -ForegroundColor Yellow
+        } else {
+            throw "Missing $configPath and no sample to copy from. Aborting."
+        }
+    }
+
+    # Verify .env exists
+    $envPath = Join-Path $RepoRoot 'quickbooks\clients\.env'
+    if (-not (Test-Path $envPath)) {
+        throw "Missing $envPath. Copy from .env.sample and fill in credentials before installing tasks."
+    }
+
+    # Verify claude CLI is on PATH
+    $claude = Get-Command claude -ErrorAction SilentlyContinue
+    if (-not $claude) {
+        Write-Host "WARNING: claude CLI not found on PATH. Tasks will fail at runtime." -ForegroundColor Yellow
+        Write-Host "         Install Claude Code and ensure it's on PATH before running any task." -ForegroundColor Yellow
+    } else {
+        Write-Host "claude CLI: $($claude.Source)"
+    }
+}
+
 $tasks = @(
     @{
         Name        = 'QbAccountant-Daily'
