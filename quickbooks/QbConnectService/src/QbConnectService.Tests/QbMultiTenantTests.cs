@@ -101,6 +101,10 @@ public sealed class QbMultiTenantTests
         var qb = new QbOptions
         {
             DefaultCompany = "co-a",
+            // This test exercises the persistent-session optimization (assert that the manager
+            // reuses the same session when the company is unchanged AND tears down + rebuilds
+            // when it switches). Opt into the old persistent-session behavior explicitly.
+            ReleaseAfterEachRequest = false,
             Companies =
             {
                 ["co-a"] = new QbCompany { CompanyFilePath = @"D:\a.qbw", AppId = "appA", AppName = "Service A" },
@@ -161,6 +165,8 @@ public sealed class QbMultiTenantTests
         var qb = new QbOptions
         {
             DefaultCompany = "co-a",
+            // Persistent-session optimization test — opt out of auto-release to assert reuse.
+            ReleaseAfterEachRequest = false,
             Companies =
             {
                 ["co-a"] = new QbCompany { CompanyFilePath = @"D:\a.qbw", AppId = "appA", AppName = "Service A" },

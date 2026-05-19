@@ -68,6 +68,10 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
         finally
         {
+            if (_qb.ReleaseAfterEachRequest)
+            {
+                await ReleaseInternalAsync();
+            }
             _gate.Release();
         }
     }
@@ -108,8 +112,60 @@ public sealed class QbConnectionManager : IAsyncDisposable
         }
         finally
         {
+            if (_qb.ReleaseAfterEachRequest)
+            {
+                await ReleaseInternalAsync();
+            }
             _gate.Release();
         }
+    }
+
+    /// <summary>
+    /// Explicit release endpoint — drops any open SDK session so the .qbw file is freed in
+    /// QB Desktop. Idempotent (no-op if no session is open). Acquires the gate so it serializes
+    /// safely against in-flight ExecuteAsync calls.
+    /// </summary>
+    public async Task ReleaseAsync(CancellationToken ct = default)
+    {
+        if (!await _gate.WaitAsync(TimeSpan.FromSeconds(_req.BusyWaitSeconds), ct))
+        {
+            throw new QbBusyException(TimeSpan.FromSeconds(_req.BusyWaitSeconds));
+        }
+
+        try
+        {
+            await ReleaseInternalAsync();
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
+
+    /// <summary>
+    /// Gate-free release. Caller MUST hold _gate. Swallows COM errors so a release failure
+    /// never leaks out of a finally block.
+    /// </summary>
+    private async Task ReleaseInternalAsync()
+    {
+        if (_rp is null)
+        {
+            return;
+        }
+
+        try
+        {
+            await DisposeCurrentConnectionAsync();
+        }
+        catch
+        {
+            // Cleanup is best-effort; the next ConnectAsync rebuilds anyway.
+        }
+
+        _rp = null;
+        _ticket = null;
+        _currentCompanyKey = null;
+        _state = QbConnectionState.Disconnected;
     }
 
     public async ValueTask DisposeAsync()

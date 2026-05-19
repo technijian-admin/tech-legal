@@ -107,6 +107,7 @@ var api = app.MapGroup("/api");
 api.MapHealthEndpoints();
 api.MapOpsEndpoints();
 api.MapQbXmlEndpoints();
+api.MapConnectionEndpoints();
 
 app.Run();
 

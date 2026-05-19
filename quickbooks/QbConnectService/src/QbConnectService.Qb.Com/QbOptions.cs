@@ -15,6 +15,16 @@ public sealed class QbOptions
 
     public QbFileMode OpenMode { get; set; } = QbFileMode.DoNotCare;
 
+    /// <summary>
+    /// When true (default), every successful request ends with EndSession + CloseConnection so the
+    /// .qbw file is released as soon as the work is done. This lets a human at QB Desktop on the
+    /// server console close/switch the company file without first stopping the service. The next
+    /// request pays a ~500ms-1s reconnect cost. Set to false only when you have a tight request
+    /// loop where the persistent-session pattern's reconnect-savings matter more than the
+    /// "file-free between requests" property.
+    /// </summary>
+    public bool ReleaseAfterEachRequest { get; set; } = true;
+
     /// <summary>Multi-tenant entries keyed by short company id (e.g. "technijian-pvt-ltd").</summary>
     public Dictionary<string, QbCompany> Companies { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

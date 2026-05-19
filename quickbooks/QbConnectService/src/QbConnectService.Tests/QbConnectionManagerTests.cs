@@ -272,7 +272,9 @@ public sealed class QbConnectionManagerTests
         await manager.DisposeAsync();
     }
 
-    private static (QbConnectionManager Manager, List<FakeRequestProcessor> Created) CreateManager(RequestOptions? request = null)
+    private static (QbConnectionManager Manager, List<FakeRequestProcessor> Created) CreateManager(
+        RequestOptions? request = null,
+        bool releaseAfterEachRequest = false)
     {
         var created = new List<FakeRequestProcessor> { new FakeRequestProcessor() };
         var nextIndex = 0;
@@ -294,6 +296,10 @@ public sealed class QbConnectionManagerTests
                 AppId = "app",
                 AppName = "QbConnectService",
                 CompanyFilePath = @"C:\co.QBW",
+                // Existing tests assume the persistent-session optimization, so default to false here
+                // even though the production default is true. Tests that exercise the auto-release
+                // behavior pass `releaseAfterEachRequest: true` explicitly.
+                ReleaseAfterEachRequest = releaseAfterEachRequest,
             }),
             Options.Create(request ?? new RequestOptions
             {
@@ -307,5 +313,71 @@ public sealed class QbConnectionManagerTests
             }));
 
         return (manager, created);
+    }
+
+    // ---------- ReleaseAfterEachRequest tests ----------
+
+    [Fact]
+    public async Task ReleaseAfterEachRequest_true_releases_the_session_after_a_single_execute()
+    {
+        var (manager, created) = CreateManager(releaseAfterEachRequest: true);
+        created[0].AddResponse("CompanyQueryRq", "<company/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+
+        // CallLog should include both EndSession and CloseConnection from the auto-release.
+        Assert.Contains(nameof(IRequestProcessor.EndSession), created[0].CallLog);
+        Assert.Contains(nameof(IRequestProcessor.CloseConnection), created[0].CallLog);
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+        Assert.Null(manager.CurrentCompanyKey);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task ReleaseAfterEachRequest_true_forces_a_fresh_connect_on_the_next_request()
+    {
+        var (manager, created) = CreateManager(releaseAfterEachRequest: true);
+        created[0].AddResponse("CompanyQueryRq", "<first/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+
+        // After the first execute the manager should be Disconnected and the next request
+        // must build a fresh IRequestProcessor instance from the factory.
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+
+        created.Add(new FakeRequestProcessor()); // factory will hand this out on the next call
+        created[1].AddResponse("CompanyQueryRq", "<second/>");
+
+        var second = await manager.ExecuteAsync(CompanyQueryRequest);
+
+        Assert.Equal("<second/>", second);
+        Assert.Equal(2, created.Count);
+        Assert.Equal(1, created[0].CallLog.Count(c => c == nameof(IRequestProcessor.OpenConnection)));
+        Assert.Equal(1, created[1].CallLog.Count(c => c == nameof(IRequestProcessor.OpenConnection)));
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task ReleaseAsync_drops_an_existing_session_idempotently()
+    {
+        var (manager, created) = CreateManager(); // default = persistent session
+        created[0].AddResponse("CompanyQueryRq", "<company/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+        Assert.Equal(QbConnectionState.SessionOpen, manager.State);
+
+        await manager.ReleaseAsync();
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+        Assert.Null(manager.CurrentCompanyKey);
+        Assert.Contains(nameof(IRequestProcessor.EndSession), created[0].CallLog);
+        Assert.Contains(nameof(IRequestProcessor.CloseConnection), created[0].CallLog);
+
+        // Idempotent: a second ReleaseAsync on an already-released manager is a no-op.
+        await manager.ReleaseAsync();
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+
+        await manager.DisposeAsync();
     }
 }

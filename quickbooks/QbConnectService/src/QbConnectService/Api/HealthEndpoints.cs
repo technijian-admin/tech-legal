@@ -56,9 +56,13 @@ public static class HealthEndpoints
             }
 
             var lastError = probeError ?? manager.LastError;
-            var status = !string.IsNullOrEmpty(probeError?.Name) || manager.State is QbConnectionState.Disconnected or QbConnectionState.Poisoned
+            // status derives from probe OUTCOME (not from manager.State), because with
+            // ReleaseAfterEachRequest=true the state is Disconnected immediately after
+            // the probe — which is correct, not degraded.
+            var probeOk = probeError is null && !probeBusy && companyInfo is not null;
+            var status = probeError is not null || manager.State == QbConnectionState.Poisoned
                 ? "down"
-                : probeBusy || manager.LastError is not null || manager.State != QbConnectionState.SessionOpen
+                : probeBusy || manager.LastError is not null || !probeOk
                     ? "degraded"
                     : "healthy";
 
@@ -66,7 +70,9 @@ public static class HealthEndpoints
             {
                 status,
                 connectionState = manager.State.ToString(),
+                lastProbe = probeOk ? "ok" : (probeBusy ? "busy" : "failed"),
                 allowWrites = safety.Value.AllowWrites,
+                releaseAfterEachRequest = qb.Value.ReleaseAfterEachRequest,
                 sdkVersion = BestVersion(supportedVersions, qbXml.Value.Version),
                 qbXmlVersionConfigured = qbXml.Value.Version,
                 qbXmlVersionsSupported = supportedVersions,
