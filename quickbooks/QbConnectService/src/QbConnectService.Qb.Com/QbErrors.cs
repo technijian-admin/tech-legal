@@ -46,11 +46,30 @@ public static class QbErrors
         [unchecked((int)0x80040154)] = new(unchecked((int)0x80040154), "REGDB_E_CLASSNOTREG",
             "QBXMLRP2.RequestProcessor is not registered (QuickBooks SDK not installed, or a 32/64-bit interop mismatch).",
             "Install the QuickBooks SDK on the host; confirm the service runs as x86; see Phase 9 deploy notes."),
+        [unchecked((int)0x80010105)] = new(unchecked((int)0x80010105), "RPC_E_SERVERFAULT",
+            "The QuickBooks COM server faulted - typically QBW.EXE is holding a different .qbw file and cannot switch in-place.",
+            "Stop the existing QBW.EXE process so the next call cold-starts QuickBooks on the requested file. The service can do this automatically when Qb:AutoRecoverFromQbwStuck is enabled (default)."),
     };
 
     private static readonly HashSet<int> DeadTicket = [unchecked((int)0x8004040D)];
 
+    /// <summary>
+    /// HRESULTs for which the recommended fix is "kill QBW.EXE and let the next call cold-start it fresh."
+    /// Per the Intuit QB SDK 16.0 Programmer's Guide ("Limitations on Accessing Company Files", page 53):
+    /// only one company file at a time is accessible per machine, so QBW.EXE has to be terminated when
+    /// (a) a different file is requested, (b) the COM server is in a stuck state, or (c) a modal dialog
+    /// is blocking QB's UI thread.
+    /// </summary>
+    private static readonly HashSet<int> QbwStuck =
+    [
+        unchecked((int)0x8004040A), // QB_DIFFERENT_FILE_OPEN
+        unchecked((int)0x80040414), // QB_MODAL_DIALOG
+        unchecked((int)0x80010105), // RPC_E_SERVERFAULT
+    ];
+
     public static bool IsDeadTicket(int hresult) => DeadTicket.Contains(hresult);
+
+    public static bool IsRecoverableByQbwRestart(int hresult) => QbwStuck.Contains(hresult);
 
     public static QbError Lookup(int hresult) =>
         Map.TryGetValue(hresult, out var error)

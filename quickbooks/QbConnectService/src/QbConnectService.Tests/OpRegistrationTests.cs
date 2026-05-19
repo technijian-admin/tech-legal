@@ -23,6 +23,8 @@ public sealed class OpRegistrationTests
                 services.Configure<AuditOptions>(options => options.Path = auditPath);
                 services.Configure<AuditAuthOptions>(options => options.ApiToken = "test-token");
                 services.AddSingleton<Func<IRequestProcessor>>(_ => () => new FakeRequestProcessor());
+                services.AddSingleton<IQbProcessManager>(_ => new FakeQbProcessManager());
+                services.AddSingleton<QbKillTracker>();
                 services.AddSingleton<QbConnectionManager>();
                 services.AddSingleton<QbXmlBuilder>();
                 services.AddSingleton<QbXmlParser>();

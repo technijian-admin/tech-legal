@@ -59,6 +59,7 @@ class QbClient:
         timeout: float = DEFAULT_TIMEOUT,
         retries: int = DEFAULT_RETRIES,
         session: requests.Session | None = None,
+        default_company: str | None = None,
     ) -> None:
         if not base_url:
             raise ValueError("base_url is required")
@@ -69,6 +70,7 @@ class QbClient:
         self.timeout = timeout
         self.retries = retries
         self.verify_tls = verify_tls
+        self.default_company = default_company
         self._session = session or requests.Session()
         self._session.headers["Authorization"] = f"Bearer {token}"
 
@@ -114,7 +116,32 @@ class QbClient:
 
         timeout = float(os.environ.get("QB_TIMEOUT", str(DEFAULT_TIMEOUT)))
         retries = int(os.environ.get("QB_RETRIES", str(DEFAULT_RETRIES)))
-        return cls(base_url, token, verify_tls=verify_tls, timeout=timeout, retries=retries)
+        default_company = os.environ.get("QB_DEFAULT_COMPANY") or None
+        return cls(
+            base_url,
+            token,
+            verify_tls=verify_tls,
+            timeout=timeout,
+            retries=retries,
+            default_company=default_company,
+        )
+
+    def with_company(self, company: str) -> "QbClient":
+        """Return a shallow clone of this client scoped to the given company key.
+
+        Useful when working across multiple .QBW files - keeps each request scoped
+        without having to thread `company=` through every call site.
+        """
+        clone = QbClient(
+            self.base_url,
+            token="placeholder",  # session below carries the real Authorization header
+            verify_tls=self.verify_tls,
+            timeout=self.timeout,
+            retries=self.retries,
+            session=self._session,
+            default_company=company,
+        )
+        return clone
 
     def health(self) -> dict[str, Any]:
         return self._get("/api/health")
@@ -123,34 +150,41 @@ class QbClient:
         payload = self._get("/api/ops")
         return payload["ops"]
 
-    def qbxml(self, raw_xml: str) -> str:
+    def qbxml(self, raw_xml: str, *, company: str | None = None) -> str:
         response = self._session.post(
             f"{self.base_url}/api/qbxml",
             data=raw_xml.encode("utf-8"),
             headers={"Content-Type": "application/xml"},
+            params=self._company_params(company),
             timeout=self.timeout,
             verify=self.verify_tls,
         )
         self._raise_for_status(response)
         return response.text
 
-    def op(self, name: str, args: dict[str, Any] | None = None) -> Any:
+    def op(self, name: str, args: dict[str, Any] | None = None, *, company: str | None = None) -> Any:
         response = self._session.post(
             f"{self.base_url}/api/ops/{name}",
             json=args or {},
+            params=self._company_params(company),
             timeout=self.timeout,
             verify=self.verify_tls,
         )
         self._raise_for_status(response)
         return response.json()["result"]
 
-    def dryrun(self, name: str, args: dict[str, Any] | None = None) -> dict[str, Any]:
+    def dryrun(self, name: str, args: dict[str, Any] | None = None, *, company: str | None = None) -> dict[str, Any]:
         response = self._post_retryable(
             f"{self.base_url}/api/ops/{name}/dryrun",
             json=args or {},
+            company=company,
         )
         self._raise_for_status(response)
         return response.json()["dryRun"]
+
+    def _company_params(self, company: str | None) -> dict[str, str] | None:
+        target = company or self.default_company
+        return {"company": target} if target else None
 
     def _get(self, path: str) -> Any:
         response = self._session.get(
@@ -161,7 +195,13 @@ class QbClient:
         self._raise_for_status(response)
         return response.json()
 
-    def _post_retryable(self, url: str, *, json: dict[str, Any]) -> requests.Response:
+    def _post_retryable(
+        self,
+        url: str,
+        *,
+        json: dict[str, Any],
+        company: str | None = None,
+    ) -> requests.Response:
         retry = Retry(
             total=self.retries,
             connect=self.retries,
@@ -177,7 +217,13 @@ class QbClient:
             adapter = HTTPAdapter(max_retries=retry)
             session.mount("https://", adapter)
             session.mount("http://", adapter)
-            return session.post(url, json=json, timeout=self.timeout, verify=self.verify_tls)
+            return session.post(
+                url,
+                json=json,
+                params=self._company_params(company),
+                timeout=self.timeout,
+                verify=self.verify_tls,
+            )
 
     @staticmethod
     def _raise_for_status(response: requests.Response) -> None:

@@ -7,7 +7,7 @@ using QbConnectService.Tests.Fakes;
 
 namespace QbConnectService.Tests;
 
-public sealed class QbWebAppFactory : WebApplicationFactory<Program>
+public class QbWebAppFactory : WebApplicationFactory<Program>
 {
     public const string Token = "test-token";
 
@@ -16,6 +16,7 @@ public sealed class QbWebAppFactory : WebApplicationFactory<Program>
     public string AuditDir { get; } = Path.Combine(Path.GetTempPath(), "qbtest", Guid.NewGuid().ToString());
 
     public FakeRequestProcessor Fake { get; } = new();
+    public FakeQbProcessManager FakeProcess { get; } = new();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -29,6 +30,7 @@ public sealed class QbWebAppFactory : WebApplicationFactory<Program>
         builder.ConfigureServices(services =>
         {
             services.AddSingleton<Func<IRequestProcessor>>(_ => () => Fake);
+            services.AddSingleton<IQbProcessManager>(_ => FakeProcess);
             services.AddSingleton<IReadOp, FakeWriteOp>();
         });
     }

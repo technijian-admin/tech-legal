@@ -31,11 +31,42 @@ execute, and even then the 5-step safe-write workflow still applies.
 QuickBooks COM/HRESULT error. Use the surfaced code and the service's `QbErrors`
 map to find the human message and remediation.
 
-### 409 QuickBooks busy
+**Auto-recovered HRESULTs (since 2026-05-19, commit `d56ddc1`)** — the service
+self-heals from these by killing QBW.EXE and retrying once. You should rarely
+see them surface to API callers unless an interactive QB Desktop session is
+attached (which the safety guard refuses to disturb), or the kill-rate ceiling
+(default `3/min`) was hit:
 
-`409 "QuickBooks busy"` means another request is in flight or QuickBooks is
-showing a modal dialog on the host. Retry shortly. This is deliberately not
-auto-retried by the Python client.
+- `0x8004040A QB_DIFFERENT_FILE_OPEN` - caller asked for a different `.qbw`
+  than QBW.EXE has open. Cross-company switches via `?company=` produce this
+  in the SDK layer; the service handles the kill+retry transparently.
+- `0x80040414 QB_MODAL_DIALOG` - a popup is blocking the QB UI thread.
+  Auto-recover kills the QBW.EXE that's showing the modal (if no human is
+  attached) and retries on a fresh QB launch.
+- `0x80010105 RPC_E_SERVERFAULT` - COM server faulted. Usually the same root
+  cause as `0x8004040A` surfaced differently by the SDK.
+
+When auto-recovery refuses (interactive session detected, or ceiling hit), the
+service returns a clean 409 with a remediation hint pointing at
+`POST /api/connection/restart-qb` as the manual override.
+
+### 409 QuickBooks busy / 409 auto-recovery refused
+
+`409 "QuickBooks busy"` with the `qbErrorCode` field is the standard "another
+request is in flight or QuickBooks is showing a modal dialog on the host" -
+retry shortly. Deliberately not auto-retried by the Python client.
+
+`409 "auto-recovery refused: QBW.EXE has an interactive session on the server
+console"` means the service detected a visible QB Desktop window (a human is
+RDP'd into `10.120.254.13` using QB Desktop interactively) and refused to kill
+QBW automatically. Resolution:
+
+1. The operator dismisses any QB Desktop popup on the server console and
+   closes QB Desktop.
+2. Or: call `POST /api/connection/restart-qb` to force the kill manually (this
+   bypasses the safety guard).
+3. Or (last resort): SSH/WinRM into the host and `Stop-Process -Name QBW
+   -Force` directly.
 
 ### 504 QuickBooks timeout
 

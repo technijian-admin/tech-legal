@@ -1,21 +1,31 @@
 namespace QbConnectService.Qb;
 
-/// <summary>Connection type passed to OpenConnection2. Mirrors QBXMLRPConnectionType.</summary>
+/// <summary>
+/// Connection type passed to OpenConnection2. Mirrors the QBXMLRPConnectionTypeE COM enum
+/// (NOT the often-cited C header order, which is wrong). Verified against the IDL shipped
+/// in C:\Program Files\Intuit\IDN\QBSDK16.0\tools\access\QBXMLRP2e\sources\qbXMLRP2e.idl.
+/// </summary>
 public enum QbConnectionType
 {
     Unknown = 0,
     LocalQBD = 1,
-    LocalQBDLaunchUI = 2,
-    RemoteQBD = 3,
+    RemoteQBD = 2,
+    LocalQBDLaunchUI = 3,
     RemoteQBOE = 4,
 }
 
-/// <summary>File open mode passed to BeginSession. Mirrors QBFileMode.</summary>
+/// <summary>
+/// File open mode passed to BeginSession. Mirrors the QBFileModeE COM enum (NOT the
+/// `qbFileOpenDoNotCare=0, SingleUser=1, MultiUser=2` order commonly published in old C
+/// headers — that ordering does NOT match the actual COM type library and silently
+/// downgrades MultiUser requests to DoNotCare). Verified against the IDL shipped in
+/// C:\Program Files\Intuit\IDN\QBSDK16.0\tools\access\QBXMLRP2e\sources\qbXMLRP2e.idl.
+/// </summary>
 public enum QbFileMode
 {
-    DoNotCare = 0,
-    SingleUser = 1,
-    MultiUser = 2,
+    SingleUser = 0,
+    MultiUser = 1,
+    DoNotCare = 2,
 }
 
 /// <summary>

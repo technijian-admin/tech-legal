@@ -1,0 +1,20 @@
+{
+  "folder_name": "SOW-BBC-001-AutoLeadGen-Build",
+  "subject": "Technijian — SOW for Signature: BBC Autonomous Lead Generation",
+  "doc_subject": "Statement of Work — Autonomous Lead Generation Automation Phase",
+  "include_ravi_signature": true,
+  "documents": [
+    { "path": "clients/BBC/03_SOW/SOW-BBC-001-AutoLeadGen-Build.docx",
+      "label": "Statement of Work — Autonomous Lead Generation Automation Phase" }
+  ],
+  "parties": [
+    { "first": "Ravi",  "last": "Jain",     "email": "rjain@technijian.com",
+      "sequence": 1, "role": "tech",
+      "intro": "This SOW is ready for your Technijian-side counter-signature. Bryan Burkhart will receive his invitation after your signature is captured." },
+    { "first": "Bryan", "last": "Burkhart", "email": "bryan@burkhartbros.com",
+      "sequence": 2, "role": "client",
+      "intro": "Please review and sign the attached Statement of Work for the BBC Autonomous Lead Generation System Automation Phase. Ravi Jain has already counter-signed on Technijian's side. Fixed-fee build $26,360, recurring ~$844/mo (hosting + lead-enrichment subs + Anthropic API tokens). Operator support is invoiced weekly under Hourly Contract 5516." }
+  ],
+  "signing_mode": "sequential",
+  "cc": []
+}

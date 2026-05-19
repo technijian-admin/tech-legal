@@ -1,23 +1,90 @@
 ---
 name: quickbooks-accounting
-description: Drive the QuickBooks Desktop accounting integration: pull reports and lists (P&L, balance sheet, invoices, bills, customers, vendors, accounts, items), look up transactions, run safe read queries, and perform write operations (create customer/vendor/invoice/bill/check, receive payment, journal entry, modify a record) through the dry-run-and-confirm workflow. Use when the user mentions QuickBooks, QbConnectService, pulling the P&L, listing invoices, creating an invoice or customer in QuickBooks, or the quickbooks/clients Python client.
+description: Top-level navigator for the QuickBooks Desktop accounting integration. Routes the work to a focused sub-skill (invoices, bills, checks-and-payments, accounts-items-classes, reports, journal-entries, bank-feeds) and owns the canonical safe-write workflow + the full op catalog. Use when the user mentions QuickBooks, QbConnectService, accounting, P&L, AR, AP, invoices, bills, checks, or the Python client at quickbooks/clients/.
 ---
 
-# QuickBooks Accounting
+# QuickBooks Accounting (Navigator)
 
-## When to use
+This is the umbrella skill. **For specific tasks, route to a focused sub-skill**:
 
-Use this skill when the task is to read or write accounting data through the
-QuickBooks Desktop `QbConnectService` integration.
+### Transactional (CRUD) skills
 
-Typical triggers:
+| User wants to… | Use sub-skill |
+|---|---|
+| Create / list / modify customer invoices, manage AR | [quickbooks-invoices](../quickbooks-invoices/SKILL.md) |
+| Enter / list vendor bills, manage AP | [quickbooks-bills](../quickbooks-bills/SKILL.md) |
+| Write a check, record a wire/debit/EFT, record customer payment, apply payment to invoices | [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) |
+| Look up chart of accounts, items (with their tied accounts), or classes | [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) |
+| Post a journal entry, reclassify between classes, accrue, depreciate | [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) |
+| Read or match bank-feed downloads (raw qbXML mechanics) | [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) |
+| Auto-categorize downloaded bank/ACH transactions to the right account + class | [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) |
 
-- Pull a Profit & Loss or Balance Sheet
-- List invoices, bills, customers, vendors, items, or accounts
-- Look up a transaction by `TxnID` or `RefNumber`
-- Run a safe ad-hoc query through `run_query`
-- Create or modify a QuickBooks object through the dry-run workflow
-- Send raw qbXML because no wrapped op fits
+### Workflow / operational skills
+
+| User wants to… | Use sub-skill |
+|---|---|
+| Chase overdue AR, draft collection reminders, calculate DSO | [quickbooks-ar-collections](../quickbooks-ar-collections/SKILL.md) |
+| Plan a bill-payment run, capture early-pay discounts, prioritize AP under cash constraint | [quickbooks-ap-management](../quickbooks-ap-management/SKILL.md) |
+| Close the month/quarter/year (accruals, depreciation, reconciliation prep) | [quickbooks-period-close](../quickbooks-period-close/SKILL.md) |
+| 1099 prep / vendor spend analysis / concentration risk | [quickbooks-vendor-spend-and-1099](../quickbooks-vendor-spend-and-1099/SKILL.md) |
+
+### Analytical / reporting skills
+
+| User wants to… | Use sub-skill |
+|---|---|
+| Pull P&L, Balance Sheet, A/R Aging, A/P Aging, by-class reports | [quickbooks-reports](../quickbooks-reports/SKILL.md) |
+| Analyze gross margin by class / service line; flag classes under-margin | [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) |
+| Per-customer P&L; which customers are profitable | [quickbooks-customer-profitability](../quickbooks-customer-profitability/SKILL.md) |
+| Understand what items drive revenue per class; sales-by-item analysis | [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) |
+| Check current cash position, working capital, AR/AP aging impact | [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) |
+| Project cash, revenue, expenses 30/60/90 days forward | [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) |
+| Compare actuals to budget, flag variances | [quickbooks-budget-vs-actual](../quickbooks-budget-vs-actual/SKILL.md) |
+
+### Autonomous agent
+
+For unattended / scheduled accounting work, see the **qb-accountant** agent in `.claude/agents/qb-accountant.md` and the scheduled-task harness under `quickbooks/agent/`. The agent uses all the skills above and runs daily/weekly/monthly routines.
+
+Common scaffolding (multi-tenant, safe-write workflow, op catalog, raw-qbXML fallback) lives here in this top-level skill.
+
+## Multi-tenant
+
+The QbConnectService serves multiple `.QBW` company files on the same QuickBooks host. Every API call picks a company via the `?company=<key>` query param (or `X-Qb-Company` header). The Python client honors a `default_company` and per-call `company=` override.
+
+| Company key | .QBW path | Authorization status (as of 2026-05-19) |
+|---|---|---|
+| `technijian` (DEFAULT) | `D:\Quickbooks\technijian.qbw` | ✅ Authorized — full unattended access (signs in as `jian` QB user) |
+| `electronic-corporation-of-america` | `D:\Quickbooks\Electronic Corporation of America.qbw` | ✅ Authorized — full unattended access (signs in as `jian` QB user) |
+| `technijian-pvt-ltd` | `D:\Quickbooks\Technijian PVT Ltd..qbw` | ⏳ Configured but not yet integrated-app-authorized |
+| `kutumba-holdings-llc` | `D:\Quickbooks\Kutumba Holdings LLC.qbw` | ⏳ Configured but not yet integrated-app-authorized |
+
+Calls against unauthorized companies will return `0x80040408 QB_COULD_NOT_START`.
+
+### Cross-company switching is now transparent (since 2026-05-19)
+
+QuickBooks Desktop is hard-locked to one company file at a time per machine (Intuit QB SDK 16.0 Programmer's Guide, p.53), but the service handles the switch automatically. Just pass `?company=<key>` and the service:
+
+1. Detects that QBW.EXE has the wrong file open (`0x8004040A` or `0x80010105`).
+2. Kills QBW.EXE (refuses only if a human is interactively using QB Desktop on the server console).
+3. Cold-starts a fresh QB Desktop on the requested file (~30-40s on the switch).
+4. Retries the request and returns the data.
+
+So a call sequence like this just works without manual intervention:
+
+```text
+POST /api/ops/list_customers                                              # technijian (default)
+POST /api/ops/list_customers?company=electronic-corporation-of-america    # auto-switch, ~30-40s
+POST /api/ops/list_invoices?company=electronic-corporation-of-america     # fast, same company
+POST /api/ops/list_customers?company=technijian                            # auto-switch back
+```
+
+If an interactive QB Desktop session is detected, the switch returns `409 Conflict` with a clean remediation hint. Use `POST /api/connection/restart-qb` to force the kill manually (see "Connection lifecycle" below).
+
+## When to use this top-level skill
+
+- Generic QuickBooks / accounting questions that don't fit a specific sub-skill
+- The full safe-write workflow (the steps below)
+- Looking up the v1 op catalog
+- The raw-qbXML fallback envelope
 
 ## Quick start
 
@@ -25,15 +92,16 @@ Typical triggers:
    `pip install -r quickbooks/clients/requirements.txt`
 2. Copy the sample env file:
    `cp quickbooks/clients/.env.sample quickbooks/clients/.env`
-3. Fill in `QB_API_BASE_URL` and `QB_API_TOKEN`.
-4. Ensure the QuickBooks-side service is running on the host.
-5. Always start with `c.health()` and confirm:
+3. Fill in `QB_API_BASE_URL`, `QB_API_TOKEN`, and optionally `QB_DEFAULT_COMPANY=technijian`.
+4. Ensure the QbConnectService scheduled task is running on the host (10.120.254.13).
+5. Always start with `client.health()` and confirm:
    - `status == "healthy"`
-   - `connectionState` is usable
+   - `connectionState == "SessionOpen"` (or be ready to wait for cold-start QB launch)
    - `allowWrites` before considering any write
 
-If the dev cert is self-signed, set `QB_VERIFY_TLS=false` or point it at a CA
-bundle / `.cer`.
+If the dev cert is self-signed, set `QB_VERIFY_TLS=false` or point at a CA
+bundle / `.cer`. (On the QB server itself the cert is already trusted in
+`Cert:\LocalMachine\Root`.)
 
 ## Invocation patterns
 
@@ -54,19 +122,23 @@ Run a small inline script from `quickbooks/clients/`:
 ```bash
 cd quickbooks/clients && python -c "
 from qb_client import QbClient
-client = QbClient.from_env()
+client = QbClient.from_env()    # picks up QB_DEFAULT_COMPANY if set
 print(client.health())
 print(client.op('list_customers', {'activeStatus': 'Active', 'name': 'Acme'}))
 "
 ```
 
-The client surface is:
+The client surface (with multi-tenant `company` support):
 
 - `client.health()`
 - `client.ops()`
-- `client.op(name, args_dict)`
-- `client.dryrun(name, args_dict)`
-- `client.qbxml(raw_xml_string)`
+- `client.op(name, args_dict, company=None)`
+- `client.dryrun(name, args_dict, company=None)`
+- `client.qbxml(raw_xml_string, company=None)`
+- `client.with_company(key)` — returns a shallow clone scoped to that company
+
+Each method's `company=` is optional. If omitted, the client uses
+`default_company` (from `QB_DEFAULT_COMPANY` env var, default `technijian`).
 
 Errors raise `QbApiError` with `.status_code`, `.title`, `.detail`, and
 `.qb_error_code`.
@@ -153,15 +225,102 @@ carefully. See `references/qbxml-cheatsheet.md` for the envelope, common
 request shapes, iterators, and status handling. A raw qbXML write is still
 gated by `AllowWrites` and still needs explicit user confirmation first.
 
+## Connection lifecycle (since 2026-05-19)
+
+Three behaviors make multi-company unattended access "just work" — all on by default in `appsettings.json` `Qb` section. Full details in `quickbooks/QbConnectService/README.md` and the topic page `quickbooks_direct_sdk_integration` in the vault.
+
+| Setting | Default | Effect |
+|---|---|---|
+| `Qb:ReleaseAfterEachRequest` | `true` | SDK ticket released after each call so the `.qbw` is free between requests. ~500ms-1s reconnect cost on the next call. |
+| `Qb:AutoRecoverFromQbwStuck` | `true` | Catches `0x8004040A` / `0x80040414` / `0x80010105` and kills QBW.EXE + retries once. Lets cross-company switches work transparently. |
+| `Qb:AbortRecoveryIfInteractiveQbDesktop` | `true` | Safety guard - won't kill QBW if a human is using QB Desktop interactively. Returns 409. |
+| `Qb:MaxQbwKillsPerMinute` | `3` | Circuit breaker against kill-loops. Beyond the cap, auto-recovery refuses (503) and asks for manual intervention. |
+| `Qb:QbwKillExitTimeoutSeconds` | `10` | How long to wait for QBW.EXE to exit after Kill() before proceeding to the retry. |
+
+### Explicit connection-management endpoints
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /api/connection/release` | Drop the SDK ticket only. QBW.EXE stays running. Idempotent. Use to free the file for QB Desktop without killing QB. |
+| `POST /api/connection/restart-qb` | Drop ticket AND kill all QBW.EXE. Idempotent. Returns pre/post snapshot of process counts. Use to force a clean cold-start when an interactive session has blocked auto-recovery. |
+
+### `/api/health` diagnostic fields
+
+`/api/health` exposes the lifecycle state - use `lastProbe = "ok"` as the load-bearing health signal, NOT `connectionState` (which is normally `Disconnected` immediately after auto-release):
+
+```json
+{
+  "status": "healthy",
+  "lastProbe": "ok",
+  "connectionState": "Disconnected",
+  "releaseAfterEachRequest": true,
+  "autoRecoverFromQbwStuck": true,
+  "qbwProcesses": 1,
+  "qbwInteractiveSession": false,
+  "recentQbwKills": 0,
+  "maxQbwKillsPerMinute": 3,
+  "openMode": "MultiUser",
+  "openModeInt": 1,
+  ...
+}
+```
+
+### Authoritative SDK constraint
+
+The "must kill QBW.EXE to switch files" design isn't ours - it's dictated by Intuit. From the QB SDK 16.0 Programmer's Guide (page 53, "Limitations on Accessing Company Files"):
+
+> Only one company file at a time can be accessed by integrated applications on any given machine running QuickBooks.
+
+The SDK has no "switch file" API. The escape hatch is to terminate QBW.EXE and let the next BeginSession cold-launch a fresh QB Desktop on the new file. The full PDF lives at `C:\Program Files\Intuit\IDN\QBSDK16.0\doc\pdf\QBSDK_ProGuide.pdf` on the server.
+
 ## Pointers
+
+### Focused sub-skills — transactional / CRUD (7)
+
+- [quickbooks-invoices](../quickbooks-invoices/SKILL.md) — AR invoices
+- [quickbooks-bills](../quickbooks-bills/SKILL.md) — AP bills
+- [quickbooks-checks-and-payments](../quickbooks-checks-and-payments/SKILL.md) — direct checks + receive_payment
+- [quickbooks-accounts-items-classes](../quickbooks-accounts-items-classes/SKILL.md) — CoA, items, classes lookup
+- [quickbooks-journal-entries](../quickbooks-journal-entries/SKILL.md) — GL JEs
+- [quickbooks-bank-feeds](../quickbooks-bank-feeds/SKILL.md) — bank-feed download mechanics (raw-qbXML)
+- [quickbooks-bank-feed-classifier](../quickbooks-bank-feed-classifier/SKILL.md) — auto-categorization rules
+
+### Focused sub-skills — workflow / operational (4)
+
+- [quickbooks-ar-collections](../quickbooks-ar-collections/SKILL.md) — overdue AR follow-up
+- [quickbooks-ap-management](../quickbooks-ap-management/SKILL.md) — strategic bill paying
+- [quickbooks-period-close](../quickbooks-period-close/SKILL.md) — month/quarter/year close
+- [quickbooks-vendor-spend-and-1099](../quickbooks-vendor-spend-and-1099/SKILL.md) — vendor analysis + tax prep
+
+### Focused sub-skills — analytical / reporting (6)
+
+- [quickbooks-reports](../quickbooks-reports/SKILL.md) — P&L, BS, aging, by-class
+- [quickbooks-class-margin-analysis](../quickbooks-class-margin-analysis/SKILL.md) — gross margin by service line
+- [quickbooks-customer-profitability](../quickbooks-customer-profitability/SKILL.md) — per-customer P&L
+- [quickbooks-item-revenue-analysis](../quickbooks-item-revenue-analysis/SKILL.md) — items → revenue → class
+- [quickbooks-cash-flow](../quickbooks-cash-flow/SKILL.md) — current cash position + working capital
+- [quickbooks-forecasting](../quickbooks-forecasting/SKILL.md) — forward projections
+- [quickbooks-budget-vs-actual](../quickbooks-budget-vs-actual/SKILL.md) — budget variance
+
+### Autonomous agent
+
+- `.claude/agents/qb-accountant.md` — the agent persona
+- `quickbooks/agent/` — scheduled-task harness + state directory + README
+
+### References
 
 - `references/qbxml-cheatsheet.md`
   Raw qbXML envelope, common Query/Add/Mod/Delete/Void shapes, iterators, and
   the `3200` stale-`EditSequence` rule.
 - `references/setup-and-troubleshooting.md`
-  Health/auth/write-gate/TLS/busy/timeout failure modes. Deploy scripts and
-  host runbooks arrive in Phase 9.
+  Health/auth/write-gate/TLS/busy/timeout failure modes.
 - `quickbooks/clients/README.md`
   Local setup and example usage for the Python client.
 - `quickbooks/dev/MULTI-LLM.md`
   The documented build and review pipeline used for this subsystem.
+
+### Operational pointers (not in repo)
+
+- Bearer token + per-company AppName/AppId — `D:\QbConnectService\INSTALL-RESULT.txt` on the QB host.
+- DPAPI cred file for remote PSRemoting from rjain's workstation — `C:\Users\rjain\.qb-server-cred.xml`.
+- Full host credentials + drives + scheduled task setup — `C:\Users\rjain\OneDrive - Technijian, Inc\Documents\VSCODE\keys\te-hq-app-qb.md`.

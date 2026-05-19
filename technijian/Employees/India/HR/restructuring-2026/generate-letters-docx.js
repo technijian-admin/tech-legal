@@ -195,8 +195,9 @@ const employees = [
       ['May 2026 Salary', 'Rs. 47,589', 'Full month payroll'],
       ['Notice pay-in-lieu (10 days shortfall)', 'Rs. 15,863', '10 days x Rs.47,589 / 30'],
       ['Retrenchment compensation (IR Code 2020 §70)', 'Rs. 48,686', '15 days x 4 years x Basic Rs.24,343 / 30 (per IR Code §2(zh): wages = Basic + DA only)'],
+      ['Shift Allowance (Third-Shift, May 2026)', 'Rs. 1,800', '6 night shifts (May 1, 2, 6, 7, 8, 9) x Rs. 300 per Employee Handbook Shift Allowance clause'],
       ['Earned Leave (EL) encashment', 'Rs. 0', 'Fully utilized during notice period (17.61 hrs per April 2026 payslip)'],
-      [{ text: 'Total Cash to Employee (payable June 1, 2026)', opts: { bold: true } }, { text: 'Rs. 1,12,138', opts: { bold: true } }, { text: 'Net amount to bank account', opts: { bold: true } }],
+      [{ text: 'Total Cash to Employee (payable June 1, 2026)', opts: { bold: true } }, { text: 'Rs. 1,13,938', opts: { bold: true } }, { text: 'Net amount to bank account', opts: { bold: true } }],
       ['Re-skilling Fund deposit (IR Code §83) - PAID TO STATE, NOT TO EMPLOYEE', 'Rs. 12,171', 'Company expense: paid directly to Haryana Re-skilling Fund (15 days x Basic Rs.24,343 / 30)'],
     ],
     body: null,
@@ -473,7 +474,12 @@ function buildLetterBody(emp) {
 (async () => {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
+  const onlyFilter = (process.env.ONLY || '').toLowerCase();
+
   for (const emp of employees) {
+    if (onlyFilter && !emp.filename.toLowerCase().includes(onlyFilter)) {
+      continue;
+    }
     const doc = new Document({
       creator: 'Technijian IT Services Pvt. Ltd.',
       title: `Termination Letter — ${emp.name}`,

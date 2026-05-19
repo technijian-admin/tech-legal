@@ -272,7 +272,14 @@ public sealed class QbConnectionManagerTests
         await manager.DisposeAsync();
     }
 
-    private static (QbConnectionManager Manager, List<FakeRequestProcessor> Created) CreateManager(RequestOptions? request = null)
+    private static (QbConnectionManager Manager, List<FakeRequestProcessor> Created) CreateManager(
+        RequestOptions? request = null,
+        bool releaseAfterEachRequest = false,
+        FakeQbProcessManager? qbProcess = null,
+        QbKillTracker? kills = null,
+        bool autoRecover = true,
+        bool abortRecoveryIfInteractive = true,
+        int maxKillsPerMinute = 3)
     {
         var created = new List<FakeRequestProcessor> { new FakeRequestProcessor() };
         var nextIndex = 0;
@@ -294,6 +301,14 @@ public sealed class QbConnectionManagerTests
                 AppId = "app",
                 AppName = "QbConnectService",
                 CompanyFilePath = @"C:\co.QBW",
+                // Existing tests assume the persistent-session optimization, so default to false here
+                // even though the production default is true. Tests that exercise the auto-release
+                // behavior pass `releaseAfterEachRequest: true` explicitly.
+                ReleaseAfterEachRequest = releaseAfterEachRequest,
+                AutoRecoverFromQbwStuck = autoRecover,
+                AbortRecoveryIfInteractiveQbDesktop = abortRecoveryIfInteractive,
+                MaxQbwKillsPerMinute = maxKillsPerMinute,
+                QbwKillExitTimeoutSeconds = 1, // tests are in-memory; no need to wait
             }),
             Options.Create(request ?? new RequestOptions
             {
@@ -304,8 +319,197 @@ public sealed class QbConnectionManagerTests
             Options.Create(new SafetyOptions
             {
                 AllowWrites = true,
-            }));
+            }),
+            qbProcess ?? new FakeQbProcessManager(),
+            kills ?? new QbKillTracker());
 
         return (manager, created);
+    }
+
+    // ---------- AutoRecoverFromQbwStuck tests ----------
+
+    private static readonly int HresultDifferentFileOpen = unchecked((int)0x8004040A);
+
+    [Theory]
+    [InlineData(0x8004040A)] // QB_DIFFERENT_FILE_OPEN
+    [InlineData(0x80040414)] // QB_MODAL_DIALOG
+    [InlineData(0x80010105)] // RPC_E_SERVERFAULT
+    public async Task Recovery_kills_qbw_and_retries_once_on_recoverable_error(uint hresult)
+    {
+        var qbProcess = new FakeQbProcessManager { Count = 1, AnyInteractive = false };
+        var (manager, created) = CreateManager(qbProcess: qbProcess);
+
+        // First RP: scripted to throw the recoverable error on the very first SDK call.
+        created[0].EnqueueComError(unchecked((int)hresult), "scripted");
+        // Pre-add a second RP that will serve the retry successfully.
+        var retryRp = new FakeRequestProcessor().AddResponse("CompanyQueryRq", "<recovered/>");
+        created.Add(retryRp);
+
+        var response = await manager.ExecuteAsync(CompanyQueryRequest);
+
+        Assert.Equal("<recovered/>", response);
+        Assert.Equal(1, qbProcess.KillCalls);
+        Assert.Equal(0, qbProcess.Count); // FakeQbProcessManager zeroes Count on kill
+        Assert.Equal(2, created.Count);   // factory was called twice (once for first try, once for retry)
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Recovery_refused_when_interactive_QbDesktop_session_visible()
+    {
+        var qbProcess = new FakeQbProcessManager { Count = 1, AnyInteractive = true };
+        var (manager, created) = CreateManager(qbProcess: qbProcess);
+        created[0].EnqueueComError(HresultDifferentFileOpen, "scripted");
+
+        var ex = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(HresultDifferentFileOpen, ex.Error.Code);
+        Assert.Contains("interactive", ex.Error.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(0, qbProcess.KillCalls); // refused, no kill happened
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Recovery_refused_when_kill_rate_ceiling_hit()
+    {
+        var qbProcess = new FakeQbProcessManager { Count = 1 };
+        var killTracker = new QbKillTracker();
+        killTracker.RecordKill();
+        killTracker.RecordKill();
+        killTracker.RecordKill();
+        Assert.Equal(3, killTracker.RecentKills);
+
+        var (manager, created) = CreateManager(qbProcess: qbProcess, kills: killTracker, maxKillsPerMinute: 3);
+        created[0].EnqueueComError(HresultDifferentFileOpen, "scripted");
+
+        var ex = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(HresultDifferentFileOpen, ex.Error.Code);
+        Assert.Contains("circuit-broken", ex.Error.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(0, qbProcess.KillCalls); // ceiling hit, no kill
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Recovery_disabled_when_AutoRecoverFromQbwStuck_is_false()
+    {
+        var qbProcess = new FakeQbProcessManager { Count = 1 };
+        var (manager, created) = CreateManager(qbProcess: qbProcess, autoRecover: false);
+        created[0].EnqueueComError(HresultDifferentFileOpen, "scripted");
+
+        var ex = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(HresultDifferentFileOpen, ex.Error.Code);
+        Assert.DoesNotContain("interactive", ex.Error.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("circuit", ex.Error.Message, StringComparison.OrdinalIgnoreCase);
+        Assert.Equal(0, qbProcess.KillCalls);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Recovery_does_not_trigger_on_non_recoverable_errors()
+    {
+        // 0x80040420 QB_ACCESS_DENIED is not in the recoverable set — must NOT trigger a kill.
+        var qbProcess = new FakeQbProcessManager { Count = 1 };
+        var (manager, created) = CreateManager(qbProcess: qbProcess);
+        var unrelatedHr = unchecked((int)0x80040420);
+        created[0].EnqueueComError(unrelatedHr, "scripted");
+
+        var ex = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(unrelatedHr, ex.Error.Code);
+        Assert.Equal(0, qbProcess.KillCalls);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task Recovery_failed_retry_surfaces_verbatim_without_third_attempt()
+    {
+        var qbProcess = new FakeQbProcessManager { Count = 1 };
+        var (manager, created) = CreateManager(qbProcess: qbProcess);
+        created[0].EnqueueComError(HresultDifferentFileOpen, "first");
+        // Add a second RP that ALSO fails — recovery should NOT loop forever, it retries ONCE.
+        var retryRp = new FakeRequestProcessor();
+        retryRp.EnqueueComError(HresultDifferentFileOpen, "second");
+        created.Add(retryRp);
+
+        var ex = await Assert.ThrowsAsync<QbException>(() => manager.ExecuteAsync(CompanyQueryRequest));
+
+        Assert.Equal(HresultDifferentFileOpen, ex.Error.Code);
+        Assert.Equal(1, qbProcess.KillCalls); // exactly one kill (one retry, not two)
+        Assert.Equal(2, created.Count);       // factory called twice (initial + one retry)
+
+        await manager.DisposeAsync();
+    }
+
+    // ---------- ReleaseAfterEachRequest tests ----------
+
+    [Fact]
+    public async Task ReleaseAfterEachRequest_true_releases_the_session_after_a_single_execute()
+    {
+        var (manager, created) = CreateManager(releaseAfterEachRequest: true);
+        created[0].AddResponse("CompanyQueryRq", "<company/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+
+        // CallLog should include both EndSession and CloseConnection from the auto-release.
+        Assert.Contains(nameof(IRequestProcessor.EndSession), created[0].CallLog);
+        Assert.Contains(nameof(IRequestProcessor.CloseConnection), created[0].CallLog);
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+        Assert.Null(manager.CurrentCompanyKey);
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task ReleaseAfterEachRequest_true_forces_a_fresh_connect_on_the_next_request()
+    {
+        var (manager, created) = CreateManager(releaseAfterEachRequest: true);
+        created[0].AddResponse("CompanyQueryRq", "<first/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+
+        // After the first execute the manager should be Disconnected and the next request
+        // must build a fresh IRequestProcessor instance from the factory.
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+
+        created.Add(new FakeRequestProcessor()); // factory will hand this out on the next call
+        created[1].AddResponse("CompanyQueryRq", "<second/>");
+
+        var second = await manager.ExecuteAsync(CompanyQueryRequest);
+
+        Assert.Equal("<second/>", second);
+        Assert.Equal(2, created.Count);
+        Assert.Equal(1, created[0].CallLog.Count(c => c == nameof(IRequestProcessor.OpenConnection)));
+        Assert.Equal(1, created[1].CallLog.Count(c => c == nameof(IRequestProcessor.OpenConnection)));
+
+        await manager.DisposeAsync();
+    }
+
+    [Fact]
+    public async Task ReleaseAsync_drops_an_existing_session_idempotently()
+    {
+        var (manager, created) = CreateManager(); // default = persistent session
+        created[0].AddResponse("CompanyQueryRq", "<company/>");
+
+        await manager.ExecuteAsync(CompanyQueryRequest);
+        Assert.Equal(QbConnectionState.SessionOpen, manager.State);
+
+        await manager.ReleaseAsync();
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+        Assert.Null(manager.CurrentCompanyKey);
+        Assert.Contains(nameof(IRequestProcessor.EndSession), created[0].CallLog);
+        Assert.Contains(nameof(IRequestProcessor.CloseConnection), created[0].CallLog);
+
+        // Idempotent: a second ReleaseAsync on an already-released manager is a no-op.
+        await manager.ReleaseAsync();
+        Assert.Equal(QbConnectionState.Disconnected, manager.State);
+
+        await manager.DisposeAsync();
     }
 }

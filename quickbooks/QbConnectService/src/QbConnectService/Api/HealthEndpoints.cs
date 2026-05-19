@@ -56,21 +56,38 @@ public static class HealthEndpoints
             }
 
             var lastError = probeError ?? manager.LastError;
-            var status = !string.IsNullOrEmpty(probeError?.Name) || manager.State is QbConnectionState.Disconnected or QbConnectionState.Poisoned
+            // status derives from probe OUTCOME (not from manager.State), because with
+            // ReleaseAfterEachRequest=true the state is Disconnected immediately after
+            // the probe — which is correct, not degraded.
+            var probeOk = probeError is null && !probeBusy && companyInfo is not null;
+            var status = probeError is not null || manager.State == QbConnectionState.Poisoned
                 ? "down"
-                : probeBusy || manager.LastError is not null || manager.State != QbConnectionState.SessionOpen
+                : probeBusy || manager.LastError is not null || !probeOk
                     ? "degraded"
                     : "healthy";
+
+            var qbw = manager.QbProcessSnapshot();
 
             return Results.Ok(new
             {
                 status,
                 connectionState = manager.State.ToString(),
+                lastProbe = probeOk ? "ok" : (probeBusy ? "busy" : "failed"),
                 allowWrites = safety.Value.AllowWrites,
+                releaseAfterEachRequest = qb.Value.ReleaseAfterEachRequest,
+                autoRecoverFromQbwStuck = qb.Value.AutoRecoverFromQbwStuck,
+                qbwProcesses = qbw.Count,
+                qbwInteractiveSession = qbw.AnyInteractive,
+                recentQbwKills = manager.RecentQbwKills,
+                maxQbwKillsPerMinute = qb.Value.MaxQbwKillsPerMinute,
                 sdkVersion = BestVersion(supportedVersions, qbXml.Value.Version),
                 qbXmlVersionConfigured = qbXml.Value.Version,
                 qbXmlVersionsSupported = supportedVersions,
                 companyFile = qb.Value.CompanyFilePath,
+                openMode = qb.Value.OpenMode.ToString(),
+                openModeInt = (int)qb.Value.OpenMode,
+                connectionType = qb.Value.ConnectionType.ToString(),
+                connectionTypeInt = (int)qb.Value.ConnectionType,
                 quickBooksVersion,
                 lastError = lastError is null
                     ? null

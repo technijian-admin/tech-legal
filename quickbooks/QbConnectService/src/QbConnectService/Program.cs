@@ -70,8 +70,10 @@ builder.WebHost.ConfigureKestrel((ctx, kestrel) =>
 if (OperatingSystem.IsWindows() && !builder.Environment.IsEnvironment("Testing"))
 {
     builder.Services.AddSingleton<Func<IRequestProcessor>>(_ => () => new QbConnectService.Qb.Com.RealRequestProcessor());
+    builder.Services.AddSingleton<IQbProcessManager, WindowsQbProcessManager>();
 }
 
+builder.Services.AddSingleton<QbKillTracker>();
 builder.Services.AddSingleton<QbConnectionManager>();
 
 // Phase 4: read ops (registered as IReadOp so Phase 5's OpRegistry is IEnumerable<IReadOp> -> dictionary by Name)
@@ -107,6 +109,7 @@ var api = app.MapGroup("/api");
 api.MapHealthEndpoints();
 api.MapOpsEndpoints();
 api.MapQbXmlEndpoints();
+api.MapConnectionEndpoints();
 
 app.Run();
 
