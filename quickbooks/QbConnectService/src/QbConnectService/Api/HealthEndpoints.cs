@@ -71,6 +71,10 @@ public static class HealthEndpoints
                 qbXmlVersionConfigured = qbXml.Value.Version,
                 qbXmlVersionsSupported = supportedVersions,
                 companyFile = qb.Value.CompanyFilePath,
+                openMode = qb.Value.OpenMode.ToString(),
+                openModeInt = (int)qb.Value.OpenMode,
+                connectionType = qb.Value.ConnectionType.ToString(),
+                connectionTypeInt = (int)qb.Value.ConnectionType,
                 quickBooksVersion,
                 lastError = lastError is null
                     ? null
