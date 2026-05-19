@@ -507,7 +507,9 @@ public sealed class CreateTransactionOpsTests
                 BusyWaitSeconds = 5,
             }),
             NullLogger<QbConnectionManager>.Instance,
-            Options.Create(new SafetyOptions { AllowWrites = allowWrites }));
+            Options.Create(new SafetyOptions { AllowWrites = allowWrites }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
 
         var xmlOptions = Options.Create(new QbXmlOptions
         {

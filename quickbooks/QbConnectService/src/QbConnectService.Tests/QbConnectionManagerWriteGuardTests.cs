@@ -80,7 +80,9 @@ public sealed class QbConnectionManagerWriteGuardTests
                 BusyWaitSeconds = 5,
             }),
             NullLogger<QbConnectionManager>.Instance,
-            Options.Create(new SafetyOptions { AllowWrites = allowWrites }));
+            Options.Create(new SafetyOptions { AllowWrites = allowWrites }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
 
         return (manager, fake);
     }

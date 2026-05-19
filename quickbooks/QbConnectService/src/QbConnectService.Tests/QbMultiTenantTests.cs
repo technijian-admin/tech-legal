@@ -116,7 +116,9 @@ public sealed class QbMultiTenantTests
             Options.Create(qb),
             Options.Create(new RequestOptions { TimeoutSeconds = 30, BusyWaitSeconds = 5 }),
             NullLogger<QbConnectionManager>.Instance,
-            Options.Create(new SafetyOptions { AllowWrites = true }));
+            Options.Create(new SafetyOptions { AllowWrites = true }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
 
         const string req = "<?xml version=\"1.0\"?><?qbxml version=\"16.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><CompanyQueryRq/></QBXMLMsgsRq></QBXML>";
 
@@ -177,7 +179,9 @@ public sealed class QbMultiTenantTests
             Options.Create(qb),
             Options.Create(new RequestOptions { TimeoutSeconds = 30, BusyWaitSeconds = 5 }),
             NullLogger<QbConnectionManager>.Instance,
-            Options.Create(new SafetyOptions { AllowWrites = true }));
+            Options.Create(new SafetyOptions { AllowWrites = true }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
 
         const string req = "<?xml version=\"1.0\"?><?qbxml version=\"16.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><CompanyQueryRq/></QBXMLMsgsRq></QBXML>";
 

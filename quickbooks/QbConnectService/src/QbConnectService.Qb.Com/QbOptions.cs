@@ -25,6 +25,37 @@ public sealed class QbOptions
     /// </summary>
     public bool ReleaseAfterEachRequest { get; set; } = true;
 
+    /// <summary>
+    /// When true (default), the service self-heals from "QBW.EXE is stuck" errors by killing the
+    /// existing QBW.EXE process and retrying the request once. The retry cold-starts a fresh
+    /// QuickBooks Desktop on the requested company file. Triggers on:
+    ///   * 0x8004040A QB_DIFFERENT_FILE_OPEN (caller asked for a different .qbw than QBW.EXE has)
+    ///   * 0x80040414 QB_MODAL_DIALOG (an interactive popup is blocking the SDK)
+    ///   * 0x80010105 RPC_E_SERVERFAULT (COM server faulted)
+    /// Per the Intuit QB SDK 16.0 Programmer's Guide ("Limitations on Accessing Company Files",
+    /// p.53), only one company file is accessible per machine and there is no "switch file" SDK
+    /// API - terminating QBW.EXE is the documented escape hatch.
+    /// </summary>
+    public bool AutoRecoverFromQbwStuck { get; set; } = true;
+
+    /// <summary>
+    /// When true (default) AND AutoRecoverFromQbwStuck is true, the recovery path refuses to kill
+    /// QBW.EXE if any QBW.EXE has a visible window (a human is RDP'd in and using QB Desktop
+    /// interactively). Returns a 409 Conflict to the caller with a clear remediation hint instead.
+    /// Set to false to force-kill regardless - only safe if you're sure no human session exists.
+    /// </summary>
+    public bool AbortRecoveryIfInteractiveQbDesktop { get; set; } = true;
+
+    /// <summary>
+    /// Rolling-1-minute kill-rate ceiling. If the recovery path would exceed this, it refuses to
+    /// kill (returns a 503 to the caller and asks for manual intervention). Prevents kill-loops
+    /// if an underlying bug keeps producing recoverable errors.
+    /// </summary>
+    public int MaxQbwKillsPerMinute { get; set; } = 3;
+
+    /// <summary>How long to wait for QBW.EXE processes to actually exit after Kill(). Default 10s.</summary>
+    public int QbwKillExitTimeoutSeconds { get; set; } = 10;
+
     /// <summary>Multi-tenant entries keyed by short company id (e.g. "technijian-pvt-ltd").</summary>
     public Dictionary<string, QbCompany> Companies { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

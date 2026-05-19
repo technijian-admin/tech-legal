@@ -30,7 +30,9 @@ public static class OpTestHarness
             Options.Create(new SafetyOptions
             {
                 AllowWrites = true,
-            }));
+            }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
         var xmlOptions = options ?? new QbXmlOptions
         {
             Version = "16.0",

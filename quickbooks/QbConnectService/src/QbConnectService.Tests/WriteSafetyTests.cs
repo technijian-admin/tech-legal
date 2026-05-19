@@ -170,7 +170,9 @@ public sealed class WriteSafetyTests
                 BusyWaitSeconds = 5,
             }),
             NullLogger<QbConnectionManager>.Instance,
-            Options.Create(new SafetyOptions { AllowWrites = false }));
+            Options.Create(new SafetyOptions { AllowWrites = false }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
 
         try
         {

@@ -178,7 +178,9 @@ public sealed class QbListExecutorTests
             Options.Create(new SafetyOptions
             {
                 AllowWrites = true,
-            }));
+            }),
+            new FakeQbProcessManager(),
+            new QbKillTracker());
         var xmlOptions = Options.Create(options ?? new QbXmlOptions
         {
             MaxReturned = 1,

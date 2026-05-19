@@ -98,4 +98,58 @@ public sealed class HealthEndpointTests
 
         Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
+
+    [Fact]
+    public async Task connection_restart_qb_endpoint_kills_processes_and_returns_snapshot()
+    {
+        await using var factory = new QbWebAppFactory();
+        factory.FakeProcess.Count = 2;
+        factory.FakeProcess.AnyInteractive = false;
+
+        using var client = factory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", QbWebAppFactory.Token);
+
+        var response = await client.PostAsync("/api/connection/restart-qb", null);
+
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal(2, document.RootElement.GetProperty("qbwProcessesBefore").GetInt32());
+        Assert.False(document.RootElement.GetProperty("qbwInteractiveSessionBefore").GetBoolean());
+        Assert.Equal(2, document.RootElement.GetProperty("qbwKilled").GetInt32());
+        Assert.Equal(0, document.RootElement.GetProperty("qbwProcessesAfter").GetInt32());
+        Assert.Equal(1, factory.FakeProcess.KillCalls);
+    }
+
+    [Fact]
+    public async Task connection_restart_qb_endpoint_requires_token()
+    {
+        await using var factory = new QbWebAppFactory();
+        using var client = factory.CreateClient();
+
+        var response = await client.PostAsync("/api/connection/restart-qb", null);
+
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+    }
+
+    [Fact]
+    public async Task health_exposes_qbw_process_diagnostics_and_auto_recover_flag()
+    {
+        await using var factory = new QbWebAppFactory();
+        factory.Fake.AddResponse("HostQueryRq", QbWebAppFactory.Fixture("HostCompanyQueryRs.qbxml"));
+        factory.FakeProcess.Count = 3;
+        factory.FakeProcess.AnyInteractive = true;
+
+        using var client = factory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", QbWebAppFactory.Token);
+
+        var response = await client.GetAsync("/api/health");
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+        using var document = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+        Assert.Equal(3, document.RootElement.GetProperty("qbwProcesses").GetInt32());
+        Assert.True(document.RootElement.GetProperty("qbwInteractiveSession").GetBoolean());
+        Assert.True(document.RootElement.GetProperty("autoRecoverFromQbwStuck").GetBoolean());
+        Assert.Equal(3, document.RootElement.GetProperty("maxQbwKillsPerMinute").GetInt32());
+        Assert.Equal(0, document.RootElement.GetProperty("recentQbwKills").GetInt32());
+    }
 }

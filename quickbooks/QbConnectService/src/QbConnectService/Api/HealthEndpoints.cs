@@ -66,6 +66,8 @@ public static class HealthEndpoints
                     ? "degraded"
                     : "healthy";
 
+            var qbw = manager.QbProcessSnapshot();
+
             return Results.Ok(new
             {
                 status,
@@ -73,6 +75,11 @@ public static class HealthEndpoints
                 lastProbe = probeOk ? "ok" : (probeBusy ? "busy" : "failed"),
                 allowWrites = safety.Value.AllowWrites,
                 releaseAfterEachRequest = qb.Value.ReleaseAfterEachRequest,
+                autoRecoverFromQbwStuck = qb.Value.AutoRecoverFromQbwStuck,
+                qbwProcesses = qbw.Count,
+                qbwInteractiveSession = qbw.AnyInteractive,
+                recentQbwKills = manager.RecentQbwKills,
+                maxQbwKillsPerMinute = qb.Value.MaxQbwKillsPerMinute,
                 sdkVersion = BestVersion(supportedVersions, qbXml.Value.Version),
                 qbXmlVersionConfigured = qbXml.Value.Version,
                 qbXmlVersionsSupported = supportedVersions,

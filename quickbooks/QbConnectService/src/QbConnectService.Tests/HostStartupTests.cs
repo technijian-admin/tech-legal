@@ -51,6 +51,8 @@ public sealed class HostStartupTests
                     created.Add(fake);
                     return fake;
                 });
+                services.AddSingleton<IQbProcessManager>(_ => new FakeQbProcessManager());
+                services.AddSingleton<QbKillTracker>();
                 services.AddSingleton<QbConnectionManager>();
             })
             .Build();
@@ -86,6 +88,8 @@ public sealed class HostStartupTests
             {
                 services.Configure<QbOptions>(_ => { });
                 services.Configure<RequestOptions>(_ => { });
+                services.AddSingleton<IQbProcessManager>(_ => new FakeQbProcessManager());
+                services.AddSingleton<QbKillTracker>();
                 services.AddSingleton<QbConnectionManager>();
             })
             .Build();
@@ -111,6 +115,8 @@ public sealed class HostStartupTests
                 services.Configure<RequestOptions>(_ => { });
                 services.Configure<QbXmlOptions>(_ => { });
                 services.AddSingleton<Func<IRequestProcessor>>(_ => () => new FakeRequestProcessor());
+                services.AddSingleton<IQbProcessManager>(_ => new FakeQbProcessManager());
+                services.AddSingleton<QbKillTracker>();
                 services.AddSingleton<QbConnectionManager>();
                 services.AddSingleton<QbXmlBuilder>();
                 services.AddSingleton<QbXmlParser>();

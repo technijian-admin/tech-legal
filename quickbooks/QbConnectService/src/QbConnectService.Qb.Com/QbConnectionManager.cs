@@ -11,6 +11,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
     private readonly RequestOptions _req;
     private readonly SafetyOptions _safety;
     private readonly ILogger<QbConnectionManager> _log;
+    private readonly IQbProcessManager _qbProcess;
+    private readonly QbKillTracker _kills;
     private readonly SemaphoreSlim _gate = new(1, 1);
 
     private StaThread _sta;
@@ -24,15 +26,25 @@ public sealed class QbConnectionManager : IAsyncDisposable
         IOptions<QbOptions> qb,
         IOptions<RequestOptions> req,
         ILogger<QbConnectionManager> log,
-        IOptions<SafetyOptions> safety)
+        IOptions<SafetyOptions> safety,
+        IQbProcessManager qbProcess,
+        QbKillTracker kills)
     {
         _factory = factory;
         _qb = qb.Value;
         _req = req.Value;
         _safety = safety.Value;
         _log = log;
+        _qbProcess = qbProcess;
+        _kills = kills;
         _sta = new StaThread("qb-com-sta");
     }
+
+    /// <summary>QBW.EXE snapshot at the moment of the call. Useful for /api/health.</summary>
+    public QbProcessSnapshot QbProcessSnapshot() => _qbProcess.Snapshot();
+
+    /// <summary>Number of QBW kills the recovery path has issued in the last minute.</summary>
+    public int RecentQbwKills => _kills.RecentKills;
 
     public QbError? LastError { get; private set; }
 
@@ -57,8 +69,20 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         try
         {
-            await EnsureConnectedForAsync(requestedKey, company);
-            return await ProcessWithRetryAsync(qbXmlRequest, requestedKey, company);
+            try
+            {
+                await EnsureConnectedForAsync(requestedKey, company);
+                return await ProcessWithRetryAsync(qbXmlRequest, requestedKey, company);
+            }
+            catch (QbException ex) when (_qb.AutoRecoverFromQbwStuck && QbErrors.IsRecoverableByQbwRestart(ex.Error.Code))
+            {
+                // RPC_E_SERVERFAULT / QB_DIFFERENT_FILE_OPEN / QB_MODAL_DIALOG — kill QBW.EXE
+                // and retry once. ReleaseInternalAsync drops our SDK session first so the kill
+                // doesn't leave dangling COM RCWs.
+                await RecoverViaQbwRestartAsync(ex, ct);
+                await EnsureConnectedForAsync(requestedKey, company);
+                return await ProcessWithRetryAsync(qbXmlRequest, requestedKey, company);
+            }
         }
         catch (QbException exception)
         {
@@ -87,22 +111,41 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         try
         {
-            await EnsureConnectedForAsync(requestedKey, company);
-            return await _sta
-                .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
-                .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
-        }
-        catch (TimeoutException)
-        {
-            Poison();
-            throw new QbTimeoutException(TimeSpan.FromSeconds(_req.TimeoutSeconds));
-        }
-        catch (COMException ex)
-        {
-            var exception = QbException.From(ex);
-            LastError = exception.Error;
-            LogMappedError(exception);
-            throw exception;
+            try
+            {
+                await EnsureConnectedForAsync(requestedKey, company);
+                return await _sta
+                    .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
+                    .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+            }
+            catch (TimeoutException)
+            {
+                Poison();
+                throw new QbTimeoutException(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+            }
+            catch (COMException ex) when (_qb.AutoRecoverFromQbwStuck && QbErrors.IsRecoverableByQbwRestart(ex.HResult))
+            {
+                await RecoverViaQbwRestartAsync(QbException.From(ex), ct);
+                await EnsureConnectedForAsync(requestedKey, company);
+                return await _sta
+                    .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
+                    .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+            }
+            catch (QbException ex) when (_qb.AutoRecoverFromQbwStuck && QbErrors.IsRecoverableByQbwRestart(ex.Error.Code))
+            {
+                await RecoverViaQbwRestartAsync(ex, ct);
+                await EnsureConnectedForAsync(requestedKey, company);
+                return await _sta
+                    .Run(() => _rp!.GetSupportedQbXmlVersions(_ticket!))
+                    .WaitAsync(TimeSpan.FromSeconds(_req.TimeoutSeconds));
+            }
+            catch (COMException ex)
+            {
+                var exception = QbException.From(ex);
+                LastError = exception.Error;
+                LogMappedError(exception);
+                throw exception;
+            }
         }
         catch (QbException exception)
         {
@@ -118,6 +161,63 @@ public sealed class QbConnectionManager : IAsyncDisposable
             }
             _gate.Release();
         }
+
+        // Unreachable; the try-block returns from every code path.
+        throw new InvalidOperationException("QbConnectionManager.GetSupportedQbXmlVersionsAsync fell through.");
+    }
+
+    /// <summary>
+    /// Self-heal from a "QBW.EXE is stuck" SDK error by killing the process and waiting for it to
+    /// exit, so the next ConnectAsync cold-starts QuickBooks on the requested file. Caller MUST hold
+    /// the gate. Throws if the recovery is refused (interactive QB Desktop attached, or kill-rate
+    /// exceeded, or AutoRecoverFromQbwStuck is off entirely).
+    /// </summary>
+    private async Task RecoverViaQbwRestartAsync(QbException trigger, CancellationToken ct)
+    {
+        // Refuse early if a human session is attached.
+        if (_qb.AbortRecoveryIfInteractiveQbDesktop)
+        {
+            var snap = _qbProcess.Snapshot();
+            if (snap.AnyInteractive)
+            {
+                _log.LogWarning(
+                    "Refusing auto-recovery: QBW.EXE has an interactive window. Trigger was {Code} {Name}.",
+                    $"0x{trigger.Error.Code:X8}", trigger.Error.Name);
+                throw new QbException(new QbError(
+                    trigger.Error.Code,
+                    trigger.Error.Name,
+                    trigger.Error.Message + " (auto-recovery refused: QBW.EXE has an interactive session on the server console)",
+                    "Close QuickBooks Desktop on 10.120.254.13, OR set Qb:AbortRecoveryIfInteractiveQbDesktop=false to force, OR call POST /api/connection/restart-qb to kill QBW.EXE manually."),
+                    trigger);
+            }
+        }
+
+        // Refuse if we've already killed too many times in the last minute.
+        if (!_kills.CanKill(_qb.MaxQbwKillsPerMinute))
+        {
+            _log.LogError(
+                "QBW.EXE kill-rate ceiling ({Max}/min) hit. Refusing further auto-recovery. Trigger was {Code} {Name}.",
+                _qb.MaxQbwKillsPerMinute, $"0x{trigger.Error.Code:X8}", trigger.Error.Name);
+            throw new QbException(new QbError(
+                trigger.Error.Code,
+                trigger.Error.Name,
+                trigger.Error.Message + " (auto-recovery circuit-broken: too many recent kills)",
+                $"The service has killed QBW.EXE {_kills.RecentKills} times in the last minute. Manual intervention is likely needed. Check qbsdklog.txt on the QuickBooks host for the underlying problem."),
+                trigger);
+        }
+
+        _log.LogWarning(
+            "Recovering from {Code} {Name} by killing QBW.EXE and retrying once.",
+            $"0x{trigger.Error.Code:X8}", trigger.Error.Name);
+
+        // Tear down our SDK session first so the kill doesn't leave dangling COM RCWs.
+        await ReleaseInternalAsync();
+
+        var killed = await _qbProcess.KillAllAsync(
+            TimeSpan.FromSeconds(_qb.QbwKillExitTimeoutSeconds), ct);
+        _kills.RecordKill();
+
+        _log.LogInformation("Recovery killed {Count} QBW.EXE process(es); next call will cold-start QuickBooks.", killed);
     }
 
     /// <summary>
