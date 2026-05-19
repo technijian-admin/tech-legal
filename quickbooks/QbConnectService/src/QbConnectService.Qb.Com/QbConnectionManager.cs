@@ -204,18 +204,6 @@ public sealed class QbConnectionManager : IAsyncDisposable
 
         try
         {
-            if (_qb.ConnectionType != QbConnectionType.LocalQBD)
-            {
-                _log.LogWarning(
-                    "Ignoring configured QuickBooks connection type {ConnectionType}; forcing LocalQBD.",
-                    _qb.ConnectionType);
-            }
-
-            if (_qb.OpenMode == QbFileMode.SingleUser)
-            {
-                _log.LogWarning("Ignoring configured QuickBooks open mode SingleUser; forcing DoNotCare.");
-            }
-
             await OpenFreshConnectionAsync(company);
 
             _currentCompanyKey = requestedKey;
@@ -327,8 +315,8 @@ public sealed class QbConnectionManager : IAsyncDisposable
         {
             _rp = _factory();
             _rp.SetUnattendedModePreference(true);
-            _rp.OpenConnection(company.AppId, company.AppName, QbConnectionType.LocalQBD);
-            _ticket = _rp.BeginSession(company.CompanyFilePath, QbFileMode.DoNotCare);
+            _rp.OpenConnection(company.AppId, company.AppName, _qb.ConnectionType);
+            _ticket = _rp.BeginSession(company.CompanyFilePath, _qb.OpenMode);
         });
 
     private Task DisposeCurrentConnectionAsync() =>
